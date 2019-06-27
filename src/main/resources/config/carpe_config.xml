@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd" >
+<properties>
+	<comment>설명</comment>
+	<entry key="key">value</entry>
+	<entry key="case.code">c1</entry>
+
+	<entry key="evdnc.code">e1</entry>
+	<entry key="evdnc.base.path">/data</entry>
+	<entry key="evdnc.base.tmp.path">/data/ex</entry>
+
+	<entry key="mq.server">218.145.27.67</entry>
+	<entry key="mq.queue">carpe_request</entry>
+	<entry key="mq.id">admin</entry>
+	<entry key="mq.pw">dfrc4738</entry>
+	<entry key="mq.vhost">Request</entry>
+	
+</properties>

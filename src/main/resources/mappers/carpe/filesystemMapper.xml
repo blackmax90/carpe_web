@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.filesystem">
+	<select id="selectDirList" parameterType="Map" resultType="Map">
+		select a.file_id as id, a.name from file_info a, partition_info b
+		where a.parent_id = #{id}
+		  and b.evd_id = #{evd_id}
+		  and a.par_id = b.par_id
+		  and a.dir_type = 3
+		  order by a.name
+	</select>
+
+	<select id="selectFileList" parameterType="Map" resultType="Map">
+		select a.file_id as id, a.name, a.dir_type, a.size, a.md5
+		  , FROM_UNIXTIME(a.fn_ctime, '%Y-%m-%d %H:%i:%s') as ctime
+		  , FROM_UNIXTIME(a.fn_atime, '%Y-%m-%d %H:%i:%s') as atime
+		  , FROM_UNIXTIME(a.fn_mtime, '%Y-%m-%d %H:%i:%s') as mtime
+		from file_info a, partition_info b
+		where a.parent_id = #{id}
+		  and b.evd_id = #{evd_id}
+		  and (a.dir_type = 3 or a.dir_type = 5)
+		  and a.par_id = b.par_id
+		order by a.dir_type, a.name
+	</select>
+</mapper>
