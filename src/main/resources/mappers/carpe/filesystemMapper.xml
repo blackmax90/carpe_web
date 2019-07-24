@@ -15,9 +15,14 @@
 
 	<select id="selectFileList" parameterType="Map" resultType="Map">
 		select a.file_id as id, a.name, a.dir_type, a.size, a.md5
-		  , FROM_UNIXTIME(a.fn_ctime, '%Y-%m-%d %H:%i:%s') as ctime
-		  , FROM_UNIXTIME(a.fn_atime, '%Y-%m-%d %H:%i:%s') as atime
-		  , FROM_UNIXTIME(a.fn_mtime, '%Y-%m-%d %H:%i:%s') as mtime
+		  , FROM_UNIXTIME(a.si_ctime, '%Y-%m-%d %H:%i:%s') as ctime
+		  , a.si_ctime_nano as ctime_nano
+		  , FROM_UNIXTIME(a.si_atime, '%Y-%m-%d %H:%i:%s') as atime
+		  , a.si_atime_nano as atime_nano
+		  , FROM_UNIXTIME(a.si_mtime, '%Y-%m-%d %H:%i:%s') as mtime
+		  , a.si_mtime_nano as mtime_nano
+		  , FROM_UNIXTIME(a.si_etime, '%Y-%m-%d %H:%i:%s') as etime
+		  , a.si_etime_nano as etime_nano
 		from file_info a, partition_info b
 		where a.parent_id = #{id}
 		  and b.evd_id = #{evd_id}
