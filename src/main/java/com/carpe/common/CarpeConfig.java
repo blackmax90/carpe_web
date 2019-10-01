@@ -20,15 +20,13 @@ public class CarpeConfig {
 	private static String MQ_VHOST;
 	
 	@Value("#{carpe_config['case.code']}")
-	public void setCASE_CODE(String code) {
+	public void setCaseCode(String code) {
 		CASE_CODE = code;
 	}
 
 	@Value("#{carpe_config['evdnc.code']}")
 	public void setEvdncCode(String code) {
 		EVDNC_CODE = code;
-
-		System.out.println("EVDNC_CODE=" + code);
 	}
 
 	@Value("#{carpe_config['evdnc.base.path']}")
@@ -38,8 +36,6 @@ public class CarpeConfig {
 		} else {
 			EVDNC_BASE_PATH = path;
 		}
-
-		System.out.println("EVDNC_BASE_PATH=" + EVDNC_BASE_PATH);
 	}
 
 	@Value("#{carpe_config['evdnc.base.tmp.path']}")
@@ -49,15 +45,11 @@ public class CarpeConfig {
 		} else {
 			EVDNC_BASE_TMP_PATH = path;
 		}
-
-		System.out.println("EVDNC_BASE_TMP_PATH=" + EVDNC_BASE_TMP_PATH);
 	}
 
 	@Value("#{carpe_config['mq.server']}")
 	public void setMqServer(String server) {
 		MQ_SERVER = server;
-
-		System.out.println("MQ_SERVER=" + MQ_SERVER);
 	}
 
 	@Value("#{carpe_config['mq.queue']}")

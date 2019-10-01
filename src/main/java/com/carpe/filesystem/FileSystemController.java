@@ -38,10 +38,12 @@ public class FileSystemController {
 	public ModelAndView getDirList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
 		long parentId = Consts.TREE_ROOT_ID;
 		if (map.get("id") != null) {
-			try {
-				parentId = Long.parseLong((String) map.get("id"));
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (!map.get("id").equals("0"))	{
+				try {
+					parentId = Long.parseLong((String) map.get("id"));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -67,7 +69,7 @@ public class FileSystemController {
 
 			List loading = new ArrayList();
 			Map dummy = new HashMap();
-			dummy.put("label", "로딩중...");
+			dummy.put("label", "Loading...");
 			loading.add(dummy);
 
 			data.put("items", loading);
@@ -109,6 +111,63 @@ public class FileSystemController {
 
 		mav.addObject("list", fileList);
 		mav.addObject("totalcount", fileList.size());
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/filename_wordcloud.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView filesystemWordCloudView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("carpe/filesystem/filename_wordcloud");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/date_treemap.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView dateTreeMapView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("id", map.get("id"));
+		mav.setViewName("carpe/filesystem/date_treemap");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/get_date_treemap.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getDateTreeMap(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("id") == null) {
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		try {
+			long parentId = Long.parseLong((String) map.get("id"));
+			paramMap.put("id", parentId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> list = service.selectDateTreeMap(paramMap);
+
+		mav.addObject("list", list);
+		mav.addObject("totalcount", list.size());
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/hexview.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView hewview(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("carpe/filesystem/hexview/hexviewer");
 
 		return mav;
 	}

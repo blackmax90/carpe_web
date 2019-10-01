@@ -10,7 +10,6 @@
 <link href="/carpe/resources/css/common.css" rel="stylesheet" type="text/css">
 <link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
 <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
-<link href="/carpe/resources/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
 <script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
 <script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
@@ -68,11 +67,7 @@
 					<br /><br />
 					파일 선택: <input type="file" id="evdnc_file" name="evdnc_file">
 					<br /><br />
-				    <div class="progress">
-						<div id="progressBar" class="progress-bar progress-bar-success" role="progressbar"
-						  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">0%
-						</div>
-				    </div>
+					<div style='margin-top: 10px; overflow: hidden;' id='colorRanges'></div>
 					<br /><br />
 	                <div style="float: right; margin-top: 15px;">
 	                    <input type="button" id="ok" value="OK" style="margin-right: 10px" />
@@ -198,10 +193,9 @@
 			$("#newEvdncSubType option:eq(0)").prop("selected", true);
         	$('#newEvdncName').val('');
         	$('input[type=file]').val('');
-			
+
         	$('#ok').prop('disabled',false);
-			$('#progressBar').text('');
-			$('#progressBar').css('width','0%');
+        	$("#colorRanges").val(0);
 
         	$('#addEvdncWindow').jqxWindow('open');
 		});
@@ -240,31 +234,44 @@
 					//Set onprogress event handler
 					 xhr.upload.onprogress = function(event){
 						var perc = Math.round((event.loaded / event.total) * 100);
-						$('#progressBar').text(perc + '%');
-						$('#progressBar').css('width',perc + '%');
+			        	$("#colorRanges").val(perc);
 					 };
 					 return xhr ;
 				},
 				beforeSend: function( xhr ) {
 					//Reset progress bar
-					$('#progressBar').text('');
-					$('#progressBar').css('width','0%');
+		        	$("#colorRanges").val(0);
                 }
 			});
 
 			ajaxReq.done(function(data) {
 				$('#addEvdncWindow').jqxWindow('close');
 				$("#jqxGrid_evdnc").jqxGrid('updateBoundData');
-				
+
 				alert(data.msg);
 			});
 
 			ajaxReq.fail(function(jqXHR) {
-				$('#progressBar').text('');
-				$('#progressBar').css('width','0%');
-				that.prop('disabled',false);
+	        	$("#colorRanges").val(0);
+				
+	        	that.prop('disabled',false);
 
 				alert(jqXHR.responseJSON.msg + '('+ jqXHR.status + ' - ' + jqXHR.statusText + ')');
+			});
+
+			$("#colorRanges").jqxProgressBar({
+				showText: true,
+				renderText: function (text, value) {
+					if (value < 60) {
+						return "<span class='jqx-rc-all' style='color: #333;'>" + text + "</span>";
+					} else {
+						return "<span class='jqx-rc-all' style='color: #fff;'>" + text + "</span>";
+					}
+				},
+				colorRanges: [{ stop: 20, color: "#33b5e5" }, { stop: 50, color: "#98ca00" }, { stop: 80, color: "#ff4444" }, { stop: 100, color: "#aa66cc" }],
+				width: 250,
+				height: 30,
+				value: 0
 			});
 		});
 	});

@@ -58,10 +58,11 @@ public class ArtifactController {
 	public ModelAndView getArtifactTreeNode(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
 		List subList = new ArrayList();
 		addArtifactTreeNode(subList, "Overview", true, true, null);
+		addArtifactTreeNode(subList, "Log", true, true, null);
 
 		List list = new ArrayList();
 		addArtifactTreeNode(list, "System Log", false, false, subList);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
 		mav.setViewName("jsonView");
@@ -70,8 +71,7 @@ public class ArtifactController {
 	}
 
 	@RequestMapping(value = "/system_log_overview.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView getSystemLogOverview(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model)
-			throws Exception {
+	public ModelAndView getSystemLogOverview(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 
@@ -106,5 +106,73 @@ public class ArtifactController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/log.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getLog(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		List<Map> logList = new ArrayList<Map>();
+
+		Map<String, Object> elementMap = new HashMap<String, Object>();
+		elementMap.put("MACB", "aaaaaaaaaa");
+		logList.add(elementMap);
+
+		int totalCnt = 1;
+
+		mav.addObject("list", logList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/timeline.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView timeline(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("carpe/artifact/timeline/timeline");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/timeline_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getTimelineList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		List<Map> timelineList = service.selectTimelineList(paramMap);
+
+		List<Map> list = new ArrayList<Map>();
+		List<Map> sublist = null;
+
+		String preName = "";
+
+		for (Map timeline : timelineList) {
+			String source = timeline.get("source").toString();
+			String date = timeline.get("date").toString();
+			long cnt = (long) timeline.get("cnt");
+
+			if (!preName.equals(source)) {
+				Map<String, Object> element = new HashMap<String, Object>();
+				element.put("name", source);
+				sublist = new ArrayList<Map>();
+				element.put("data", sublist);
+				list.add(element);
+
+				preName = source;
+			}
+
+			Map<String, Object> subElement = new HashMap<String, Object>();
+			subElement.put("date", date);
+			subElement.put("cnt", cnt);
+
+			sublist.add(subElement);
+		}
+
+		mav.addObject("list", list);
+
+		return mav;
+	}
 
 }

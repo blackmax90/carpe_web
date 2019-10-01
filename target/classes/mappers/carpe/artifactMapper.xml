@@ -25,4 +25,15 @@
 		SELECT count(*) as cnt FROM log2timeline
 		<!--include refid="selectSystemLogOverviewCondition" /-->
 	</select>
+
+
+	<select id="selectTimelineList" parameterType="Map" resultType="Map">
+		select source, date_format(datetime, '%m/%d/%Y %h:%i:%s %p') as date, count(*) as cnt from log2timeline
+		where 1=1
+		<!-- and datetime >= str_to_date('2000-01-01', '%Y-%m-%d')
+		and source in ('EVT') -->
+		group by source, datetime
+		order by source, datetime
+	</select>
+
 </mapper>

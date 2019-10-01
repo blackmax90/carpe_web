@@ -34,6 +34,14 @@ public class CaseController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/map.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView mapView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("carpe/case/map");
+		return mav;
+	}
+
 	@RequestMapping(value = "/case_list.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getCaseList(Locale locale, @RequestParam HashMap<String, String> map, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();

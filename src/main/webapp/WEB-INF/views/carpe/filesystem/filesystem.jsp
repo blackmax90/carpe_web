@@ -31,8 +31,9 @@
 	<div class='outer'>
 		<article class='outer'>
 			<header class='inner'>
-				<button type="button" id="btnNewCase">New</button>
-				<button type="button" id="btnDeleteCases">Delete</button>
+				<button type="button" id="btnFileNameWordCloud">Word Cloud</button>
+				<button type="button" id="btnDateTreeMap">Date Tree Map</button>
+				<button type="button" id="btnHexView">HEX VIEW</button>
 			</header>
 			<div class='inner'>
 				<article class='inner'>
@@ -51,6 +52,7 @@
 					<ul>
 						<li><a href="/carpe/filesystem.do">File System</a></li>
 						<li><a href="/carpe/artifact.do">Artifact</a></li>
+						<li><a href="/carpe/search.do">검색</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -61,6 +63,32 @@
 <script>
 (function($) {
 	$(document).ready(function() {
+		$('#btnFileNameWordCloud').click(function(e) {
+			var popUrl = "/carpe/filename_wordcloud.do";
+			var popOption = "width=900, height=750, resizable=no, scrollbars=no, status=no;";
+			window.open(popUrl,"",popOption);
+		});
+
+		$('#btnDateTreeMap').click(function(e) {
+			var node = $('#jqxTree_dirs').jqxTree('getSelectedItem');
+			var dir_id;
+			if (node) {
+				var dir_id = node.value["id"];
+			} else {
+				return;
+			}
+			
+			var popUrl = "/carpe/date_treemap.do?id=" + dir_id;
+			var popOption = "width=900, height=750, resizable=no, scrollbars=no, status=no;";
+			window.open(popUrl,"",popOption);
+		});
+
+		$('#btnHexView').click(function(e) {
+			var popUrl = "/carpe/hexview.do";
+			var popOption = "width=1050, height=750, resizable=no, scrollbars=no, status=no;";
+			window.open(popUrl,"",popOption);
+		});
+
 		// splitter
 		$('#jqxSplitter').jqxSplitter({ width: '100%', height: '100%', panels: [{ min: 150, size: 200 }, { min: 300 }] });
 

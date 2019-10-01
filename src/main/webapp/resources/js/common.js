@@ -31,24 +31,25 @@ var closeLayer = function(selector, next, callback) {
 
 // 2017-09-25 lnb 액션 추가
 function hasJqueryObject( $elem ){ return $elem.length > 0;}
-	var app = app || {};
+	
+var app = app || {};
 
-	app.lnbEvent = function(){
-		var $lnbWrap = app.$body.find(".lnb");
-		var $btnLnbControl = $lnbWrap.find(".btnLnbControl");
+app.lnbEvent = function(){
+	var $lnbWrap = app.$body.find(".lnb");
+	var $btnLnbControl = $lnbWrap.find(".btnLnbControl");
 
-		if(!$lnbWrap.hasClass("active")){
-			$lnbWrap.addClass("active");
-			$lnbWrap.animate({ "right" :0 });
-		}else{
-			$lnbWrap.removeClass("active");
-			$lnbWrap.animate({ "right" :-320});
-		}
+	if(!$lnbWrap.hasClass("active")){
+		$lnbWrap.addClass("active");
+		$lnbWrap.animate({ "right" :0 });
+	}else{
+		$lnbWrap.removeClass("active");
+		$lnbWrap.animate({ "right" :-320});
 	}
+}
 
 
-	$(function(){
-		app.$body = $("body");
+$(function(){
+	app.$body = $("body");
 
-		app.$body.on("click", ".btnLnbControl" , app.lnbEvent); // lnb 컨트롤
-	});
+	app.$body.on("click", ".btnLnbControl" , app.lnbEvent); // lnb 컨트롤
+});

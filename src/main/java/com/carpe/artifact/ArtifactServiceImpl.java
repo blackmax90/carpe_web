@@ -22,4 +22,9 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectSystemLogOverviewListCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectSystemLogOverviewListCount(paramMap);
 	}
+
+	@Override
+	public List<Map> selectTimelineList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectTimelineList(paramMap);
+	}
 }

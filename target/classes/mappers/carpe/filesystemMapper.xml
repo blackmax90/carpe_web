@@ -30,4 +30,20 @@
 		  and a.par_id = b.par_id
 		order by a.dir_type, a.name
 	</select>
+
+	<select id="selectDateTreeMap" parameterType="Map" resultType="Map">
+		select FROM_UNIXTIME(fn_mtime, '%Y-%m-%d') as name, count(*) as value from (
+		    with recursive cte (file_id, name, parent_id, dir_type, fn_mtime) as (
+		      select file_id, name, parent_id, dir_type, fn_mtime
+		      from file_info
+		      where parent_id = #{id}
+		      union all
+		      select p.file_id, p.name, p.parent_id, p.dir_type, p.fn_mtime
+		      from  file_info p
+		      inner join cte
+		        on p.parent_id = cte.file_id
+		    )
+		    select * from cte
+		) a group by FROM_UNIXTIME(fn_mtime, '%Y-%m-%d')
+	</select>
 </mapper>

@@ -27,6 +27,7 @@
 			<header class='inner'>
 				<button type="button" id="btnNewCase">New</button>
 				<button type="button" id="btnDeleteCases">Delete</button>
+				<button type="button" id="btnMap">Map</button>
 			</header>
 			<div class='inner'>
 				<article class='inner'>
@@ -68,6 +69,12 @@
 <script>
 (function($) {
 	$(document).ready(function() {
+		$('#btnMap').click(function(e) {
+			var popUrl = "/carpe/map.do";
+			var popOption = "width=900, height=750, resizable=no, scrollbars=no, status=no;";
+			window.open(popUrl,"",popOption);
+		});
+
 		var source = {
 			datatype: "json",
 			datafields: [

@@ -31,14 +31,13 @@
 	<div class='outer'>
 		<article class='outer'>
 			<header class='inner'>
-				<button type="button" id="btnNewCase">New</button>
-				<button type="button" id="btnDeleteCases">Delete</button>
+				<button type="button" id="btnTimeLine">Time Line</button>
 			</header>
 			<div class='inner'>
 				<article class='inner'>
 					<div id='jqxSplitter'>
 						<div><div id="jqxTree_artifacts"></div></div>
-						<div><div id="jqxGrid_Systemlog"></div></div>
+						<div><div id="jqxGrid_artifact"></div></div>
 					</div>
 				</article>
 			</div>
@@ -53,6 +52,7 @@
 					<ul>
 						<li><a href="/carpe/filesystem.do">File System</a></li>
 						<li><a href="/carpe/artifact.do">Artifact</a></li>
+						<li><a href="/carpe/search.do">검색</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -63,12 +63,63 @@
 <script>
 (function($) {
 	$(document).ready(function() {
-        var pagesize = <%=Consts.PAGE_SZIE%>;
+		$('#btnTimeLine').click(function(e) {
+			var popUrl = "/carpe/timeline.do";
+			var popOption = "width=1200, height=750, resizable=no, scrollbars=no, status=no;";
+			window.open(popUrl,"",popOption);
+		});
+
+		var pagesize = <%=Consts.PAGE_SZIE%>;
 		var i, j;
 		var currentPage = 1;
 		var lastPage = 1;
 		var currentRowCount = 0;
 		var currentPageOffset = 1;
+
+		var source = {
+			datatype: "json",
+            type: "POST",
+            contenttype: "application/x-www-form-urlencoded; charset=UTF-8"
+		};
+		
+		var columnSet = [];
+		
+		var artifactKind = {};
+		artifactKind["Overview"] = {};
+		artifactKind["Overview"].url = "/carpe/system_log_overview.do";
+		artifactKind["Overview"].columnSet = [
+			{text: 'MACB', dataField: 'MACB', width: '70px', cellsalign: 'left', align: 'center'}
+		  , {text: 'source', dataField: 'source', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'sourcetype', dataField: 'sourcetype', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'type', dataField: 'type', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'user', dataField: 'user', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'host', dataField: 'host', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'filename', dataField: 'filename', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'inode', dataField: 'inode', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'notes', dataField: 'notes', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'format', dataField: 'format', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'extra', dataField: 'extra', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'datetime', dataField: 'datetime', width: '100px', cellsalign: 'center', align: 'center'}
+		  , {text: 'reportnotes', dataField: 'reportnotes', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'inreport', dataField: 'inreport', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'tag', dataField: 'tag', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'offset', dataField: 'offset', width: '100px', cellsalign: 'right', align: 'center'}
+		  , {text: 'vss_store_number', dataField: 'vss_store_number', width: '100px', cellsalign: 'right', align: 'center'}
+		  , {text: 'URL', dataField: 'URL', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'record_number', dataField: 'record_number', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'event_identifier', dataField: 'event_identifier', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'event_type', dataField: 'event_type', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'source_name', dataField: 'source_name', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'user_sid', dataField: 'user_sid', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'computer_name', dataField: 'computer_name', width: '100px', cellsalign: 'left', align: 'center'}
+		  , {text: 'evidence', dataField: 'evidence', width: '100px', cellsalign: 'left', align: 'center'}
+		];
+	    
+		artifactKind["Log"] = {};
+		artifactKind["Log"].url = "/carpe/log.do";
+		artifactKind["Log"].columnSet = [
+			{text: 'aaa', dataField: 'MACB', width: '70px', cellsalign: 'left', align: 'center'}
+		];
 
 		// splitter
 		$('#jqxSplitter').jqxSplitter({ width: '100%', height: '100%', panels: [{ min: 150, size: 200 }, { min: 300 }] });
@@ -100,6 +151,9 @@
 	    	var item = treeItems[i];
 	    	if (item.value["force_select"]) {
 			    $('#jqxTree_artifacts').jqxTree('selectItem', item);
+			    source["url"] = artifactKind[item.value["artifact"]].url;
+			    columnSet = artifactKind[item.value["artifact"]].columnSet;
+			    
 			    break;
 	    	}
 	    }
@@ -112,74 +166,8 @@
 			}
 
 			currentPage = e.data.value;
-			$("#jqxGrid_Systemlog").jqxGrid('updateBoundData');
+			$("#jqxGrid_artifact").jqxGrid('updateBoundData');
 		};
-
-	    var source = {
-			datatype: "json",
-			datafields: [
-				{ name: 'rowid', type: 'number' },
-				{ name: 'timezone', type: 'string' },
-				{ name: 'MACB', type: 'string' },
-				{ name: 'source', type: 'string' },
-				{ name: 'sourcetype', type: 'string' },
-				{ name: 'type', type: 'string' },
-				{ name: 'user', type: 'string' },
-				{ name: 'host', type: 'string' },
-				{ name: 'description', type: 'string' },
-				{ name: 'filename', type: 'string' },
-				{ name: 'inode', type: 'string' },
-				{ name: 'notes', type: 'string' },
-				{ name: 'format', type: 'string' },
-				{ name: 'extra', type: 'string' },
-				{ name: 'datetime', type: 'string' },
-				{ name: 'reportnotes', type: 'string' },
-				{ name: 'inreport', type: 'string' },
-				{ name: 'tag', type: 'string' },
-				{ name: 'offset', type: 'number' },
-				{ name: 'vss_store_number', type: 'number' },
-				{ name: 'URL', type: 'string' },
-				{ name: 'record_number', type: 'string' },
-				{ name: 'event_identifier', type: 'string' },
-				{ name: 'event_type', type: 'string' },
-				{ name: 'source_name', type: 'string' },
-				{ name: 'user_sid', type: 'string' },
-				{ name: 'computer_name', type: 'string' },
-				{ name: 'evidence', type: 'string' },
-				{ name: 'par_id', type: 'string' }
-			],
-            type: "POST",
-            contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-			url: "/carpe/system_log_overview.do"
-		};
-
-		var columnSet = [
-			{text: 'MACB', dataField: 'MACB', width: '70px', cellsalign: 'left', align: 'center'}
-		  , {text: 'source', dataField: 'source', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'sourcetype', dataField: 'sourcetype', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'type', dataField: 'type', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'user', dataField: 'user', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'host', dataField: 'host', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'filename', dataField: 'filename', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'inode', dataField: 'inode', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'notes', dataField: 'notes', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'format', dataField: 'format', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'extra', dataField: 'extra', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'datetime', dataField: 'datetime', width: '100px', cellsalign: 'center', align: 'center'}
-		  , {text: 'reportnotes', dataField: 'reportnotes', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'inreport', dataField: 'inreport', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'tag', dataField: 'tag', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'offset', dataField: 'offset', width: '100px', cellsalign: 'right', align: 'center'}
-		  , {text: 'vss_store_number', dataField: 'vss_store_number', width: '100px', cellsalign: 'right', align: 'center'}
-		  , {text: 'URL', dataField: 'URL', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'record_number', dataField: 'record_number', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'event_identifier', dataField: 'event_identifier', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'event_type', dataField: 'event_type', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'source_name', dataField: 'source_name', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'user_sid', dataField: 'user_sid', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'computer_name', dataField: 'computer_name', width: '100px', cellsalign: 'left', align: 'center'}
-		  , {text: 'evidence', dataField: 'evidence', width: '100px', cellsalign: 'left', align: 'center'}
-		];
 
 		var dataAdapter = new $.jqx.dataAdapter(source, {
 			contentType : 'application/json; charset=utf-8',
@@ -258,15 +246,15 @@
 			}
 		});
 
-		$('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
+		$('#jqxGrid_artifact').on('bindingcomplete', function(event) {
 			var localizationobj = {};
 			localizationobj.emptydatastring = " ";
 
-			$("#jqxGrid_Systemlog").jqxGrid('localizestrings', localizationobj);
-			$("#jqxGrid_Systemlog").jqxGrid('pagesize', currentRowCount);
+			$("#jqxGrid_artifact").jqxGrid('localizestrings', localizationobj);
+			$("#jqxGrid_artifact").jqxGrid('pagesize', currentRowCount);
 		});
 
-		$("#jqxGrid_Systemlog").jqxGrid({
+		$("#jqxGrid_artifact").jqxGrid({
 			width: '100%',
 			height: '100%',
 			source: dataAdapter,
@@ -285,7 +273,19 @@
 		});
 
 		$("#jqxTree_artifacts").on('select',function (event){
-			$("#jqxGrid_Systemlog").jqxGrid('updateBoundData');
+			var item = $('#jqxTree_artifacts').jqxTree('getSelectedItem');
+			
+			if (item.value["sub_exists"]) {
+				return;
+			}
+
+		    source["url"] = artifactKind[item.value["artifact"]].url;
+		    columnSet = artifactKind[item.value["artifact"]].columnSet;
+			$('#jqxGrid_artifact').jqxGrid({ columns: columnSet });
+
+			currentPage = 1;
+
+			$("#jqxGrid_artifact").jqxGrid('updateBoundData');
 		});
 	});
 })(jQuery);

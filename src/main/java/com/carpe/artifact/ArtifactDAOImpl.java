@@ -25,4 +25,10 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	public Map selectSystemLogOverviewListCount(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectSystemLogOverviewListCount", paramMap);
 	}
+
+	@Override
+	public List<Map> selectTimelineList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectTimelineList", paramMap);
+	}
+
 }

@@ -19,3 +19,34 @@ header.inner { /*background: red;*/ height: 51px; }
 footer.inner { /*background: red;*/ height: 51px; }
 
 li.on { background:#ffff62; }
+
+.unfold-ist{ display:block;margin:10px 10px; padding-bottom:7px}
+.unfold-ist:after{content:"";display:block;clear:both}
+.unfold-ist li{position:relative;display:block;}
+.unfold-ist li.title{padding-bottom:12px}
+.unfold-ist li.title .tit{color:#333;font-weight:bold;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+.unfold-ist li .btnArea { display:inline-block;vertical-align:middle;margin-left:5px}
+.unfold-ist li.con{  line-height:18px;padding-bottom:3px  }
+.unfold-ist li.btns{ text-align:right;padding-bottom:11px }
+.unfold-ist li.btns .property {display:inline-block;vertical-align:middle;}
+.unfold-ist li.dates{font-size:12px;color:#888;margin-bottom:7px;padding-bottom:8px;background: url(../images/unfold-dotlist.png) repeat-x 0 100% }   /*2017-08-28 명재홍 사이즈가 너무 작다고 하여 1px키움*/
+.unfold-ist li.dates span{display:inline-block;vertical-align:middle;margin-right:10px}
+.unfold-ist li.dates span strong{display:inline-block;color:#0b638a;font-weight:normal;padding-left:10px;background: url(../images/dot-list.png) no-repeat 0 center}
+.unfold-ist li.dates .dateArea{ display:block;padding-top:15px }
+
+.unfold-ist li.addFile{ font-size:11px;color:#467094;margin-bottom:0px }
+.unfold-ist li.addFile p{
+	padding:5px;padding-left:30px;background: url(../images/addfile-tree.png) no-repeat 14px 7px;
+	border-top:1px #b2b2b2 dotted;
+	}
+
+.unfold-ist li span.img{margin-left:10px;text-align:center;display:inline-block;vertical-align:top}
+.unfold-ist li span.img img{border:1px #ccc solid;}
+.unfold-ist.imgSide li.dates span.img{position:absolute;left:0px;top:0px;}
+.unfold-ist.imgSide li.dates{display:block;padding-left:120px;min-height:78px}
+.unfold-ist.imgSide li.dates span.img{border:1px #ccc solid;text-align:center;height:78px}
+.unfold-ist.imgSide li.dates span.img img{border:none;}
+.unfold-ist.thum{margin:0px;padding-bottom:0px}
+.unfold-ist.thum li{display:block;width:120px;margin-bottom:0px;text-align:center;border:1px #e6e6e6 solid; border-radius:4px; background:#f5f5f5}
+.unfold-ist.thum li img{border:1px #fff solid;margin-top:5px}
+.unfold-ist.thum li .subject{ display:block;padding:5px 0px;letter-spacing:-0.05em;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; }
