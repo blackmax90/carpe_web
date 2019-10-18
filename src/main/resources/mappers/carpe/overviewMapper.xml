@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.carpe.mapper.overview">
+	<select id="selectCaseInfo" parameterType="Map" resultType="Map">
+		SELECT  a.case_id
+		       ,a.case_name
+			   ,a.description		 
+			   , (SELECT  CASE WHEN process_state =  '0' THEN '분석 필요'
+                               WHEN process_state =  '1' THEN '분석중'
+                               WHEN process_state =  '2' THEN '분석완료'
+                           END 
+			        FROM  evidence_info where case_id = a.case_id order by process_state desc limit 1) process_state			   
+			   ,(select count(1) from case_user where case_id = a.case_id) case_user_cnt
+			   ,(select count(1) from evidence_info where case_id = a.case_id) evidence_cnt
+			   ,(select count(1) from log2timeline where case_id = a.case_id) logtimeline_cnt
+		  FROM  case_info a
+		 WHERE  a.case_id = #{case_id}
+	</select>
+
+	<select id="selectCaseUserList" parameterType="Map" resultType="Map">
+		 SELECT  user_id
+                ,acl
+		   FROM  case_user
+          WHERE  case_id = #{case_id}		   
+	</select>
+		
+</mapper>

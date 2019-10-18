@@ -18,8 +18,6 @@ header.inner, footer.inner, article.inner, nav.inner { padding: 3px; }
 header.inner { /*background: red;*/ height: 51px; }
 footer.inner { /*background: red;*/ height: 51px; }
 
-li.on { background:#ffff62; }
-
 .unfold-ist{ display:block;margin:10px 10px; padding-bottom:7px}
 .unfold-ist:after{content:"";display:block;clear:both}
 .unfold-ist li{position:relative;display:block;}

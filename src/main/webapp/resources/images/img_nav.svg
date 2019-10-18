@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="430" viewBox="0 0 200 430" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <path d="M5,0 L195,0 C197.761424,-5.07265313e-16 200,2.23857625 200,5 L200,425 C200,427.761424 197.761424,430 195,430 L5,430 C2.23857625,430 3.38176876e-16,427.761424 0,425 L0,5 C-3.38176876e-16,2.23857625 2.23857625,5.07265313e-16 5,0 Z" id="path-1"></path>
+    </defs>
+    <g id="bg_nav" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Rectangle"></g>
+        <polygon id="Rectangle" fill-opacity="0.1" fill="#8CDCFF" mask="url(#mask-2)" points="200 3.58046925e-14 200 430 0 430"></polygon>
+        <polygon id="Rectangle" fill-opacity="0.1" fill="#8C9FFF" mask="url(#mask-2)" points="200 240 200 430 0 430"></polygon>
+        <polygon id="Rectangle" fill-opacity="0.1" fill="#8CC6FF" mask="url(#mask-2)" points="-2.56739074e-13 330 200 430 -1.38777878e-15 430"></polygon>
+    </g>
+</svg>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20" height="20" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ico_process_succeed</title>
+    <g id="ico_process_succeed" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M10,20 C15.5228475,20 20,15.5228475 20,10 C20,4.4771525 15.5228475,0 10,0 C4.4771525,0 0,4.4771525 0,10 C0,15.5228475 4.4771525,20 10,20 Z M10,16 C6.6862915,16 4,13.3137085 4,10 C4,6.6862915 6.6862915,4 10,4 C13.3137085,4 16,6.6862915 16,10 C16,13.3137085 13.3137085,16 10,16 Z" id="Oval" fill="#64C814" fill-rule="nonzero"></path>
+    </g>
+</svg>

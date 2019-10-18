@@ -4,16 +4,32 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.carpe.mapper.filesystem">
+
+	<select id="selectPartList" parameterType="Map" resultType="Map">
+		SELECT  par_id
+		       ,par_name 
+		  FROM  partition_info 
+		 WHERE  evd_id = #{evd_id}
+		order by par_name asc		  
+	</select>
+	
 	<select id="selectDirList" parameterType="Map" resultType="Map">
-		select a.file_id as id, a.name from file_info a, partition_info b
-		where a.parent_id = #{id}
-		  and b.evd_id = #{evd_id}
-		  and a.par_id = b.par_id
-		  and a.dir_type = 3
-		  order by a.name
+		SELECT  a.file_id as id
+		       ,a.name 
+		  FROM  file_info a
+		       ,partition_info b
+		 WHERE  a.parent_id = #{id}
+		   AND b.evd_id = #{evd_id}
+		  <if test="par_id != null">
+		   AND  b.par_id =  #{par_id}
+  		  </if>
+		   AND a.par_id = b.par_id
+		   AND a.dir_type = 3
+	  ORDER BY a.name
 	</select>
 
 	<select id="selectFileList" parameterType="Map" resultType="Map">
+	<!-- 
 		select a.file_id as id, a.name, a.dir_type, a.size, a.md5
 		  , FROM_UNIXTIME(a.si_ctime, '%Y-%m-%d %H:%i:%s') as ctime
 		  , a.si_ctime_nano as ctime_nano
@@ -29,6 +45,22 @@
 		  and (a.dir_type = 3 or a.dir_type = 5)
 		  and a.par_id = b.par_id
 		order by a.dir_type, a.name
+	 -->
+		select a.file_id as id, a.name, a.dir_type, a.size, a.md5
+				  , FROM_UNIXTIME(a.ctime, '%Y-%m-%d %H:%i:%s') as ctime
+				  , a.ctime_nano as ctime_nano
+				  , FROM_UNIXTIME(a.atime, '%Y-%m-%d %H:%i:%s') as atime
+				  , a.atime_nano as atime_nano
+				  , FROM_UNIXTIME(a.mtime, '%Y-%m-%d %H:%i:%s') as mtime
+				  , a.mtime_nano as mtime_nano
+				  , FROM_UNIXTIME(a.etime, '%Y-%m-%d %H:%i:%s') as etime
+				  , a.etime_nano as etime_nano
+				from file_info a, partition_info b
+				where a.parent_id = #{id}
+				  and b.evd_id = #{evd_id}
+				  and (a.dir_type = 3 or a.dir_type = 5)
+				  and a.par_id = b.par_id
+				order by a.dir_type, a.name
 	</select>
 
 	<select id="selectDateTreeMap" parameterType="Map" resultType="Map">

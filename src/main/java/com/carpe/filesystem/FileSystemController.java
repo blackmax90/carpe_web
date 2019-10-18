@@ -34,48 +34,93 @@ public class FileSystemController {
 		return mav;
 	}
 
+	/**
+	 * Directory Tree List
+	 * @param locale
+	 * @param map
+	 * @param session
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/dir_list.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getDirList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
 		long parentId = Consts.TREE_ROOT_ID;
-		if (map.get("id") != null) {
-			if (!map.get("id").equals("0"))	{
-				try {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+		List list = new ArrayList();
+		String dataAttr = "";
+		if (map.get("attr") != null && map.get("attr") != "") {
+			dataAttr = map.get("attr");
+		}
+		//file directory list
+		if (map.get("id") != null && map.get("id") != "") {
+			try {
+
+				//parent가 partion 속성일 경우
+				if ("par".equals(dataAttr)) {
+					paramMap.put("par_id", map.get("id"));
+				} else {
 					parentId = Long.parseLong((String) map.get("id"));
-				} catch (Exception e) {
-					e.printStackTrace();
 				}
+				
+				paramMap.put("id", parentId);
+				List<Map> dirList = service.selectDirList(paramMap);
+				
+				for (int i = 0; i < dirList.size(); i++) {
+					Map data = new HashMap();
+					data.put("label", dirList.get(i).get("name"));
+					data.put("icon", Consts.FOLDER_CLOSED_IMAGE);
+					data.put("iconsize", "18");
+					
+					Map value = new HashMap();
+					value.put("id", dirList.get(i).get("id"));
+					value.put("isLoaded", false);
+					value.put("attr", "dir");
+					data.put("value", value);
+					
+					List loading = new ArrayList();
+					Map dummy = new HashMap();
+					dummy.put("label", "로딩중...");
+					loading.add(dummy);
+					
+					data.put("items", loading);
+					
+					list.add(data);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		//partion directory list			
+		} else {
+			try {
+			List<Map> dirList = service.selectPartList(paramMap);
+			for (int i = 0; i < dirList.size(); i++) {
+				Map data = new HashMap();
+				data.put("label", dirList.get(i).get("par_name"));
+				data.put("icon", Consts.FOLDER_CLOSED_IMAGE);
+				data.put("iconsize", "18");
+				
+				Map value = new HashMap();
+				value.put("id", dirList.get(i).get("par_id"));
+				value.put("attr", "par");
+				value.put("isLoaded", false);
+				data.put("value", value);
+				
+				List loading = new ArrayList();
+				Map dummy = new HashMap();
+				dummy.put("label", "로딩중...");
+				loading.add(dummy);
+				
+				data.put("items", loading);
+				
+				list.add(data);
+			}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 
-		Map<String, Object> paramMap = new HashMap<String, Object>();
-
-		paramMap.put("id", parentId);
-		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
-
-		List<Map> dirList = service.selectDirList(paramMap);
-
-		List list = new ArrayList();
-		for (int i = 0; i < dirList.size(); i++) {
-			Map data = new HashMap();
-			data.put("label", dirList.get(i).get("name"));
-			data.put("icon", Consts.FOLDER_CLOSED_IMAGE);
-			data.put("iconsize", "18");
-
-			Map value = new HashMap();
-			value.put("id", dirList.get(i).get("id"));
-			value.put("isLoaded", false);
-
-			data.put("value", value);
-
-			List loading = new ArrayList();
-			Map dummy = new HashMap();
-			dummy.put("label", "Loading...");
-			loading.add(dummy);
-
-			data.put("items", loading);
-
-			list.add(data);
-		}
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -84,12 +129,21 @@ public class FileSystemController {
 		return mav;
 	}
 
+	/**
+	 * File Grid List
+	 * @param locale
+	 * @param map
+	 * @param session
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/file_list.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getFileList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
-
-		if (map.get("id") == null) {
+		
+		if (map.get("id") == null || (map.get("attr") != null && "par".equals(map.get("attr")))) {
 			mav.addObject("totalcount", 0);
 			return mav;
 		}

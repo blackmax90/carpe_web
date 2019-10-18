@@ -11,7 +11,7 @@
 
 <script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cef6cb47be07d53310c6414a32217460"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dd678d53931c05d004c6fbd2d20de9ca"></script>
 
 </head>
 

@@ -20,6 +20,11 @@ public class FileSystemDAOImpl implements FileSystemDAO {
 	public List<Map> selectDirList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectDirList", paramMap);
 	}
+	
+	@Override
+	public List<Map> selectPartList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectPartList", paramMap);
+	}
 
 	@Override
 	public List<Map> selectFileList(Map<String, Object> paramMap) throws Exception {

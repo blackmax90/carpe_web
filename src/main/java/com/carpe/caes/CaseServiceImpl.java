@@ -22,4 +22,9 @@ public class CaseServiceImpl implements CaseService {
 	public int insertCase(Map<String, Object> paramMap) throws Exception {
 		return dao.insertCase(paramMap);
 	}
+
+	@Override
+	public int deleteCaseList(Map<String, Object> paramMap) throws Exception {
+		return dao.deleteCaseList(paramMap);
+	}
 }

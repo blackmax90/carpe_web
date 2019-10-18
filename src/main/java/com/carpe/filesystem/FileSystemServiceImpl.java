@@ -17,6 +17,11 @@ public class FileSystemServiceImpl implements FileSystemService {
 	public List<Map> selectDirList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectDirList(paramMap);
 	}
+	
+	@Override
+	public List<Map> selectPartList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectPartList(paramMap);
+	}
 
 	@Override
 	public List<Map> selectFileList(Map<String, Object> paramMap) throws Exception {

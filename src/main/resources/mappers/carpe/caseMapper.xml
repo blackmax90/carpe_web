@@ -16,4 +16,13 @@
 		INSERT INTO case_info(case_id, case_name, administrator, create_date, description) 
 			VALUES(#{id}, #{name}, #{admin}, now(), #{desc})
 	</insert>
+	
+	<delete id="deleteCaseList" parameterType="Map">
+		DELETE 
+		  FROM case_info
+		 WHERE case_id in
+		  <foreach item="item" index="index" collection="caseList" open="(" close=")" separator=",">
+            #{item}
+   		  </foreach>
+	</delete>
 </mapper>
