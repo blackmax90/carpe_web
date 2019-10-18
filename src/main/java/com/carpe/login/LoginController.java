@@ -55,4 +55,14 @@ public class LoginController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value = "/logout.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView logout(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		session.removeAttribute("userInfo");
+		mav.setViewName("forward:/login.do");
+		
+		return mav;
+	}
 }
