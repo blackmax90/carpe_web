@@ -201,10 +201,14 @@
 
 					var $divpageele = $('<div class="paginate">');
 					var $firstele = $('<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>');
+					var $firsteleDis = $('<button type="button" class="btn-paging icon ico-first" disabled="disabled"><span class="ir">처음</span></button>');
 					var $prevele = $('<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>');
+					var $preveleDis = $('<button type="button" class="btn-paging icon ico-prev" disabled="disabled"><span class="ir">이전</span></button>');
 					var $spanele = $('<span class="num">');
 					var $nextele = $('<button class="btn-paging icon ico-next"><span class="ir">다음</span></button>');
+					var $nexteleDis = $('<button class="btn-paging icon ico-next" disabled="disabled"><span class="ir">다음</span></button>');
 					var $lastele = $('<button class="btn-paging icon ico-last"><span class="ir">마지막</span></button>');
+					var $lasteleDis = $('<button class="btn-paging icon ico-last" disabled="disabled"><span class="ir">마지막</span></button>');
 					var $aele
 
 					if (currentPage % 10 === 0) {
@@ -239,14 +243,26 @@
 							$aele = $('<a href="#">&nbsp;' + i + '&nbsp;</a>');
 							$aele.on("click", { value: i }, updateBound);
 							$spanele.append($aele);
-						}
+						}						
 					}
 
-					$divpageele.append($firstele);
-					$divpageele.append($prevele);
+					if (currentPage == 1) {
+						$divpageele.append($firsteleDis);
+						$divpageele.append($preveleDis);												
+					} else {
+						$divpageele.append($firstele);
+						$divpageele.append($prevele);
+					}					
+					
 					$divpageele.append($spanele);
-					$divpageele.append($nextele);
-					$divpageele.append($lastele);
+					
+					if (currentPage == lastPage) {
+						$divpageele.append($nexteleDis);
+						$divpageele.append($lasteleDis);
+					} else {
+						$divpageele.append($nextele);
+						$divpageele.append($lastele);
+					}
 
 					$('#paing').append($divpageele);
 				},
