@@ -31,10 +31,10 @@
 						<div class="btn-area">
 							<ul>
 								<li>
-									<button type="button" class="btn-case-02" id="btnNewCase"><span class="icon ico-plus">New Case</span></button>
+									<button type="button" class="btn-case-01" id="btnNewCase"><span class="icon ico-plus">New Case</span></button>
 								</li>
 								<li>
-									<button type="button" class="btn-case-02" id="btnDeleteCases"><span class="icon ico-minus">Delete Case</span></button>
+									<button type="button" class="btn-case-01" id="btnDeleteCases"><span class="icon ico-minus">Delete Case</span></button>
 								</li>
 							</ul>
 						</div>
@@ -72,25 +72,35 @@
 
 	</div>
 	
-	<div id="addCaseWindow">
-		<div id="addCaseWindowHeader">
-			<span style="float: left">Create Case</span>
+	<div id="addCaseWindow" class="pop wrap-pop">
+		<div id="addCaseWindowHeader" class="pop-header">
+			<h1>Create Case</h1>
 		</div>
-		<div id="addCaseWindowContent" style="overflow: hidden">
-			<div style="margin: 10px">
-				Name: <input id="newCaseName" type="text" style="width: 175px; border: 1px solid #aaa" />
-				<br /><br />
-				Administrator: <input id="newCaseAdministrator" type="text" style="width: 175px; border: 1px solid #aaa" />
-				<br /><br />
-				Time Zone: <input id="newCaseTimeZone" type="text" style="width: 175px; border: 1px solid #aaa" />
-				<br /><br />
-				Description: <textarea id="newCaseDescription" cols="36" rows="5" ></textarea>
-				<br /><br />
-                <div style="float: right; margin-top: 15px;">
-                    <input type="button" id="ok" value="OK" style="margin-right: 10px" />
-                    <input type="button" id="cancel" value="Cancel" />
-                </div>
+		<div id="addCaseWindowContent" class="pop-content">
+			<div class="data-type-1">
+				<dl>
+					<dt>Name :</dt>
+					<dd class="input-text input-text-type-1"><input id="newCaseName" type="text"/></dd>
+				</dl>
+				<dl>
+					<dt>Administrator :</dt>
+					<dd class="input-text input-text-type-1"><input id="newCaseAdministrator" type="text"/></dd>
+				</dl>
+				<dl>
+					<dt>Time Zone :</dt>
+					<dd class="input-text input-text-type-1"><input id="newCaseTimeZone" type="text"/></dd>
+				</dl>
+				<dl>
+					<dt>Description :</dt>
+					<dd><textarea id="newCaseDescription" cols="36" rows="5" class="textarea" ></textarea></dd>
+				</dl>
 			</div>
+            <div class="btn-area">
+                <ul>
+		            <li><button type="button" class="btn-case-01" id="cancel" value="Cancel" >Cancel</button></li>
+                	<li><button type="button" class="btn-case-01" id="ok" value="OK">OK</button></li>
+		        </ul>
+            </div>
 		</div>
 	</div>	
 	<!-- 공통 javascript 영역 -->		
@@ -218,7 +228,7 @@
 			*/
 
 			// New Case Layer Open
-			$('#addCaseWindow').jqxWindow({  width: 400, height: 300, resizable: false,
+			$('#addCaseWindow').jqxWindow({  width: 400, height: 400, resizable: false,
 	            /*okButton: $('#ok'),*/ cancelButton: $('#cancel'),
 	            autoOpen: false,
 	            //position: { x: offset.left + 50, y: offset.top + 50 },

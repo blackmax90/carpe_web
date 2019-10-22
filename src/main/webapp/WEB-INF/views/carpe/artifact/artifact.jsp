@@ -20,7 +20,7 @@
 <body>
 
 	<!-- wrap -->
-	<div class="wrap evidence bg-theme blue">
+	<div class="wrap analysis bg-theme blue">
 
 		<!-- header -->
 		<%@ include file="../common/header.jsp" %>
@@ -57,23 +57,24 @@
 				<h3>Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
 				<button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
 			</section>
+			<section class="btn-area">
+				<ul>
+					<li>
+						<button type="button" class="btn-case-02" id="btnTimeLine"><span>Time Line</span></button>
+					</li>
+				</ul>				
+			</section>
 			<article class="container">
 				<h4 class="blind">조회된 컨텐츠</h4>
-				<div class="jqx-reset jqx-splitter jqx-widget jqx-widget-content content-box">
-					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">				
-						<!--// Content 영역 //-->	
-						<div class="btn-area">
-							<ul>
-								<li>
-									<button type="button" class="btn-case-02" id="btnTimeLine">Time Line</span></button>
-								</li>
-							</ul>
-						</div>
-												
-						<div id="jqxSplitter" role="grid" class="jqx-reset jqx-splitter jqx-widget jqx-widget-content content-box">
-							<div><div id="jqxTree_artifacts"></div></div>
-							<div><div id="jqxGrid_Systemlog"></div></div>
-						</div>
+				<!--// Content 영역 //-->
+				<div id="jqxSplitter" class="jqx-reset jqx-splitter jqx-widget jqx-widget-content content-box">
+
+					<div class="jqx-widget-content jqx-splitter-panel jqx-reset aside">
+						<div id="jqxTree_artifacts" role="tree" data-role="treeview"><!--// Tree 영역 //--></div>
+					</div>
+
+					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">
+						<div id="jqxGrid_Systemlog" role="grid" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content"><!--// Table 영역 //--></div>
 						<div id="paing" class="paging-area">
 							<!--// Table Paging 영역 - 위치고정 //-->
 							<div class="paginate">

@@ -7,12 +7,12 @@
 # Layout
 # Common
 # Form
-	## button
-	## input text
-	## checkbox
-	## radio
-# Icon
+  ## button
+  ## input text
+  ## checkbox
+  ## radio
 # Header
+# Icon
 # Navigation
 # Footer
 # Page
@@ -20,6 +20,10 @@
   ## Login
   ## search
 # Size
+# Table
+# jqwidget Layout Custom
+# jqwidget Form Custom
+# jqwidget Pop-up Custom
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
 # Normalize
@@ -314,7 +318,7 @@ body, input, select, button, textarea {
 --------------------------------------------------------------*/
 html {
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 html, body {
@@ -398,14 +402,13 @@ html, body {
   float: left;
   width: 20rem;
   height: calc(100vh - 10rem);
-  min-height: 43rem;
+  min-height: 56rem;
   margin: 2rem 0 0 2rem;
   z-index: 9;
 }
 
 .blue .bg-img-nav { 
   width: 100%;
-
   height: 100%;
   background: url("../images/img_nav.svg") 0 bottom no-repeat;
 }
@@ -476,13 +479,36 @@ html, body {
   white-space: nowrap;
 }
 
+.ofy-auto {
+  overflow-y: auto !important;
+}
+
+
 /*--------------------------------------------------------------
 # Form
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
 # Form
-	## button
+  ## button
 --------------------------------------------------------------*/
+
+.btn-area {
+  position: relative;
+  margin-top: 1rem;
+}
+
+.btn-area ul {
+  float: right;
+}
+
+.btn-area li {
+  position: relative;
+  display: inline-block;
+  float: left;
+  margin-left: 1rem;
+  color: #FFF;
+}
+
 button {
   display: inline-block;
   width: auto;
@@ -505,7 +531,7 @@ button.btn-case-01 {
   height: 3rem;
   padding: 0 1.5rem;
   font-size: 1.4rem;
-  line-height: 3rem;
+  line-height: calc(3rem - 1px);
   background-image: linear-gradient(90deg, #646E8C 0%, #8C96C8 100%);
 }
 
@@ -518,7 +544,7 @@ button.btn-case-02 {
   height: 4rem;
   padding: 0 2rem;
   font-size: 1.4rem;
-  line-height: 4rem;
+  line-height: calc(4rem - 1px);
   background: #00B4F0;
   background-image: linear-gradient(90deg, rgba(0,200,240,0.20) 0%, rgba(160,0,240,0.50) 100%);
 }
@@ -545,7 +571,7 @@ button.btn-transparent {
   color: #FFF;
   font-size: 1.4rem;
   font-weight: 700;
-  line-height: 2rem;
+  line-height: calc(2rem - 1px);
   text-transform: uppercase;
   background-color: transparent;
   opacity: 0.6;
@@ -560,7 +586,7 @@ button.btn-paging {
   min-width: 1.4rem;
   height: 2rem;
   padding: 0 1rem; 
-  line-height: 2rem;
+  line-height: calc(2rem - 1px);
   background-color: transparent;
   opacity:1;
 }
@@ -574,7 +600,7 @@ button.btn-block.btn-login {
   margin-top: 3rem;
   font-size: 2rem;
   font-weight: 700;
-  line-height: 6rem;
+  line-height: calc(6rem - 1px);
   background: #0050A0;
   background-image: linear-gradient(90deg, rgba(0,200,240,0.30) 0%, rgba(160,0,240,0.50) 100%);
   border-radius: 0.5rem;
@@ -601,9 +627,62 @@ button:disabled {
   color: #ccc;
 }
 
+.map-area .map-pin {
+  width: 2.8rem;
+  height: 3.6rem;
+  background: url(../images/ico_pin.svg) no-repeat center center;
+  background-size: 2.8rem 3.6rem;
+}
+
+.map-area .map-func-btns {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  width: 3.6rem;
+  font-size: 0;
+}
+
+.map-area .map-func-btns .btn {
+    width: 3.6rem;
+    height: 3.6rem;
+    margin-top: 1rem;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+    -webkit-box-shadow: 0 0.26667vw 0.8vw rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.26667vw 0.8vw rgba(0, 0, 0, 0.4);
+}
+
+.map-area .map-func-btns .btn:hover {
+  background-color: #0078C8;
+}
+
+.map-area .map-func-btns .plus {
+    background-image: url(../images/ico_plus_bk.svg);
+    background-size: 1.2rem;
+}
+
+.map-area .map-func-btns .plus:hover {
+    background-image: url(../images/ico_plus.svg);
+    background-size: 1.2rem;
+}
+
+.map-area .map-func-btns .minus {
+    background-image: url(../images/ico_minus_bk.svg);
+    background-size: 1.2rem;
+}
+
+.map-area .map-func-btns .minus:hover {
+    background-image: url(../images/ico_minus.svg);
+    background-size: 1.2rem;
+}
+
+
+
 /*--------------------------------------------------------------
 # Form
-	## input text
+  ## input text
 --------------------------------------------------------------*/
 
 input[readonly] {
@@ -640,10 +719,10 @@ label {
 .input-text > input {
   width: 100%;
   color: #1E2832;
-  border: none;
+  border: 1px solid rgba(0,0,0,0.15);
 }
 
-.input-text-type-1 input {
+.input-text-type-1 input { /* general */
   display: inline-block;
   height: 3rem;
   padding: 0.5rem;
@@ -653,7 +732,7 @@ label {
   border-radius: 0.3rem;
 }
 
-.input-text-type-2 input {
+.input-text-type-2 input { /* log-in */
   display: block;
   height: 6rem;
   margin-top: 1rem;
@@ -673,10 +752,23 @@ label {
 }
 
 
+.textarea { 
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem;
+  font-size: 1.4rem;
+  color: #1E2832;
+  line-height: 2rem;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-sizing: border-box;
+  border-radius: 0.3rem;
+}
+
 
 /*--------------------------------------------------------------
 # Form
-	## checkbox
+  ## checkbox
 --------------------------------------------------------------*/
 .checkbox {
   position: relative;
@@ -697,10 +789,88 @@ label {
 
 .checkbox > label {
   position: relative;
+  display: inline-block;
   z-index: 2;
-  display: block;
 }
 
+.checkbox-type-1 {
+  line-height: 3rem;
+}
+
+.checkbox-type-1 label {
+  color: #FFF;
+  font-size: 1.4rem;
+  line-height: 3rem;
+  text-transform: uppercase;
+}
+
+.checkbox-type-1 label .text {
+  padding-left: 0.6rem;
+}
+
+.checkbox:last-child {
+  margin-right: 0;
+}
+
+.checkbox-type-2 {
+  line-height: 2rem;
+}
+
+.checkbox-type-2 label {
+  color: #FFF;
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.checkbox-type-2 label .text {
+  padding-left: 0;
+}
+
+.checkbox-type-2 > label:before {
+  position: absolute;
+  top: -1.4rem;
+  left: -1rem;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+  background: url("../images/check_off.svg") no-repeat center center;
+  background-size: 2rem;
+  content: "";
+}
+
+.checkbox-type-2 > input:checked + label:before,
+.checkbox-type-3 > input:checked + label:before {
+  background-image: url("../images/check_on.svg");
+}
+
+.checkbox-type-3 {
+  line-height: 3rem;
+}
+
+.checkbox-type-3 label {
+  color: #333;
+  font-size: 1.4rem;
+  line-height: 3rem;
+}
+
+.checkbox-type-3 label .text {
+  padding-left: 3rem;
+}
+
+.checkbox-type-3 > label:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 2rem;
+  height: 3rem;
+  background: url("../images/check_off.svg") no-repeat center center;
+  background-size: 2rem;
+  content: "";
+}
+
+
+/*
 .checkbox > label:before {
   position: absolute;
   left: 0;
@@ -717,162 +887,53 @@ label {
   background-image: url("../images/check_on.svg");
 }
 
-.checkbox-type-1 {
-  line-height: 3rem;
-}
-
-.checkbox-type-1 label {
-  color: #FFF;
-  font-size: 1.4rem;
-  line-height: 3rem;
-  text-transform: uppercase;
-}
-
 .checkbox-type-1 label:before {
   top: 0.5rem;
   width: 2rem;
   height: 2rem;
   background-size: 2rem;
 }
+*/
 
-.checkbox-type-1 label .text {
-  padding-left: 3rem;
-}
-
-
-.checkbox:last-child {
-  margin-right: 0;
-}
-
-.checkbox-btn-block > label,
-.checkbox-btn-block-type-1 > label {
-  height: 6rem;
-  padding: 0 3rem;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  background: transparent;
-  -webkit-box-shadow: 0 0.1rem 2rem rgba(0, 0, 0, 0.2);
-  box-shadow: 0 0.1rem 2rem rgba(0, 0, 0, 0.2);
-  border-radius: 0.5rem;
-  color: #323333;
-  font-size: 1.4rem;
-  line-height: 6rem;
-}
-
-.checkbox-btn-block > label:before,
-.checkbox-btn-block-type-1 > label:before {
-  display: none;
-}
-
-.checkbox-btn-block > input:checked + label,
-.checkbox-btn-block-type-1 > input:checked + label {
-  background-color: #36ADE6;
-  color: #fff;
-}
 
 /*--------------------------------------------------------------
-# Icon
+# Form
+  ## checkbox
 --------------------------------------------------------------*/
-.icon:before {
-  display: inline-block;
-  background-repeat: no-repeat;
-  background-position: center center;
-  content: '';
-  vertical-align: top;
+
+.select {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 0.3rem;
 }
 
-.ico-first:before,
-.ico-first:disabled:hover:before{
+.select:after {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  display: block;
   width: 1.4rem;
-  height: 100%;
-  background-image: url("../images/ico_arr_first_off.svg");
+  height: 1.2rem;
+  margin-top: -0.6rem;
+  background: url(../images/ico_arr_next_off.svg) no-repeat right center;
   background-size: 1.4rem 1.2rem;
-}
-.ico-first:hover:before {
-  background-image: url("../images/ico_arr_first_on.svg");
+  content: "";
 }
 
-.ico-prev:before,
-.ico-prev:disabled:hover:before  {
-  width: 1.4rem;
-  height: 100%;
-  background-image: url("../images/ico_arr_prev_off.svg");
-  background-size: 1.4rem 1.2rem;
+.select select {    
+  position: relative;
+  width: 100%;
+  padding: 0.4rem 2rem 0.4rem 1rem;
+  background-color: #fff;
+  border: none;
+  color: #323333;
+  font-size: 1.4rem;
+  line-height: 2rem;
 }
-.ico-prev:hover:before {
-  background-image: url("../images/ico_arr_prev_on.svg");
-}
-
-.ico-next:before,
-.ico-next:disabled:hover:before {
-  width: 1.4rem;
-  height: 100%;
-  background-image: url("../images/ico_arr_next_off.svg");
-  background-size: 1.4rem 1.2rem;
-}
-.ico-next:hover:before {
-  background-image: url("../images/ico_arr_next_on.svg");
-}
-
-.ico-last:before,
-.ico-last:disabled:hover:before {
-  width: 1.4rem;
-  height: 100%;
-  background-image: url("../images/ico_arr_last_off.svg");
-  background-size: 1.4rem 1.2rem;
-}
-.ico-last:hover:before {
-  background-image: url("../images/ico_arr_last_on.svg");
-}
-
-.ico-plus:before {
-  width: 1.2rem;
-  height: 100%;
-  margin-right: 1rem;
-  background-image: url("../images/ico_plus.svg");
-  background-size: 1.2rem 1.2rem;
-}
-
-.ico-minus:before {
-  width: 1.2rem;
-  height: 100%;
-  margin-right: 1rem;
-  background-image: url("../images/ico_minus.svg");
-  background-size: 1.2rem 1.2rem;
-}
-
-.ico-case-out:before {
-  width: 1.6rem;
-  height: 100%;
-  margin-right: 1rem;
-  background-image: url("../images/ico_case_out.svg");
-  background-size: 1.6rem 1.6rem;
-}
-
-.ico-view-list:before {
-  width: 1.4rem;
-  height: 100%;
-  margin-right: 0.6rem;
-  background-image: url("../images/ico_view_list.svg");
-  background-size: 1.4rem 1.4rem;
-}
-
-.ico-view-summary:before {
-  width: 1.4rem;
-  height: 100%;
-  margin-right: 0.6rem;
-  background-image: url("../images/ico_view_summary.svg");
-  background-size: 1.4rem 1.4rem;
-}
-
-.ico-search:before {
-  width: 1.4rem;
-  height: 100%;
-  margin-right: 0.6rem;
-  background-image: url("../images/ico_search.svg");
-  background-size: 1.4rem 1.4rem;
-}
-
 
 /*--------------------------------------------------------------
 # Header
@@ -1026,12 +1087,116 @@ label {
 
 
 /*--------------------------------------------------------------
+# Icon
+--------------------------------------------------------------*/
+.icon:before {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: center center;
+  content: '';
+  vertical-align: top;
+}
+
+.ico-first:before,
+.ico-first:disabled:hover:before{
+  width: 1.4rem;
+  height: 100%;
+  background-image: url("../images/ico_arr_first_off.svg");
+  background-size: 1.4rem 1.2rem;
+}
+.ico-first:hover:before {
+  background-image: url("../images/ico_arr_first_on.svg");
+}
+
+.ico-prev:before,
+.ico-prev:disabled:hover:before  {
+  width: 1.4rem;
+  height: 100%;
+  background-image: url("../images/ico_arr_prev_off.svg");
+  background-size: 1.4rem 1.2rem;
+}
+.ico-prev:hover:before {
+  background-image: url("../images/ico_arr_prev_on.svg");
+}
+
+.ico-next:before,
+.ico-next:disabled:hover:before {
+  width: 1.4rem;
+  height: 100%;
+  background-image: url("../images/ico_arr_next_off.svg");
+  background-size: 1.4rem 1.2rem;
+}
+.ico-next:hover:before {
+  background-image: url("../images/ico_arr_next_on.svg");
+}
+
+.ico-last:before,
+.ico-last:disabled:hover:before {
+  width: 1.4rem;
+  height: 100%;
+  background-image: url("../images/ico_arr_last_off.svg");
+  background-size: 1.4rem 1.2rem;
+}
+.ico-last:hover:before {
+  background-image: url("../images/ico_arr_last_on.svg");
+}
+
+.ico-plus:before {
+  width: 1.2rem;
+  height: 100%;
+  margin-right: 1rem;
+  background-image: url("../images/ico_plus.svg");
+  background-size: 1.2rem 1.2rem;
+}
+
+.ico-minus:before {
+  width: 1.2rem;
+  height: 100%;
+  margin-right: 1rem;
+  background-image: url("../images/ico_minus.svg");
+  background-size: 1.2rem 1.2rem;
+}
+
+.ico-case-out:before {
+  width: 1.6rem;
+  height: 100%;
+  margin-right: 1rem;
+  background-image: url("../images/ico_case_out.svg");
+  background-size: 1.6rem 1.6rem;
+}
+
+.ico-view-list:before {
+  width: 1.4rem;
+  height: 100%;
+  margin-right: 0.6rem;
+  background-image: url("../images/ico_view_list.svg");
+  background-size: 1.4rem 1.4rem;
+}
+
+.ico-view-summary:before {
+  width: 1.4rem;
+  height: 100%;
+  margin-right: 0.6rem;
+  background-image: url("../images/ico_view_summary.svg");
+  background-size: 1.4rem 1.4rem;
+}
+
+.ico-search:before {
+  width: 1.4rem;
+  height: 100%;
+  margin-right: 0.6rem;
+  background-image: url("../images/ico_search.svg");
+  background-size: 1.4rem 1.4rem;
+}
+
+
+/*--------------------------------------------------------------
 # Navigation
 --------------------------------------------------------------*/
 .nav li {
   width:100%;
   height: 6rem;
-  padding : 0 2rem;
+  padding : 0 1.5rem 0 2rem;
   color: #FFF;
   font-size: 1.6rem;
   font-weight: 700;
@@ -1044,6 +1209,7 @@ label {
 .nav li > a {
   width: 100%;
   height: 100%;
+  word-break: break-all;
 }
 
 .nav li:hover,
@@ -1052,10 +1218,12 @@ label {
 }
 
 .nav li.level02 {
-  height: 4.8rem;
-  padding : 0 2rem 0 5.4rem;
+  height: auto;
+  min-height: 4.8rem;
+  padding : 1.2rem 2rem 1.2rem 5.4rem;
   font-size: 1.4rem;
-  line-height: 4.8rem;
+  font-weight: 400;
+  line-height: 2.4rem;
   text-transform: capitalize;
   text-shadow: none;
   background: rgba(0,0,0,0.1);
@@ -1139,6 +1307,41 @@ label {
   background-image: url("../images/ico_nav_report_on.svg");
 }
 
+.nav .time-area {
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 1.5rem 2rem 2rem;
+}
+
+.nav .time-area dt,
+.nav .time-area dd {
+  width: 100%;
+  color: #FFF;
+}
+
+.nav .time-area dt {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 3rem;
+  text-transform: uppercase;
+}
+
+.nav .time-area dt:before {
+  width: 1.8rem;
+  height: 2.9rem;
+  margin-right: 0.6rem;
+  background-image: url("../images/ico_clock.svg");
+  background-size: 1.8rem 1.8rem;
+}
+
+.nav .time-area dd {
+  line-height: 2rem;
+}
+
+
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
@@ -1183,13 +1386,13 @@ h3 {
 # Page
   ## Container
 --------------------------------------------------------------*/
-.container {
+.container { /* 공통 및 Evidence / Visualization 화면 height */
   position: relative;
   display: block;
   float: left;
-  height: calc(100vh - 22rem);
+  height: calc(100vh - 13rem);
   min-height: 31rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   border-radius: 0.5rem;
   background-color: #FFF;
 }
@@ -1200,11 +1403,24 @@ h3 {
 }
 
 .overview .container {
+  height: calc(100vh - 22rem);
+  margin-top: 2rem;
   background-color: transparent;
 }
 
-.evidence .container {
-  height: calc(100vh - 14rem);
+.analysis .container {
+  height: calc(100vh - 18rem);
+}
+
+.srch-page .container {
+  height: calc(100vh - 20rem);
+}
+
+.container .content-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
 }
 
 .container .content-area {  
@@ -1212,13 +1428,13 @@ h3 {
   position: relative;
   display: block;
   float: left;
-  height: calc(100% - 2rem);
+  width: 100%;
+  height: 100%;
   padding: 2rem;
 }
 
 .home .container .content-area,
 .evidence .container .content-area {
-  width: 100%;
   border-radius: 0.5rem;
 }
 
@@ -1230,7 +1446,7 @@ h3 {
 }
 
 .overview .container .content-area:last-child {
-  margin-top:2rem; 
+  margin-top: 2rem; 
 }
 
 .overview .container aside.content-area {
@@ -1241,18 +1457,39 @@ h3 {
 .container .content-area .btn-area {
   position: relative;
   float: right;
-  height: 5rem;
   padding-bottom: 1rem;
+  margin-top: 0;
 }
 
-.container .content-area .btn-area li {
-  position: relative;
-  display: inline-block;
+.vsa-page .chart-area,
+.vsa-page .result-long-data {
+  position: relative;  
   float: left;
-  height: 4rem;
-  margin-left: 1rem;
-  color: #FFF;
-  line-height: 4rem;
+  width: 100%;
+  height: calc(100% - 4rem);
+}
+
+.vsa-page .content-area .chart-area.chart-type-1 {
+  height: 100%;
+}
+
+.vsa-page .result-long-data .chart-area.chart-type-2 {
+  height: 400%;
+}
+
+.container .content-area .map-area {
+  position: relative;
+  width: 100%;
+  height: calc(60% - 1rem);
+  background: rgba(0,0,0,0.04);
+}
+
+.container .content-area .data-tbl-area {
+  position: relative;
+  width: 100%;
+  height: 40%;
+  margin-top: 1rem;
+  overflow-y: auto;
 }
 
 .container .content-area .paging-area {
@@ -1278,6 +1515,7 @@ h3 {
 .container .content-area .paging-area .num a strong.on {
   color: #3CB4F0;
 }
+
 
 /*--------------------------------------------------------------
 # Page
@@ -1345,7 +1583,7 @@ h3 {
   float: left;
   height: 6rem;
   padding: 1.4rem 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   line-height: 3rem;
 }
 
@@ -1410,63 +1648,278 @@ h3 {
   line-height: 2rem;
 }
 
+
 /*--------------------------------------------------------------
 # Size
 --------------------------------------------------------------*/
-.w100p { width:100% !important; }
-.w300 { width:30rem !important; }
+.w100p { width: 100% !important; }
+.w300 { width: 30rem !important; }
+.h100 { height: 10rem !important; }
 
 
 
 /*--------------------------------------------------------------
-# TEST CSS 
-  ## jqwidget 관련 임의 사이즈 및 레이아웃 - 삭제 예정 
+# Table
 --------------------------------------------------------------*/
+
+.tbl-grid {
+  width:100%;
+  border-top: 1px solid #999;
+}
+
+.tbl-grid tbody tr:nth-child(even) {
+  background-color: rgba(0,0,0,0.02);
+}
+
+.tbl-grid th,
+.tbl-grid td {
+  padding: 0.5rem;
+  line-height: 2rem;
+  text-align:center;
+  border-left: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.tbl-grid th {
+  background-color: rgba(0,0,0,0.08);
+}
+
+.tbl-grid th:first-child,
+.tbl-grid td:first-child {
+  border-left: none;
+}
+
+.tbl-grid td.left {
+  text-align:left;
+}
+
+.tbl-grid.tbl-data-check tbody td.bg-point-1 {
+  background-color: #B0BAC9;
+}
+
+.tbl-grid.tbl-data-check tbody tr.bg-point-2 {
+  background-color: #DCF0E6;
+}
+
+.tbl-grid.tbl-data-check tbody td.bg-point-3 {
+  background-color: #FAE6F0;
+}
+
+/*--------------------------------------------------------------
+# jqwidget Layout Custom CSS 
+  ## jqwidget 관련 임의 사이즈 및 레이아웃
+--------------------------------------------------------------*/
+
+.container .jqx-rc-all {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+}
 
 .container .jqx-splitter.content-box {
   width: 100%;
   height: 100%;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
 }
 
 .container .jqx-splitter-panel.jqx-widget-content, 
-.container .jqx-fill-state-normal { /* 패널영역 및 스플릿 바 공통 */
+.container .jqx-splitter-splitbar-vertical { /* 패널영역 및 스플릿 바 공통 */
   display:inline-block;
-  float: left; 
+  float: left;
 }
 
 .container .jqx-splitter-panel.jqx-widget-content { /* 패널영역 공통 */
   height: 100%;
   padding: 2rem;
+  box-sizing: border-box;
 }
 
-.container .jqx-fill-state-normal { /* 스플릿 바 */
-  width: 0.5rem;
-  height: 100%;
+.container .jqx-splitter-splitbar-vertical, 
+.container .jqx-splitter-splitbar-horizontal { /* 스플릿 바 */
+  width: 0.5rem; /* test-size */
+  height: 100%; /* test-size */
   background: #143C78;
 }
 
 .container .jqx-splitter-panel.jqx-widget-content.aside { /* 트리 및 사이드 메뉴 영역 */
   width: 20rem;
+  padding: 2rem 2rem 2rem 1rem;
 }
 
-.container .jqx-splitter-panel.jqx-widget-content.content-area {  /* jqwidget 메인 패널 컨텐츠 영역 */
-  width: calc(100% - 20.5rem);
+.container .aside.jqx-widget-content,
+.container .aside.jqx-widget-content .jqx-widget-content {
+  border: none !important;
 }
 
-.evidence .container .jqx-splitter-panel.jqx-widget-content.content-area, /* evidence 화면 jqwidget 메인 패널 컨텐츠 영역 */
-.home .container .jqx-splitter-panel.jqx-widget-content.content-area {  /* home 화면 jqwidget 메인 패널 컨텐츠 영역 */
+.container .jqx-splitter-panel.content-area {  /* Home / Evidence / Search 화면 jqwidget 메인 패널 컨텐츠 영역 */
   width: 100%;
+}
+
+.analysis .container .jqx-splitter-panel.content-area { /* analysis 화면 jqwidget 메인 패널 컨텐츠 영역 */
+  width: calc(100% - 20.5rem);
 }
 
 .container .content-area .jqx-grid {  /* 테이블 영역 */
   position: relative;
   float: left;
   width: 100%;
-  height: calc(100% - 8rem);
+  height: calc(100% - 7rem);
 }
+
+.analysis .container .content-area .jqx-grid,
+.srch-page .container .content-area .jqx-grid  { 
+  height: calc(100% - 3rem);
+}
+
+.vsa-page .container .jqx-splitter-panel.jqx-widget-content.aside { /* 사이드 Table 영역 */
+  width: 24rem;
+  padding: 2rem 2rem 2rem 2rem;
+}
+
+.vsa-page .container .jqx-splitter-panel.content-area  {  /* visualization 화면 jqwidget 메인 패널 컨텐츠 영역 */
+  width: calc(100% - 24.5rem);
+}
+
 
 .empty-area {
   width:100%;
   height:100%;
-  background: rgba(0,0,0,0.1) !important;
+  background: rgba(0,0,0,0.05);
 }
+
+
+
+/*--------------------------------------------------------------
+# jqwidget Form Custom
+  ## jqwidget grid table checkbox/radio custom >> jqx.base.css
+--------------------------------------------------------------*/
+
+.jqx-checkbox,
+.jqx-radiobutton {
+  display: inline-block;
+  float: left;
+  padding: 0.1rem 0;
+}
+
+.jqx-checkbox .jqx-fill-state-normal,
+.jqx-radiobutton .jqx-fill-state-normal {
+/*  width: 2rem;
+  height: 2rem;*/
+  padding: 0.1rem;
+  background: #FFF;
+}
+
+
+/*--------------------------------------------------------------
+# jqwidget Pop-up Custom
+  ## jqwidget pop-up custom >> jqx.base.css
+--------------------------------------------------------------*/
+.pop { 
+  overflow: hidden; 
+  z-index: 999;
+}
+
+.pop, .pop * {
+  font-family: 'Noto Sans KR', 'Noto Sans CJK KR', 'Noto Sans', 'AppleGothic', -apple-system, system, BlinkMacSystemFont, 'SF UI Text', 'SF Pro Text', BlinkMacSystemFont, 'droid sans fallback', 'Droid Sans', 'Segoe UI', "Helvetica Neue", Helvetica, Tahoma, "Microsoft Sans Serif", sans-serif;
+  box-sizing: border-box;
+}
+
+.pop.wrap-pop {
+  background: #FFF;
+  border-radius: 0.6rem; 
+  box-shadow: 0rem 0.2rem 0.6rem 0 rgba(0,0,0,0.4);
+}
+
+.pop-header {
+  position: relative;
+  padding: 1rem 1rem 1rem 1.8rem;
+  line-height: 2rem;
+  background: #00B4F0;
+  background-image: linear-gradient(90deg, rgba(0,200,240,0.20) 0%, rgba(160,0,240,0.50) 100%);
+}
+
+.pop-header h1{
+  color: #FFF;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: calc(2rem - 1px);
+}
+
+.jqx-window-close-button-background {
+  position: absolute;
+  top: 0.8rem;
+  right: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-right: 1rem;
+  margin-left: 0px;
+  visibility: visible;
+}
+
+.pop-header .jqx-icon-close,
+.pop-header .jqx-window-close-button {
+  cursor: pointer;
+  background-image: url("../images/ico_close_wh.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.pop-header .jqx-icon-close.jqx-window-close-button {
+  width:100%;
+  height:100%;
+  margin-top: 2px;
+}
+
+.pop-content {
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.pop-content dl { 
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: stretch;
+  -webkit-justify-content: stretch;
+  -ms-flex-pack: stretch;
+  justify-content: stretch;
+  min-height: 3rem;
+  font-size: 1.4rem;
+  line-height: 3rem;
+}
+
+.pop-content dl > dt, 
+.pop-content dl > dd {
+  display: inline-block;
+  float:left;
+  width: auto;
+  padding: 0.5rem;
+  word-break: break-all;
+}
+
+.pop-content dl > dt {
+  color: #1E2832;
+  font-weight: 700;
+}
+
+.pop-content dl > dd {
+  text-align: left;
+}
+
+.pop-content .data-type-1 dl > dt {
+  width: 35%;
+}
+.pop-content .data-type-1 dl > dd {
+  width: 65%;
+}
+
+.pop-content .data-type-2 dl > dt {
+  width: 15%;
+}
+
+.pop-content .data-type-2 dl > dd {
+  width: 85%;
+}
+
+

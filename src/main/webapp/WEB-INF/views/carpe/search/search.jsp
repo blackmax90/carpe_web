@@ -20,7 +20,7 @@
 <body>
 
 	<!-- wrap -->
-	<div class="wrap evidence bg-theme blue">
+	<div class="wrap evidence bg-theme blue">>
 
 		<!-- header -->
 		<%@ include file="../common/header.jsp" %>
@@ -57,49 +57,51 @@
 				<h3>Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
 				<button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
 			</section>
+			<section class="search-area bg-unit">
+				<form action="" id="" name="" method="">
+					<legend class="blind">조회조건 선택</legend>
+					<ul class="search-item-area">
+						<li>
+							<div class="checkbox checkbox-type-1">
+								<input id="checkbox_filename" name="checkbox_filename" type="checkbox" />
+								<label for="checkbox_filename"><span class="text">파일명</span></label>
+							</div>
+						</li>
+						<li>
+							<div class="checkbox checkbox-type-1">
+								<input id="checkbox_content" name="checkbox_content" type="checkbox" checked=""/>
+								<label for="checkbox_content"><span class="text">내용</span></label>
+							</div>
+						</li>
+						<li>
+							<div class="input-text input-text-type-1 fl w300">
+								<input id="search_word" name="search_word" type="text" placeholder="검색어를 입력해주세요."/>
+							</div>
+							<button type="button" class="btn-case-01 btn-search" id="btnSearch"><span class="icon ico-search">검색</span></button>
+						</li>
+					</ul>
+					<ul class="btn-sort-area">
+						<li>
+							<button type="button" class="btn-case-01" id="btnViewList"><span class="icon ico-view-list">List View</span></button>
+						</li>
+						<li>
+							<button type="button" class="btn-case-01" id="btnViewSummary"><span class="icon ico-view-summary">Summary View</span></button>
+						</li>
+					</ul>
+				</form>
+			</section>
 			<article class="container">
 				<h4 class="blind">조회된 컨텐츠</h4>
 				<div class="jqx-reset jqx-splitter jqx-widget jqx-widget-content content-box">
+					
 					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">				
 						<!--// Content 영역 //-->	
-						<div class="btn-area">
-							<ul class="search-item-area">
-								<li>
-									<div class="checkbox checkbox-type-1">
-										<input id="checkbox_filename" name="checkbox_filename" type="checkbox">
-										<label for="filename"><span class="text">파일명</span></label>
-									</div>
-								</li>
-								<li>
-									<div class="checkbox checkbox-type-1">
-										<input id="checkbox_content" name="checkbox_content" type="checkbox">
-										<label for="filename"><span class="text">내용</span></label>
-									</div>
-								</li>
-								<li>
-									<div class="input-text input-text-type-1 fl w300">
-										<input id="search_word" name="search_word" type="text" placeholder="검색어를 입력해주세요.">
-									</div>
-									<button type="button" id="btnSearch" class="btn-case-01 btn-search">
-										<span class="icon ico-search">검색</span>
-									</button>
-								</li>
-								<li>
-									<button type="button" class="btn-case-01" id="btnViewList">
-										<span class="icon ico-view-list">목록보기</span>
-									</button>
-								</li>
-								<li>
-									<button type="button" class="btn-case-01" id="btnViewSummary">
-										<span class="icon ico-view-summary">요약보기</span>
-									</button>
-								</li>
-							</ul>
-						</div>
 						<div id="jqxGrid_Systemlog" role="grid" align="left" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content empty-area">
+						<!--// Table 영역 //-->
 						</div>
+						
+						<!--// Table Paging 영역 - 위치고정 //-->
 						<div id="paing" class="paging-area">
-							<!--// Table Paging 영역 - 위치고정 //-->
 							<div class="paginate">
 								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
 								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>

@@ -67,10 +67,10 @@
 						<div class="btn-area">
 							<ul>
 								<li>
-									<button type="button" class="btn-case-02" id="btnNewEvdnc"><span class="icon ico-plus">Add Evidence</span></button>
+									<button type="button" class="btn-case-01" id="btnNewEvdnc"><span class="icon ico-plus">Add Evidence</span></button>
 								</li>
 								<li>
-									<button type="button" class="btn-case-02" id="btnDeleteEvdncs"><span class="icon ico-minus">Delete Evidence</span></button>
+									<button type="button" class="btn-case-01" id="btnDeleteEvdncs"><span class="icon ico-minus">Delete Evidence</span></button>
 								</li>
 							</ul>
 						</div>				
@@ -106,33 +106,46 @@
 
 	</div>
 	<!-- // wrap -->
-	<div id="addEvdncWindow">
-		<div id="addEvdncWindowHeader">
-			<span style="float: left">Create Evidence</span>
+	
+	<div id="addEvdncWindow" class="pop wrap-pop">
+		<div id="addEvdncWindowHeader" class="pop-header" style="background:#00B4F0";>
+			<h1>Create Evidence</h1>
 		</div>
-		<div id="addEvdncWindowContent" style="overflow: hidden">
+		<div id="addEvdncWindowContent" class="pop-content">
 		    <form action="/carpe/add_evdnc.do" method="post" enctype="multipart/form-data">
-				<div style="margin: 10px">
-					Evidence Type:
-					<select name="newEvdncSubType" id="newEvdncSubType">
-						<option>EWF</option>
-						<option>AFF</option>
-						<option>RAW</option>
-						<option>VMDK</option>
-						<option>VHD</option>
-					</select>
-					<br /><br />
-					Name: <input name="newEvdncName" id="newEvdncName" type="text" style="width: 175px; border: 1px solid #aaa" />
-					<br /><br />
-					파일 선택: <input type="file" id="evdnc_file" name="evdnc_file">
-					<br /><br />
-				    <div style='margin-top: 10px; overflow: hidden;' id='colorRanges'></div>
-					<br /><br />
-	                <div style="float: right; margin-top: 15px;">
-	                    <input type="button" id="ok" value="OK" style="margin-right: 10px" />
-	                    <input type="button" id="cancel" value="Cancel" />
-	                </div>
+				<div class="data-type-3">
+					<dl>
+						<dt>Evidence Type :</dt>
+						<dd>
+							<div class="select">
+								<select name="newEvdncSubType" id="newEvdncSubType">
+									<option>EWF</option>
+									<option>AFF</option>
+									<option>RAW</option>
+									<option>VMDK</option>
+									<option>VHD</option>
+								</select>
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>Name :</dt>
+						<dd><input name="newEvdncName" id="newEvdncName" type="text"/></dd>
+					</dl>	
+					<dl>
+						<dt>파일 선택 :</dt>
+						<dd>
+							<input type="file" id="evdnc_file" name="evdnc_file"/>
+                <div style='margin-top: 10px; overflow: hidden;' id='colorRanges'></div>
+						</dd>
+					</dl>
 				</div>
+	            <div class="btn-area">
+	                <ul>
+			            <li><button type="button" class="btn-case-01" id="cancel" value="Cancel" >Cancel</button></li>
+	                	<li><button type="button" class="btn-case-01" id="ok" value="OK">OK</button></li>
+			        </ul>
+	            </div>
 			</form>
 		</div>
 	</div>
