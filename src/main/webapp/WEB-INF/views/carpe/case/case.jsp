@@ -131,6 +131,11 @@
 				beforeSend : function(xhr) {
 				},
 				downloadComplete : function(data, status, xhr) {
+					var totalcount = data['totalcount'] || 0;
+					currentRowCount = data['list'] ? data['list'].length : 0;
+					
+					$('#paing').empty();
+
 				},
 				loadComplete : function(data) {
 				},
