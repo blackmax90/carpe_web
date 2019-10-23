@@ -46,7 +46,7 @@
 						<li class="level02"><a href="/carpe/artifact.do">Artifact</a></li>
 						<li class="level02 on"><a href="/carpe/calls.do">Calls</a></li>
 						<li class="level02"><a href="/carpe/search.do">검색</a></li>
-					<li><a href="#" class="icon visualization">Visualization</a></li>
+					<li><a href="/carpe/gps.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>
 			</div>
@@ -107,8 +107,8 @@
 					{ name: 'calls_type', type: 'string' },
 					{ name: 'duration', type: 'number' },
 					{ name: 'name', type: 'string' },
-					{ name: 'title', type: 'title' },
-					{ name: 'conts', type: 'conts' }
+					{ name: 'title', type: 'string' },
+					{ name: 'conts', type: 'string' }
 				],
 	            type : "POST",
 	            contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -151,7 +151,6 @@
 			$("#jqxGrid_Systemlog").jqxGrid({
 				width: '100%',				
 				source: dataAdapter,
-				selectionmode: 'checkbox',
 				pagerheight: 0,
 				altrows: true,
 				scrollbarsize: 12,

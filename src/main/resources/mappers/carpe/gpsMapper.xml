@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.gps">
+	<select id="selectGpsList" parameterType="Map" resultType="Map">
+		SELECT  @a:=@a+1 serial_number
+		       ,FROM_UNIXTIME(substr(a.regdate,1,10),'%Y-%m-%d %H:%i:%s') as regdate
+		       ,a.gps_type
+		       ,a.source
+		       ,a.location
+		       ,a.latitude
+		       ,a.longitude
+		       ,a.gps_id
+		  FROM  gps a, (SELECT @a:= 0) AS sn
+		 WHERE a.case_id = #{case_id}
+	</select>
+
+</mapper>

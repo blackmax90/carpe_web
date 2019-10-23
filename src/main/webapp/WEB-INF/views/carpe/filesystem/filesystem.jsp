@@ -43,7 +43,7 @@
 						<li class="level02"><a href="/carpe/artifact.do">Artifact</a></li>
 						<li class="level02"><a href="/carpe/calls.do">Calls</a></li>
 						<li class="level02"><a href="/carpe/search.do">검색</a></li>
-					<li><a href="#" class="icon visualization">Visualization</a></li>
+					<li><a href="/carpe/gps.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>
 			</div>
