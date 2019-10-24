@@ -74,21 +74,21 @@
 				<h4 class="blind">조회된 컨텐츠</h4>
 
 				<!--// Content 영역 //-->
-				<div id="jqxSplitter" class="jqx-reset jqx-splitter jqx-widget jqx-widget-content content-box">
+				<div id="jqxSplitter" class="content-box">
 
-					<div class="jqx-widget-content jqx-splitter-panel jqx-reset aside">
-						<div id="jqxTree_dirs" role="tree" data-role="treeview"><!--// Tree 영역 //--></div>
+					<div class="aside">
+						<div id="jqxTree_dirs" role="tree" data-role="treeview" class="aside-result"><!--// Tree 영역 //--></div>
 					</div>
 
-					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">
-						<div id="jqxGrid_files" role="grid" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content"><!--// Table 영역 //--></div>
+					<div class="content-area">
+						<div id="jqxGrid_files" role="grid" class="cont-result"><!--// Table 영역 //--></div>
 						<div id="paing" class="paging-area">
 							<!--// Table Paging 영역 - 위치고정 //-->
 							<div class="paginate">
 								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
 								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
 								<span class="num">
-									<a href="#">81</strong></a>
+									<a href="#">81</a>
 									<a href="#">82</a>
 									<a href="#"><strong class="on">83</strong></a>
 									<a href="#">84</a>
@@ -154,7 +154,7 @@
 			});
 
 			// splitter
-			$('#jqxSplitter').jqxSplitter({ width: '100%', height: '100%', panels: [{ min: 150, size: 200 }, { min: 300 }] });
+			$('#jqxSplitter').jqxSplitter({ width: '100%', height: '100%', panels: [{ min: 150, size: 200 }, { min: 300,}] });
 
 			// tree
 			function expandDirTree(node) {
@@ -200,7 +200,7 @@
 			}
 
 			var treeRootDir = expandDirTree();
-		    $("#jqxTree_dirs").jqxTree({ source: treeRootDir, allowDrag:false, width:'100%', height:'100%'});
+		    $("#jqxTree_dirs").jqxTree({ source: treeRootDir, allowDrag:false, width:'calc(100%)', height:'calc(100%)'});
 
 		    $("#jqxTree_dirs").on("expand", function (event) {
 			    var node = $("#jqxTree_dirs").jqxTree('getItem', event.args.element);
@@ -251,10 +251,10 @@
 			};
 
 			var columnSet = [
-				{text: '파일명', dataField: 'name', width: '170px', cellsalign: 'left', align: 'center'}
-			  , {text: '크기', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'right', align: 'center'}
-			  , {text: 'MD5', dataField: 'md5', width: '100px', cellsalign: 'center', align: 'center'}
-			  , {text: 'Category', dataField: 'dir_type', width: '100px', cellsalign: 'center', align: 'center',
+				{text: '파일명', dataField: 'name', width: '20%', cellsalign: 'left', align: 'center'}
+			  , {text: '크기', dataField: 'size', cellsformat : 'd', width: '12%', cellsalign: 'right', align: 'center'}
+			  , {text: 'MD5', dataField: 'md5', width: '10%', cellsalign: 'center', align: 'center'}
+			  , {text: 'Category', dataField: 'dir_type', width: '10%', cellsalign: 'center', align: 'center',
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var tmp = '기타';
 						if (value === 3) {
@@ -266,9 +266,9 @@
 						return '<div style="margin-top: 8px; text-align: center;">' + tmp + '</div>';
 					}
 			    }
-			  , {text: '수정일시', dataField: 'mtime', width: '170px', cellsalign: 'center', align: 'center'}
-			  , {text: '생성일시', dataField: 'ctime', width: '170px', cellsalign: 'center', align: 'center'}
-			  , {text: '접근일시', dataField: 'atime', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: '수정일시', dataField: 'mtime', width: '15%', cellsalign: 'center', align: 'center'}
+			  , {text: '생성일시', dataField: 'ctime', width: '15%', cellsalign: 'center', align: 'center'}
+			  , {text: '접근일시', dataField: 'atime', width: '15%', cellsalign: 'center', align: 'center'}
 			];
 
 			var dataAdapter = new $.jqx.dataAdapter(source, {
@@ -300,7 +300,8 @@
 			});
 
 			$("#jqxGrid_files").jqxGrid({
-				width: '100%',
+				width: 'calc(100% - 4rem)',
+				height: 'calc(100% - 7rem)',
 				source: dataAdapter,
 				selectionmode: 'checkbox', // 'none',
 				columnsresize: true,

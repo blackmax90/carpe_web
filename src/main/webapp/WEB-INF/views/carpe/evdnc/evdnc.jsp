@@ -61,8 +61,8 @@
 			</section>
 			<article class="container">
 				<h4 class="blind">조회된 컨텐츠</h4>
-				<div id="jqxSplitter" class="jqx-reset jqx-splitter jqx-widget jqx-widget-content content-box">
-					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">				
+				<div id="jqxSplitter" class="content-box">
+					<div class="content-area">				
 						<!--// Content 영역 //-->	
 						<div class="btn-area">
 							<ul>
@@ -74,7 +74,7 @@
 								</li>
 							</ul>
 						</div>				
-						<div id="jqxGrid_Systemlog" role="grid" align="left" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content empty-area">						
+						<div id="jqxGrid_Systemlog" role="grid" align="left" class="cont-result">						
 							<!--// Grid Table 영역 //-->
 						</div>
 						<div id="paing" class="paging-area">
@@ -83,7 +83,7 @@
 								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
 								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
 								<span class="num">
-									<a href="#">81</strong></a>
+									<a href="#">81</a>
 									<a href="#">82</a>
 									<a href="#"><strong class="on">83</strong></a>
 									<a href="#">84</a>
@@ -108,12 +108,12 @@
 	<!-- // wrap -->
 	
 	<div id="addEvdncWindow" class="pop wrap-pop">
-		<div id="addEvdncWindowHeader" class="pop-header" style="background:#00B4F0";>
+		<div id="addEvdncWindowHeader" class="pop-header" >
 			<h1>Create Evidence</h1>
 		</div>
 		<div id="addEvdncWindowContent" class="pop-content">
 		    <form action="/carpe/add_evdnc.do" method="post" enctype="multipart/form-data">
-				<div class="data-type-3">
+				<div class="data-type-1">
 					<dl>
 						<dt>Evidence Type :</dt>
 						<dd>
@@ -130,13 +130,19 @@
 					</dl>
 					<dl>
 						<dt>Name :</dt>
-						<dd><input name="newEvdncName" id="newEvdncName" type="text"/></dd>
+						<dd>
+							<div class="input-text input-text-type-1">
+								<input name="newEvdncName" id="newEvdncName" type="text" />
+							</div>
+						</dd>
 					</dl>	
 					<dl>
 						<dt>파일 선택 :</dt>
 						<dd>
-							<input type="file" id="evdnc_file" name="evdnc_file"/>
-                <div style='margin-top: 10px; overflow: hidden;' id='colorRanges'></div>
+							<div class="file-area">
+								<input type="file" id="evdnc_file" name="evdnc_file"/>
+	                			<div style='margin-top: 10px; overflow: hidden;' id='colorRanges'></div>
+							</div>
 						</dd>
 					</dl>
 				</div>
@@ -201,7 +207,7 @@
 						evdncInfo.name = value;
 						var param = encodeQueryData(evdncInfo);
 	
-						return '<span style="margin: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a href="/carpe/select_evdnc.do?' + param + '">' + value + '</a></span>';
+						return '<span style="padding: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a href="/carpe/select_evdnc.do?' + param + '">' + value + '</a></span>';
 					}
 				},
 				{text: 'Main Type', dataField: 'main_type', width: '90px', cellsalign: 'center', align: 'center',
@@ -226,7 +232,7 @@
 						evdncInfo.id = dataRecord.evd_id;
 						var param = encodeQueryData(evdncInfo);
 	
-						return '<span style="margin: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a target="_blank" href="/carpe/download_evdnc.do?' + param + '">' + value + '</a></span>';
+						return '<span style="width: 100%; display: block; overflow: hidden; text-overflow: ellipsis;  white-space: nowrap; margin: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a title="' + value + '" target="_blank" href="/carpe/download_evdnc.do?' + param + '">' + value + '</a></span>';
 					}
 				}
 			];
@@ -239,7 +245,8 @@
 			});
 	
 			$("#jqxGrid_Systemlog").jqxGrid({
-				width: '100%',				
+				width: '100%',	
+				height: 'calc(100% - 7rem)',
 				source: dataAdapter,
 				selectionmode: 'checkbox',
 				pagerheight: 0,
@@ -340,8 +347,8 @@
 						}
 					},
 					colorRanges: [{ stop: 20, color: "#33b5e5" }, { stop: 50, color: "#98ca00" }, { stop: 80, color: "#ff4444" }, { stop: 100, color: "#aa66cc" }],
-					width: 250,
-					height: 30,
+					width: 222,
+					height: 24,
 					value: 0
 				});
 			});

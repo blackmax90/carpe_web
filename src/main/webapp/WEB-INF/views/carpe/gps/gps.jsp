@@ -100,7 +100,7 @@
 	<!-- // wrap -->
 
 	<!-- pop-up //-->
-	<div id="mapInfo" class="pop wrap-pop  jqx-window jqx-popup" style="position: absolute; top: 16rem; left: calc(50% - 10rem); width: 40rem; height: 24rem; display:none;">
+	<div id="mapInfo" class="pop wrap-pop" style="position: absolute; top: 16rem; left: calc(50% - 10rem); width: 40rem; height: 24rem; display:none;">
 		<div id="" class="pop-header jqx-window-header">
 			<h1>지도 정보</h1>
 			<div class="jqx-window-close-button-background">
@@ -205,13 +205,13 @@
 			});
 	
 			var columnSet = [
-				{text: 'No.', dataField: 'serial_number', width: '50px', cellsalign: 'right', align: 'center'},
-				{text: 'Time', dataField: 'regdate', width: '120px', cellsalign: 'right', align: 'center'},
-				{text: 'Type', dataField: 'gps_type', width: '180px', cellsalign: 'center', align: 'center'},
-				{text: 'Source', dataField: 'source', width: '50px', cellsalign: 'center', align: 'center'},
-				{text: 'Location', dataField: 'location', width: '280px', cellsalign: 'center', align: 'center'},
-				{text: 'Latitude', dataField: 'latitude', width: '150px', cellsalign: 'center', align: 'center'},
-				{text: 'Longitude', dataField: 'longitude', width: '150px', cellsalign: 'center', align: 'center'}
+				{text: 'No.', dataField: 'serial_number', width: '6%', cellsalign: 'right', align: 'center'},
+				{text: 'Time', dataField: 'regdate', width: '10%', cellsalign: 'right', align: 'center'},
+				{text: 'Type', dataField: 'gps_type', width: '18%', cellsalign: 'center', align: 'center'},
+				{text: 'Source', dataField: 'source', width: '10%', cellsalign: 'center', align: 'center'},
+				{text: 'Location', dataField: 'location', width: 'auto', cellsalign: 'center', align: 'center'},
+				{text: 'Latitude', dataField: 'latitude', width: '10%', cellsalign: 'center', align: 'center'},
+				{text: 'Longitude', dataField: 'longitude', width: '10%', cellsalign: 'center', align: 'center'}
 			];
 	
 			$('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {

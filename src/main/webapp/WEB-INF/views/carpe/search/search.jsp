@@ -20,7 +20,7 @@
 <body>
 
 	<!-- wrap -->
-	<div class="wrap evidence bg-theme blue">>
+	<div class="wrap srch-page bg-theme blue">
 
 		<!-- header -->
 		<%@ include file="../common/header.jsp" %>
@@ -92,11 +92,11 @@
 			</section>
 			<article class="container">
 				<h4 class="blind">조회된 컨텐츠</h4>
-				<div class="jqx-reset jqx-splitter jqx-widget jqx-widget-content content-box">
+				<div class="content-box">
 					
-					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">				
+					<div class="content-area">				
 						<!--// Content 영역 //-->	
-						<div id="jqxGrid_Systemlog" role="grid" align="left" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content empty-area">
+						<div id="jqxGrid_Systemlog" role="grid" align="left" class="cont-result">
 						<!--// Table 영역 //-->
 						</div>
 						
@@ -106,7 +106,7 @@
 								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
 								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
 								<span class="num">
-									<a href="#">81</strong></a>
+									<a href="#">81</a>
 									<a href="#">82</a>
 									<a href="#"><strong class="on">83</strong></a>
 									<a href="#">84</a>
@@ -148,8 +148,8 @@
 			var currentRowCount = 0;
 			var currentPageOffset = 1;
 
-			$("#checkbox_filename").jqxCheckBox({ width: 65, height: 25, checked: true });
-			$("#checkbox_content").jqxCheckBox({ width: 55, height: 25, checked: true });
+			$("#checkbox_filename").jqxCheckBox({ width: 28, height: 28, checked: true });
+			$("#checkbox_content").jqxCheckBox({ width: 28, height: 28, checked: true });
 			//$("#search_word").jqxInput({ width: '250px', height: '25px'});
 			
 			var updateBound = function(e) {
@@ -281,7 +281,7 @@
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
 						var highlight_nm = dataRecord.highlight_nm;
-						return '<div style="margin: 7px; overflow: hidden; text-overflow: ellipsis;">' + highlight_nm + '</div>';
+						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis;">' + highlight_nm + '</div>';
 					}
 				}
 			   ,{text: '크기', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'right', align: 'center'}
@@ -326,6 +326,7 @@
 
 			$("#jqxGrid_Systemlog").jqxGrid({
 				width: '100%',
+				height: 'calc(100% - 3rem)',
 				source: dataAdapter,
 				selectionmode: 'checkbox',
 				pagerheight: 0,

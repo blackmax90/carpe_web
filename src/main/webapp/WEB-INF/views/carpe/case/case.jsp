@@ -26,7 +26,7 @@
 			<article class="container">
 				<h4 class="blind">조회된 컨텐츠</h4>
 				<div id="jqxSplitter" class="jqx-reset jqx-splitter jqx-widget jqx-widget-content content-box">
-					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">				
+					<div class="content-area">				
 						<!--// Content 영역 -->		
 						<div class="btn-area">
 							<ul>
@@ -38,9 +38,8 @@
 								</li>
 							</ul>
 						</div>
-						<div id="jqxGrid_Systemlog" role="grid" align="left" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content empty-area">
+						<div id="jqxGrid_Systemlog" role="grid" align="left" class="cont-result">
 							<!--// Table 영역 //-->
-							
 						</div>
 						<div id="paing" class="paging-area">
 							<!--// Table Paging 영역 - 위치고정 //-->
@@ -48,7 +47,7 @@
 								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
 								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
 								<span class="num">
-									<a href="#">81</strong></a>
+									<a href="#">81</a>
 									<a href="#">82</a>
 									<a href="#"><strong class="on">83</strong></a>
 									<a href="#">84</a>
@@ -163,7 +162,7 @@
 						caseInfo.name = value;
 						var param = encodeQueryData(caseInfo);
 						
-						return '<span style="margin: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a href="/carpe/select_case.do?' + param + '">' + value + '</a></span>';
+						return '<span style="padding: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a href="/carpe/select_case.do?' + param + '">' + value + '</a></span>';
 					}
 				},
 				{text: 'Description', dataField: 'description', width: '200px', cellsalign: 'left', align: 'center'},
@@ -188,7 +187,8 @@
 			});
 
 			$("#jqxGrid_Systemlog").jqxGrid({
-				width: '100%',				
+				width: '100%',	
+				height: 'calc(100% - 7rem)',			
 				source: dataAdapter,
 				selectionmode: 'checkbox',
 				pagerheight: 0,
