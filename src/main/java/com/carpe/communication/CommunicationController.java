@@ -1,0 +1,101 @@
+package com.carpe.communication;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.carpe.common.CarpeConfig;
+import com.carpe.common.Consts;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+
+@Controller
+public class CommunicationController {
+	@Inject
+	private CommunicationService service;
+
+	@RequestMapping(value = "/communication.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView communicationView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("carpe/communication/communication");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/communication_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getCommunicationList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+
+		List<Map> communicationList = service.selectCommunicationList(paramMap);
+
+		mav.addObject("list", communicationList);
+		mav.addObject("totalcount", communicationList.size());
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/communication_call_stat.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getCallStat(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		String year = map.get("year");
+		paramMap.put("year", year);
+
+		List<Map> gpsList = service.selectCallStat(paramMap);
+		
+		mav.addObject("list", gpsList);
+		mav.addObject("totalcount", gpsList.size());
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/communication_sms_stat.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getSmsStat(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		
+		String year = map.get("year");
+		paramMap.put("year", year);
+		
+		List<Map> gpsList = service.selectSmsStat(paramMap);
+		
+		mav.addObject("list", gpsList);
+		mav.addObject("totalcount", gpsList.size());
+		
+		return mav;
+	}
+}

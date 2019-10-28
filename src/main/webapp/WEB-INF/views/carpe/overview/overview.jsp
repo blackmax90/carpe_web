@@ -41,7 +41,7 @@
 						<li class="level02 hide"><a href="#">Filesystem</a></li> 
 						<li class="level02 hide"><a href="#">Artifact</a></li>
 					<!--// 2Depth Menu -->
-					<li><a href="/carpe/gps.do" class="icon visualization">Visualization</a></li>
+					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>	
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>
 			</div>

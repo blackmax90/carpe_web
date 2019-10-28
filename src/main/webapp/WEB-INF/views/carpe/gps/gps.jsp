@@ -49,9 +49,9 @@
 						<li class="level02 hide"><a href="#">Artifact</a></li>
 						<li class="level02 hide"><a href="#">검색</a></li>
 						<!--// 2Depth Menu -->
-					<li class="on"><a href="/carpe/gps.do" class="icon visualization">Visualization</a></li>						
+					<li class="on"><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>					
 						<!-- 2Depth Menu //-->
-						<li class="level02"><a href="#">Communication<br/>model</a></li> 
+						<li class="level02"><a href="/carpe/communication.do">Communication<br/>model</a></li> 
 						<li class="level02"><a href="#">Usage model</a></li>
 						<li class="level02 on"><a href="/carpe/gps.do">GPS model</a></li>
 						<!--// 2Depth Menu -->

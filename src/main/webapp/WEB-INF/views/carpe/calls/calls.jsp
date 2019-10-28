@@ -46,7 +46,7 @@
 						<li class="level02"><a href="/carpe/artifact.do">Artifact</a></li>
 						<li class="level02 on"><a href="/carpe/calls.do">Calls</a></li>
 						<li class="level02"><a href="/carpe/search.do">검색</a></li>
-					<li><a href="/carpe/gps.do" class="icon visualization">Visualization</a></li>
+					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>
 			</div>
@@ -61,19 +61,19 @@
 			</section>
 			<article class="container">
 				<h4 class="blind">조회된 컨텐츠</h4>
-				<div id="jqxSplitter" class="jqx-reset jqx-splitter jqx-widget jqx-widget-content content-box">
-					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">				
+				<div id="jqxSplitter" class="content-box">
+					<div class="content-area">				
 						<!--// Content 영역 //-->	
-						<div id="jqxGrid_Systemlog" role="grid" align="left" class="jqx-grid jqx-reset jqx-rc-all jqx-widget jqx-widget-content empty-area">						
+						<div id="jqxGrid_Systemlog" role="grid" align="left" class="jqx-grid jqx-reset jqx-widget jqx-widget-content cont-result">						
 							<!--// Grid Table 영역 //-->
 						</div>
-						<div id="paing" class="paging-area">
+						<div id="paing" class="paging-area" style="display:none">
 							<!--// Table Paging 영역 - 위치고정 //-->
 							<div class="paginate">
 								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
 								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
 								<span class="num">
-									<a href="#">81</strong></a>
+									<a href="#">81</a>
 									<a href="#">82</a>
 									<a href="#"><strong class="on">83</strong></a>
 									<a href="#">84</a>
@@ -149,7 +149,8 @@
 			});
 	
 			$("#jqxGrid_Systemlog").jqxGrid({
-				width: '100%',				
+				width: '100%',	
+				height: 'calc(100% - 3rem)',
 				source: dataAdapter,
 				pagerheight: 0,
 				altrows: true,

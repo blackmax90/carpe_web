@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//src/main/java/com/carpe/filesystem/FileSystemController.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/carpe/artifact/timeline/timeline.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/carpe/case/case.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/carpe/communication/communication.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/carpe/filesystem/hexview/hexviewer.jsp=UTF-8
 encoding//src/main/webapp/resources/hexview/css.css=UTF-8
 encoding//src/main/webapp/resources/hexview/style.css=UTF-8

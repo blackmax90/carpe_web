@@ -38,7 +38,7 @@ public class GpsController {
 	private GpsService service;
 
 	@RequestMapping(value = "/gps.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView evdncView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public ModelAndView gpsView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("carpe/gps/gps");
@@ -47,7 +47,7 @@ public class GpsController {
 	}
 
 	@RequestMapping(value = "/gps_list.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView getEvdncList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public ModelAndView getGpsList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 

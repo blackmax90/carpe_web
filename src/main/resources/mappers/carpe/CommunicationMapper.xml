@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.communication">
+	<select id="selectCommunicationList" parameterType="Map" resultType="Map">
+		SELECT  @a:=@a+1 serial_number		       		
+			   ,ifnull(a.formatted_number, a.number) as call_number
+		       ,count(number) as cnt
+		  FROM  calls a , (SELECT @a:= 0) AS sn		 
+         WHERE  case_id = #{case_id}
+      GROUP BY  call_number
+      ORDER BY  cnt desc
+	</select>
+
+	<select id="selectCallStat" parameterType="Map" resultType="Map">
+		  SELECT  
+		          number
+		         ,m1
+		         ,m2
+		         ,m3
+		         ,m4
+		         ,m5
+		         ,m6
+		         ,m7
+		         ,m8
+		         ,m9
+		         ,m10
+		         ,m11
+		         ,m12		         
+		    FROM  calls_stat a
+		   WHERE  case_id = #{case_id}
+		     AND  year = #{year}		
+	</select>
+	
+	<select id="selectSmsStat" parameterType="Map" resultType="Map">
+		  SELECT  
+		          number
+		         ,m1
+		         ,m2
+		         ,m3
+		         ,m4
+		         ,m5
+		         ,m6
+		         ,m7
+		         ,m8
+		         ,m9
+		         ,m10
+		         ,m11
+		         ,m12		         
+		    FROM  sms_stat a
+		   WHERE  case_id = #{case_id}		
+		     AND  year = #{year}
+	</select>
+
+</mapper>

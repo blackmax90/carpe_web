@@ -43,7 +43,7 @@
 						<li class="level02 on"><a href="/carpe/artifact.do">Artifact</a></li>
 						<li class="level02"><a href="/carpe/calls.do">Calls</a></li>
 						<li class="level02"><a href="/carpe/search.do">검색</a></li>
-					<li><a href="/carpe/gps.do" class="icon visualization">Visualization</a></li>
+					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>
 			</div>
@@ -75,7 +75,7 @@
 
 					<div class="content-area">
 						<div id="jqxGrid_Systemlog" role="grid" class="cont-result"><!--// Table 영역 //--></div>
-						<div id="paing" class="paging-area">
+						<div id="paing" class="paging-area" style="display:none">
 							<!--// Table Paging 영역 - 위치고정 //-->
 							<div class="paginate">
 								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>

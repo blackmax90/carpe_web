@@ -38,7 +38,7 @@ public class CallsController {
 	private CallsService service;
 
 	@RequestMapping(value = "/calls.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView evdncView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public ModelAndView callsView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("carpe/calls/calls");
@@ -47,7 +47,7 @@ public class CallsController {
 	}
 
 	@RequestMapping(value = "/calls_list.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView getEvdncList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public ModelAndView getCallsList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 

@@ -313,6 +313,28 @@ body, input, select, button, textarea {
   font-weight: 700;
 }
 
+dl { 
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: stretch;
+  -webkit-justify-content: stretch;
+  -ms-flex-pack: stretch;
+  justify-content: stretch;
+  min-height: 3rem;
+  font-size: 1.4rem;
+  line-height: 3rem;
+}
+
+dl > dt, 
+dl > dd {
+  display: inline-block;
+  float:left;
+  width: auto;
+  padding: 0.5rem;
+  word-break: break-all;
+}
+
 /*--------------------------------------------------------------
 # Layout
 --------------------------------------------------------------*/
@@ -415,7 +437,6 @@ html, body {
 }
 
 
-
 /*--------------------------------------------------------------
 # Common
 --------------------------------------------------------------*/
@@ -484,6 +505,10 @@ html, body {
   overflow-y: auto !important;
 }
 
+.division-line {
+	width:100%;
+	border-bottom:1px dotted #999;
+}
 
 /*--------------------------------------------------------------
 # Form
@@ -1470,9 +1495,16 @@ h5 {
   float: right;
   padding-bottom: 1rem;
   margin-top: 0;  
-/*   margin-top: 2rem;
+}
+
+.container .content-area .btn-area.division-line {
+  margin-top: 2rem;
   margin-right: 2rem;
-  margin-bottom:-1rem; */
+  margin-bottom:-1rem;
+}
+
+.container .content-area .btn-area.division-line dl {
+	float:right;
 }
 
 .vsa-page .chart-area,
@@ -1770,7 +1802,7 @@ h5 {
 
 .container .aside.jqx-widget-content,
 .container .aside.jqx-widget-content .jqx-widget-content {
-  border: none !important;
+  border: none;
 }
 
 .container .content-area {  /* Home / Evidence / Search 화면 jqwidget 메인 패널 컨텐츠 영역 */
@@ -1794,17 +1826,19 @@ h5 {
 
 .vsa-page .container .jqx-splitter-panel.content-area  {  /* visualization 화면 jqwidget 메인 패널 컨텐츠 영역 */
   width: calc(100% - 24.7rem);
+  float: right;
 }
 
 .vsa-page .container .jqx-splitter-panel.aside .cont-result,
 .vsa-page .container .jqx-splitter-panel.content-area .cont-result  {
-  height: calc(100% - 4rem);
+  height: calc(100% - 7rem);
 }
 
 .vsa-page .container .jqx-splitter-panel.content-area .cont-result  {
   display: inline-block;
   float: left;
   width: calc(50% - 3rem);
+  margin-top: 0;
   border: none;
 }
 
@@ -1961,28 +1995,6 @@ h5 {
 .pop-content.jqx-window-content {
   padding: 2rem;
   overflow: hidden;
-}
-
-.pop-content dl { 
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: stretch;
-  -webkit-justify-content: stretch;
-  -ms-flex-pack: stretch;
-  justify-content: stretch;
-  min-height: 3rem;
-  font-size: 1.4rem;
-  line-height: 3rem;
-}
-
-.pop-content dl > dt, 
-.pop-content dl > dd {
-  display: inline-block;
-  float:left;
-  width: auto;
-  padding: 0.5rem;
-  word-break: break-all;
 }
 
 .pop-content dl > dt {
