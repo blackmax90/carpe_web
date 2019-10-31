@@ -41,7 +41,7 @@
 						<div id="jqxGrid_Systemlog" role="grid" align="left" class="cont-result">
 							<!--// Table 영역 //-->
 						</div>
-						<div id="paing" class="paging-area">
+						<div id="paing" class="paging-area" style="display:none">
 							<!--// Table Paging 영역 - 위치고정 //-->
 							<div class="paginate">
 								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>

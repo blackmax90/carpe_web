@@ -13,4 +13,13 @@ public class UsageServiceImpl implements UsageService {
 	@Inject
 	private UsageDAO dao;
 
+	@Override
+	public List<Map> selectUsageYearList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectUsageYearList(paramMap);
+	}
+	
+	@Override
+	public List<Map> selectUsageMonthList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectUsageMonthList(paramMap);
+	}
 }

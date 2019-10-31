@@ -15,5 +15,15 @@ public class UsageDAOImpl implements UsageDAO {
 	private SqlSession sqlSession;
 
 	private static final String Namespace = "com.carpe.mapper.usage";
+	
+	@Override
+	public List<Map> selectUsageYearList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectUsageYearList", paramMap);
+	}
+
+	@Override
+	public List<Map> selectUsageMonthList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectUsageMonthList", paramMap);
+	}
 
 }

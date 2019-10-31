@@ -80,7 +80,7 @@
 					<!-- Chart 영역 //-->
 					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">
 						
-						<div class="btn-area division-line" style="display:none">
+						<div class="btn-area division-line" style="display:">
 							<dl>
 								<dt>연도선택 :</dt>
 								<dd>
@@ -164,7 +164,8 @@
 	var setYear = function(year) {
 		getCallList(year.value);
 		getSmsList(year.value);
-		
+
+		//chart1.data = generateRadarData();
 		console.log(dataList);
 	}
 	
@@ -173,7 +174,7 @@
 	
 	// Chart1 Start
 	am4core.useTheme(am4themes_animated);
-	window.onload = function() {
+
 	var startYear = 1;
 	var endYear = 12;
 	var currentYear = 10;
@@ -597,9 +598,8 @@
 
 	    valueAxis2.renderer.axisAngle = chart2.startAngle;
 	})
-	}
-	//grid start
 
+	//grid start
 	$(document).ready(function() {
 		var source = {
 			datatype: "json",

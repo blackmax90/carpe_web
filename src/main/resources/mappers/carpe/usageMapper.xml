@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.usage">
+	<select id="selectUsageYearList" parameterType="Map" resultType="Map">
+				SELECT  year
+				       ,month
+				       ,cnt
+				  FROM  usage_year
+				 WHERE  case_id = #{case_id}
+				 <if test="yearList != null">
+				  AND year in
+		  			<foreach item="item" index="index" collection="yearList" open="(" close=")" separator=",">
+            		#{item}
+   		  			</foreach>
+				 </if>
+			  ORDER BY  year, month asc
+	</select>
+	
+	<select id="selectUsageMonthList" parameterType="Map" resultType="Map">
+		SELECT  day
+		       ,office_hours
+		       ,office_hours_after 
+		  FROM  usage_month
+		 WHERE  case_id = #{case_id}
+		   AND  year = #{year}
+		   AND  month = #{month}
+		ORDER BY day asc
+	</select>
+
+</mapper>
