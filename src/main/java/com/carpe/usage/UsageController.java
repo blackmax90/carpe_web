@@ -65,7 +65,7 @@ public class UsageController {
 		mav.setViewName("carpe/usage/usage_day");
 		mav.addObject("year", map.get("year"));
 		mav.addObject("month", map.get("month"));
-		mav.addObject("month", map.get("day"));
+		mav.addObject("day", map.get("day"));
 		return mav;
 	}
 	
@@ -103,6 +103,25 @@ public class UsageController {
 		paramMap.put("month", map.get("month"));
 		
 		List<Map> usageList = service.selectUsageMonthList(paramMap);
+		
+		mav.addObject("list", usageList);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/usage_day_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getUsageDayList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("year", map.get("year"));
+		paramMap.put("month", map.get("month"));
+		paramMap.put("day", map.get("day"));
+		
+		List<Map> usageList = service.selectUsageDayList(paramMap);
 		
 		mav.addObject("list", usageList);
 		

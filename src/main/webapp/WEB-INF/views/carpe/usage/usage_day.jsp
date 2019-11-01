@@ -225,64 +225,44 @@
 
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
-		am4core.ready(function() {
-
+	
+		var getUsageDayList = function(year, month, day) {
+			$.ajax({
+				url: "/carpe/usage_day_list.do",
+		        dataType:'json',
+		        data: { year : year
+		        	   ,month : month
+		        	   ,day : day
+		        	  },
+		        async:false,
+		        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+		        success:function(data){
+		        	console.log(data);
+		        	dataList = new Array();
+		        	$(data["list"]).each(function(i, list) {
+		        		 var tmpArr = {}
+		        		 tmpArr.year = list["hour"];
+		        		 tmpArr.income = list["act"];
+		        		 if (list["hour"] == "18") {
+		        			 tmpArr.lineColor = 'red';
+		        		 }
+		        		 dataList.push(tmpArr);
+		            });
+		        }
+		    })
+		    return dataList;
+		}
+		
+		//dataList = getUsageDayList(${year}, ${month}, ${day});
+		dataList = getUsageDayList('2014', '1', '1');
+		console.log(dataList);
 		// Themes begin
 		am4core.useTheme(am4themes_animated);
 		// Themes end
 
 		var chart = am4core.create("chartdiv", am4charts.XYChart);
 
-		var data = [];
-
-		chart.data = [{
-		  "year": "2014",
-		  "income": 23.5,
-		  "expenses": 21.1,
-		  "lineColor": chart.colors.next()
-		}, {
-		  "year": "2015",
-		  "income": 26.2,
-		  "expenses": 30.5
-		}, {
-		  "year": "2016",
-		  "income": 30.1,
-		  "expenses": 34.9
-		}, {
-		  "year": "2017",
-		  "income": 20.5,
-		  "expenses": 23.1
-		}, {
-		  "year": "2018",
-		  "income": 30.6,
-		  "expenses": 28.2,
-		  "lineColor": chart.colors.next()
-		}, {
-		  "year": "2019",
-		  "income": 34.1,
-		  "expenses": 31.9
-		}, {
-		  "year": "2020",
-		  "income": 34.1,
-		  "expenses": 31.9
-		}, {
-		  "year": "2021",
-		  "income": 34.1,
-		  "expenses": 31.9,
-		  "lineColor": chart.colors.next()
-		}, {
-		  "year": "2022",
-		  "income": 34.1,
-		  "expenses": 31.9
-		}, {
-		  "year": "2023",
-		  "income": 34.1,
-		  "expenses": 31.9
-		}, {
-		  "year": "2024",
-		  "income": 34.1,
-		  "expenses": 31.9
-		}];
+		chart.data = dataList;
 
 		var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 		categoryAxis.renderer.grid.template.location = 0;
@@ -304,12 +284,12 @@
 		var lineSeries = chart.series.push(new am4charts.LineSeries());
 		lineSeries.dataFields.categoryX = "year";
 		lineSeries.dataFields.valueY = "income";
-		lineSeries.tooltipText = "income: {valueY.value}";
+		lineSeries.tooltipText = "행위갯수: {valueY.value}";
 		lineSeries.fillOpacity = 0.5;
 		lineSeries.strokeWidth = 3;
 		lineSeries.propertyFields.stroke = "lineColor";
 		lineSeries.propertyFields.fill = "lineColor";
-
+		
 		var bullet = lineSeries.bullets.push(new am4charts.CircleBullet());
 		bullet.circle.radius = 6;
 		bullet.circle.fill = am4core.color("#fff");
@@ -322,8 +302,6 @@
 
 		chart.scrollbarX = new am4core.Scrollbar();
 		chart.scrollbarX.parent = chart.bottomAxesContainer;
-
-		}); // end am4core.ready()
 	</script>
 	<!-- // 현재 페이지에 필요한 js -->
 

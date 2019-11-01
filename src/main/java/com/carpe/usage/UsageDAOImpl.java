@@ -25,5 +25,10 @@ public class UsageDAOImpl implements UsageDAO {
 	public List<Map> selectUsageMonthList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectUsageMonthList", paramMap);
 	}
+	
+	@Override
+	public List<Map> selectUsageDayList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectUsageDayList", paramMap);
+	}
 
 }

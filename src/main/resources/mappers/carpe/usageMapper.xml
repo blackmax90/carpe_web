@@ -23,11 +23,22 @@
 		SELECT  day
 		       ,office_hours
 		       ,office_hours_after 
-		  FROM  usage_month
+		  FROM  usage_month_stat
 		 WHERE  case_id = #{case_id}
 		   AND  year = #{year}
 		   AND  month = #{month}
 		ORDER BY day asc
+	</select>
+	
+	<select id="selectUsageDayList" parameterType="Map" resultType="Map">
+			SELECT  hour
+			       ,act
+			  FROM  usage_day_stat
+			 WHERE  year = #{year}
+			   AND  month = #{month}
+			   AND  day = #{day}
+			   AND  case_id = #{case_id}
+		  ORDER BY  hour asc
 	</select>
 
 </mapper>

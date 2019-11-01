@@ -22,4 +22,9 @@ public class UsageServiceImpl implements UsageService {
 	public List<Map> selectUsageMonthList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectUsageMonthList(paramMap);
 	}
+	
+	@Override
+	public List<Map> selectUsageDayList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectUsageDayList(paramMap);
+	}
 }
