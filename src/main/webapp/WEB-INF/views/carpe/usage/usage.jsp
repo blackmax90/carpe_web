@@ -77,7 +77,7 @@
 						<div class="btn-area">
 							<button type="button" class="btn-case-01" id="setYear">연도 선택</button>
 						</div>
-						<div id="chartdiv" class="chart-area chart-type-1">
+						<div id="chartdiv" class="chart-area chart-type-3">
 							<!-- Chart 영역 //-->
 						</div>
 					</div>
@@ -102,30 +102,7 @@
 		</div>
 		<div id="" class="pop-content">
 			<ul>
-				<li class="checkbox checkbox-type-3">
-					<input id="checkbox2011" name="checkYear" type="checkbox" value="2011" />
-					<label for="checkbox2011"><span class="text">2011</span></label>
-				</li>
-				<li class="checkbox checkbox-type-3">
-					<input id="checkbox2012" name="checkYear" type="checkbox"  value="2012" />
-					<label for="checkbox2012"><span class="text">2012</span></label>
-				</li>
-				<li class="checkbox checkbox-type-3">
-					<input id="checkbox2013" name="checkYear" type="checkbox"  value="2013" />
-					<label for="checkbox2013"><span class="text">2013</span></label>
-				</li>
-				<li class="checkbox checkbox-type-3">
-					<input id="checkbox2014" name="checkYear" type="checkbox"  value="2014" />
-					<label for="checkbox2014"><span class="text">2014</span></label>
-				</li>
-				<li class="checkbox checkbox-type-3">
-					<input id="checkbox2015" name="checkYear" type="checkbox"  value="2015" />
-					<label for="checkbox2015"><span class="text">2015</span></label>
-				</li>
-				<li class="checkbox checkbox-type-3">
-					<input id="checkbox2016" name="checkYear" type="checkbox"  value="2016" />
-					<label for="checkbox2016"><span class="text">2016</span></label>
-				</li>
+				
 				<li class="checkbox checkbox-type-3">
 					<input id="checkbox2017" name="checkYear" type="checkbox"  value="2017" />
 					<label for="checkbox2017"><span class="text">2017</span></label>

@@ -131,14 +131,14 @@
 			});
 	
 			var columnSet = [
-				{text: 'Index', dataField: 'serial_number', width: '50px', cellsalign: 'right', align: 'center'},
-				{text: 'Number', dataField: 'number', width: '120px', cellsalign: 'right', align: 'center'},
-				{text: 'Date', dataField: 'regdate', width: '180px', cellsalign: 'center', align: 'center'},
-				{text: 'Type', dataField: 'calls_type', width: '50px', cellsalign: 'center', align: 'center'},
-				{text: 'Duration', dataField: 'duration', width: '80px', cellsalign: 'center', align: 'center'},
-				{text: 'Name', dataField: 'name', width: '120px', cellsalign: 'center', align: 'center'},
-				{text: 'Title', dataField: 'title', width: '120px', cellsalign: 'center', align: 'center'},
-				{text: 'Conts', dataField: 'conts', width: '300px', cellsalign: 'center', align: 'center'}
+				{text: 'Index', dataField: 'serial_number', width: '5%', cellsalign: 'right', align: 'center'},
+				{text: 'Number', dataField: 'number', width: '10%', cellsalign: 'right', align: 'center'},
+				{text: 'Date', dataField: 'regdate', width: '12%', cellsalign: 'center', align: 'center'},
+				{text: 'Type', dataField: 'calls_type', width: '8%', cellsalign: 'center', align: 'center'},
+				{text: 'Duration', dataField: 'duration', width: '8%', cellsalign: 'center', align: 'center'},
+				{text: 'Name', dataField: 'name', width: '10%', cellsalign: 'center', align: 'center'},
+				{text: 'Title', dataField: 'title', width: '15%', cellsalign: 'center', align: 'center'},
+				{text: 'Conts', dataField: 'conts', width: '32%', cellsalign: 'center', align: 'center'}
 			];
 	
 			$('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {

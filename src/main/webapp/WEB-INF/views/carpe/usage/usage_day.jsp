@@ -254,7 +254,7 @@
 		}
 		
 		//dataList = getUsageDayList(${year}, ${month}, ${day});
-		dataList = getUsageDayList('2014', '1', '1');
+		dataList = getUsageDayList('2019', '1', '1');
 		console.log(dataList);
 		// Themes begin
 		am4core.useTheme(am4themes_animated);

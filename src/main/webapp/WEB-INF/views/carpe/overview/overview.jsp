@@ -14,6 +14,12 @@
 	<link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
 	<link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
 	<link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
+	
+	<script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
+	<script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
+	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
+	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
 </head>
 <body>
 
@@ -63,12 +69,30 @@
 					<p># of members : ${caseUserCnt}</p>
 				</aside>
 				<div class="content-area bg-unit">					
-					<h3>Events</h3>
-					<p><fmt:formatNumber value="${logtimelineCnt }"/> 건 발견</p>
-					
+					<h3>Evidence별 파일 비율</h3>
+					<%-- <p><fmt:formatNumber value="${logtimelineCnt }"/> 건 발견</p> --%>
+					<div class="cont-result">
+						<ul>
+							<li>
+								<div id="chartdiv-s1" class="chart-area">
+									<!-- Chart 영역 //-->
+								</div>
+							</li>
+							<li>
+								<div id="chartdiv-s2" class="chart-area">
+									<!-- Chart 영역 //-->
+								</div>
+							</li>
+							<li>
+								<div id="chartdiv-s3" class="chart-area">
+									<!-- Chart 영역 //-->
+								</div>
+							</li>
+						</ul>
+					</div>
 				</div>
 				<div class="content-area bg-unit">
-					<h3>Members(${caseUserCnt})</h3>
+					<h3>Case Log</h3>
 					<c:forEach items="${caseUserList }" var="userList">
 						<p>${userList.user_id }</p>
 					</c:forEach>
@@ -80,19 +104,10 @@
 	</div>
 	<!-- // wrap -->
 
-	<!-- 공통 javascript 영역 -->
-	<script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
-	<script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
-	<script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
-	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
-	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
-	<!-- // 공통 javascript 영역 -->
 
 	<!-- 현재 페이지에 필요한 js -->
-	<!-- <script>
-	$(document).ready(function(){
-	});
-	</script> -->
+	<script>
+	</script>
 	<!-- // 현재 페이지에 필요한 js -->
 
 </body>

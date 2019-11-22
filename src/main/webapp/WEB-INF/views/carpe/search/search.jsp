@@ -41,7 +41,6 @@
 					<li class="on"><a href="#" class="icon analysis">Analysis</a></li>					
 						<li class="level02"><a href="/carpe/filesystem.do">Filesystem</a></li> 
 						<li class="level02"><a href="/carpe/artifact.do">Artifact</a></li>
-						<li class="level02"><a href="/carpe/calls.do">Calls</a></li>
 						<li class="level02 on"><a href="/carpe/search.do">검색</a></li>
 					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
@@ -102,24 +101,6 @@
 						
 						<!--// Table Paging 영역 - 위치고정 //-->
 						<div id="paing" class="paging-area">
-							<div class="paginate">
-								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
-								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
-								<span class="num">
-									<a href="#">81</a>
-									<a href="#">82</a>
-									<a href="#"><strong class="on">83</strong></a>
-									<a href="#">84</a>
-									<a href="#">85</a>
-									<a href="#">86</a>
-									<a href="#">87</a>
-									<a href="#">88</a>
-									<a href="#">89</a>
-									<a href="#">90</a>
-								</span>
-								<button class="btn-paging icon ico-next"><span class="ir">다음</span></button>
-								<button class="btn-paging icon ico-last" disabled="disabled"><span class="ir">마지막</span></button>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -287,7 +268,7 @@
 			   ,{text: '크기', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'right', align: 'center'}
 			   ,{text: 'Author', width: '150px', datafield: 'author', cellsalign: 'center', align: 'center'}
 			   ,{text: '최종수정일시일시', width: '200px', datafield: 'last_written_time', cellsalign: 'center', align: 'center'}
-			   ,{text: '파일경로', datafield: 'path', cellsalign: 'left', align: 'center'}
+			   ,{text: '파일경로', width: 'auto', datafield: 'path', cellsalign: 'left', align: 'center'}
 			];
 
 			var columnSet_summary = [
@@ -295,7 +276,7 @@
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
 						var strHtml = "<ul class='unfold-ist'><li class='title'><div class='tit'>";
-						strHtml += "<span style='font-size:11pt;'>&nbsp;" + dataRecord.highlight_nm + "</span></div></li>";
+						strHtml += "<span style='font-size:1.3rem;'>&nbsp;" + dataRecord.highlight_nm + "</span></div></li>";
 
 						var last_written_time = "시간정보가 없습니다.";
 						if(dataRecord.last_written_time){

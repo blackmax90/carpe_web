@@ -49,11 +49,30 @@ public class CaseController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+		
 		List<Map> caseList = service.selectCaseList(paramMap);
+		int totalCnt = ((Long) service.selectCaseListCount(paramMap).get("cnt")).intValue();
 
 		mav.addObject("list", caseList);
-		mav.addObject("totalcount", caseList.size());
+		mav.addObject("totalcount", totalCnt);
 
 		return mav;
 	}
@@ -132,7 +151,6 @@ public class CaseController {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-//		String caseId = CarpeConfig.getCaseCode() + UUID.randomUUID().toString().replace("-", "");
 		String delimiter = ",";
 		List<String> split = Arrays.asList(map.get("caseId").split(delimiter));
 		ArrayList<String> caseList = new ArrayList<String>();

@@ -6,12 +6,25 @@
 <mapper namespace="com.carpe.mapper.evdnc">
 	<select id="selectEvdncList" parameterType="Map" resultType="Map">
 		SELECT @a:=@a+1 serial_number
-		  , evd_id, evd_name, evd_path, tmp_path, case_id, main_type, sub_type, timezone, DATE_FORMAT(acquired_date, '%Y-%m-%d %H:%i:%s') AS acquired_date, md5, sha1, process_state 
+		  , evd_id, evd_name, evd_path, tmp_path, case_id, main_type, sub_type, timezone, DATE_FORMAT(acquired_date, '%Y-%m-%d %H:%i:%s') AS acquired_date, md5, sha1
+		  , CASE 
+				WHEN process_state = '0'
+				THEN 'Complete'
+				WHEN process_state = '1'
+				THEN 'Processing'
+				WHEN process_state = '2'
+				THEN 'Ready'
+			END as process_state 
 		FROM evidence_info a, (SELECT @a:= 0) AS sn
 		WHERE a.case_id = #{case_id}
 		ORDER BY acquired_date
+		limit #{offset}, #{pageSize}
 	</select>
 
+	<select id="selectEvdncListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) cnt FROM evidence_info
+	</select>
+	
 	<select id="selectEvdnc" parameterType="Map" resultType="Map">
 		select evd_path from evidence_info where evd_id = #{id}
 	</select>
@@ -20,4 +33,13 @@
 		INSERT INTO evidence_info(evd_id, evd_name, evd_path, tmp_path, case_id, main_type, sub_type, timezone, acquired_date) 
 			VALUES(#{id}, #{name}, #{path}, #{tmp_path}, #{case_id}, #{main_type}, #{sub_type}, #{timezone}, now())
 	</insert>
+	
+	<delete id="deleteEvdncList" parameterType="Map">
+		DELETE 
+		  FROM evidence_info
+		 WHERE evd_id in
+		  <foreach item="item" index="index" collection="evdList" open="(" close=")" separator=",">
+            #{item}
+   		  </foreach>
+	</delete>
 </mapper>

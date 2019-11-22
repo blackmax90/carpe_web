@@ -61,4 +61,20 @@ public class GpsController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value = "/gps_link_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getGpsLinkList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("regdate", map.get("regdate"));
+
+		List<Map> gpsList = service.selectGpsLinkList(paramMap);
+
+		mav.addObject("list", gpsList);
+
+		return mav;
+	}
 }

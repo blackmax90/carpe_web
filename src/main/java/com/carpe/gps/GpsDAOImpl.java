@@ -20,4 +20,9 @@ public class GpsDAOImpl implements GpsDAO {
 	public List<Map> selectGpsList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectGpsList", paramMap);
 	}
+	
+	@Override
+	public List<Map> selectGpsLinkList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectGpsLinkList", paramMap);
+	}
 }

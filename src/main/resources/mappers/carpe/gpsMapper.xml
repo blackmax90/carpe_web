@@ -6,7 +6,8 @@
 <mapper namespace="com.carpe.mapper.gps">
 	<select id="selectGpsList" parameterType="Map" resultType="Map">
 		SELECT  @a:=@a+1 serial_number
-		       ,FROM_UNIXTIME(substr(a.regdate,1,10),'%Y-%m-%d %H:%i:%s') as regdate
+		       ,substr(a.regdate,1,19) regd
+		       ,a.regdate
 		       ,a.gps_type
 		       ,a.source
 		       ,a.location
@@ -14,7 +15,18 @@
 		       ,a.longitude
 		       ,a.gps_id
 		  FROM  gps a, (SELECT @a:= 0) AS sn
-		 WHERE a.case_id = #{case_id}
+		 WHERE  a.case_id = #{case_id}
+ 	  ORDER BY  regdate desc
+	</select>
+
+	<select id="selectGpsLinkList" parameterType="Map" resultType="Map">
+	
+		SELECT  latitude
+		       ,longitude 
+		  FROM  gps
+		 WHERE  DATE_FORMAT(regdate, '%Y-%m-%d') = substr(#{regdate},1,10)
+		   AND  case_id = #{case_id}
+      ORDER BY  regdate asc
 	</select>
 
 </mapper>

@@ -5,6 +5,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -53,13 +55,32 @@ public class EvdncController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+		
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
-
+		
 		List<Map> evdncList = service.selectEvdncList(paramMap);
+		int totalCnt = ((Long) service.selectEvdncListCount(paramMap).get("cnt")).intValue();
 
 		mav.addObject("list", evdncList);
-		mav.addObject("totalcount", evdncList.size());
+		mav.addObject("totalcount", totalCnt);
 
 		return mav;
 	}
@@ -182,5 +203,32 @@ public class EvdncController {
 				}
 			}
 		}
+	}
+
+	@RequestMapping(value = "/delete_evdnc.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView delEvdnc(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		String delimiter = ",";
+		List<String> split = Arrays.asList(map.get("evdId").split(delimiter));
+		ArrayList<String> evdncList = new ArrayList<String>();
+		evdncList.addAll(split);
+		paramMap.put("evdList", evdncList);
+
+
+		int affected = 0;
+		try {
+			// evdncList list delete
+			affected = service.deleteEvdncList(paramMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		mav.addObject("affected", affected);
+		mav.setViewName("jsonView");
+
+		return mav;
 	}
 }

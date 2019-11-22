@@ -22,6 +22,11 @@ public class CommunicationDAOImpl implements CommunicationDAO {
 	}
 	
 	@Override
+	public Map selectCallStatCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectCallStatCount", paramMap);
+	}
+	
+	@Override
 	public List<Map> selectCallStat(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectCallStat", paramMap);
 	}

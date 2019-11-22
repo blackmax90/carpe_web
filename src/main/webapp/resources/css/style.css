@@ -393,8 +393,8 @@ html, body {
   width: calc(100% - 22rem);
   min-width: calc(100% - 49rem);
   height: calc(100vh - 6rem);
-  min-height: 43rem;
-  padding: 2rem 3rem 2rem 2rem;
+  min-height: 60rem;
+  padding: 2rem;
   z-index: 9;
 }
 
@@ -402,7 +402,6 @@ html, body {
   display: block;
   width: 100%;
   min-width: 100%;
-  padding: 2rem 3rem;
 }
 
 .login .main {
@@ -973,7 +972,7 @@ label {
 }
 
 .blue .header { 
-  padding: 2rem 3rem 0 2rem; 
+  padding: 2rem 2rem 0 2rem; 
 }
 
 .header h1, .header h2 { 
@@ -1490,6 +1489,26 @@ h5 {
   margin-right: 2rem;
 }
 
+.overview .container .content-area .cont-result {
+  height: calc(100% - 2rem);
+  border: none;
+}
+
+.overview .container .content-area .cont-result li {
+  display: inline-block;
+  float: left;
+  width: calc(33.33%);
+  height: 100%;
+  margin-top: 0;
+  padding: 1rem;
+}
+
+.overview .content-area .cont-result ul,
+.overview .content-area .chart-area {
+  width:100%;
+  height: 100%;
+}
+
 .container .content-area .btn-area {
   position: relative;
   float: right;
@@ -1524,7 +1543,7 @@ h5 {
 }
 
 .vsa-page .content-area .chart-area.chart-type-3 {
-  height: calc(100% -2rem);
+  height: calc(100% - 4rem);
 }
 
 .container .content-area .map-area {
@@ -1553,7 +1572,8 @@ h5 {
   text-align: center;
 }
 
-.container .content-area .paging-area .num a {
+.container .content-area .paging-area .num a,
+.container .content-area .paging-area .num strong {
   min-width: 1.4rem;
   padding: 0 1rem;
   color: #1E2832;
@@ -1562,7 +1582,8 @@ h5 {
 }
 
 .container .content-area .paging-area .num a:hover,
-.container .content-area .paging-area .num a strong.on {
+.container .content-area .paging-area .num a strong.on,
+.container .content-area .paging-area .num strong.on {
   color: #3CB4F0;
 }
 
@@ -1773,6 +1794,7 @@ h5 {
 .container .jqx-splitter.content-box {
   width: 100%;
   height: 100%;
+  border: none;
   border-radius: 0.5rem;
   box-sizing: border-box;
 }

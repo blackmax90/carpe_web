@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URLEncoder;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -41,7 +42,19 @@ public class CommunicationController {
 	public ModelAndView communicationView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		int year = Calendar.getInstance().get(Calendar.YEAR);
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
 		mav.setViewName("carpe/communication/communication");
+		if (map.get("year") != null && !"".equals(map.get("year"))) {
+			mav.addObject("year", map.get("year"));
+			paramMap.put("year", map.get("year"));
+		} else {
+			mav.addObject("year", year);
+			paramMap.put("year", year);
+		}
+		//int topCnt = ((Long) service.selectCallStatCount(paramMap).get("cnt")).intValue();
+		//mav.addObject("topCnt", topCnt);
 
 		return mav;
 	}
@@ -53,7 +66,7 @@ public class CommunicationController {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
-
+		paramMap.put("year", map.get("year"));
 		List<Map> communicationList = service.selectCommunicationList(paramMap);
 
 		mav.addObject("list", communicationList);

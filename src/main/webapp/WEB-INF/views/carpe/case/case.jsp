@@ -1,4 +1,5 @@
-﻿
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.carpe.common.Consts"%>
 <!DOCTYPE html>
 <html lang="ko"><!-- 사용자 언어에 따라 lang 속성 변경. 예) 한국어: ko, 일본어: ja, 영어: en -->
 <head>
@@ -41,26 +42,7 @@
 						<div id="jqxGrid_Systemlog" role="grid" align="left" class="cont-result">
 							<!--// Table 영역 //-->
 						</div>
-						<div id="paing" class="paging-area" style="display:none">
-							<!--// Table Paging 영역 - 위치고정 //-->
-							<div class="paginate">
-								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
-								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
-								<span class="num">
-									<a href="#">81</a>
-									<a href="#">82</a>
-									<a href="#"><strong class="on">83</strong></a>
-									<a href="#">84</a>
-									<a href="#">85</a>
-									<a href="#">86</a>
-									<a href="#">87</a>
-									<a href="#">88</a>
-									<a href="#">89</a>
-									<a href="#">90</a>
-								</span>
-								<button class="btn-paging icon ico-next"><span class="ir">다음</span></button>
-								<button class="btn-paging icon ico-last" disabled="disabled"><span class="ir">마지막</span></button>
-							</div>
+						<div id="paing" class="paging-area">
 						</div>
 						<!-- Content 영역 //-->	
 					</div>
@@ -114,6 +96,13 @@
 	(function($) {
 		$(document).ready(function() {
 
+			var pagesize = <%=Consts.PAGE_SZIE%>;
+			var i, j;
+			var currentPage = 1;
+			var lastPage = 1;
+			var currentRowCount = 0;
+			var currentPageOffset = 1;
+			
 			var source = {
 				datatype: "json",
 				datafields: [
@@ -132,9 +121,20 @@
 				url: "/carpe/case_list.do"
 			};
 
+			var updateBound = function(e) {
+				if (currentPage === e.data.value) {
+					return;
+				}
+	
+				currentPage = e.data.value;
+				$("#jqxGrid_Systemlog").jqxGrid('updateBoundData');
+			};
+			
 			var dataAdapter = new $.jqx.dataAdapter(source, {
 				contentType : 'application/json; charset=utf-8',
 				formatData : function(data) {
+					data["currentPage"] = currentPage;
+					data["pageSize"] = pagesize;
 		            return data;
 				},
 				beforeSend : function(xhr) {
@@ -145,6 +145,78 @@
 					
 					$('#paing').empty();
 
+					if (totalcount < 1) {
+						return;
+					}
+	
+					var $divpageele = $('<div class="paginate">');
+					var $firstele = $('<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>');
+					var $firsteleDis = $('<button type="button" class="btn-paging icon ico-first" disabled="disabled"><span class="ir">처음</span></button>');
+					var $prevele = $('<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>');
+					var $preveleDis = $('<button type="button" class="btn-paging icon ico-prev" disabled="disabled"><span class="ir">이전</span></button>');
+					var $spanele = $('<span class="num">');
+					var $nextele = $('<button class="btn-paging icon ico-next"><span class="ir">다음</span></button>');
+					var $nexteleDis = $('<button class="btn-paging icon ico-next" disabled="disabled"><span class="ir">다음</span></button>');
+					var $lastele = $('<button class="btn-paging icon ico-last"><span class="ir">마지막</span></button>');
+					var $lasteleDis = $('<button class="btn-paging icon ico-last" disabled="disabled"><span class="ir">마지막</span></button>');
+					var $aele
+					
+				
+					if (currentPage % 10 === 0) {
+						currentPageOffset = currentPage - 1;
+					} else {
+						currentPageOffset = currentPage;
+					}
+
+					currentPageOffset = Math.floor(currentPageOffset / 10) * 10 + 1;
+					lastPage = Math.ceil(totalcount/pagesize);
+
+					$firstele.on("click", { value: 1 }, updateBound);
+					$lastele.on("click", { value: lastPage}, updateBound);
+
+					if (currentPageOffset - 10 < 1) {
+						$prevele.on("click", { value: 1 }, updateBound);
+					} else {
+						$prevele.on("click", { value: (currentPageOffset - 10) }, updateBound);
+					}
+
+					if (currentPageOffset + 10 > lastPage) {
+						$nextele.on("click", { value: lastPage }, updateBound);
+					} else {
+						$nextele.on("click", { value: (currentPageOffset + 10) }, updateBound);
+					}
+
+					for(i = currentPageOffset, j = 1; (j <= 10) && (i <= lastPage); i++, j++) {
+						if (i === currentPage) {
+							$aele = $('<strong class="on">&nbsp;' + i + '&nbsp;</strong>');
+							$spanele.append($aele);
+						} else {
+							$aele = $('<a href="#">&nbsp;' + i + '&nbsp;</a>');
+							$aele.on("click", { value: i }, updateBound);
+							$spanele.append($aele);
+						}						
+					}
+
+					if (currentPage == 1) {
+						$divpageele.append($firsteleDis);
+						$divpageele.append($preveleDis);												
+					} else {
+						$divpageele.append($firstele);
+						$divpageele.append($prevele);
+					}					
+					
+					$divpageele.append($spanele);
+					
+					if (currentPage == lastPage) {
+						$divpageele.append($nexteleDis);
+						$divpageele.append($lasteleDis);
+					} else {
+						$divpageele.append($nextele);
+						$divpageele.append($lastele);
+					}
+
+					
+					$('#paing').append($divpageele);	
 				},
 				loadComplete : function(data) {
 				},
@@ -165,7 +237,7 @@
 						return '<span style="padding: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a href="/carpe/select_case.do?' + param + '">' + value + '</a></span>';
 					}
 				},
-				{text: 'Description', dataField: 'description', width: '200px', cellsalign: 'left', align: 'center'},
+				{text: 'Description', dataField: 'description', width: 'auto', cellsalign: 'left', align: 'center'},
 				{text: 'Administrator', dataField: 'administrator', width: '150px', cellsalign: 'center', align: 'center'},
 				{text: 'Permission', dataField: 'permission', width: '150px', cellsalign: 'center', align: 'center'},
 				{text: 'Create Date', dataField: 'create_date', width: '150px', cellsalign: 'center', align: 'center'},

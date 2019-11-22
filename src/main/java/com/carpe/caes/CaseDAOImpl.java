@@ -22,6 +22,11 @@ public class CaseDAOImpl implements CaseDAO {
 	}
 	
 	@Override
+	public Map selectCaseListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectCaseListCount", paramMap);
+	}
+	
+	@Override
 	public int insertCase(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.insert(Namespace + ".insertCase", paramMap);
 	}

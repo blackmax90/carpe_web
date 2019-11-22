@@ -28,4 +28,8 @@ public class CommunicationServiceImpl implements CommunicationService {
 		return dao.selectSmsStat(paramMap);
 	}
 
+	@Override
+	public Map selectCallStatCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectCallStatCount(paramMap);
+	}
 }

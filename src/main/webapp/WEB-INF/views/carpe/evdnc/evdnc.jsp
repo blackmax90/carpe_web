@@ -78,25 +78,6 @@
 							<!--// Grid Table 영역 //-->
 						</div>
 						<div id="paing" class="paging-area">
-							<!--// Table Paging 영역 - 위치고정 //-->
-							<div class="paginate">
-								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
-								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
-								<span class="num">
-									<a href="#">81</a>
-									<a href="#">82</a>
-									<a href="#"><strong class="on">83</strong></a>
-									<a href="#">84</a>
-									<a href="#">85</a>
-									<a href="#">86</a>
-									<a href="#">87</a>
-									<a href="#">88</a>
-									<a href="#">89</a>
-									<a href="#">90</a>
-								</span>
-								<button class="btn-paging icon ico-next"><span class="ir">다음</span></button>
-								<button class="btn-paging icon ico-last" disabled="disabled"><span class="ir">마지막</span></button>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -159,6 +140,14 @@
 	<script>
 	(function($) {
 		$(document).ready(function() {
+			
+			var pagesize = <%=Consts.PAGE_SZIE%>;
+			var i, j;
+			var currentPage = 1;
+			var lastPage = 1;
+			var currentRowCount = 0;
+			var currentPageOffset = 1;
+			
 			var source = {
 				datatype: "json",
 				datafields: [
@@ -181,15 +170,103 @@
 	            contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
 				url: "/carpe/evdnc_list.do"
 			};
+
+			var updateBound = function(e) {
+				if (currentPage === e.data.value) {
+					return;
+				}
 	
+				currentPage = e.data.value;
+				$("#jqxGrid_Systemlog").jqxGrid('updateBoundData');
+			};
+			
 			var dataAdapter = new $.jqx.dataAdapter(source, {
 				contentType : 'application/json; charset=utf-8',
 				formatData : function(data) {
+					data["currentPage"] = currentPage;
+					data["pageSize"] = pagesize;
 		            return data;
 				},
 				beforeSend : function(xhr) {
 				},
 				downloadComplete : function(data, status, xhr) {
+					var totalcount = data['totalcount'] || 0;
+					currentRowCount = data['list'] ? data['list'].length : 0;
+					
+					$('#paing').empty();
+
+					if (totalcount < 1) {
+						return;
+					}
+	
+					var $divpageele = $('<div class="paginate">');
+					var $firstele = $('<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>');
+					var $firsteleDis = $('<button type="button" class="btn-paging icon ico-first" disabled="disabled"><span class="ir">처음</span></button>');
+					var $prevele = $('<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>');
+					var $preveleDis = $('<button type="button" class="btn-paging icon ico-prev" disabled="disabled"><span class="ir">이전</span></button>');
+					var $spanele = $('<span class="num">');
+					var $nextele = $('<button class="btn-paging icon ico-next"><span class="ir">다음</span></button>');
+					var $nexteleDis = $('<button class="btn-paging icon ico-next" disabled="disabled"><span class="ir">다음</span></button>');
+					var $lastele = $('<button class="btn-paging icon ico-last"><span class="ir">마지막</span></button>');
+					var $lasteleDis = $('<button class="btn-paging icon ico-last" disabled="disabled"><span class="ir">마지막</span></button>');
+					var $aele
+					
+				
+					if (currentPage % 10 === 0) {
+						currentPageOffset = currentPage - 1;
+					} else {
+						currentPageOffset = currentPage;
+					}
+
+					currentPageOffset = Math.floor(currentPageOffset / 10) * 10 + 1;
+					lastPage = Math.ceil(totalcount/pagesize);
+
+					$firstele.on("click", { value: 1 }, updateBound);
+					$lastele.on("click", { value: lastPage}, updateBound);
+
+					if (currentPageOffset - 10 < 1) {
+						$prevele.on("click", { value: 1 }, updateBound);
+					} else {
+						$prevele.on("click", { value: (currentPageOffset - 10) }, updateBound);
+					}
+
+					if (currentPageOffset + 10 > lastPage) {
+						$nextele.on("click", { value: lastPage }, updateBound);
+					} else {
+						$nextele.on("click", { value: (currentPageOffset + 10) }, updateBound);
+					}
+
+					for(i = currentPageOffset, j = 1; (j <= 10) && (i <= lastPage); i++, j++) {
+						if (i === currentPage) {
+							$aele = $('<strong class="on">&nbsp;' + i + '&nbsp;</strong>');
+							$spanele.append($aele);
+						} else {
+							$aele = $('<a href="#">&nbsp;' + i + '&nbsp;</a>');
+							$aele.on("click", { value: i }, updateBound);
+							$spanele.append($aele);
+						}						
+					}
+
+					if (currentPage == 1) {
+						$divpageele.append($firsteleDis);
+						$divpageele.append($preveleDis);												
+					} else {
+						$divpageele.append($firstele);
+						$divpageele.append($prevele);
+					}					
+					
+					$divpageele.append($spanele);
+					
+					if (currentPage == lastPage) {
+						$divpageele.append($nexteleDis);
+						$divpageele.append($lasteleDis);
+					} else {
+						$divpageele.append($nextele);
+						$divpageele.append($lastele);
+					}
+
+					
+					$('#paing').append($divpageele);	
 				},
 				loadComplete : function(data) {
 				},
@@ -225,14 +302,14 @@
 				{text: 'SHA1', dataField: 'sha1', width: '120px', cellsalign: 'center', align: 'center'},
 				{text: 'SHA256', dataField: 'sha256', width: '120px', cellsalign: 'center', align: 'center'},
 				{text: 'Process State', dataField: 'process_state', width: '120px', cellsalign: 'center', align: 'center'},
-				{text: 'Evidence Path', dataField: 'evd_path', cellsalign: 'left', align: 'center',
+				{text: 'Evidence Path', dataField: 'evd_path', width: 'auto', cellsalign: 'left', align: 'center',
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
 						var evdncInfo = {};
 						evdncInfo.id = dataRecord.evd_id;
 						var param = encodeQueryData(evdncInfo);
 	
-						return '<span style="width: 100%; display: block; overflow: hidden; text-overflow: ellipsis;  white-space: nowrap; margin: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a title="' + value + '" target="_blank" href="/carpe/download_evdnc.do?' + param + '">' + value + '</a></span>';
+						return '<span style="width: 100%; display: block; overflow: hidden; text-overflow: ellipsis;  white-space: nowrap; padding: 0.7rem 0.5rem; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a title="' + value + '" target="_blank" href="/carpe/download_evdnc.do?' + param + '">' + value + '</a></span>';
 					}
 				}
 			];
@@ -277,7 +354,48 @@
 	
 	        	$('#addEvdncWindow').jqxWindow('open');
 			});
-	
+
+			/*
+			// evdnc Delete
+			$("#btnDeleteEvdncs").click(function(e) {
+				if (confirm('삭제 하시겠습니까')) {
+					var selectedrowindexes = $("#jqxGrid_Systemlog").jqxGrid('getselectedrowindexes');
+					var rowscount = $("#jqxGrid_Systemlog").jqxGrid('getdatainformation').rowscount;
+					
+					$("#jqxGrid_Systemlog").jqxGrid('beginupdate');
+					var deleteEvd = {};
+					var idList = "";
+					// delete the selected rows by using the 'deleterow' method of jqxGrid.
+					for (var m = 0; m < selectedrowindexes.length; m++) {
+					    var selectedrowindex = selectedrowindexes[m];
+					    console.log(selectedrowindex);
+					    var selectedRowData = $('#jqxGrid_Systemlog').jqxGrid('getrowdata', selectedrowindex);
+					    idList += "," + selectedRowData["evd_id"];
+					}
+					idList = idList.substring(1);
+		        	deleteEvd.evdId = idList;
+
+					$.ajax({
+						type : "POST",
+						url : "/carpe/delete_evdnc.do",
+						data : deleteEvd,
+						async: false,
+						success : function(data, textStatus, jqXHR) {
+							if (data['affected'] < 1) {
+								alert("삭제에 실패 하였습니다");
+							} else {
+								alert('삭제 되었습니다.');
+								location.reload();
+							}
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+							alert(errorThrown);
+						}
+					});
+				}
+			});
+			*/
+			
 			$('#ok').click(function(e) {
 				e.preventDefault();
 	

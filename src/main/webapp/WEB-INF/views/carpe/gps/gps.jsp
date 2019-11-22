@@ -75,11 +75,11 @@
 				<div class="content-box">
 					<div class="content-area">
 						<div class="map-area" id="map"><!-- 지도 영역 //-->
-							<a href="#" class="btn map-pin ir">위치1</a>
+							<!-- <a href="#" class="btn map-pin ir">위치1</a>
 							<div class="map-func-btns">
 								<button type="button" class="btn plus ir">지도 확대</button>
 								<button type="button" class="btn minus ir">지도 축소</button>
-							</div>
+							</div> -->
 						</div>
 
 						
@@ -113,10 +113,12 @@
 					<dt>시간</dt>
 					<dd id="infoTime"></dd>
 				</dl>
+				<!-- 
 				<dl>
 					<dt>소스</dt>
 					<dd id="infoSource"></dd>
 				</dl>
+				 -->
 				<dl>
 					<dt>장소</dt>
 					<dd id="infoLocation"></dd>
@@ -127,6 +129,7 @@
 
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
+	
 	(function($) {
 		$(document).ready(function() {
 		    var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
@@ -134,6 +137,28 @@
 		        level : 8 // 지도의 확대 레벨 
 		    });
 		    
+		 // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
+		    var linePath = [
+		      //  new kakao.maps.LatLng(37.5785484313965, 126.970542907715),
+		      //  new kakao.maps.LatLng(37.5156898498535, 127.016311645508)
+		        
+		    ];
+
+		 console.log(linePath);
+		 
+		    var polyline = new kakao.maps.Polyline({
+		    	endArrow : true,
+		        path: linePath, // 선을 구성하는 좌표배열 입니다
+		        strokeWeight: 3, // 선의 두께 입니다
+		        strokeColor: '#db4040', // 선의 색깔입니다
+		        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+		        strokeStyle: 'solid' // 선의 스타일입니다
+		    });
+		    
+		 // 지도에 선을 표시합니다 
+		    polyline.setMap(map);  
+
+		   
 		    $('#hideInfo').click(function(){
 		    	$("#mapInfo").hide();	
 		    });
@@ -156,7 +181,7 @@
 		            });
 		        	
 		        	kakao.maps.event.addListener(marker, 'click', function() {
-		        		viewMapInfo(position.location, position.regdate, position.source);
+		        		viewMapInfo(position.location, position.regd, position.source);
 		            });
 					return marker;
 		        });
@@ -165,11 +190,36 @@
 		        clusterer.addMarkers(markers);
 		    });
 		    
+		    var getLinkList = function(regdate) {
+				$.ajax({
+					url: "/carpe/gps_link_list.do",
+			        dataType:'json',
+			        data: { regdate : regdate},
+			        async:false,
+			        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+			        success:function(data){
+			        	var lineLine = new daum.maps.Polyline();
+			        	linePath = [
+			  		        new kakao.maps.LatLng(37.5785484313965, 126.970542907715),
+			  		        new kakao.maps.LatLng(37.5156898498535, 127.016311645508)
+			  		        
+			  		    ];
+			        	linePath = [];
+			        	$(data["list"]).each(function(i, list) {
+			        		linePath[i] = new kakao.maps.LatLng(list.latitude, list.longitude);
+			             });
+			        	
+			        	polyline.setPath(linePath)
+			        }
+			    })
+			}
+		    
 		    // map marker click event
-			var viewMapInfo = function(location, regdate, source) {
-		    	$("#infoTime").html(regdate);
+			var viewMapInfo = function(location, regd, source) {
+		    	getLinkList(regd);
+		    	$("#infoTime").html(regd);
 		    	$("#infoLocation").html(location);
-		    	$("#infoSource").html(source);
+		    	//$("#infoSource").html(source);
 				$("#mapInfo").show();
 			}
 		    
@@ -177,9 +227,9 @@
 				datatype: "json",
 				datafields: [
 					{ name: 'serial_number', type: 'number' },
-					{ name: 'regdate', type: 'string' },
-					{ name: 'gps_type', type: 'string' },
-					{ name: 'source', type: 'string' },
+					{ name: 'regd', type: 'string' },
+					//{ name: 'gps_type', type: 'string' },
+					//{ name: 'source', type: 'string' },
 					{ name: 'location', type: 'string' },
 					{ name: 'latitude', type: 'string' },
 					{ name: 'longitude', type: 'string' }
@@ -206,9 +256,9 @@
 	
 			var columnSet = [
 				{text: 'No.', dataField: 'serial_number', width: '6%', cellsalign: 'right', align: 'center'},
-				{text: 'Time', dataField: 'regdate', width: '10%', cellsalign: 'right', align: 'center'},
-				{text: 'Type', dataField: 'gps_type', width: '18%', cellsalign: 'center', align: 'center'},
-				{text: 'Source', dataField: 'source', width: '10%', cellsalign: 'center', align: 'center'},
+				{text: 'Time', dataField: 'regd', width: '10%', cellsalign: 'right', align: 'center'},
+				//{text: 'Type', dataField: 'gps_type', width: '18%', cellsalign: 'center', align: 'center'},
+				//{text: 'Source', dataField: 'source', width: '10%', cellsalign: 'center', align: 'center'},
 				{text: 'Location', dataField: 'location', width: 'auto', cellsalign: 'center', align: 'center'},
 				{text: 'Latitude', dataField: 'latitude', width: '10%', cellsalign: 'center', align: 'center'},
 				{text: 'Longitude', dataField: 'longitude', width: '10%', cellsalign: 'center', align: 'center'}

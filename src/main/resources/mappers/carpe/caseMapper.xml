@@ -10,6 +10,11 @@
 		  , (select count(*) from evidence_info where case_id = a.case_id) AS evd_cnt
 		FROM case_info a, (SELECT @a:= 0) AS sn
 		ORDER BY create_date
+		limit #{offset}, #{pageSize}
+	</select>
+	
+	<select id="selectCaseListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) cnt FROM case_info
 	</select>
 
 	<insert id="insertCase" parameterType="Map">

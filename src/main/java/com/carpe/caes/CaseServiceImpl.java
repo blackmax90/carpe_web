@@ -19,6 +19,12 @@ public class CaseServiceImpl implements CaseService {
 	}
 
 	@Override
+	public Map selectCaseListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectCaseListCount(paramMap);
+	}
+
+	
+	@Override
 	public int insertCase(Map<String, Object> paramMap) throws Exception {
 		return dao.insertCase(paramMap);
 	}

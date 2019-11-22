@@ -85,7 +85,7 @@
 								<dt>연도선택 :</dt>
 								<dd>
 									<div class="select">
-										<select name="" id="" onChange="setYear(this);">
+										<select name="" id="setYear" onChange="setYear(this);">
 											<option value="2019">2019</option>
 											<option value="2018">2018</option>
 											<option value="2017">2017</option>
@@ -123,6 +123,8 @@
 	var dataList = {Call: []}
 	var dataList2 = {SMS: []}
 
+	var cntData1 = 0;
+	var cntData2 = 0;
 	var getCallList = function(year) {
 		$.ajax({
 			url: "/carpe/communication_call_stat.do",
@@ -133,6 +135,7 @@
 	        success:function(data){
 	        	 dataList = {Call: []}
 	        	 $(data["list"]).each(function(i, list) {
+	        		 cntData1 ++;
 	        		 tmpArr = [list["number"], list["m1"], list["m2"], list["m3"], list["m4"]
 	        		 , list["m5"], list["m6"], list["m7"], list["m8"], list["m9"]
 	        		 , list["m10"], list["m11"], list["m12"]];
@@ -152,6 +155,7 @@
 	        success:function(data){
 	        	 dataList2 = {SMS: []}
 	        	 $(data["list"]).each(function(i, list) {
+	        		 cntData2 ++;
 	        		 tmpArr = [list["number"], list["m1"], list["m2"], list["m3"], list["m4"]
 	        		 , list["m5"], list["m6"], list["m7"], list["m8"], list["m9"]
 	        		 , list["m10"], list["m11"], list["m12"]];
@@ -161,16 +165,13 @@
 	    })
 	}
 	
-	var setYear = function(year) {
-		getCallList(year.value);
-		getSmsList(year.value);
-
-		//chart1.data = generateRadarData();
-		console.log(dataList);
+	var setYear = function(val) {
+		location.href = "/carpe/communication.do?year=" + val.value;
 	}
 	
-	getCallList('2017');
-	getSmsList('2017');
+	
+	getCallList(${year});
+	getSmsList(${year});
 	
 	// Chart1 Start
 	am4core.useTheme(am4themes_animated);
@@ -180,120 +181,134 @@
 	var currentYear = 10;
 	var colorSet = new am4core.ColorSet();
 
-	var chart = am4core.create("chartdiv01", am4charts.RadarChart);
-	chart.numberFormatter.numberFormat = "#건";
-	chart.hiddenState.properties.opacity = 0;
-
-	chart.startAngle = 270 - 180;
-	chart.endAngle = 270 + 180;
-
-	chart.radius = am4core.percent(60);
-	chart.innerRadius = am4core.percent(40);
-
-	// year label goes in the middle
-	var yearLabel = chart.radarContainer.createChild(am4core.Label);
-	yearLabel.horizontalCenter = "middle";
-	yearLabel.verticalCenter = "middle";
-	yearLabel.fill = am4core.color("#673AB7");
-	yearLabel.fontSize = 30;
-	yearLabel.text = String(currentYear);
-
-	// zoomout button
-	var zoomOutButton = chart.zoomOutButton;
-	zoomOutButton.dx = 0;
-	zoomOutButton.dy = 0;
-	zoomOutButton.marginBottom = 15;
-	zoomOutButton.parent = chart.rightAxesContainer;
-
-	// scrollbar
-	chart.scrollbarX = new am4core.Scrollbar();
-	chart.scrollbarX.parent = chart.rightAxesContainer;
-	chart.scrollbarX.orientation = "vertical";
-	chart.scrollbarX.align = "center";
-
-	// vertical orientation for zoom out button and scrollbar to be positioned properly
-	chart.rightAxesContainer.layout = "vertical";
-	chart.rightAxesContainer.padding(120, 20, 120, 20);
-
-	// category axis
-	var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-	categoryAxis.renderer.grid.template.location = 0;
-	categoryAxis.dataFields.category = "country";
-
-	var categoryAxisRenderer = categoryAxis.renderer;
-	var categoryAxisLabel = categoryAxisRenderer.labels.template;
-	categoryAxisLabel.location = 0.5;
-	categoryAxisLabel.radius = 28;
-	categoryAxisLabel.relativeRotation = 90;
-
-	categoryAxisRenderer.minGridDistance = 13;
-	categoryAxisRenderer.grid.template.radius = -25;
-	categoryAxisRenderer.grid.template.strokeOpacity = 0.05;
-	categoryAxisRenderer.grid.template.interactionsEnabled = false;
-
-	categoryAxisRenderer.ticks.template.disabled = true;
-	categoryAxisRenderer.axisFills.template.disabled = true;
-	categoryAxisRenderer.line.disabled = true;
-
-	categoryAxisRenderer.tooltipLocation = 0.5;
-	categoryAxis.tooltip.defaultState.properties.opacity = 0;
-
-	// value axis
-	var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-	valueAxis.min = 0;
-	valueAxis.max = 50;
-	valueAxis.strictMinMax = true;
-	valueAxis.tooltip.defaultState.properties.opacity = 0;
-	valueAxis.tooltip.animationDuration = 0;
-	valueAxis.cursorTooltipEnabled = true;
-	valueAxis.zIndex = 10;
-
-	var valueAxisRenderer = valueAxis.renderer;
-	valueAxisRenderer.axisFills.template.disabled = true;
-	valueAxisRenderer.ticks.template.disabled = true;
-	valueAxisRenderer.minGridDistance = 30;
-	valueAxisRenderer.grid.template.strokeOpacity = 0.05;
-
-
-	// series
-	var series = chart.series.push(new am4charts.RadarColumnSeries());
-	series.columns.template.width = am4core.percent(90);
-	series.columns.template.strokeOpacity = 0;
-	series.dataFields.valueY = "value" + currentYear;
-	series.dataFields.categoryX = "country";
-	series.tooltipText = "{categoryX}:{valueY.value}";
-
-	// this makes columns to be of a different color, depending on value
-	series.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 50, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
-
-	// cursor
-	var cursor = new am4charts.RadarCursor();
-	chart.cursor = cursor;
-	cursor.behavior = "zoomX";
-
-	cursor.xAxis = categoryAxis;
-	cursor.innerRadius = am4core.percent(40);
-	cursor.lineY.disabled = true;
-
-	cursor.lineX.fillOpacity = 0.2;
-	cursor.lineX.fill = am4core.color("#000000");
-	cursor.lineX.strokeOpacity = 0;
-	cursor.fullWidthLineX = true;
-
-	// year slider
-	var yearSliderContainer = chart.createChild(am4core.Container);
-	yearSliderContainer.layout = "vertical";
-	yearSliderContainer.padding(0, 38, 0, 38);
-	yearSliderContainer.width = am4core.percent(100);
-
-	var yearSlider = yearSliderContainer.createChild(am4core.Slider);
-	yearSlider.events.on("rangechanged", function () {
-	    updateRadarData(startYear + Math.round(yearSlider.start * (endYear - startYear)));
-	})
-	yearSlider.orientation = "horizontal";
-	yearSlider.start = 0.5;
-
-	chart.data = generateRadarData();
+	if (cntData1 > 0) {
+		var chart = am4core.create("chartdiv01", am4charts.RadarChart);
+		chart.numberFormatter.numberFormat = "#건";
+		chart.hiddenState.properties.opacity = 0;
+	
+		chart.startAngle = 270 - 180;
+		chart.endAngle = 270 + 180;
+	
+		chart.radius = am4core.percent(60);
+		chart.innerRadius = am4core.percent(40);
+	
+		// year label goes in the middle
+		var yearLabel = chart.radarContainer.createChild(am4core.Label);
+		yearLabel.horizontalCenter = "middle";
+		yearLabel.verticalCenter = "middle";
+		yearLabel.fill = am4core.color("#673AB7");
+		yearLabel.fontSize = 30;
+		yearLabel.text = String(currentYear);
+	
+		// zoomout button
+		var zoomOutButton = chart.zoomOutButton;
+		zoomOutButton.dx = 0;
+		zoomOutButton.dy = 0;
+		zoomOutButton.marginBottom = 15;
+		zoomOutButton.parent = chart.rightAxesContainer;
+	
+		// scrollbar
+		chart.scrollbarX = new am4core.Scrollbar();
+		chart.scrollbarX.parent = chart.rightAxesContainer;
+		chart.scrollbarX.orientation = "vertical";
+		chart.scrollbarX.align = "center";
+	
+		// vertical orientation for zoom out button and scrollbar to be positioned properly
+		chart.rightAxesContainer.layout = "vertical";
+		chart.rightAxesContainer.padding(120, 20, 120, 20);
+	
+		// category axis
+		var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+		categoryAxis.renderer.grid.template.location = 0;
+		categoryAxis.dataFields.category = "country";
+	
+		var categoryAxisRenderer = categoryAxis.renderer;
+		var categoryAxisLabel = categoryAxisRenderer.labels.template;
+		categoryAxisLabel.location = 0.5;
+		categoryAxisLabel.radius = 28;
+		categoryAxisLabel.relativeRotation = 90;
+	
+		categoryAxisRenderer.minGridDistance = 13;
+		categoryAxisRenderer.grid.template.radius = -25;
+		categoryAxisRenderer.grid.template.strokeOpacity = 0.05;
+		categoryAxisRenderer.grid.template.interactionsEnabled = false;
+	
+		categoryAxisRenderer.ticks.template.disabled = true;
+		categoryAxisRenderer.axisFills.template.disabled = true;
+		categoryAxisRenderer.line.disabled = true;
+	
+		categoryAxisRenderer.tooltipLocation = 0.5;
+		categoryAxis.tooltip.defaultState.properties.opacity = 0;
+	
+		// value axis
+		var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+		valueAxis.min = 0;
+		valueAxis.max = 50;
+		valueAxis.strictMinMax = true;
+		valueAxis.tooltip.defaultState.properties.opacity = 0;
+		valueAxis.tooltip.animationDuration = 0;
+		valueAxis.cursorTooltipEnabled = true;
+		valueAxis.zIndex = 10;
+	
+		var valueAxisRenderer = valueAxis.renderer;
+		valueAxisRenderer.axisFills.template.disabled = true;
+		valueAxisRenderer.ticks.template.disabled = true;
+		valueAxisRenderer.minGridDistance = 30;
+		valueAxisRenderer.grid.template.strokeOpacity = 0.05;
+	
+	
+		// series
+		var series = chart.series.push(new am4charts.RadarColumnSeries());
+		series.columns.template.width = am4core.percent(90);
+		series.columns.template.strokeOpacity = 0;
+		series.dataFields.valueY = "value" + currentYear;
+		series.dataFields.categoryX = "country";
+		series.tooltipText = "{categoryX}:{valueY.value}";
+	
+		// this makes columns to be of a different color, depending on value
+		series.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 50, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
+	
+		// cursor
+		var cursor = new am4charts.RadarCursor();
+		chart.cursor = cursor;
+		cursor.behavior = "zoomX";
+	
+		cursor.xAxis = categoryAxis;
+		cursor.innerRadius = am4core.percent(40);
+		cursor.lineY.disabled = true;
+	
+		cursor.lineX.fillOpacity = 0.2;
+		cursor.lineX.fill = am4core.color("#000000");
+		cursor.lineX.strokeOpacity = 0;
+		cursor.fullWidthLineX = true;
+	
+		// year slider
+		var yearSliderContainer = chart.createChild(am4core.Container);
+		yearSliderContainer.layout = "vertical";
+		yearSliderContainer.padding(0, 38, 0, 38);
+		yearSliderContainer.width = am4core.percent(100);
+	
+		var yearSlider = yearSliderContainer.createChild(am4core.Slider);
+		yearSlider.events.on("rangechanged", function () {
+		    updateRadarData(startYear + Math.round(yearSlider.start * (endYear - startYear)));
+		})
+		yearSlider.orientation = "horizontal";
+		yearSlider.start = 0.5;
+	
+		var slider = yearSliderContainer.createChild(am4core.Slider);
+		slider.start = 1;
+		slider.events.on("rangechanged", function () {
+		    var start = slider.start;
+	
+		    chart.startAngle = 270 - start * 179 - 1;
+		    chart.endAngle = 270 + start * 179 + 1;
+	
+		    valueAxis.renderer.axisAngle = chart.startAngle;
+		})
+		
+		chart.data = generateRadarData();
+	}
+	
 	function generateRadarData() {
 	    var data = [];
 	    var i = 0;
@@ -374,139 +389,144 @@
 	    axisLabel.radius = 0;
 	    axisLabel.relativeRotation = 0;
 	}
-	var slider = yearSliderContainer.createChild(am4core.Slider);
-	slider.start = 1;
-	slider.events.on("rangechanged", function () {
-	    var start = slider.start;
-
-	    chart.startAngle = 270 - start * 179 - 1;
-	    chart.endAngle = 270 + start * 179 + 1;
-
-	    valueAxis.renderer.axisAngle = chart.startAngle;
-	})
+	
 	// Chart1 End
 	
-	// Chart2 End
-	am4core.useTheme(am4themes_animated);
-	var startYear2 = 1;
-	var endYear2 = 12;
-	var currentYear2 = 10;
-	var colorSet = new am4core.ColorSet();
-
-	var chart2 = am4core.create("chartdiv02", am4charts.RadarChart);
-	chart2.numberFormatter.numberFormat = "#건";
-	chart2.hiddenState.properties.opacity = 0;
-
-	chart2.startAngle = 270 - 180;
-	chart2.endAngle = 270 + 180;
-
-	chart2.radius = am4core.percent(60);
-	chart2.innerRadius = am4core.percent(40);
-
-	// year label goes in the middle
-	var yearLabel2 = chart2.radarContainer.createChild(am4core.Label);
-	yearLabel2.horizontalCenter = "middle";
-	yearLabel2.verticalCenter = "middle";
-	yearLabel2.fill = am4core.color("#673AB7");
-	yearLabel2.fontSize = 30;
-	yearLabel2.text = String(currentYear2);
-
-	// zoomout button
-	var zoomOutButton = chart2.zoomOutButton;
-	zoomOutButton.dx = 0;
-	zoomOutButton.dy = 0;
-	zoomOutButton.marginBottom = 15;
-	zoomOutButton.parent = chart2.rightAxesContainer;
-
-	// scrollbar
-	chart2.scrollbarX = new am4core.Scrollbar();
-	chart2.scrollbarX.parent = chart2.rightAxesContainer;
-	chart2.scrollbarX.orientation = "vertical";
-	chart2.scrollbarX.align = "center";
-
-	// vertical orientation for zoom out button and scrollbar to be positioned properly
-	chart2.rightAxesContainer.layout = "vertical";
-	chart2.rightAxesContainer.padding(120, 20, 120, 20);
-
-	// category axis
-	var categoryAxis = chart2.xAxes.push(new am4charts.CategoryAxis());
-	categoryAxis.renderer.grid.template.location = 0;
-	categoryAxis.dataFields.category = "country";
-
-	var categoryAxisRenderer = categoryAxis.renderer;
-	var categoryAxisLabel = categoryAxisRenderer.labels.template;
-	categoryAxisLabel.location = 0.5;
-	categoryAxisLabel.radius = 28;
-	categoryAxisLabel.relativeRotation = 90;
-
-	categoryAxisRenderer.minGridDistance = 13;
-	categoryAxisRenderer.grid.template.radius = -25;
-	categoryAxisRenderer.grid.template.strokeOpacity = 0.05;
-	categoryAxisRenderer.grid.template.interactionsEnabled = false;
-
-	categoryAxisRenderer.ticks.template.disabled = true;
-	categoryAxisRenderer.axisFills.template.disabled = true;
-	categoryAxisRenderer.line.disabled = true;
-
-	categoryAxisRenderer.tooltipLocation = 0.5;
-	categoryAxis.tooltip.defaultState.properties.opacity = 0;
-
-	// value axis
-	var valueAxis2 = chart2.yAxes.push(new am4charts.ValueAxis());
-	valueAxis2.min = 0;
-	valueAxis2.max = 50;
-	valueAxis2.strictMinMax = true;
-	valueAxis2.tooltip.defaultState.properties.opacity = 0;
-	valueAxis2.tooltip.animationDuration = 0;
-	valueAxis2.cursorTooltipEnabled = true;
-	valueAxis2.zIndex = 10;
-
-	var valueAxisRenderer2 = valueAxis2.renderer;
-	valueAxisRenderer2.axisFills.template.disabled = true;
-	valueAxisRenderer2.ticks.template.disabled = true;
-	valueAxisRenderer2.minGridDistance = 30;
-	valueAxisRenderer2.grid.template.strokeOpacity = 0.05;
-
-
-	// series
-	var series2 = chart2.series.push(new am4charts.RadarColumnSeries());
-	series2.columns.template.width = am4core.percent(90);
-	series2.columns.template.strokeOpacity = 0;
-	series2.dataFields.valueY = "value" + currentYear2;
-	series2.dataFields.categoryX = "country";
-	series2.tooltipText = "{categoryX}:{valueY.value}";
-
-	// this makes columns to be of a different color, depending on value
-	series2.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 50, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
-
-	// cursor
-	var cursor = new am4charts.RadarCursor();
-	chart2.cursor = cursor;
-	cursor.behavior = "zoomX";
-
-	cursor.xAxis = categoryAxis;
-	cursor.innerRadius = am4core.percent(40);
-	cursor.lineY.disabled = true;
-
-	cursor.lineX.fillOpacity = 0.2;
-	cursor.lineX.fill = am4core.color("#000000");
-	cursor.lineX.strokeOpacity = 0;
-	cursor.fullWidthLineX = true;
-
-	// year slider
-	var yearSliderContainer2 = chart2.createChild(am4core.Container);
-	yearSliderContainer2.layout = "vertical";
-	yearSliderContainer2.padding(0, 38, 0, 38);
-	yearSliderContainer2.width = am4core.percent(100);
-
-	var yearSlider2 = yearSliderContainer2.createChild(am4core.Slider);
-	yearSlider2.events.on("rangechanged", function () {
-	    updateRadarData2(startYear2 + Math.round(yearSlider2.start * (endYear2 - startYear2)));
-	})
-	yearSlider2.orientation = "horizontal";
-	yearSlider2.start = 0.5;
-
-	chart2.data = generateRadarData2();
+	// Chart2 Start
+	if (cntData2 > 0) {
+		am4core.useTheme(am4themes_animated);
+		var startYear2 = 1;
+		var endYear2 = 12;
+		var currentYear2 = 10;
+		var colorSet = new am4core.ColorSet();
+	
+		var chart2 = am4core.create("chartdiv02", am4charts.RadarChart);
+		chart2.numberFormatter.numberFormat = "#건";
+		chart2.hiddenState.properties.opacity = 0;
+	
+		chart2.startAngle = 270 - 180;
+		chart2.endAngle = 270 + 180;
+	
+		chart2.radius = am4core.percent(60);
+		chart2.innerRadius = am4core.percent(40);
+	
+		// year label goes in the middle
+		var yearLabel2 = chart2.radarContainer.createChild(am4core.Label);
+		yearLabel2.horizontalCenter = "middle";
+		yearLabel2.verticalCenter = "middle";
+		yearLabel2.fill = am4core.color("#673AB7");
+		yearLabel2.fontSize = 30;
+		yearLabel2.text = String(currentYear2);
+	
+		// zoomout button
+		var zoomOutButton = chart2.zoomOutButton;
+		zoomOutButton.dx = 0;
+		zoomOutButton.dy = 0;
+		zoomOutButton.marginBottom = 15;
+		zoomOutButton.parent = chart2.rightAxesContainer;
+	
+		// scrollbar
+		chart2.scrollbarX = new am4core.Scrollbar();
+		chart2.scrollbarX.parent = chart2.rightAxesContainer;
+		chart2.scrollbarX.orientation = "vertical";
+		chart2.scrollbarX.align = "center";
+	
+		// vertical orientation for zoom out button and scrollbar to be positioned properly
+		chart2.rightAxesContainer.layout = "vertical";
+		chart2.rightAxesContainer.padding(120, 20, 120, 20);
+	
+		// category axis
+		var categoryAxis = chart2.xAxes.push(new am4charts.CategoryAxis());
+		categoryAxis.renderer.grid.template.location = 0;
+		categoryAxis.dataFields.category = "country";
+	
+		var categoryAxisRenderer = categoryAxis.renderer;
+		var categoryAxisLabel = categoryAxisRenderer.labels.template;
+		categoryAxisLabel.location = 0.5;
+		categoryAxisLabel.radius = 28;
+		categoryAxisLabel.relativeRotation = 90;
+	
+		categoryAxisRenderer.minGridDistance = 13;
+		categoryAxisRenderer.grid.template.radius = -25;
+		categoryAxisRenderer.grid.template.strokeOpacity = 0.05;
+		categoryAxisRenderer.grid.template.interactionsEnabled = false;
+	
+		categoryAxisRenderer.ticks.template.disabled = true;
+		categoryAxisRenderer.axisFills.template.disabled = true;
+		categoryAxisRenderer.line.disabled = true;
+	
+		categoryAxisRenderer.tooltipLocation = 0.5;
+		categoryAxis.tooltip.defaultState.properties.opacity = 0;
+	
+		// value axis
+		var valueAxis2 = chart2.yAxes.push(new am4charts.ValueAxis());
+		valueAxis2.min = 0;
+		valueAxis2.max = 50;
+		valueAxis2.strictMinMax = true;
+		valueAxis2.tooltip.defaultState.properties.opacity = 0;
+		valueAxis2.tooltip.animationDuration = 0;
+		valueAxis2.cursorTooltipEnabled = true;
+		valueAxis2.zIndex = 10;
+	
+		var valueAxisRenderer2 = valueAxis2.renderer;
+		valueAxisRenderer2.axisFills.template.disabled = true;
+		valueAxisRenderer2.ticks.template.disabled = true;
+		valueAxisRenderer2.minGridDistance = 30;
+		valueAxisRenderer2.grid.template.strokeOpacity = 0.05;
+	
+	
+		// series
+		var series2 = chart2.series.push(new am4charts.RadarColumnSeries());
+		series2.columns.template.width = am4core.percent(90);
+		series2.columns.template.strokeOpacity = 0;
+		series2.dataFields.valueY = "value" + currentYear2;
+		series2.dataFields.categoryX = "country";
+		series2.tooltipText = "{categoryX}:{valueY.value}";
+	
+		// this makes columns to be of a different color, depending on value
+		series2.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 50, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
+	
+		// cursor
+		var cursor = new am4charts.RadarCursor();
+		chart2.cursor = cursor;
+		cursor.behavior = "zoomX";
+	
+		cursor.xAxis = categoryAxis;
+		cursor.innerRadius = am4core.percent(40);
+		cursor.lineY.disabled = true;
+	
+		cursor.lineX.fillOpacity = 0.2;
+		cursor.lineX.fill = am4core.color("#000000");
+		cursor.lineX.strokeOpacity = 0;
+		cursor.fullWidthLineX = true;
+	
+		// year slider
+		var yearSliderContainer2 = chart2.createChild(am4core.Container);
+		yearSliderContainer2.layout = "vertical";
+		yearSliderContainer2.padding(0, 38, 0, 38);
+		yearSliderContainer2.width = am4core.percent(100);
+	
+		var yearSlider2 = yearSliderContainer2.createChild(am4core.Slider);
+		yearSlider2.events.on("rangechanged", function () {
+		    updateRadarData2(startYear2 + Math.round(yearSlider2.start * (endYear2 - startYear2)));
+		})
+		yearSlider2.orientation = "horizontal";
+		yearSlider2.start = 0.5;
+	
+		var slider2 = yearSliderContainer2.createChild(am4core.Slider);
+		slider2.start = 1;
+		slider2.events.on("rangechanged", function () {
+		    var start2 = slider2.start;
+	
+		    chart2.startAngle = 270 - start2 * 179 - 1;
+		    chart2.endAngle = 270 + start2 * 179 + 1;
+	
+		    valueAxis2.renderer.axisAngle = chart2.startAngle;
+		})
+	
+		chart2.data = generateRadarData2();
+	
+	}
 	function generateRadarData2() {
 	    var data = [];
 	    var i = 0;
@@ -588,19 +608,10 @@
 	    axisLabel.relativeRotation = 0;
 	}
 
-	var slider2 = yearSliderContainer2.createChild(am4core.Slider);
-	slider2.start = 1;
-	slider2.events.on("rangechanged", function () {
-	    var start2 = slider2.start;
-
-	    chart2.startAngle = 270 - start2 * 179 - 1;
-	    chart2.endAngle = 270 + start2 * 179 + 1;
-
-	    valueAxis2.renderer.axisAngle = chart2.startAngle;
-	})
 
 	//grid start
 	$(document).ready(function() {
+		$("#setYear").val(${year});
 		var source = {
 			datatype: "json",
 			datafields: [
@@ -609,7 +620,7 @@
 			],
             type : "POST",
             contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-			url: "/carpe/communication_list.do"
+			url: "/carpe/communication_list.do?year=" + ${year}
 		};
 
 		var dataAdapter = new $.jqx.dataAdapter(source, {
@@ -628,8 +639,8 @@
 		});
 
 		var columnSet = [
-			{text: 'Number', dataField: 'call_number', width: '60%', cellsalign: 'right', align: 'center'},
-			{text: 'Count', dataField: 'cnt', width: '25%', cellsalign: 'center', align: 'center'},
+			{text: 'Number', dataField: 'call_number', width: 'auto', cellsalign: 'right', align: 'center'},
+			{text: 'Count', dataField: 'cnt', width: '48px', cellsalign: 'center', align: 'center'},
 		];
 
 		$('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
@@ -647,7 +658,6 @@
 			altrows: true,
 			scrollbarsize: 12,
 			autoshowloadelement: true,
-			selectionmode: 'checkbox',
 			ready: function() {},
 			enablebrowserselection: true,
 			columnsresize: true,

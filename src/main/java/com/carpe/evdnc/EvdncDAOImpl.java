@@ -20,6 +20,11 @@ public class EvdncDAOImpl implements EvdncDAO {
 	public List<Map> selectEvdncList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectEvdncList", paramMap);
 	}
+
+	@Override
+	public Map selectEvdncListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEvdncListCount", paramMap);
+	}
 	
 	@Override
 	public int insertEvdnc(Map<String, Object> paramMap) throws Exception {
@@ -29,5 +34,10 @@ public class EvdncDAOImpl implements EvdncDAO {
 	@Override
 	public Map selectEvdnc(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectEvdnc", paramMap);
+	}
+	
+	@Override
+	public int deleteEvdncList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.insert(Namespace + ".deleteEvdncList", paramMap);
 	}
 }

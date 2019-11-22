@@ -41,7 +41,6 @@
 					<li class="on"><a href="#" class="icon analysis">Analysis</a></li>					
 						<li class="level02 on"><a href="/carpe/filesystem.do">Filesystem</a></li> 
 						<li class="level02"><a href="/carpe/artifact.do">Artifact</a></li>
-						<li class="level02"><a href="/carpe/calls.do">Calls</a></li>
 						<li class="level02"><a href="/carpe/search.do">검색</a></li>
 					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
@@ -63,7 +62,7 @@
 						<button type="button" class="btn-case-02" id="btnFileNameWordCloud"><span>Word Cloud</span></button>
 					</li>
 					<li>
-						<button type="button" class="btn-case-02" id="btnDateTreeMap"><span>Date Tree Map</span></button>
+						<button type="button" class="btn-case-02" id="btnDateTreeMap"><span>Data Tree Map</span></button>
 					</li>
 					<li>
 						<button type="button" class="btn-case-02" id="btnHexView"><span>HEX VIEW</span></button>
@@ -251,10 +250,10 @@
 			};
 
 			var columnSet = [
-				{text: '파일명', dataField: 'name', width: '20%', cellsalign: 'left', align: 'center'}
-			  , {text: '크기', dataField: 'size', cellsformat : 'd', width: '12%', cellsalign: 'right', align: 'center'}
-			  , {text: 'MD5', dataField: 'md5', width: '10%', cellsalign: 'center', align: 'center'}
-			  , {text: 'Category', dataField: 'dir_type', width: '10%', cellsalign: 'center', align: 'center',
+				{text: '파일명', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
+			  , {text: '크기', dataField: 'size', cellsformat : 'd', width: '120px', cellsalign: 'right', align: 'center'}
+			  , {text: 'MD5', dataField: 'md5', width: '120px', cellsalign: 'center', align: 'center'}
+			  , {text: 'Category', dataField: 'dir_type', width: '120px', cellsalign: 'center', align: 'center',
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var tmp = '기타';
 						if (value === 3) {
@@ -266,9 +265,9 @@
 						return '<div style="margin-top: 8px; text-align: center;">' + tmp + '</div>';
 					}
 			    }
-			  , {text: '수정일시', dataField: 'mtime', width: '15%', cellsalign: 'center', align: 'center'}
-			  , {text: '생성일시', dataField: 'ctime', width: '15%', cellsalign: 'center', align: 'center'}
-			  , {text: '접근일시', dataField: 'atime', width: '15%', cellsalign: 'center', align: 'center'}
+			  , {text: '수정일시', dataField: 'mtime', width: '150px', cellsalign: 'center', align: 'center'}
+			  , {text: '생성일시', dataField: 'ctime', width: '150px', cellsalign: 'center', align: 'center'}
+			  , {text: '접근일시', dataField: 'atime', width: '150px', cellsalign: 'center', align: 'center'}
 			];
 
 			var dataAdapter = new $.jqx.dataAdapter(source, {

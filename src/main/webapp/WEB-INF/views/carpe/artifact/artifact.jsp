@@ -41,7 +41,6 @@
 					<li class="on"><a href="#" class="icon analysis">Analysis</a></li>					
 						<li class="level02"><a href="/carpe/filesystem.do">Filesystem</a></li> 
 						<li class="level02 on"><a href="/carpe/artifact.do">Artifact</a></li>
-						<li class="level02"><a href="/carpe/calls.do">Calls</a></li>
 						<li class="level02"><a href="/carpe/search.do">검색</a></li>
 					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
@@ -172,7 +171,7 @@
 			artifactKind["Log"] = {};
 			artifactKind["Log"].url = "/carpe/log.do";
 			artifactKind["Log"].columnSet = [
-				{text: 'aaa', dataField: 'MACB', width: '70px', cellsalign: 'left', align: 'center'}
+				{text: 'aaa', dataField: 'MACB', width: '100%', cellsalign: 'left', align: 'center'}
 			];
 	
 			// splitter
