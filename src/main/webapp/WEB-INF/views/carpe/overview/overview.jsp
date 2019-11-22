@@ -71,10 +71,10 @@
 				<div class="content-area bg-unit">					
 					<h3>Evidence별 파일 비율</h3>
 					<%-- <p><fmt:formatNumber value="${logtimelineCnt }"/> 건 발견</p> --%>
-					<div class="cont-result">
+					<div class="cont-result" id="chartDiv">
 						<ul>
 							<li>
-								<div id="chartdiv-s1" class="chart-area">
+								<div id="chartdiv-s2" class="chart-area">
 									<!-- Chart 영역 //-->
 								</div>
 							</li>
@@ -106,7 +106,49 @@
 
 
 	<!-- 현재 페이지에 필요한 js -->
+	<script src="https://www.amcharts.com/lib/4/core.js"></script>
+	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 	<script>
+	<!-- Chart code -->
+	am4core.ready(function() {
+
+		// Themes begin
+		am4core.useTheme(am4themes_animated);
+		// Themes end
+
+		// Create chart instance
+		var chart = am4core.create("chartDiv", am4charts.PieChart);
+
+		// Add data
+		chart.data = [ {
+		  "country": "Processing",
+		  "litres": 7
+		}, {
+		  "country": "Complete",
+		  "litres": 15
+		}, {
+		  "country": "Ready",
+		  "litres": 5
+		}];
+
+		// Set inner radius
+		chart.innerRadius = am4core.percent(50);
+
+		// Add and configure Series
+		var pieSeries = chart.series.push(new am4charts.PieSeries());
+		pieSeries.dataFields.value = "litres";
+		pieSeries.dataFields.category = "country";
+		pieSeries.slices.template.stroke = am4core.color("#fff");
+		pieSeries.slices.template.strokeWidth = 2;
+		pieSeries.slices.template.strokeOpacity = 1;
+
+		// This creates initial animation
+		pieSeries.hiddenState.properties.opacity = 1;
+		pieSeries.hiddenState.properties.endAngle = -90;
+		pieSeries.hiddenState.properties.startAngle = -90;
+
+		}); // end am4core.ready()
 	</script>
 	<!-- // 현재 페이지에 필요한 js -->
 
