@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carpe.common.Consts;
+import com.carpe.sqlite.SqliteDataReader;
 
 @Controller
 public class ArtifactController {
@@ -60,8 +61,17 @@ public class ArtifactController {
 		addArtifactTreeNode(subList, "Overview", true, true, null);
 		addArtifactTreeNode(subList, "Log", true, true, null);
 
+		List subListMobile = new ArrayList();
+		addArtifactTreeNode(subListMobile, "Application List", true, true, null);
+		addArtifactTreeNode(subListMobile, "Call Log", true, true, null);
+		addArtifactTreeNode(subListMobile, "Web Browser", true, true, null);
+		addArtifactTreeNode(subListMobile, "Message", true, true, null);
+		addArtifactTreeNode(subListMobile, "Timeline", true, true, null);
+		addArtifactTreeNode(subListMobile, "Contacts", true, true, null);
+		
 		List list = new ArrayList();
 		addArtifactTreeNode(list, "System Log", false, false, subList);
+		addArtifactTreeNode(list, "Mobile", false, false, subListMobile);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -174,5 +184,40 @@ public class ArtifactController {
 
 		return mav;
 	}
+	
+
+	@RequestMapping(value = "/sqlite_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getSqliteList(Locale locale, @RequestParam HashMap<String, String> map, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		SqliteDataReader reader = new SqliteDataReader("D:\\프로젝트\\고려대학교 포렌식\\DB\\sqllite\\analysis_XXX.dd.db");
+		//SqliteDataReader reader = new SqliteDataReader("/data/carpe/sqllite/analysis_XXX.dd.db");
+
+		try {
+			reader.open();
+			List<Map> list = null;
+			if (map.get("div") != null && "application_list".equals(map.get("div"))) {
+				list = reader.readApplicationList();
+			} else if (map.get("div") != null && "call_log".equals(map.get("div"))) {
+				list = reader.readCallLog();
+			} else if (map.get("div") != null && "web_browser".equals(map.get("div"))) {
+				list = reader.readWebBrowser();
+			} else if (map.get("div") != null && "message".equals(map.get("div"))) {
+				list = reader.readMessage();
+			} else if (map.get("div") != null && "timeline".equals(map.get("div"))) {
+				list = reader.readTimeline();
+			} else if (map.get("div") != null && "contacts".equals(map.get("div"))) {
+				list = reader.readContacts();
+			}
+			mav.addObject("list", list);
+			mav.addObject("totalcount", list.size());
+		} finally {
+			reader.close();
+		}
+
+		return mav;
+	}
+
 
 }

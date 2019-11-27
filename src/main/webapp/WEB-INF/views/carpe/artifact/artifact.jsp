@@ -77,22 +77,6 @@
 						<div id="paing" class="paging-area" style="display:none">
 							<!--// Table Paging 영역 - 위치고정 //-->
 							<div class="paginate">
-								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
-								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
-								<span class="num">
-									<a href="#">81</a>
-									<a href="#">82</a>
-									<a href="#"><strong class="on">83</strong></a>
-									<a href="#">84</a>
-									<a href="#">85</a>
-									<a href="#">86</a>
-									<a href="#">87</a>
-									<a href="#">88</a>
-									<a href="#">89</a>
-									<a href="#">90</a>
-								</span>
-								<button class="btn-paging icon ico-next"><span class="ir">다음</span></button>
-								<button class="btn-paging icon ico-last" disabled="disabled"><span class="ir">마지막</span></button>
 							</div>
 						</div>
 					</div>
@@ -171,9 +155,89 @@
 			artifactKind["Log"] = {};
 			artifactKind["Log"].url = "/carpe/log.do";
 			artifactKind["Log"].columnSet = [
-				{text: 'aaa', dataField: 'MACB', width: '100%', cellsalign: 'left', align: 'center'}
+				{text: 'MACB', dataField: 'MACB', width: '100%', cellsalign: 'left', align: 'center'}
 			];
+			
 	
+			artifactKind["Application List"] = {};
+			artifactKind["Application List"].url = "/carpe/sqlite_list.do?div=application_list";
+			artifactKind["Application List"].columnSet = [
+				 {text: 'package_name', dataField: 'package_name', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'applicationi_name', dataField: 'applicationi_name', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'version', dataField: 'version', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'category', dataField: 'category', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'installed_time', dataField: 'installed_time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'updated_time', dataField: 'updated_time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'is_updated', dataField: 'is_updated', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'cnt_permission', dataField: 'cnt_permission', width: '5%', cellsalign: 'left', align: 'center'}
+				,{text: 'is_deleted', dataField: 'is_deleted', width: '5%', cellsalign: 'left', align: 'center'}
+			];
+			
+			artifactKind["Call Log"] = {};
+			artifactKind["Call Log"].url = "/carpe/sqlite_list.do?div=call_log";
+			artifactKind["Call Log"].columnSet = [
+				 {text: 'id_application', dataField: 'id_application', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'timestamp_start', dataField: 'timestamp_start', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'timestamp_end', dataField: 'timestamp_end', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time_duration', dataField: 'time_duration', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'is_group', dataField: 'is_group', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_from', dataField: 'id_from', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_to', dataField: 'id_to', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'is_recorded', dataField: 'is_recorded', width: '5%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_file', dataField: 'id_file', width: '5%', cellsalign: 'left', align: 'center'}
+			];
+			
+			artifactKind["Web Browser"] = {};
+			artifactKind["Web Browser"].url = "/carpe/sqlite_list.do?div=web_browser";
+			artifactKind["Web Browser"].columnSet = [
+				 {text: 'id_application', dataField: 'id_application', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'timestamp', dataField: 'timestamp', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'timestamp_end', dataField: 'timestamp_end', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'url_address', dataField: 'url_address', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'title', dataField: 'title', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_file', dataField: 'id_file', width: '10%', cellsalign: 'left', align: 'center'}
+			];
+			
+			artifactKind["Message"] = {};
+			artifactKind["Message"].url = "/carpe/sqlite_list.do?div=message";
+			artifactKind["Message"].columnSet = [
+				 {text: 'id_application', dataField: 'id_application', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'timestamp', dataField: 'timestamp', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'time_duration', dataField: 'time_duration', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_from', dataField: 'id_from', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_to', dataField: 'id_to', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'contents', dataField: 'contents', width: '30%', cellsalign: 'left', align: 'center'}
+			];
+			
+			artifactKind["Timeline"] = {};
+			artifactKind["Timeline"].url = "/carpe/sqlite_list.do?div=timeline";
+			artifactKind["Timeline"].columnSet = [
+				 {text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time_duration', dataField: 'time_duration', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_application', dataField: 'id_application', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_from', dataField: 'id_from', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_to', dataField: 'id_to', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'contents', dataField: 'contents', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'has_attachment', dataField: 'has_attachment', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_file', dataField: 'id_file', width: '5%', cellsalign: 'left', align: 'center'}
+				,{text: 'attachement_contetns', dataField: 'attachement_contetns', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'is_deleted', dataField: 'is_deleted', width: '5%', cellsalign: 'left', align: 'center'}
+			];
+			
+			artifactKind["Contacts"] = {};
+			artifactKind["Contacts"].url = "/carpe/sqlite_list.do?div=contacts";
+			artifactKind["Contacts"].columnSet = [
+				 {text: 'is_group', dataField: 'is_group', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'id_group', dataField: 'id_group', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'name', dataField: 'name', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'phonenumber', dataField: 'phonenumber', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'email', dataField: 'email', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'ip_address', dataField: 'ip_address', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'mac_address', dataField: 'mac_address', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'}
+			];
+			
 			// splitter
 			$('#jqxSplitter').jqxSplitter({ width: '100%', height: '100%', panels: [{ min: 150, size: 200 }, { min: 300 }] });
 	
