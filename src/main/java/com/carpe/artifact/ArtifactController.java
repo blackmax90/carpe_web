@@ -144,6 +144,15 @@ public class ArtifactController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/timeline_chart.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView timelineChart(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("carpe/timeline/timeline");
+		
+		return mav;
+	}
+
 	@RequestMapping(value = "/timeline_list.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getTimelineList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
