@@ -114,12 +114,10 @@
 					<dt>시간</dt>
 					<dd id="infoTime"></dd>
 				</dl>
-				<!-- 
 				<dl>
 					<dt>소스</dt>
 					<dd id="infoSource"></dd>
 				</dl>
-				 -->
 				<dl>
 					<dt>장소</dt>
 					<dd id="infoLocation"></dd>
@@ -220,7 +218,7 @@
 		    	getLinkList(regd);
 		    	$("#infoTime").html(regd);
 		    	$("#infoLocation").html(location);
-		    	//$("#infoSource").html(source);
+		    	$("#infoSource").html(source);
 				$("#mapInfo").show();
 			}
 		    
@@ -230,7 +228,7 @@
 					{ name: 'serial_number', type: 'number' },
 					{ name: 'regd', type: 'string' },
 					//{ name: 'gps_type', type: 'string' },
-					//{ name: 'source', type: 'string' },
+					{ name: 'source', type: 'string' },
 					{ name: 'location', type: 'string' },
 					{ name: 'latitude', type: 'string' },
 					{ name: 'longitude', type: 'string' }
@@ -259,7 +257,7 @@
 				{text: 'No.', dataField: 'serial_number', width: '6%', cellsalign: 'right', align: 'center'},
 				{text: 'Time', dataField: 'regd', width: '10%', cellsalign: 'right', align: 'center'},
 				//{text: 'Type', dataField: 'gps_type', width: '18%', cellsalign: 'center', align: 'center'},
-				//{text: 'Source', dataField: 'source', width: '10%', cellsalign: 'center', align: 'center'},
+				{text: 'Source', dataField: 'source', width: '10%', cellsalign: 'center', align: 'center'},
 				{text: 'Location', dataField: 'location', width: 'auto', cellsalign: 'center', align: 'center'},
 				{text: 'Latitude', dataField: 'latitude', width: '10%', cellsalign: 'center', align: 'center'},
 				{text: 'Longitude', dataField: 'longitude', width: '10%', cellsalign: 'center', align: 'center'}
