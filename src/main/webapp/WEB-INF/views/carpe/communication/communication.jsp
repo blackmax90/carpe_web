@@ -97,11 +97,11 @@
 						</div>
 						<div class="cont-result">
 							<div id="chartdiv01" class="chart-area chart-type-3"></div>							
-							<h5>Phone Call</h5>						
+							<h5>발신</h5>						
 						</div>
 						<div class="cont-result">
 							<div id="chartdiv02" class="chart-area chart-type-3"></div>	
-							<h5>SMS</h5>				
+							<h5>수신</h5>				
 						</div>
 					</div>
 					<!--// Chart 영역 -->
@@ -121,8 +121,8 @@
 
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
-	var dataList = {Call: []}
-	var dataList2 = {SMS: []}
+	var dataList = {발신: []}
+	var dataList2 = {수신: []}
 
 	var cntData1 = 0;
 	var cntData2 = 0;
@@ -134,13 +134,13 @@
 	        async:false,
 	        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
 	        success:function(data){
-	        	 dataList = {Call: []}
+	        	 dataList = {발신: []}
 	        	 $(data["list"]).each(function(i, list) {
 	        		 cntData1 ++;
 	        		 tmpArr = [list["number"], list["m1"], list["m2"], list["m3"], list["m4"]
 	        		 , list["m5"], list["m6"], list["m7"], list["m8"], list["m9"]
 	        		 , list["m10"], list["m11"], list["m12"]];
-	        		 dataList.Call.push(tmpArr);
+	        		 dataList.발신.push(tmpArr);
 	             });
 	        }
 	    })
@@ -154,13 +154,13 @@
 	        async:false,
 	        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
 	        success:function(data){
-	        	 dataList2 = {SMS: []}
+	        	 dataList2 = {수신: []}
 	        	 $(data["list"]).each(function(i, list) {
 	        		 cntData2 ++;
 	        		 tmpArr = [list["number"], list["m1"], list["m2"], list["m3"], list["m4"]
 	        		 , list["m5"], list["m6"], list["m7"], list["m8"], list["m9"]
 	        		 , list["m10"], list["m11"], list["m12"]];
-	        		 dataList2.SMS.push(tmpArr);
+	        		 dataList2.수신.push(tmpArr);
 	             });
 	        }
 	    })
