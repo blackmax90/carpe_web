@@ -41,8 +41,8 @@
 					<li class="on"><a href="#" class="icon analysis">Analysis</a></li>					
 						<li class="level02"><a href="/carpe/filesystem.do">Filesystem</a></li> 
 						<li class="level02"><a href="/carpe/artifact.do">Artifact</a></li>
-						<li class="level02 on"><a href="/carpe/search.do">검색</a></li>
-					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>	
+						<li class="level02 on"><a href="/carpe/search.do">String Search</a></li>
+					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>
 					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>
@@ -64,20 +64,20 @@
 						<li>
 							<div class="checkbox checkbox-type-1">
 								<input id="checkbox_filename" name="checkbox_filename" type="checkbox" />
-								<label for="checkbox_filename"><span class="text">파일명</span></label>
+								<label for="checkbox_filename"><span class="text">Name</span></label>
 							</div>
 						</li>
 						<li>
 							<div class="checkbox checkbox-type-1">
 								<input id="checkbox_content" name="checkbox_content" type="checkbox" checked=""/>
-								<label for="checkbox_content"><span class="text">내용</span></label>
+								<label for="checkbox_content"><span class="text">Content</span></label>
 							</div>
 						</li>
 						<li>
 							<div class="input-text input-text-type-1 fl w300">
 								<input id="search_word" name="search_word" type="text" placeholder="검색어를 입력해주세요."/>
 							</div>
-							<button type="button" class="btn-case-01 btn-search" id="btnSearch"><span class="icon ico-search">검색</span></button>
+							<button type="button" class="btn-case-01 btn-search" id="btnSearch"><span class="icon ico-search"></span></button>
 						</li>
 					</ul>
 					<ul class="btn-sort-area">
@@ -259,17 +259,17 @@
 			});
 
 			var columnSet_list = [
-				{text: '파일명', datafield: 'name', width: '350px', cellsalign: 'left', align: 'center',
+				{text: 'File name', datafield: 'name', width: '350px', cellsalign: 'left', align: 'center',
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
 						var highlight_nm = dataRecord.highlight_nm;
 						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis;">' + highlight_nm + '</div>';
 					}
 				}
-			   ,{text: '크기', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'right', align: 'center'}
+			   ,{text: 'File Size', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'right', align: 'center'}
 			   ,{text: 'Author', width: '150px', datafield: 'author', cellsalign: 'center', align: 'center'}
-			   ,{text: '최종수정일시일시', width: '200px', datafield: 'last_written_time', cellsalign: 'center', align: 'center'}
-			   ,{text: '파일경로', width: 'auto', datafield: 'path', cellsalign: 'left', align: 'center'}
+			   ,{text: 'Modified', width: '200px', datafield: 'last_written_time', cellsalign: 'center', align: 'center'}
+			   ,{text: 'File Path', width: 'auto', datafield: 'path', cellsalign: 'left', align: 'center'}
 			];
 
 			var columnSet_summary = [

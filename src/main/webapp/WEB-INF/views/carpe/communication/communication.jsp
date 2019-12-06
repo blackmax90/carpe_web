@@ -46,15 +46,15 @@
 						<!-- 2Depth Menu //-->
 						<li class="level02 hide"><a href="#">Filesystem</a></li> 
 						<li class="level02 hide"><a href="#">Artifact</a></li>
-						<li class="level02 hide"><a href="#">검색</a></li>
+						<li class="level02 hide"><a href="#">String Search</a></li>
 						<!--// 2Depth Menu -->
 					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>						
 					<li class="on"><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>						
 						<!-- 2Depth Menu //-->
-						<li class="level02 on"><a href="/carpe/communication.do">Communication<br/>model</a></li> 
-						<li class="level02"><a href="/carpe/usage.do">Usage model</a></li>
-						<li class="level02"><a href="/carpe/gps.do">GPS model</a></li>
 						<li class="level02"><a href="/carpe/timeline_chart.do">Timeline</a></li>
+						<li class="level02 on"><a href="/carpe/communication.do">Communication</a></li> 
+						<li class="level02"><a href="/carpe/usage.do">Usage history</a></li>
+						<li class="level02"><a href="/carpe/gps.do">Location map</a></li>
 						<!--// 2Depth Menu -->
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>
@@ -98,11 +98,11 @@
 						</div>
 						<div class="cont-result">
 							<div id="chartdiv01" class="chart-area chart-type-3"></div>							
-							<h5>발신</h5>						
+							<h5>outgoing</h5>						
 						</div>
 						<div class="cont-result">
 							<div id="chartdiv02" class="chart-area chart-type-3"></div>	
-							<h5>수신</h5>				
+							<h5>incoming</h5>				
 						</div>
 					</div>
 					<!--// Chart 영역 -->
@@ -122,8 +122,8 @@
 
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
-	var dataList = {발신: []}
-	var dataList2 = {수신: []}
+	var dataList = {outgoing: []}
+	var dataList2 = {incoming: []}
 
 	var cntData1 = 0;
 	var cntData2 = 0;
@@ -135,13 +135,13 @@
 	        async:false,
 	        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
 	        success:function(data){
-	        	 dataList = {발신: []}
+	        	 dataList = {outgoing: []}
 	        	 $(data["list"]).each(function(i, list) {
 	        		 cntData1 ++;
 	        		 tmpArr = [list["number"], list["m1"], list["m2"], list["m3"], list["m4"]
 	        		 , list["m5"], list["m6"], list["m7"], list["m8"], list["m9"]
 	        		 , list["m10"], list["m11"], list["m12"]];
-	        		 dataList.발신.push(tmpArr);
+	        		 dataList.outgoing.push(tmpArr);
 	             });
 	        }
 	    })
@@ -155,13 +155,13 @@
 	        async:false,
 	        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
 	        success:function(data){
-	        	 dataList2 = {수신: []}
+	        	 dataList2 = {incoming: []}
 	        	 $(data["list"]).each(function(i, list) {
 	        		 cntData2 ++;
 	        		 tmpArr = [list["number"], list["m1"], list["m2"], list["m3"], list["m4"]
 	        		 , list["m5"], list["m6"], list["m7"], list["m8"], list["m9"]
 	        		 , list["m10"], list["m11"], list["m12"]];
-	        		 dataList2.수신.push(tmpArr);
+	        		 dataList2.incoming.push(tmpArr);
 	             });
 	        }
 	    })

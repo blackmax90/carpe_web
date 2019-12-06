@@ -52,10 +52,10 @@
 					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>	
 					<li class="on"><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>						
 						<!-- 2Depth Menu //-->
+						<li class="level02 on"><a href="/carpe/timeline_chart.do">Timeline</a></li>
 						<li class="level02"><a href="/carpe/communication.do">Communication<br/>model</a></li> 
 						<li class="level02"><a href="/carpe/usage.do">Usage model</a></li>
 						<li class="level02"><a href="/carpe/gps.do">GPS model</a></li>
-						<li class="level02 on"><a href="/carpe/timeline_chart.do">Timeline</a></li>
 						<!--// 2Depth Menu -->
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>

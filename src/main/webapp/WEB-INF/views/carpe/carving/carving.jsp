@@ -46,8 +46,10 @@
 						<li class="level02 hide"><a href="#">Filesystem</a></li> 
 						<li class="level02 hide"><a href="#">Artifact</a></li>
 					<!--// 2Depth Menu -->
-					<li class="on"><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>	
-						<li class="level02 on"><a href="/carpe/carving.do">Data Carving</a></li>
+					<li class="on"><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>
+						<li class="level02"><a href="/carpe/carving.do">Deleted Files</a></li>
+						<li class="level02 on"><a href="/carpe/carving.do">File Carving</a></li>
+						<li class="level02"><a href="/carpe/carving.do">Record Carving</a></li>
 					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>

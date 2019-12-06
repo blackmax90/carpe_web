@@ -74,14 +74,20 @@ public class SqliteDataReader {
 			while (row.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("is_deleted", row.getString("is_deleted"));
-				map.put("package_name", row.getString("package_name"));
-				map.put("application_name", row.getString("application_name"));
-				map.put("version", row.getString("version"));
 				map.put("category", row.getString("category"));
+				map.put("package_name", row.getString("package_name"));
+				map.put("app_name", row.getString("app_name"));
+				map.put("version", row.getString("version"));
 				map.put("installed_time", row.getString("installed_time"));
+				map.put("apk_changed_time", row.getString("apk_changed_time"));
 				map.put("updated_time", row.getString("updated_time"));
+				map.put("deleted_time", row.getString("deleted_time"));
+				map.put("fs_ctime", row.getString("fs_ctime"));
+				map.put("fs_crtime", row.getString("fs_crtime"));
+				map.put("fs_atime", row.getString("fs_atime"));
+				map.put("fs_mtime", row.getString("fs_mtime"));
 				map.put("is_updated", row.getString("is_updated"));
-				map.put("cnt_permission", row.getString("cnt_permission"));
+				map.put("source", row.getString("source"));
 				
 				list.add(map);
 			}

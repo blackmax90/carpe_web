@@ -22,7 +22,7 @@
 
 	<bean id="dataSourcemaria" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="url" value="jdbc:log4jdbc:mariadb://218.145.27.66:23306/carpe_case"></property>
+		<property name="url" value="jdbc:log4jdbc:mariadb://211.192.109.193:23306/carpe"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="dfrc4738"></property>
 	</bean>

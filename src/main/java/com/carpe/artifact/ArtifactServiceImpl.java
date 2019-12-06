@@ -12,7 +12,8 @@ public class ArtifactServiceImpl implements ArtifactService {
 
 	@Inject
 	private ArtifactDAO dao;
-
+	
+	// Plaso Result
 	@Override
 	public List<Map> selectSystemLogOverviewList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectSystemLogOverviewList(paramMap);
@@ -22,7 +23,58 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectSystemLogOverviewListCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectSystemLogOverviewListCount(paramMap);
 	}
+	
+	// Operating System	
+	@Override
+	public List<Map> selectOSInstallationList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectOSInstallationList(paramMap);
+	}
 
+	@Override
+	public Map selectOSInstallationListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectOSInstallationListCount(paramMap);
+	}
+	
+	// Windows Storage Device
+	public List<Map> selectStorageDeviceList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectStorageDeviceList(paramMap);
+	}
+
+	@Override
+	public Map selectStorageDeviceListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectStorageDeviceListCount(paramMap);
+	}
+	
+	//	Installed Application
+	public List<Map> selectInstalledAppList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectInstalledAppList(paramMap);
+	}
+
+	@Override
+	public Map selectInstalledAppListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectInstalledAppListCount(paramMap);
+	}
+	
+	//	Web History
+	public List<Map> selectWebHistoryList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectWebHistoryList(paramMap);
+	}
+
+	@Override
+	public Map selectWebHistoryListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectWebHistoryListCount(paramMap);
+	}
+	
+	//	Web Download
+	public List<Map> selectWebDownloadList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectWebDownloadList(paramMap);
+	}
+
+	@Override
+	public Map selectWebDownloadListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectWebDownloadListCount(paramMap);
+	}
+	
 	@Override
 	public List<Map> selectTimelineList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectTimelineList(paramMap);

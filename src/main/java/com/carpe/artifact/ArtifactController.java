@@ -57,10 +57,17 @@ public class ArtifactController {
 
 	@RequestMapping(value = "/artifact_tree_node.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getArtifactTreeNode(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		List subWebList = new ArrayList();
+		addArtifactTreeNode(subWebList, "History", true, true, null);
+		addArtifactTreeNode(subWebList, "Download", true, true, null);
+		
 		List subList = new ArrayList();
 		addArtifactTreeNode(subList, "Overview", true, true, null);
-		addArtifactTreeNode(subList, "Log", true, true, null);
-
+		addArtifactTreeNode(subList, "Operating System", true, true, null);
+		addArtifactTreeNode(subList, "Storage Device", true, true, null);
+		addArtifactTreeNode(subList, "Installed Application", true, true, null);
+		addArtifactTreeNode(subList, "Web", false, false, subWebList);
+		
 		List subListMobile = new ArrayList();
 		addArtifactTreeNode(subListMobile, "Application List", true, true, null);
 		addArtifactTreeNode(subListMobile, "Call Log", true, true, null);
@@ -116,20 +123,181 @@ public class ArtifactController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/log.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView getLog(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+	@RequestMapping(value = "/operating_system.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getOSInstallation(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 
-		List<Map> logList = new ArrayList<Map>();
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
 
-		Map<String, Object> elementMap = new HashMap<String, Object>();
-		elementMap.put("MACB", "aaaaaaaaaa");
-		logList.add(elementMap);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		int totalCnt = 1;
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
 
-		mav.addObject("list", logList);
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> OSInstallationList = service.selectOSInstallationList(paramMap);
+		int totalCnt = ((Long) service.selectOSInstallationListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", OSInstallationList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/storage_device.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getStorageDevice(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> StorageDeviceList = service.selectStorageDeviceList(paramMap);
+		int totalCnt = ((Long) service.selectStorageDeviceListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", StorageDeviceList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/installed_app.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getInstalledApp(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> InstalledAppList = service.selectInstalledAppList(paramMap);
+		int totalCnt = ((Long) service.selectInstalledAppListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", InstalledAppList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/web_history.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getWebHistory(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> WebHistoryList = service.selectWebHistoryList(paramMap);
+		int totalCnt = ((Long) service.selectWebHistoryListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", WebHistoryList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/web_download.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getWebDownload(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> WebDownloadList = service.selectWebDownloadList(paramMap);
+		int totalCnt = ((Long) service.selectWebDownloadListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", WebDownloadList);
 		mav.addObject("totalcount", totalCnt);
 
 		return mav;
@@ -141,15 +309,6 @@ public class ArtifactController {
 
 		mav.setViewName("carpe/artifact/timeline/timeline");
 
-		return mav;
-	}
-
-	@RequestMapping(value = "/timeline_chart.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView timelineChart(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("carpe/timeline/timeline");
-		
 		return mav;
 	}
 
@@ -194,14 +353,22 @@ public class ArtifactController {
 		return mav;
 	}
 	
-
+	@RequestMapping(value = "/timeline_chart.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView timelineChart(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("carpe/timeline/timeline");
+		
+		return mav;
+	}
+	
 	@RequestMapping(value = "/sqlite_list.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getSqliteList(Locale locale, @RequestParam HashMap<String, String> map, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 
-		SqliteDataReader reader = new SqliteDataReader("D:\\프로젝트\\고려대학교 포렌식\\DB\\sqllite\\analysis_XXX.dd.db");
-		//SqliteDataReader reader = new SqliteDataReader("/data/carpe/sqllite/analysis_XXX.dd.db");
+		//SqliteDataReader reader = new SqliteDataReader("D:\\analysis_result.db");
+		SqliteDataReader reader = new SqliteDataReader("/home/carpe/sqllite/analysis.db");
 
 		try {
 			reader.open();
@@ -227,6 +394,4 @@ public class ArtifactController {
 
 		return mav;
 	}
-
-
 }

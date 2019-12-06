@@ -41,8 +41,8 @@
 					<li class="on"><a href="#" class="icon analysis">Analysis</a></li>					
 						<li class="level02"><a href="/carpe/filesystem.do">Filesystem</a></li> 
 						<li class="level02 on"><a href="/carpe/artifact.do">Artifact</a></li>
-						<li class="level02"><a href="/carpe/search.do">검색</a></li>
-					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>						
+						<li class="level02"><a href="/carpe/search.do">String Search</a></li>
+					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>	
 					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>
@@ -60,7 +60,7 @@
 			<section class="btn-area">
 				<ul>
 					<li>
-						<button type="button" class="btn-case-02" id="btnTimeLine"><span>Time Line</span></button>
+						
 					</li>
 				</ul>				
 			</section>
@@ -153,25 +153,98 @@
 			  , {text: 'evidence', dataField: 'evidence', width: '100px', cellsalign: 'left', align: 'center'}
 			];
 		    
-			artifactKind["Log"] = {};
-			artifactKind["Log"].url = "/carpe/log.do";
-			artifactKind["Log"].columnSet = [
-				{text: 'MACB', dataField: 'MACB', width: '100%', cellsalign: 'left', align: 'center'}
+			artifactKind["Operating System"] = {};
+			artifactKind["Operating System"].url = "/carpe/operating_system.do";
+			artifactKind["Operating System"].columnSet = [
+				{text: 'case_id', dataField: 'case_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'evd_id', dataField: 'evd_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'par_id', dataField: 'par_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'os_type', dataField: 'os_type', width: '100px', cellsalign: 'center', align: 'center'}
+			  , {text: 'product_name', dataField: 'product_name', width: '180px', cellsalign: 'center', align: 'center'}
+			  , {text: 'release_id', dataField: 'release_id', width: '90px', cellsalign: 'center', align: 'center'}
+			  , {text: 'os_version', dataField: 'os_version', width: '90px', cellsalign: 'center', align: 'center'}
+			  , {text: 'build_version', dataField: 'build_version', width: '200px', cellsalign: 'left', align: 'center'}
+			  , {text: 'product_id', dataField: 'product_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'owner', dataField: 'owner', width: '100px', cellsalign: 'center', align: 'center'}
+			  , {text: 'install_date (UTC+0)', dataField: 'install_date', width: '170px', cellsalign: 'center', align: 'center'}
 			];
 			
-	
+			artifactKind["Installed Application"] = {};
+			artifactKind["Installed Application"].url = "/carpe/installed_app.do";
+			artifactKind["Installed Application"].columnSet = [
+				{text: 'case_id', dataField: 'case_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'evd_id', dataField: 'evd_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'par_id', dataField: 'par_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'app_name', dataField: 'app_name', width: '100px', cellsalign: 'center', align: 'center'}
+			  , {text: 'app_version', dataField: 'app_version', width: '180px', cellsalign: 'center', align: 'center'}
+			  , {text: 'publisher', dataField: 'publisher', width: '90px', cellsalign: 'center', align: 'center'}
+			  , {text: 'installation_path', dataField: 'installation_path', width: '90px', cellsalign: 'center', align: 'center'}
+			  , {text: 'source_path', dataField: 'source_path', width: '200px', cellsalign: 'left', align: 'center'}
+			];
+			
+			artifactKind["Storage Device"] = {};
+			artifactKind["Storage Device"].url = "/carpe/storage_device.do";
+			artifactKind["Storage Device"].columnSet = [
+				{text: 'case_id', dataField: 'case_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'evd_id', dataField: 'evd_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'par_id', dataField: 'par_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'storage_type', dataField: 'storage_type', width: '120px', cellsalign: 'center', align: 'center'}
+			  , {text: 'device_type', dataField: 'device_type', width: '120px', cellsalign: 'center', align: 'center'}
+			  , {text: 'device_name', dataField: 'device_name', width: '250px', cellsalign: 'left', align: 'center'}
+			  , {text: 'serial_number', dataField: 'serial_number', width: '180px', cellsalign: 'left', align: 'center'}			  
+			  , {text: 'first_connect_time (UTC+0)', dataField: 'first_connect_time', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'first_disconnect_time (UTC+0)', dataField: 'first_disconnect_time', width: '100px', cellsalign: 'center', align: 'center'}
+			  , {text: 'first_connect_time_after_last_boot (UTC+0)', dataField: 'first_connect_time_after_last_boot', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'first_disconnect_time_after_last_boot (UTC+0)', dataField: 'first_disconnect_time_after_last_boot', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'last_connect_time (UTC+0)', dataField: 'last_connect_time', width: '170px', cellsalign: 'center', align: 'center'}
+			];
+			
+			artifactKind["History"] = {};
+			artifactKind["History"].url = "/carpe/web_history.do";
+			artifactKind["History"].columnSet = [
+				{text: 'case_id', dataField: 'case_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'evd_id', dataField: 'evd_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'par_id', dataField: 'par_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'browser_type', dataField: 'browser_type', width: '120px', cellsalign: 'center', align: 'center'}
+			  , {text: 'time_type', dataField: 'time_type', width: '120px', cellsalign: 'center', align: 'center'}
+			  , {text: 'time (UTC+0)', dataField: 'time', width: '250px', cellsalign: 'left', align: 'center'}
+			  , {text: 'visit_url', dataField: 'visit_url', width: '180px', cellsalign: 'left', align: 'center'}			  
+			  , {text: 'title', dataField: 'title', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'visit_count', dataField: 'visit_count', width: '100px', cellsalign: 'center', align: 'center'}
+			];
+			
+			artifactKind["Download"] = {};
+			artifactKind["Download"].url = "/carpe/web_download.do";
+			artifactKind["Download"].columnSet = [
+				{text: 'case_id', dataField: 'case_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'evd_id', dataField: 'evd_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'par_id', dataField: 'par_id', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'browser_type', dataField: 'browser_type', width: '120px', cellsalign: 'center', align: 'center'}
+			  , {text: 'time_type', dataField: 'time_type', width: '120px', cellsalign: 'center', align: 'center'}
+			  , {text: 'download_time (UTC+0)', dataField: 'down_time', width: '250px', cellsalign: 'left', align: 'center'}
+			  , {text: 'download_url', dataField: 'down_url', width: '180px', cellsalign: 'left', align: 'center'}			  
+			  , {text: 'saved_path', dataField: 'save_path', width: '170px', cellsalign: 'center', align: 'center'}
+			  , {text: 'file_size', dataField: 'file_size', width: '100px', cellsalign: 'center', align: 'center'}
+			];
+			
 			artifactKind["Application List"] = {};
 			artifactKind["Application List"].url = "/carpe/sqlite_list.do?div=application_list";
 			artifactKind["Application List"].columnSet = [
-				 {text: 'package_name', dataField: 'package_name', width: '20%', cellsalign: 'left', align: 'center'}
-				,{text: 'applicationi_name', dataField: 'applicationi_name', width: '20%', cellsalign: 'left', align: 'center'}
-				,{text: 'version', dataField: 'version', width: '10%', cellsalign: 'left', align: 'center'}
+				 {text: 'is_deleted', dataField: 'is_deleted', width: '5%', cellsalign: 'left', align: 'center'}
 				,{text: 'category', dataField: 'category', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'package_name', dataField: 'package_name', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'app_name', dataField: 'app_name', width: '20%', cellsalign: 'left', align: 'center'}
+				,{text: 'version', dataField: 'version', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'installed_time', dataField: 'installed_time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'apk_changed_time', dataField: 'apk_changed_time', width: '20%', cellsalign: 'left', align: 'center'}
 				,{text: 'updated_time', dataField: 'updated_time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'deleted_time', dataField: 'deleted_time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'fs_ctime', dataField: 'fs_ctime', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'fs_crtime', dataField: 'fs_crtime', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'fs_atime', dataField: 'fs_atime', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'fs_mtime', dataField: 'fs_mtime', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'is_updated', dataField: 'is_updated', width: '10%', cellsalign: 'left', align: 'center'}
-				,{text: 'cnt_permission', dataField: 'cnt_permission', width: '5%', cellsalign: 'left', align: 'center'}
-				,{text: 'is_deleted', dataField: 'is_deleted', width: '5%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '5%', cellsalign: 'left', align: 'center'}
 			];
 			
 			artifactKind["Call Log"] = {};

@@ -41,7 +41,7 @@
 					<li class="on"><a href="#" class="icon analysis">Analysis</a></li>					
 						<li class="level02 on"><a href="/carpe/filesystem.do">Filesystem</a></li> 
 						<li class="level02"><a href="/carpe/artifact.do">Artifact</a></li>
-						<li class="level02"><a href="/carpe/search.do">검색</a></li>
+						<li class="level02"><a href="/carpe/search.do">String Search</a></li>
 					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>	
 					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
@@ -235,24 +235,24 @@
 			};
 
 			var columnSet = [
-				{text: '파일명', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
-			  , {text: '크기', dataField: 'size', cellsformat : 'd', width: '120px', cellsalign: 'right', align: 'center'}
+				{text: 'Name', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
+			  , {text: 'Size', dataField: 'size', cellsformat : 'd', width: '120px', cellsalign: 'right', align: 'center'}
 			  , {text: 'MD5', dataField: 'md5', width: '120px', cellsalign: 'center', align: 'center'}
 			  , {text: 'Category', dataField: 'dir_type', width: '120px', cellsalign: 'center', align: 'center',
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
-						var tmp = '기타';
+						var tmp = 'etc';
 						if (value === 3) {
-							tmp = '폴더';
+							tmp = 'Directory';
 						} else if (value === 5) {
-							tmp = '파일';
+							tmp = 'File';
 						}
 
 						return '<div style="margin-top: 8px; text-align: center;">' + tmp + '</div>';
 					}
 			    }
-			  , {text: '수정일시', dataField: 'mtime', width: '150px', cellsalign: 'center', align: 'center'}
-			  , {text: '생성일시', dataField: 'ctime', width: '150px', cellsalign: 'center', align: 'center'}
-			  , {text: '접근일시', dataField: 'atime', width: '150px', cellsalign: 'center', align: 'center'}
+			  , {text: 'Modified Time', dataField: 'mtime', width: '150px', cellsalign: 'center', align: 'center'}
+			  , {text: 'Created Time', dataField: 'ctime', width: '150px', cellsalign: 'center', align: 'center'}
+			  , {text: 'Accessed Time', dataField: 'atime', width: '150px', cellsalign: 'center', align: 'center'}
 			];
 
 			var dataAdapter = new $.jqx.dataAdapter(source, {

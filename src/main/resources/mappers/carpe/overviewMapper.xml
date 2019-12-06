@@ -8,9 +8,9 @@
 		SELECT  a.case_id
 		       ,a.case_name
 			   ,a.description		 
-			   , (SELECT  CASE WHEN process_state =  '0' THEN '분석 필요'
-                               WHEN process_state =  '1' THEN '분석중'
-                               WHEN process_state =  '2' THEN '분석완료'
+			   , (SELECT  CASE WHEN process_state =  '0' THEN 'Ready'
+                               WHEN process_state =  '1' THEN 'Processing'
+                               WHEN process_state =  '2' THEN 'Complete'
                            END 
 			        FROM  evidence_info where case_id = a.case_id order by process_state desc limit 1) process_state			   
 			   ,(select count(1) from case_user where case_id = a.case_id) case_user_cnt

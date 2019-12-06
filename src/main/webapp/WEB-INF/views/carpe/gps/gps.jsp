@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=dd678d53931c05d004c6fbd2d20de9ca&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cef6cb47be07d53310c6414a32217460&libraries=services,clusterer,drawing"></script>
 </head>
 <body>
 
@@ -47,15 +47,15 @@
 						<!-- 2Depth Menu //-->
 						<li class="level02 hide"><a href="#">Filesystem</a></li> 
 						<li class="level02 hide"><a href="#">Artifact</a></li>
-						<li class="level02 hide"><a href="#">검색</a></li>
+						<li class="level02 hide"><a href="#">String Search</a></li>
 						<!--// 2Depth Menu -->
 					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>
 					<li class="on"><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>					
 						<!-- 2Depth Menu //-->
-						<li class="level02"><a href="/carpe/communication.do">Communication<br/>model</a></li> 
-						<li class="level02"><a href="/carpe/usage.do">Usage model</a></li>
-						<li class="level02 on"><a href="/carpe/gps.do">GPS model</a></li>
 						<li class="level02"><a href="/carpe/timeline_chart.do">Timeline</a></li>
+						<li class="level02"><a href="/carpe/communication.do">Communication</a></li> 
+						<li class="level02"><a href="/carpe/usage.do">Usage history</a></li>
+						<li class="level02 on"><a href="/carpe/gps.do">Location map</a></li>
 						<!--// 2Depth Menu -->
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>

@@ -45,7 +45,7 @@
 						<li class="level02"><a href="/carpe/filesystem.do">Filesystem</a></li> 
 						<li class="level02"><a href="/carpe/artifact.do">Artifact</a></li>
 						<li class="level02 on"><a href="/carpe/calls.do">Calls</a></li>
-						<li class="level02"><a href="/carpe/search.do">검색</a></li>
+						<li class="level02"><a href="/carpe/search.do">String Search</a></li>
 					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>	
 					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
