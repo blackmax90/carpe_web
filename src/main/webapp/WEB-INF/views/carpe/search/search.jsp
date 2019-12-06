@@ -130,6 +130,7 @@
 			var currentRowCount = 0;
 			var currentPageOffset = 1;
 
+
 			$("#checkbox_filename").jqxCheckBox({ width: 28, height: 28, checked: true });
 			$("#checkbox_content").jqxCheckBox({ width: 28, height: 28, checked: true });
 			//$("#search_word").jqxInput({ width: '250px', height: '25px'});
@@ -263,7 +264,7 @@
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
 						var highlight_nm = dataRecord.highlight_nm;
-						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis;">' + highlight_nm + '</div>';
+						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis;"><a href="/carpe/download_search.do?path=' + dataRecord.path + '" target="_blank">' + highlight_nm + '</a></div>';
 					}
 				}
 			   ,{text: 'File Size', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'right', align: 'center'}
@@ -271,13 +272,13 @@
 			   ,{text: 'Modified', width: '200px', datafield: 'last_written_time', cellsalign: 'center', align: 'center'}
 			   ,{text: 'File Path', width: 'auto', datafield: 'path', cellsalign: 'left', align: 'center'}
 			];
-
+	
 			var columnSet_summary = [
 				{text: '', dataField: 'name', width: '94%', cellsalign: 'left',align: 'center',
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
 						var strHtml = "<ul class='unfold-ist'><li class='title'><div class='tit'>";
-						strHtml += "<span style='font-size:1.3rem;'>&nbsp;" + dataRecord.highlight_nm + "</span></div></li>";
+						strHtml += "<span style='font-size:1.3rem;'>&nbsp;<a href=\"/carpe/download_search.do?path=" + dataRecord.path + "\" target=\"_blank\">" + dataRecord.highlight_nm + "</a></span></div></li>";
 
 						var last_written_time = "시간정보가 없습니다.";
 						if(dataRecord.last_written_time){

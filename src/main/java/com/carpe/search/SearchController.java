@@ -1,6 +1,11 @@
 package com.carpe.search;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,17 +14,20 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.carpe.common.CarpeConfig;
 import com.carpe.common.search.SearchService;
 
 import io.searchbox.core.SearchResult;
@@ -39,6 +47,41 @@ public class SearchController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/download_search.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public void downloadEvdnc(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, HttpServletResponse response) throws Exception {
+		String searchPath = map.get("path");
+
+		File physicalFile = new File(String.format("%s/%s", CarpeConfig.getEvdncBasePath(), searchPath));
+
+		BufferedInputStream in = null;
+		BufferedOutputStream out = null;
+
+		try {
+			response.setContentType("application/x-msdownload");
+			response.setHeader("Content-Disposition", "attachment; filename*=UTF-8''" + URLEncoder.encode(physicalFile.getName(), "UTF-8").replaceAll("\\+", "%20") + "; ");
+
+			in = new BufferedInputStream(new FileInputStream(physicalFile));
+			out = new BufferedOutputStream(response.getOutputStream());
+
+			FileCopyUtils.copy(in, out);
+			out.flush();
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (Exception ignore) {
+				}
+			}
+
+			if (out != null) {
+				try {
+					out.close();
+				} catch (Exception ignore) {
+				}
+			}
+		}
+	}
+	
 	@RequestMapping(value = "/search_list.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getSearchList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
