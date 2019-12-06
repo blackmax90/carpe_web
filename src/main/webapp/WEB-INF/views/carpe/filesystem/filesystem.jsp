@@ -42,6 +42,7 @@
 						<li class="level02 on"><a href="/carpe/filesystem.do">Filesystem</a></li> 
 						<li class="level02"><a href="/carpe/artifact.do">Artifact</a></li>
 						<li class="level02"><a href="/carpe/search.do">검색</a></li>
+					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>	
 					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
 					<li><a href="#" class="icon report">Report</a></li>
 				</ul>
@@ -84,22 +85,6 @@
 						<div id="paing" class="paging-area" style="display:none">
 							<!--// Table Paging 영역 - 위치고정 //-->
 							<div class="paginate">
-								<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>
-								<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>
-								<span class="num">
-									<a href="#">81</a>
-									<a href="#">82</a>
-									<a href="#"><strong class="on">83</strong></a>
-									<a href="#">84</a>
-									<a href="#">85</a>
-									<a href="#">86</a>
-									<a href="#">87</a>
-									<a href="#">88</a>
-									<a href="#">89</a>
-									<a href="#">90</a>
-								</span>
-								<button class="btn-paging icon ico-next"><span class="ir">다음</span></button>
-								<button class="btn-paging icon ico-last" disabled="disabled"><span class="ir">마지막</span></button>
 							</div>
 						</div>
 					</div>

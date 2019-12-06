@@ -48,6 +48,7 @@
 						<li class="level02 hide"><a href="#">Artifact</a></li>
 						<li class="level02 hide"><a href="#">검색</a></li>
 						<!--// 2Depth Menu -->
+					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>						
 					<li class="on"><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>						
 						<!-- 2Depth Menu //-->
 						<li class="level02 on"><a href="/carpe/communication.do">Communication<br/>model</a></li> 
