@@ -264,7 +264,12 @@
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
 						var highlight_nm = dataRecord.highlight_nm;
-						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis;"><a href="/carpe/download_search.do?path=' + dataRecord.path + '" target="_blank">' + highlight_nm + '</a></div>';
+						var name = dataRecord.name
+						var viewname = highlight_nm;
+						if (highlight_nm == undefined) {
+							viewname = name;
+						}
+						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis;"><a href="/carpe/download_search.do?path=' + dataRecord.path + '" target="_blank">' + viewname + '</a></div>';
 					}
 				}
 			   ,{text: 'File Size', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'right', align: 'center'}
@@ -278,7 +283,13 @@
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
 						var strHtml = "<ul class='unfold-ist'><li class='title'><div class='tit'>";
-						strHtml += "<span style='font-size:1.3rem;'>&nbsp;<a href=\"/carpe/download_search.do?path=" + dataRecord.path + "\" target=\"_blank\">" + dataRecord.highlight_nm + "</a></span></div></li>";
+						var highlight_nm = dataRecord.highlight_nm;
+						var name = dataRecord.name
+						var viewname = highlight_nm;
+						if (highlight_nm == undefined) {
+							viewname = name;
+						}
+						strHtml += "<span style='font-size:1.3rem;'>&nbsp;<a href=\"/carpe/download_search.do?path=" + dataRecord.path + "\" target=\"_blank\">" + viewname + "</a></span></div></li>";
 
 						var last_written_time = "시간정보가 없습니다.";
 						if(dataRecord.last_written_time){
