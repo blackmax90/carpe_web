@@ -139,7 +139,7 @@ public class SearchController {
 
 		List<Hit<Map<String, Object>, Void>> thehits = (List) searchResult.getHits(Map.class);
 		for (Hit<Map<String, Object>, Void> hit : thehits) {
-			String name = "", highlight_nm = "", path = "", author = "", last_written_time = "", content = "";
+			String name = "", highlight_nm = "", original_size = "", path = "", author = "", last_written_time = "", content = "";
 			if (hit.source.get("name") != null) {
 				name = hit.source.get("name").toString();
 			}
@@ -157,7 +157,12 @@ public class SearchController {
 			if (hit.source.get("full_path") != null) {
 				path = hit.source.get("full_path").toString();
 			}
+			
+			if (hit.source.get("original_size") != null) {
+				original_size = hit.source.get("original_size").toString();
+			}
 
+			
 			if (hit.source.get("author") != null) {
 				author = hit.source.get("author").toString();
 			}
@@ -176,6 +181,8 @@ public class SearchController {
 			if (map.get("searchWord") != null && !"".equals(map.get("searchWord"))) {
 				element.put("highlight_nm", highlight_nm);
 			}
+			element.put("path", path);
+			element.put("size", original_size);
 			element.put("path", path);
 			element.put("author", author);
 			element.put("last_written_time", last_written_time);

@@ -160,7 +160,6 @@
 			var dataAdapter = new $.jqx.dataAdapter(source, {
 				contentType : 'application/json; charset=utf-8',
 				formatData : function(data) {
-					console.log(data);
 					data["currentPage"] = currentPage;
 					data["pageSize"] = pagesize;
 
