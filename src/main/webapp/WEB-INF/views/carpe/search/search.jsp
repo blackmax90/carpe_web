@@ -58,7 +58,7 @@
 				<button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
 			</section>
 			<section class="search-area bg-unit">
-				<form action="" id="" name="" method="">
+				<form action="" id="" name="" method="" onSubmit="return false">
 					<legend class="blind">조회조건 선택</legend>
 					<ul class="search-item-area">
 						<li>
@@ -348,6 +348,11 @@
 				$("#jqxGrid_Systemlog").jqxGrid('updateBoundData');
 			});
 			
+			$("#search_word").keypress(function(e) { 
+			    if (e.keyCode == 13){
+			    	$("#jqxGrid_Systemlog").jqxGrid('updateBoundData');
+			    }    
+			});
 		});
 	})(jQuery);
 	</script>
