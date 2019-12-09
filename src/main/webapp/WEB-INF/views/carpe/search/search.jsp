@@ -271,14 +271,20 @@
 						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis;"><a href="/carpe/download_search.do?path=' + dataRecord.path + '" target="_blank">' + viewname + '</a></div>';
 					}
 				}
-			   ,{text: 'File Size', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'right', align: 'center'}
+			   ,{text: 'File Size', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'center', align: 'center',
+					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
+						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
+						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis; text-align:center">'+ fileSizeSI(dataRecord.size) + '</div>';
+						
+					}
+				}
 			   ,{text: 'Author', width: '150px', datafield: 'author', cellsalign: 'center', align: 'center'}
 			   ,{text: 'Modified', width: '200px', datafield: 'last_written_time', cellsalign: 'center', align: 'center'}
 			   ,{text: 'File Path', width: 'auto', datafield: 'path', cellsalign: 'left', align: 'center'}
 			];
 	
 			var columnSet_summary = [
-				{text: '', dataField: 'name', width: '94%', cellsalign: 'left',align: 'center',
+				{text: '', dataField: 'name', width: '98%', cellsalign: 'left',align: 'center',
 					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
 						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
 						var strHtml = "<ul class='unfold-ist'><li class='title'><div class='tit'>";
