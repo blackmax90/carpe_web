@@ -143,13 +143,15 @@ public class SearchController {
 			if (hit.source.get("name") != null) {
 				name = hit.source.get("name").toString();
 			}
-
-			if (hit.highlight.get("name") != null) {
-				highlight_nm = hit.highlight.get("name").toString();
-			}
-
-			if (highlight_nm == null || highlight_nm.length() < 1) {
-				highlight_nm = name;
+			
+			if (map.get("searchWord") != null && !"".equals(map.get("searchWord"))) {
+				if (hit.highlight.get("name") != null) {
+					highlight_nm = hit.highlight.get("name").toString();
+				}
+	
+				if (highlight_nm == null || highlight_nm.length() < 1) {
+					highlight_nm = name;
+				}
 			}
 
 			if (hit.source.get("full_path") != null) {
@@ -163,14 +165,17 @@ public class SearchController {
 			if (hit.source.get("last_written_time") != null) {
 				last_written_time = hit.source.get("last_written_time").toString();
 			}
-
-			if (hit.highlight.get("content") != null) {
-				content = hit.highlight.get("content").toString();
+			
+			if (map.get("searchWord") != null && !"".equals(map.get("searchWord"))) {
+				if (hit.highlight.get("content") != null) {
+					content = hit.highlight.get("content").toString();
+				}
 			}
-
 			Map<String, Object> element = new HashMap<String, Object>();
 			element.put("name", name);
-			element.put("highlight_nm", highlight_nm);
+			if (map.get("searchWord") != null && !"".equals(map.get("searchWord"))) {
+				element.put("highlight_nm", highlight_nm);
+			}
 			element.put("path", path);
 			element.put("author", author);
 			element.put("last_written_time", last_written_time);
