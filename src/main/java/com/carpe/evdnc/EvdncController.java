@@ -143,20 +143,20 @@ public class EvdncController {
 		file.transferTo(destFile);
 
 		String mqMsg = "{'req_id':'1', 'req_type':'analyze', 'case_id':'" + caseId + "', 'evd_id':'" + evdncId + "', 'options':'vss'}";
+		
+		//ConnectionFactory factory = new ConnectionFactory();
+		//factory.setUsername(CarpeConfig.getMqId());
+		//factory.setPassword(CarpeConfig.getMqPw());
+		//factory.setHost(CarpeConfig.getMqServer());
+		//factory.setVirtualHost(CarpeConfig.getMqVhost());
+		//Connection connection = factory.newConnection();
+		//Channel channel = connection.createChannel();
 
-		ConnectionFactory factory = new ConnectionFactory();
-		factory.setUsername(CarpeConfig.getMqId());
-		factory.setPassword(CarpeConfig.getMqPw());
-		factory.setHost(CarpeConfig.getMqServer());
-		factory.setVirtualHost(CarpeConfig.getMqVhost());
-		Connection connection = factory.newConnection();
-		Channel channel = connection.createChannel();
+		//channel.queueDeclare(CarpeConfig.getMqQueue(), true, false, false, null);
+		//channel.basicPublish("", CarpeConfig.getMqQueue(), null, mqMsg.getBytes("UTF-8"));
 
-		channel.queueDeclare(CarpeConfig.getMqQueue(), true, false, false, null);
-		channel.basicPublish("", CarpeConfig.getMqQueue(), null, mqMsg.getBytes("UTF-8"));
-
-		channel.close();
-		connection.close();
+		//channel.close();
+		//connection.close();
 
 		mav.addObject("msg", "Add Evidence Complete!");
 		mav.setStatus(HttpStatus.OK);

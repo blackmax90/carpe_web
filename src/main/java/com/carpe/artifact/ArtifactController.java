@@ -60,6 +60,8 @@ public class ArtifactController {
 		List subWebList = new ArrayList();
 		addArtifactTreeNode(subWebList, "History", true, true, null);
 		addArtifactTreeNode(subWebList, "Download", true, true, null);
+		addArtifactTreeNode(subWebList, "Cache", true, true, null);
+		addArtifactTreeNode(subWebList, "Cookie", true, true, null);
 		
 		List subList = new ArrayList();
 		addArtifactTreeNode(subList, "Overview", true, true, null);
@@ -70,15 +72,15 @@ public class ArtifactController {
 		
 		List subListMobile = new ArrayList();
 		addArtifactTreeNode(subListMobile, "Application List", true, true, null);
-		addArtifactTreeNode(subListMobile, "Call Log", true, true, null);
+		addArtifactTreeNode(subListMobile, "Call History", true, true, null);
+		addArtifactTreeNode(subListMobile, "File History", true, true, null);
+		addArtifactTreeNode(subListMobile, "Geo Data", true, true, null);
+		addArtifactTreeNode(subListMobile, "ID/Password Hash", true, true, null);
 		addArtifactTreeNode(subListMobile, "Web Browser", true, true, null);
-		addArtifactTreeNode(subListMobile, "Message", true, true, null);
-		addArtifactTreeNode(subListMobile, "Timeline", true, true, null);
-		addArtifactTreeNode(subListMobile, "Contacts", true, true, null);
 		
 		List list = new ArrayList();
 		addArtifactTreeNode(list, "System Log", false, false, subList);
-		addArtifactTreeNode(list, "Mobile", false, false, subListMobile);
+		//addArtifactTreeNode(list, "Mobile", false, false, subListMobile);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -302,6 +304,78 @@ public class ArtifactController {
 
 		return mav;
 	}
+	
+	@RequestMapping(value = "/web_cache.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getWebCache(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> WebCacheList = service.selectWebCacheList(paramMap);
+		int totalCnt = ((Long) service.selectWebCacheListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", WebCacheList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	@RequestMapping(value = "/web_cookie.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getWebCookie(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> WebCookieList = service.selectWebCookieList(paramMap);
+		int totalCnt = ((Long) service.selectWebCookieListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", WebCookieList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
 
 	@RequestMapping(value = "/timeline.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView timeline(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
@@ -367,24 +441,24 @@ public class ArtifactController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 
-		//SqliteDataReader reader = new SqliteDataReader("D:\\analysis_result.db");
-		SqliteDataReader reader = new SqliteDataReader("/home/carpe/sqllite/analysis.db");
+		//SqliteDataReader reader = new SqliteDataReader("D:\\analysis.db");
+		SqliteDataReader reader = new SqliteDataReader("/home/carpe/sqlite/analysis.db");
 
 		try {
 			reader.open();
 			List<Map> list = null;
 			if (map.get("div") != null && "application_list".equals(map.get("div"))) {
 				list = reader.readApplicationList();
-			} else if (map.get("div") != null && "call_log".equals(map.get("div"))) {
-				list = reader.readCallLog();
+			} else if (map.get("div") != null && "call_history".equals(map.get("div"))) {
+				list = reader.readCallHistory();
+			} else if (map.get("div") != null && "file_history".equals(map.get("div"))) {
+				list = reader.readFileHistory();
+			} else if (map.get("div") != null && "geodata".equals(map.get("div"))) {
+				list = reader.readGeoData();
+			} else if (map.get("div") != null && "id_password_hash".equals(map.get("div"))) {
+				list = reader.readIDPasswordHash();
 			} else if (map.get("div") != null && "web_browser".equals(map.get("div"))) {
 				list = reader.readWebBrowser();
-			} else if (map.get("div") != null && "message".equals(map.get("div"))) {
-				list = reader.readMessage();
-			} else if (map.get("div") != null && "timeline".equals(map.get("div"))) {
-				list = reader.readTimeline();
-			} else if (map.get("div") != null && "contacts".equals(map.get("div"))) {
-				list = reader.readContacts();
 			}
 			mav.addObject("list", list);
 			mav.addObject("totalcount", list.size());

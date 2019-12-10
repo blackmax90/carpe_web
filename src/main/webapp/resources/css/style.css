@@ -1097,7 +1097,7 @@ label {
 .header h1.logo {
   width: 20rem;
   height: 100%;
-  background: url("../images/logo_carpe.svg") no-repeat center center;
+  background: url("../images/new_logo_carpe.svg") no-repeat center center;
   background-size: 17rem auto;
 }
 
@@ -1781,7 +1781,7 @@ h5 {
   width: 100%;
   height: 8rem;
   line-height: 8rem;
-  background: url("../images/logo_carpe.svg") no-repeat center center;
+  background: url("../images/new_logo_carpe.svg") no-repeat center center;
   background-size: 20rem auto;
 }
 .box-login .login_cont{

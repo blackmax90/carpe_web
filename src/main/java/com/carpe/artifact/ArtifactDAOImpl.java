@@ -82,6 +82,28 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 		return sqlSession.selectOne(Namespace + ".selectWebDownloadListCount", paramMap);
 	}
 
+	//	Web Cache
+	@Override
+	public List<Map> selectWebCacheList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectWebCacheList", paramMap);
+	}
+	
+	@Override
+	public Map selectWebCacheListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectWebCacheListCount", paramMap);
+	}
+	
+	//	Web Cookie
+	@Override
+	public List<Map> selectWebCookieList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectWebCookieList", paramMap);
+	}
+	
+	@Override
+	public Map selectWebCookieListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectWebCookieListCount", paramMap);
+	}
+
 	@Override
 	public List<Map> selectTimelineList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectTimelineList", paramMap);

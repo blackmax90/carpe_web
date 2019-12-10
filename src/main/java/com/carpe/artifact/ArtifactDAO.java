@@ -27,6 +27,14 @@ public interface ArtifactDAO {
 	// Web Download
 	public List<Map> selectWebDownloadList(Map<String, Object> paramMap) throws Exception;
 	public Map selectWebDownloadListCount(Map<String, Object> paramMap) throws Exception;
+
+	// Web Cache
+	public List<Map> selectWebCacheList(Map<String, Object> paramMap) throws Exception;
+	public Map selectWebCacheListCount(Map<String, Object> paramMap) throws Exception;
+	
+	// Web Cookie
+	public List<Map> selectWebCookieList(Map<String, Object> paramMap) throws Exception;
+	public Map selectWebCookieListCount(Map<String, Object> paramMap) throws Exception;
 	
 	public List<Map> selectTimelineList(Map<String, Object> paramMap) throws Exception;
 }

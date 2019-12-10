@@ -91,6 +91,30 @@
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	
+	<select id="selectWebCacheList" parameterType="Map" resultType="Map">
+		SELECT case_id, evd_id, par_id, browser_type, time_type, time, cache_url, cache_name, cache_size, mime_type 
+		FROM WebCache
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+
+	<select id="selectWebCacheListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM WebCache
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<select id="selectWebCookieList" parameterType="Map" resultType="Map">
+		SELECT case_id, evd_id, par_id, browser_type, time_type, time, host_url, path, cookie_key, cookie_value 
+		FROM WebCookie
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+
+	<select id="selectWebCookieListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM WebCookie
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
 	<select id="selectTimelineList" parameterType="Map" resultType="Map">
 		select source, date_format(datetime, '%m/%d/%Y %h:%i:%s %p') as date, count(*) as cnt from log2timeline
 		where 1=1

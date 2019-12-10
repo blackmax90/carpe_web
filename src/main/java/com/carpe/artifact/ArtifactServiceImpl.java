@@ -75,6 +75,26 @@ public class ArtifactServiceImpl implements ArtifactService {
 		return dao.selectWebDownloadListCount(paramMap);
 	}
 	
+	//	Web Cache
+	public List<Map> selectWebCacheList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectWebCacheList(paramMap);
+	}
+
+	@Override
+	public Map selectWebCacheListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectWebCacheListCount(paramMap);
+	}
+	
+	//	Web Cookie
+	public List<Map> selectWebCookieList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectWebCookieList(paramMap);
+	}
+
+	@Override
+	public Map selectWebCookieListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectWebCookieListCount(paramMap);
+	}
+	
 	@Override
 	public List<Map> selectTimelineList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectTimelineList(paramMap);
