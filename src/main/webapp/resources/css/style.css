@@ -367,7 +367,7 @@ html, body {
   position: relative;
   z-index: 1;
   width: 100%;
-  min-width: 128rem; 
+/*  min-width: 128rem; */
   min-height: 100%; 
 }
 
@@ -408,7 +408,7 @@ html, body {
   width: calc(100% - 22rem);
   min-width: calc(100% - 49rem);
   height: calc(100vh - 6rem);
-  min-height: 60rem;
+/*  min-height: 60rem; */
   padding: 2rem;
   z-index: 9;
 }
@@ -441,7 +441,7 @@ html, body {
   float: left;
   width: 20rem;
   height: calc(100vh - 10rem);
-  min-height: 61.5rem;
+/*  min-height: 61.5rem; */
   margin: 2rem 0 0 2rem;
   z-index: 9;
 }
