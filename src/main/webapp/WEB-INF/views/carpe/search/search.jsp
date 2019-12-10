@@ -314,7 +314,7 @@
 						if (highlight_nm == undefined) {
 							viewname = name;
 						}
-						strHtml += "<span style='font-size:1.3rem;'>&nbsp;<a href=\"/carpe/download_search.do?path=" + dataRecord.path + "\" target=\"_blank\">" + viewname + "</a></span></div></li>";
+						strHtml += "<span style='font-size:1.3rem;'>&nbsp;<a href=\"/carpe/download_search.do?path=" + dataRecord.download_path + "\" target=\"_blank\">" + viewname + "</a></span></div></li>";
 
 						var last_written_time = "시간정보가 없습니다.";
 						if(dataRecord.last_written_time){
