@@ -139,7 +139,8 @@ public class SearchController {
 
 		List<Hit<Map<String, Object>, Void>> thehits = (List) searchResult.getHits(Map.class);
 		for (Hit<Map<String, Object>, Void> hit : thehits) {
-			String name = "", highlight_nm = "", original_size = "", path = "", author = "", last_written_time = "", content = "";
+			String name = "", highlight_nm = "", original_size = "", path = "", author = ""
+					, last_written_time = "", content = "", download_path = "", path_with_ext  = "", lastsavedby = "", createdtime = "", lastsavedtime = "";
 			if (hit.source.get("name") != null) {
 				name = hit.source.get("name").toString();
 			}
@@ -167,8 +168,28 @@ public class SearchController {
 				author = hit.source.get("author").toString();
 			}
 
+			if (hit.source.get("download_path") != null) {
+				download_path = hit.source.get("download_path").toString();
+			}
+
 			if (hit.source.get("last_written_time") != null) {
 				last_written_time = hit.source.get("last_written_time").toString();
+			}
+			
+			if (hit.source.get("path_with_ext") != null) {
+				path_with_ext = hit.source.get("path_with_ext").toString();
+			}
+			
+			if (hit.source.get("createdtime") != null) {
+				createdtime = hit.source.get("createdtime").toString();
+			}
+			
+			if (hit.source.get("lastsavedby") != null) {
+				lastsavedby = hit.source.get("lastsavedby").toString();
+			}
+			
+			if (hit.source.get("lastsavedtime") != null) {
+				lastsavedtime = hit.source.get("lastsavedtime").toString();
 			}
 			
 			if (map.get("searchWord") != null && !"".equals(map.get("searchWord"))) {
@@ -186,6 +207,11 @@ public class SearchController {
 			element.put("path", path);
 			element.put("author", author);
 			element.put("last_written_time", last_written_time);
+			element.put("download_path", download_path);
+			element.put("path_with_ext", path_with_ext);
+			element.put("lastsavedby", lastsavedby);
+			element.put("createdtime", createdtime);
+			element.put("lastsavedtime", lastsavedtime);
 			element.put("content", content);
 
 			list.add(element);

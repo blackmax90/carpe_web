@@ -150,7 +150,12 @@
 					{ name: 'author', type: 'string' },
 					{ name: 'last_written_time', type: 'string' },
 					{ name: 'size', type: 'number' },
+					{ name: 'path_with_ext', type: 'string' },
+					{ name: 'lastsavedby', type: 'string' },
+					{ name: 'createdtime', type: 'string' },
+					{ name: 'lastsavedtime', type: 'string' },
 					{ name: 'content', type: 'content' },
+					{ name: 'download_path', type: 'string' }
 				],
 	            type : "POST",
 	            contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -177,7 +182,8 @@
 				downloadComplete : function(data, status, xhr) {
 					var totalcount = data['totalcount'] || 0;
 					currentRowCount = data['list'] ? data['list'].length : 0;
-
+					
+					console.log(data);
 					$('#paing').empty();
 
 					if (totalcount < 1) {
@@ -268,7 +274,7 @@
 						if (highlight_nm == undefined) {
 							viewname = name;
 						}
-						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis;"><a href="/carpe/download_search.do?path=' + dataRecord.path + '" target="_blank">' + viewname + '</a></div>';
+						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis;"><a href="/carpe/download_search.do?path=' + dataRecord.download_path + '" target="_blank">' + viewname + '</a></div>';
 					}
 				}
 			   ,{text: 'File Size', dataField: 'size', cellsformat : 'd', width: '150px', cellsalign: 'center', align: 'center',
@@ -278,9 +284,23 @@
 						
 					}
 				}
-			   ,{text: 'Author', width: '150px', datafield: 'author', cellsalign: 'center', align: 'center'}
-			   ,{text: 'Modified', width: '200px', datafield: 'last_written_time', cellsalign: 'center', align: 'center'}
-			   ,{text: 'File Path', width: 'auto', datafield: 'path', cellsalign: 'left', align: 'center'}
+			   ,{text: 'Author', width: '100px', datafield: 'author', cellsalign: 'center', align: 'center'}
+			   ,{text: 'Last saved by', width: '100px', datafield: 'lastsavedby', cellsalign: 'center', align: 'center'}
+			   ,{text: 'Created time', dataField: 'createdtime', width: '150px', cellsalign: 'center', align: 'center',
+					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
+						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
+						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis; text-align:center">'+ dataRecord.createdtime.substring(0,19) + '</div>';
+						
+					}
+				}
+			   ,{text: 'Last saved time', dataField: 'lastsavedtime', width: '150px', cellsalign: 'center', align: 'center',
+					cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
+						var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
+						return '<div style="padding: 7px; overflow: hidden; text-overflow: ellipsis; text-align:center">'+ dataRecord.lastsavedtime.substring(0,19) + '</div>';
+						
+					}
+				}
+			   ,{text: 'File Path', width: 'auto', datafield: 'path_with_ext', cellsalign: 'left', align: 'center'}
 			];
 	
 			var columnSet_summary = [
