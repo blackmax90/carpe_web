@@ -130,7 +130,7 @@
 				</div>
 	            <div class="btn-area">
 	                <ul>
-			            <li><button type="button" class="btn-case-01" id="cancel" value="Cancel" >Cancel</button></li>
+			            <li><button type="button" class="btn-case-01 bk" id="cancel" value="Cancel" >Cancel</button></li>
 	                	<li><button type="button" class="btn-case-01" id="ok" value="OK">OK</button></li>
 			        </ul>
 	            </div>

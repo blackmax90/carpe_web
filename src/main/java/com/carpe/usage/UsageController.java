@@ -99,8 +99,7 @@ public class UsageController {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
-		paramMap.put("year", map.get("year"));
-		paramMap.put("month", map.get("month"));
+		paramMap.put("regdate", map.get("year") + map.get("month"));
 		
 		List<Map> usageList = service.selectUsageMonthList(paramMap);
 		
