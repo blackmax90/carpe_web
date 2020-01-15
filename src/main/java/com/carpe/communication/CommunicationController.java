@@ -43,7 +43,8 @@ public class CommunicationController {
 		ModelAndView mav = new ModelAndView();
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		int year = Calendar.getInstance().get(Calendar.YEAR);
+		//int year = Calendar.getInstance().get(Calendar.YEAR);
+		int year = 2019;
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
 		mav.setViewName("carpe/communication/communication");
 		if (map.get("year") != null && !"".equals(map.get("year"))) {

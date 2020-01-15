@@ -378,7 +378,7 @@
 			// value axis
 			var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 			valueAxis.min = 0;
-			valueAxis.max = 50;
+			valueAxis.max = 40;
 			valueAxis.strictMinMax = true;
 			valueAxis.tooltip.defaultState.properties.opacity = 0;
 			valueAxis.tooltip.animationDuration = 0;
@@ -401,7 +401,7 @@
 			series.tooltipText = "{categoryX}:{valueY.value}";
 		
 			// this makes columns to be of a different color, depending on value
-			series.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 50, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
+			series.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 40, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
 		
 			// cursor
 			var cursor = new am4charts.RadarCursor();
@@ -596,7 +596,7 @@
 			// value axis
 			var valueAxis2 = chart2.yAxes.push(new am4charts.ValueAxis());
 			valueAxis2.min = 0;
-			valueAxis2.max = 50;
+			valueAxis2.max = 40;
 			valueAxis2.strictMinMax = true;
 			valueAxis2.tooltip.defaultState.properties.opacity = 0;
 			valueAxis2.tooltip.animationDuration = 0;
@@ -619,7 +619,7 @@
 			series2.tooltipText = "{categoryX}:{valueY.value}";
 		
 			// this makes columns to be of a different color, depending on value
-			series2.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 50, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
+			series2.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 40, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
 		
 			// cursor
 			var cursor = new am4charts.RadarCursor();

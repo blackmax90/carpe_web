@@ -23,7 +23,7 @@
                      AND  case_id = #{case_id}
                      AND  is_sent = 0
                 GROUP BY  number
-                ORDER BY  cnt desc LIMIT 50
+                ORDER BY  cnt desc LIMIT 40
 	</select>
 
 	<select id="selectCallStatCount" parameterType="Map" resultType="Map">
@@ -59,7 +59,7 @@
                      AND  case_id = #{case_id}
                      AND  is_sent = 0
                 GROUP BY  number, m
-                ORDER BY  cnt desc LIMIT 50
+                ORDER BY  cnt desc LIMIT 40
                  ) a
 	</select>
 	
@@ -86,7 +86,7 @@
                      AND  case_id = #{case_id}
                      AND  is_sent = 1
                 GROUP BY  number, m
-                ORDER BY  cnt desc LIMIT 50
+                ORDER BY  cnt desc LIMIT 40
                  ) a
 	</select>
 
