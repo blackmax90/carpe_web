@@ -283,7 +283,7 @@
 		             });
 		        }
 		    })
-		}
+		};
 		
 		var getSmsList = function(year) {
 			$.ajax({
@@ -303,7 +303,7 @@
 		             });
 		        }
 		    })
-		}
+		};
 		
 		getCallList(${year});
 		getSmsList(${year});
