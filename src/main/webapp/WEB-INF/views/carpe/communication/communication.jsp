@@ -307,7 +307,6 @@
 		
 		getCallList(${year});
 		getSmsList(${year});
-		
 		// Chart1 Start
 		am4core.useTheme(am4themes_animated);
 	
@@ -526,7 +525,6 @@
 		}
 		
 		// Chart1 End
-		
 		// Chart2 Start
 		if (cntData2 > 0) {
 			am4core.useTheme(am4themes_animated);
@@ -619,7 +617,7 @@
 			series2.tooltipText = "{categoryX}:{valueY.value}";
 		
 			// this makes columns to be of a different color, depending on value
-			series2.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 40, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
+			series2.heatRules.push({ target: series2.columns.template, property: "fill", minValue: 0, maxValue: 40, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
 		
 			// cursor
 			var cursor = new am4charts.RadarCursor();
