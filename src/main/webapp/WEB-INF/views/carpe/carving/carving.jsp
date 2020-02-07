@@ -234,7 +234,6 @@
 				width: '100%',	
 				height: 'calc(100% - 7rem)',
 				source: dataAdapter,
-				selectionmode: 'checkbox',
 				pagerheight: 0,
 				altrows: true,
 				scrollbarsize: 12,

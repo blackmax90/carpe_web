@@ -347,7 +347,7 @@
 				width: '100%',
 				height: 'calc(100% - 3rem)',
 				source: dataAdapter,
-				selectionmode: 'checkbox',
+				//selectionmode: 'checkbox',
 				pagerheight: 0,
 				//enableellipsis: true,
 				enabletooltips: true,

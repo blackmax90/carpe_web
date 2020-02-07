@@ -20,6 +20,7 @@
 	<script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>	
+
 </head>
 <body>
 
@@ -76,8 +77,16 @@
 				<!--// Side 메뉴가 우측에 있는 형태의 jqx-widget //-->
 				<div class="content-box">
 					<div class="content-area">
-						<div id="chartdiv" class="chart-area chart-type-1">
+						<div class="tit-area">
+							<h3>2019년 11월 26일</h3>
+							<button type="button" class="fl btn-case-01" id=""><span>일자변경</span></button>
+        					<div id="dateInput" class="input-calendar-jqx hide"></div>
+						</div>
+						<div id="chartdiv" class="chart-area chart-type-4">
 							<!-- Chart 영역 //-->
+						</div>
+						<div id="jqxGrid_Systemlog" class="data-tbl-area">
+							<!-- table 영역 //-->
 						</div>
 					</div>
 					<!--// Chart 영역 -->
@@ -90,6 +99,7 @@
 
 	</div>
 	<!-- // wrap -->
+
 
 
 	<!-- pop-up //-->
@@ -218,16 +228,23 @@
 			</table>
 		</div><!-- // pop-content end -->
 	</div><!-- // pop-up end -->
-
+	
 	<!-- 공통 javascript 영역 -->
 	<script src="https://www.amcharts.com/lib/4/core.js"></script>
 	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
 	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	
+    <script type="text/javascript" src="/carpe/resources/jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="/carpe/resources/jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="/carpe/resources/jqwidgets/jqxtooltip.js"></script>
 	<!-- // 공통 javascript 영역 -->
 
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
-	
+	    $(document).ready(function () {               
+	        // Create a jqxDateTimeInput
+	        $("#dateInput").jqxDateTimeInput({ width: '30rem', height: '3rem' });
+	    });
 		var getUsageDayList = function(year, month, day) {
 			$.ajax({
 				url: "/carpe/usage_day_list.do",

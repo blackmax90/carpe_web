@@ -287,7 +287,6 @@
 				width: 'calc(100% - 4rem)',
 				height: 'calc(100% - 7rem)',
 				source: dataAdapter,
-				selectionmode: 'checkbox', // 'none',
 				columnsresize: true,
 				pagerheight: 0,
 				altrows: true,
