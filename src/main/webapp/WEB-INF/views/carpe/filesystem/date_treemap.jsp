@@ -43,6 +43,7 @@
 (function($) {
 	$(document).ready(function() {
 		am4core.useTheme(am4themes_animated);
+		am4core.options.commercialLicense = true;
 		var chart = am4core.create("chartdiv", am4charts.TreeMap);
 		chart.layoutAlgorithm = chart.squarify;
 		chart.dataFields.value = "value";
@@ -77,26 +78,6 @@
 				alert(errorThrown);
 			}
 		});
-
-/*		chart.data =  [{"name":"", "value":1},
-		{"name":"1970-01-01", "value":1},
-		{"name":"2011-04-19", "value":2},
-		{"name":"2011-06-01", "value":2},
-		{"name":"2012-09-26", "value":4},
-		{"name":"2014-05-15", "value":231},
-		{"name":"2016-11-24", "value":14},
-		{"name":"2017-01-06", "value":100},
-		{"name":"2017-05-04", "value":376},
-		{"name":"2017-07-25", "value":4},
-		{"name":"2017-10-30", "value":16},
-		{"name":"2018-04-11", "value":18},
-		{"name":"2018-04-12", "value":617},
-		{"name":"2018-04-26", "value":75},
-		{"name":"2018-07-13", "value":4},
-		{"name":"2019-02-13", "value":18}
-		];
-
-		*/
 	});
 })(jQuery);
 

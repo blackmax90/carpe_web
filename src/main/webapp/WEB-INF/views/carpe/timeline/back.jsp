@@ -27,6 +27,7 @@ am4core.ready(function() {
 
 // Themes begin
 am4core.useTheme(am4themes_animated);
+am4core.options.commercialLicense = true;
 // Themes end
 
 var chart = am4core.create("chartdiv", am4plugins_timeline.SerpentineChart);

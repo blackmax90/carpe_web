@@ -15,11 +15,17 @@
 	<link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
 	<link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
 	
+	
+	
+	
 	<script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
 	<script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/core.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/charts.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/themes/animated.js"></script>
 </head>
 <body>
 
@@ -104,18 +110,14 @@
 
 	</div>
 	<!-- // wrap -->
-
-
 	<!-- 현재 페이지에 필요한 js -->
-	<script src="https://www.amcharts.com/lib/4/core.js"></script>
-	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
 	<script>
 	<!-- Chart code -->
 	am4core.ready(function() {
 
 		// Themes begin
 		am4core.useTheme(am4themes_animated);
+		am4core.options.commercialLicense = true;
 		// Themes end
 
 		// Create chart instance

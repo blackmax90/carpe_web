@@ -116,7 +116,6 @@
 	</div>
 	<!-- // wrap -->
 	
-	
 	<!-- pop-up // 데이터 선택 시, 대화내용 팝업  // -->
 	<div id="" class="pop wrap-pop jqx-window jqx-popup" style="position: absolute; top: 20rem; left: calc(50% - 30rem); width: 80rem; height: auto; display:none;">
 		<div id="" class="pop-header jqx-window-header">
@@ -124,14 +123,14 @@
 			<div class="jqx-window-close-button-background">
 				<div class="jqx-window-close-button jqx-icon-close"></div>
 			</div>
-		</div>
+		</div>tbl-grid
 		<div id="" class="pop-content">
 			<!-- <article class="container"> -->
 				<h4 class="blind">조회된 컨텐츠</h4>
 				<!--// Content 영역 //-->
 				<div id="jqxSplitter" class="content-box">
 					<div class="content-area">
-						<div id="jqxGrid_Systemlog" role="grid" class="cont-result of-auto" style="width: 100%; height: calc(100% - 3rem);">
+						<div id="jqxGrid_Systemlog2" role="grid" class="cont-result of-auto" style="width: 100%; height: calc(100% - 3rem);">
 							<!--// Table Sample - Size Check //-->
 							<table class="tbl-grid">
 								<thead>
@@ -246,9 +245,9 @@
 	</div><!-- // pop-up end -->
 	
 	
-	<script src="https://www.amcharts.com/lib/4/core.js"></script>
-	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/core.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/charts.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/themes/animated.js"></script>
 	<!-- // 공통 javascript 영역 -->
 
 	<!-- 현재 페이지에 필요한 js -->
@@ -309,6 +308,7 @@
 		getSmsList(${year});
 		// Chart1 Start
 		am4core.useTheme(am4themes_animated);
+		am4core.options.commercialLicense = true;
 	
 		var startYear = 1;
 		var endYear = 12;
@@ -443,6 +443,63 @@
 			chart.data = generateRadarData();
 		}
 		
+		$("#setYear").val(${year});
+		var source = {
+			datatype: "json",
+			datafields: [
+				{ name: 'call_number', type: 'string' },
+				{ name: 'cnt', type: 'number' }					
+			],
+            type : "POST",
+            contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+			url: "/carpe/communication_list.do?year=" + ${year}
+		};
+
+		var dataAdapter = new $.jqx.dataAdapter(source, {
+			contentType : 'application/json; charset=utf-8',
+			formatData : function(data) {
+	            return data;
+			},
+			beforeSend : function(xhr) {
+			},
+			downloadComplete : function(data, status, xhr) {
+			},
+			loadComplete : function(data) {
+			},
+			loadError : function(xhr, status, error) {
+			}
+		});
+
+		var columnSet = [
+			{text: 'Number', dataField: 'call_number', width: 'auto', cellsalign: 'right', align: 'center'},
+			{text: 'Count', dataField: 'cnt', width: '48px', cellsalign: 'center', align: 'center'},
+		];
+
+		$('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
+			var localizationobj = {};
+			localizationobj.emptydatastring = " ";
+
+			$("#jqxGrid_Systemlog").jqxGrid('localizestrings', localizationobj);
+		});
+
+		$("#jqxGrid_Systemlog").jqxGrid({
+			width: 'calc(100% - 4rem)',
+			height: 'calc(100% - 4rem)',		
+			source: dataAdapter,
+			pagerheight: 0,
+			altrows: true,
+			scrollbarsize: 12,
+			autoshowloadelement: true,
+			ready: function() {},
+			enablebrowserselection: true,
+			columnsresize: true,
+			filterable: true,
+			sortable: true,
+			sortMode: 'many',
+			columnsheight: 40,
+			columns: columnSet
+		});
+		
 		function generateRadarData() {
 		    var data = [];
 		    var i = 0;
@@ -461,11 +518,9 @@
 	
 		        createRange(continent, continentData, i);
 		        i++;
-	
 		    }
 		    return data;
 		}
-	
 	
 		function updateRadarData(year) {
 		    if (currentYear != year) {
@@ -523,11 +578,12 @@
 		    axisLabel.radius = 0;
 		    axisLabel.relativeRotation = 0;
 		}
-		
 		// Chart1 End
+		
 		// Chart2 Start
 		if (cntData2 > 0) {
 			am4core.useTheme(am4themes_animated);
+			am4core.options.commercialLicense = true;
 			var startYear2 = 1;
 			var endYear2 = 12;
 			var currentYear2 = 10;
@@ -660,6 +716,7 @@
 			chart2.data = generateRadarData2();
 		
 		}
+		
 		function generateRadarData2() {
 		    var data = [];
 		    var i = 0;
@@ -682,7 +739,6 @@
 		    }
 		    return data;
 		}
-	
 	
 		function updateRadarData2(year) {
 		    if (currentYear2 != year) {
@@ -741,66 +797,6 @@
 		    axisLabel.relativeRotation = 0;
 		}
 	
-	
-		//grid start
-		$(document).ready(function() {
-			$("#setYear").val(${year});
-			var source = {
-				datatype: "json",
-				datafields: [
-					{ name: 'call_number', type: 'string' },
-					{ name: 'cnt', type: 'number' }					
-				],
-	            type : "POST",
-	            contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-				url: "/carpe/communication_list.do?year=" + ${year}
-			};
-	
-			var dataAdapter = new $.jqx.dataAdapter(source, {
-				contentType : 'application/json; charset=utf-8',
-				formatData : function(data) {
-		            return data;
-				},
-				beforeSend : function(xhr) {
-				},
-				downloadComplete : function(data, status, xhr) {
-				},
-				loadComplete : function(data) {
-				},
-				loadError : function(xhr, status, error) {
-				}
-			});
-	
-			var columnSet = [
-				{text: 'Number', dataField: 'call_number', width: 'auto', cellsalign: 'right', align: 'center'},
-				{text: 'Count', dataField: 'cnt', width: '48px', cellsalign: 'center', align: 'center'},
-			];
-	
-			$('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
-				var localizationobj = {};
-				localizationobj.emptydatastring = " ";
-	
-				$("#jqxGrid_Systemlog").jqxGrid('localizestrings', localizationobj);
-			});
-	
-			$("#jqxGrid_Systemlog").jqxGrid({
-				width: 'calc(100% - 4rem)',
-				height: 'calc(100% - 4rem)',		
-				source: dataAdapter,
-				pagerheight: 0,
-				altrows: true,
-				scrollbarsize: 12,
-				autoshowloadelement: true,
-				ready: function() {},
-				enablebrowserselection: true,
-				columnsresize: true,
-				filterable: true,
-				sortable: true,
-				sortMode: 'many',
-				columnsheight: 40,
-				columns: columnSet
-			});
-		});
 	});
 	<!-- // 현재 페이지에 필요한 js -->
 	</script>

@@ -77,10 +77,15 @@
 				<div class="content-box">
 					<div class="content-area">
 						<div class="btn-area">
-							<button type="button" class="btn-case-01" id="setYear">연도 선택</button>
+							<ul>
+								<li><button type="button" class="btn-case-01" id="">사용 (업무시간)</button></li>
+								<li><button type="button" class="btn-case-01" id="">사용 (업무시간 이외)</button></li>
+							</ul>
 						</div>
-						<div id="chartdiv" class="chart-area chart-type-3">
-							<!-- Chart 영역 //-->
+						<div class="result-long-data ofy-auto">
+							<div id="chartdiv" class="chart-area chart-type-2">
+								<!-- Chart 영역 //-->
+							</div>
 						</div>
 					</div>
 					<!--// Chart 영역 -->
@@ -94,33 +99,6 @@
 	</div>
 	<!-- // wrap -->
 
-	<!-- pop-up //-->
-	<div id="yearList" class="pop wrap-pop jqx-window jqx-popup ofy-auto" style="position: absolute; top: 12rem; right: 13rem; width: 14rem; height: 36rem;display:none;">
-		<div id="" class="pop-header jqx-window-header">
-			<h1>연도 선택</h1>
-			<div class="jqx-window-close-button-background">
-				<div class="jqx-window-close-button jqx-icon-close" id="closeYear"></div>
-			</div>
-		</div>
-		<div id="" class="pop-content">
-			<ul>
-				
-				<li class="checkbox checkbox-type-3">
-					<input id="checkbox2017" name="checkYear" type="checkbox"  value="2017" />
-					<label for="checkbox2017"><span class="text">2017</span></label>
-				</li>
-				<li class="checkbox checkbox-type-3">
-					<input id="checkbox2018" name="checkYear" type="checkbox"  value="2018" />
-					<label for="checkbox2018"><span class="text">2018</span></label>
-				</li>
-				<li class="checkbox checkbox-type-3">
-					<input id="checkbox2019" name="checkYear" type="checkbox"  value="2019" />
-					<label for="checkbox2019"><span class="text">2019</span></label>
-				</li>
-			</ul>
-		</div><!-- // pop-content end -->
-	</div><!-- // pop-up end -->
-
 	<!-- 공통 javascript 영역 -->
 	<script src="https://www.amcharts.com/lib/4/core.js"></script>
 	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
@@ -129,132 +107,91 @@
 
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
-		var getUsageYearList = function(year) {
+		
+		var getUsageMonthList = function(year, month) {
 			$.ajax({
-				url: "/carpe/usage_year_list.do",
+				url: "/carpe/usage_month_list.do",
 		        dataType:'json',
-		        data: { year : year},
+		        data: { year : year
+		        	   ,month : month
+		        	  },
 		        async:false,
 		        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
 		        success:function(data){
 		        	dataList = new Array();
 		        	$(data["list"]).each(function(i, list) {
 		        		 var tmpArr = {}
-		        		 tmpArr.hour = list["month"] + '월';
-		        		 tmpArr.weekday = list["year"] + '년';
-		        		 tmpArr.value = list["cnt"];
+		        		 tmpArr.year = list["day"] + "일";
+		        		 tmpArr.income = list["office_hours"];
+		        		 tmpArr.expenses = list["office_hours_after"];
 		        		 dataList.push(tmpArr);
-
+	
 		            });
 		        }
 		    })
 		    return dataList;
-		};
+		}
 		
-		dataList = getUsageYearList();
-
+		dataList = getUsageMonthList(${year}, ${month});
 		// Themes begin
 		am4core.useTheme(am4themes_animated);
 		am4core.options.commercialLicense = true;
 		// Themes end
 
+		 // Create chart instance
 		var chart = am4core.create("chartdiv", am4charts.XYChart);
-		chart.maskBullets = false;
 
-		var xAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-		var yAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+		// Add data
+		chart.data = dataList;
 
-		xAxis.dataFields.category = "weekday";
-		yAxis.dataFields.category = "hour";
+		
+		// Create axes
+		var categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis());
+		categoryAxis.dataFields.category = "year";
+		categoryAxis.numberFormatter.numberFormat = "#";
+		categoryAxis.renderer.inversed = true;
+		categoryAxis.renderer.grid.template.location = 0;
+		categoryAxis.renderer.cellStartLocation = 0.1;
+		categoryAxis.renderer.cellEndLocation = 0.9;
 
-		xAxis.renderer.grid.template.disabled = true;
-		xAxis.renderer.minGridDistance = 40;
+		var  valueAxis = chart.xAxes.push(new am4charts.ValueAxis()); 
+		valueAxis.renderer.opposite = true;
 
-		yAxis.renderer.grid.template.disabled = true;
-		yAxis.renderer.inversed = true;
-		yAxis.renderer.minGridDistance = 30;
+		// Create series
+		function createSeries(field, name) {
+		  var series = chart.series.push(new am4charts.ColumnSeries());
+		  series.dataFields.valueX = field;
+		  series.dataFields.categoryY = "year";
+		  series.name = name;
+		  series.columns.template.tooltipText = "{name}: [bold]{valueX}[/]";
+		  series.columns.template.height = am4core.percent(100);
+		  series.sequencedInterpolation = true;
 
-		var series = chart.series.push(new am4charts.ColumnSeries());
-		series.dataFields.categoryX = "weekday";
-		series.dataFields.categoryY = "hour";
-		series.dataFields.value = "value";
-		series.sequencedInterpolation = true;
-		series.defaultState.transitionDuration = 3000;
+		  series.columns.template.events.on("hit", function(ev) {
+			  day = ev.target.dataItem.categoryY.replace("일", "");
+			  location.href = '/carpe/usage_day.do?year=' + ${year} + '&month=' + ${month} + '&day=' + day;
+  		  	  handleHover(ev.target);
+			})
+			
+		  var valueLabel = series.bullets.push(new am4charts.LabelBullet());
+		  valueLabel.label.text = "{valueX}";
+		  valueLabel.label.horizontalCenter = "left";
+		  valueLabel.label.dx = 10;
+		  valueLabel.label.hideOversized = false;
+		  valueLabel.label.truncate = false;
 
-		var bgColor = new am4core.InterfaceColorSet().getFor("background");
-
-		var columnTemplate = series.columns.template;
-		columnTemplate.strokeWidth = 1;
-		columnTemplate.strokeOpacity = 0.2;
-		columnTemplate.stroke = bgColor;
-		columnTemplate.tooltipText = "{weekday}, {hour}: {value.workingValue.formatNumber('#.')}";
-		columnTemplate.width = am4core.percent(100);
-		columnTemplate.height = am4core.percent(100);
-
-		series.heatRules.push({
-		  target: columnTemplate,
-		  property: "fill",
-		  min: am4core.color(bgColor),
-		  max: chart.colors.getIndex(0)
-		});
-
-		// heat legend
-		var heatLegend = chart.bottomAxesContainer.createChild(am4charts.HeatLegend);
-		heatLegend.width = am4core.percent(100);
-		heatLegend.series = series;
-		heatLegend.valueAxis.renderer.labels.template.fontSize = 9;
-		heatLegend.valueAxis.renderer.minGridDistance = 30;
-
-		// heat legend behavior
-		series.columns.template.events.on("over", function(event) {
-		  handleHover(event.target);
-		});
-
-		// click event
-		series.columns.template.events.on("hit", function(ev) {
-			year = ev.target.dataItem.categoryX.replace("년", "");
-			month = ev.target.dataItem.categoryY.replace("월", "");
-
-			location.href = '/carpe/usage_month.do?year=' + year + '&month=' + month;
-		  	handleHover(ev.target);
-		});
-
-		function handleHover(column) {
-		  if (!isNaN(column.dataItem.value)) {
-		    heatLegend.valueAxis.showTooltipAt(column.dataItem.value)
-		  }
-		  else {
-		    heatLegend.valueAxis.hideTooltip();
-		  }
+		  var categoryLabel = series.bullets.push(new am4charts.LabelBullet());
+		  categoryLabel.label.text = "{name}";
+		  categoryLabel.label.horizontalCenter = "right";
+		  categoryLabel.label.dx = -10;
+		  categoryLabel.label.fill = am4core.color("#fff");
+		  categoryLabel.label.hideOversized = false;
+		  categoryLabel.label.truncate = false;
 		}
 
-		series.columns.template.events.on("out", function(event) {
-		  heatLegend.valueAxis.hideTooltip();
-		});
+		createSeries("income", "업무시간");
+		createSeries("expenses", "업무시간 이외");
 
-		chart.data = dataList;
-		
-		$( document ).ready( function() {
-			$('#setYear').click(function(){
-				$('#yearList').show();
-			});
-			
-			$('#closeYear').click(function(){
-				$('#yearList').hide();
-			});
-			
-			$('input[name="checkYear"]').change(function() {
-				var yearList = "";
-				 $('input[name="checkYear"]').each(function() {
-				      if(this.checked){//checked 처리된 항목의 값
-				      	yearList += "," + this.value;
-				      }
-				 });
-				 yearList = yearList.substring(1);
-				 dataList = getUsageYearList(yearList);
-				 chart.data = dataList;
-			});
-		});
 	</script>
 	<!-- // 현재 페이지에 필요한 js -->
 

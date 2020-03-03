@@ -100,8 +100,6 @@
 	</div>
 	<!-- // wrap -->
 
-
-
 	<!-- pop-up //-->
 	<div id="" class="pop wrap-pop jqx-window jqx-popup ofy-auto" style="position: absolute; top: calc(50% - 30rem); left: calc(50% - 30rem); width: 60rem; height: 60rem; display:none;">
 		<div id="" class="pop-header jqx-window-header">
@@ -270,19 +268,18 @@
 		        }
 		    })
 		    return dataList;
-		}
+		};
 		
 		//dataList = getUsageDayList(${year}, ${month}, ${day});
 		dataList = getUsageDayList('2019', '1', '1');
-		console.log(dataList);
 		// Themes begin
 		am4core.useTheme(am4themes_animated);
+		am4core.options.commercialLicense = true;
 		// Themes end
 
 		var chart = am4core.create("chartdiv", am4charts.XYChart);
-
 		chart.data = dataList;
-
+		
 		var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 		categoryAxis.renderer.grid.template.location = 0;
 		categoryAxis.renderer.ticks.template.disabled = true;

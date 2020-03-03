@@ -260,13 +260,8 @@
 			</article>
 		</main>
 		<!-- // main -->
-
 	</div>
 	<!-- // wrap -->
-
-	
-	
-
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
 	function dayMove(day) {
