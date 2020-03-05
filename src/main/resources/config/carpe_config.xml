@@ -20,5 +20,8 @@
 	<entry key="mq.id">admin</entry>
 	<entry key="mq.pw">dfrc4738</entry>
 	<entry key="mq.vhost">Request</entry>
+
+	<entry key="ncp.clientid">79nj7ifdx2</entry>
+	<entry key="ncp.clientsecret">Yn0UlgJzbNYyIJIhR6jQuADcMZW0410RU8MRLln1</entry>
 	
 </properties>

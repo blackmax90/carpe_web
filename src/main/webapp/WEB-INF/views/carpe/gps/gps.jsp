@@ -19,7 +19,9 @@
 	<script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cef6cb47be07d53310c6414a32217460&libraries=services,clusterer,drawing"></script>
+  <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ncpClientId}"></script>
+	<script type="text/javascript" src="/carpe/resources/naverapi/marker-clustering/src/MarkerClustering.js"></script>
+  
 </head>
 <body>
 
@@ -129,165 +131,192 @@
 
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
-	
 	(function($) {
+		var map = null;
+		var polyLine = null;
+
 		$(document).ready(function() {
-		    var map = new kakao.maps.Map(document.getElementById('map'), { // 지도를 표시할 div
-		    	center: new kakao.maps.LatLng(37.5818014673445, 127.025512978435), // 지도의 중심좌표 
-		        level : 8 // 지도의 확대 레벨 
-		    });
-		    
-		 // 선을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 선을 표시합니다
-		    var linePath = [
-		      //  new kakao.maps.LatLng(37.5785484313965, 126.970542907715),
-		      //  new kakao.maps.LatLng(37.5156898498535, 127.016311645508)
-		        
-		    ];
+			init();
 
-		 console.log(linePath);
-		 
-		    var polyline = new kakao.maps.Polyline({
-		    	endArrow : true,
-		        path: linePath, // 선을 구성하는 좌표배열 입니다
-		        strokeWeight: 3, // 선의 두께 입니다
-		        strokeColor: '#db4040', // 선의 색깔입니다
-		        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-		        strokeStyle: 'solid' // 선의 스타일입니다
-		    });
-		    
-		 // 지도에 선을 표시합니다 
-		    polyline.setMap(map);  
+	    $('#hideInfo').click(function(){
+	    	$("#mapInfo").hide();	
+	    });
+		});
 
-		   
-		    $('#hideInfo').click(function(){
-		    	$("#mapInfo").hide();	
+		var init = function() {
+			//지도 api 객체 생성
+			map = new naver.maps.Map('map', {
+			  center: new naver.maps.LatLng(37.5642135, 127.0016985),
+			  zoom: 11
+			});
+
+			//PolyLine 객체
+			polyLine = new naver.maps.Polyline({
+				map: map,
+		    strokeWeight: 3, //두께
+		    strokeColor: '#db4040', //색
+		    strokeOpacity: 0.7, //불투명도
+		    strokeStyle: "solid",
+		    startIcon: naver.maps.PointingIcon.CIRCLE,
+		    endIcon: naver.maps.PointingIcon.BLOCK_ARROW
+			});
+
+			//마커 생성
+		  $.get("/carpe/gps_list.do", function(data) {
+		    // 데이터에서 좌표 값을 가지고 마커를 표시합니다
+		    // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+		    var markers = $(data.list).map(function(i, position) {
+		      var marker = new naver.maps.Marker({
+		        position : new naver.maps.LatLng(position.latitude, position.longitude),
+		        title : position.source,
+		        clickable: true 
+		      });
+
+		      naver.maps.Event.addListener(marker, 'click', function() {
+		    		viewMapInfo(position.location, position.regd, position.source);
+		      });
+
+				  return marker;
 		    });
+
+		    var htmlMarker1 = {
+		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-1.png);background-size:contain;"></div>',
+		      size: N.Size(40, 40),
+		      anchor: N.Point(20, 20)
+		    },
+		    htmlMarker2 = {
+		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-2.png);background-size:contain;"></div>',
+		      size: N.Size(40, 40),
+		      anchor: N.Point(20, 20)
+		    },
+		    htmlMarker3 = {
+		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-3.png);background-size:contain;"></div>',
+		      size: N.Size(40, 40),
+		      anchor: N.Point(20, 20)
+		    },
+		    htmlMarker4 = {
+		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-4.png);background-size:contain;"></div>',
+		      size: N.Size(40, 40),
+		      anchor: N.Point(20, 20)
+		    },
+		    htmlMarker5 = {
+		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-5.png);background-size:contain;"></div>',
+		      size: N.Size(40, 40),
+		      anchor: N.Point(20, 20)
+		    };
 		    
-		    // 마커 클러스터러를 생성합니다 
-		    var clusterer = new kakao.maps.MarkerClusterer({
-		        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-		        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-		        minLevel: 4 // 클러스터 할 최소 지도 레벨 
-		    });
-			
-		    $.get("/carpe/gps_list.do", function(data) {
-		        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-		        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-		        var markers = $(data.list).map(function(i, position) {
-		        	var marker = new kakao.maps.Marker({
-		                position : new kakao.maps.LatLng(position.latitude, position.longitude),
-		            	title : position.source,
-		            	clickable: true 
-		            });
-		        	
-		        	kakao.maps.event.addListener(marker, 'click', function() {
-		        		viewMapInfo(position.location, position.regd, position.source);
-		            });
-					return marker;
-		        });
-		        
-		        // 클러스터러에 마커들을 추가합니다
-		        clusterer.addMarkers(markers);
-		    });
-		    
-		    var getLinkList = function(regdate) {
-				$.ajax({
-					url: "/carpe/gps_link_list.do",
-			        dataType:'json',
-			        data: { regdate : regdate},
-			        async:false,
-			        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-			        success:function(data){
-			        	var lineLine = new daum.maps.Polyline();
-			        	linePath = [
-			  		        new kakao.maps.LatLng(37.5785484313965, 126.970542907715),
-			  		        new kakao.maps.LatLng(37.5156898498535, 127.016311645508)
-			  		        
-			  		    ];
-			        	linePath = [];
-			        	$(data["list"]).each(function(i, list) {
-			        		linePath[i] = new kakao.maps.LatLng(list.latitude, list.longitude);
-			             });
-			        	
-			        	polyline.setPath(linePath)
-			        }
-			    })
+		    // 클러스터러에 마커들을 추가
+	      var clusterer = new MarkerClustering({
+	        minClusterSize: 2,
+	        maxZoom: 15,
+	        map: map,
+	        markers: markers,
+	        disableClickZoom: false,
+	        gridSize: 120,
+	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+	        indexGenerator: [5, 10, 15, 20, 25],
+	        stylingFunction: function(clusterMarker, count) {
+	          $(clusterMarker.getElement()).find('div:first-child').text(count);
+	        }
+	      });
+		  });
+		};
+
+    // map marker click event
+		var viewMapInfo = function(location, regd, source) {
+	   	getLinkList(regd);
+	   	$("#infoTime").html(regd);
+	   	$("#infoLocation").html(location);
+	   	$("#infoSource").html(source);
+	    $("#mapInfo").show();
+		};
+
+		var getLinkList = function(regdate) {
+		  $.ajax({
+			  url: "/carpe/gps_link_list.do",
+		    dataType:'json',
+		    data: { regdate : regdate},
+		    async: false,
+		    contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+		    success: function(data) {
+		      var linePath = [];
+
+		      $(data.list).each(function(i, list) {
+		    	  linePath[i] = new naver.maps.LatLng(list.latitude, list.longitude);
+		      });
+
+		      console.log(linePath.length);
+		   	
+			    polyLine.setPath(linePath);
+		    }
+		  });
+		};
+
+		//Grid
+		var source = {
+      datatype: "json",
+      datafields: [
+        { name: 'serial_number', type: 'number' },
+        { name: 'regd', type: 'string' },
+        //{ name: 'gps_type', type: 'string' },
+        { name: 'source', type: 'string' },
+        { name: 'location', type: 'string' },
+        { name: 'latitude', type: 'string' },
+        { name: 'longitude', type: 'string' }
+      ],
+      type : "POST",
+      contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+      url: "/carpe/gps_list.do"
+    };
+		
+		var dataAdapter = new $.jqx.dataAdapter(source, {
+			contentType : 'application/json; charset=utf-8',
+			formatData : function(data) {
+		    return data;
+			},
+			beforeSend : function(xhr) {
+			},
+			downloadComplete : function(data, status, xhr) {
+			},
+			loadComplete : function(data) {
+			},
+			loadError : function(xhr, status, error) {
 			}
-		    
-		    // map marker click event
-			var viewMapInfo = function(location, regd, source) {
-		    	getLinkList(regd);
-		    	$("#infoTime").html(regd);
-		    	$("#infoLocation").html(location);
-		    	$("#infoSource").html(source);
-				$("#mapInfo").show();
-			}
-		    
-			var source = {
-				datatype: "json",
-				datafields: [
-					{ name: 'serial_number', type: 'number' },
-					{ name: 'regd', type: 'string' },
-					//{ name: 'gps_type', type: 'string' },
-					{ name: 'source', type: 'string' },
-					{ name: 'location', type: 'string' },
-					{ name: 'latitude', type: 'string' },
-					{ name: 'longitude', type: 'string' }
-				],
-	            type : "POST",
-	            contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-				url: "/carpe/gps_list.do"
-			};
+		});
+
+		var columnSet = [
+			{text: 'No.', dataField: 'serial_number', width: '6%', cellsalign: 'right', align: 'center'},
+			{text: 'Time', dataField: 'regd', width: '10%', cellsalign: 'right', align: 'center'},
+			//{text: 'Type', dataField: 'gps_type', width: '18%', cellsalign: 'center', align: 'center'},
+			{text: 'Source', dataField: 'source', width: '10%', cellsalign: 'center', align: 'center'},
+			{text: 'Location', dataField: 'location', width: 'auto', cellsalign: 'center', align: 'center'},
+			{text: 'Latitude', dataField: 'latitude', width: '10%', cellsalign: 'center', align: 'center'},
+			{text: 'Longitude', dataField: 'longitude', width: '10%', cellsalign: 'center', align: 'center'}
+		];
 	
-			var dataAdapter = new $.jqx.dataAdapter(source, {
-				contentType : 'application/json; charset=utf-8',
-				formatData : function(data) {
-		            return data;
-				},
-				beforeSend : function(xhr) {
-				},
-				downloadComplete : function(data, status, xhr) {
-				},
-				loadComplete : function(data) {
-				},
-				loadError : function(xhr, status, error) {
-				}
-			});
+		$('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
+			var localizationobj = {};
+			localizationobj.emptydatastring = " ";
 	
-			var columnSet = [
-				{text: 'No.', dataField: 'serial_number', width: '6%', cellsalign: 'right', align: 'center'},
-				{text: 'Time', dataField: 'regd', width: '10%', cellsalign: 'right', align: 'center'},
-				//{text: 'Type', dataField: 'gps_type', width: '18%', cellsalign: 'center', align: 'center'},
-				{text: 'Source', dataField: 'source', width: '10%', cellsalign: 'center', align: 'center'},
-				{text: 'Location', dataField: 'location', width: 'auto', cellsalign: 'center', align: 'center'},
-				{text: 'Latitude', dataField: 'latitude', width: '10%', cellsalign: 'center', align: 'center'},
-				{text: 'Longitude', dataField: 'longitude', width: '10%', cellsalign: 'center', align: 'center'}
-			];
+			$("#jqxGrid_Systemlog").jqxGrid('localizestrings', localizationobj);
+		});
 	
-			$('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
-				var localizationobj = {};
-				localizationobj.emptydatastring = " ";
-	
-				$("#jqxGrid_Systemlog").jqxGrid('localizestrings', localizationobj);
-			});
-	
-			$("#jqxGrid_Systemlog").jqxGrid({
-				width: '100%',		
-				height: '40%',
-				source: dataAdapter,
-				pagerheight: 0,
-				altrows: true,
-				scrollbarsize: 12,
-				autoshowloadelement: true,
-				ready: function() {},
-				enablebrowserselection: true,
-				columnsresize: true,
-				filterable: true,
-				sortable: true,
-				sortMode: 'many',
-				columnsheight: 40,
-				columns: columnSet
-			});
+		$("#jqxGrid_Systemlog").jqxGrid({
+			width: '100%',		
+			height: '40%',
+			source: dataAdapter,
+			pagerheight: 0,
+			altrows: true,
+			scrollbarsize: 12,
+			autoshowloadelement: true,
+			ready: function() {},
+			enablebrowserselection: true,
+			columnsresize: true,
+			filterable: true,
+			sortable: true,
+			sortMode: 'many',
+			columnsheight: 40,
+			columns: columnSet
 		});
 	})(jQuery);
 	

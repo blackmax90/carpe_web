@@ -19,6 +19,9 @@ public class CarpeConfig {
 	private static String MQ_PW;
 	private static String MQ_VHOST;
 	
+	private static String NCP_CLIENT_ID;
+	private static String NCP_CLIENT_SECRET;
+	
 	@Value("#{carpe_config['case.code']}")
 	public void setCaseCode(String code) {
 		CASE_CODE = code;
@@ -74,6 +77,16 @@ public class CarpeConfig {
 		MQ_PW = pw;
 	}
 
+	@Value("#{carpe_config['ncp.clientid']}")
+	public void setNcpClientId(String id)	{
+		NCP_CLIENT_ID = id;
+	}
+
+	@Value("#{carpe_config['ncp.clientsecret']}")
+	public void setNaverClientSecret(String sec)	{
+		NCP_CLIENT_SECRET = sec;
+	}
+
 	public static String getCaseCode() {
 		return CASE_CODE;
 	}
@@ -112,6 +125,14 @@ public class CarpeConfig {
 	
 	public static String getMqVhost()	{
 		return MQ_VHOST;
+	}
+	
+	public static String getNcpClientId() {
+		return NCP_CLIENT_ID;
+	}
+
+	public static String getNcpClientSecret() {
+		return NCP_CLIENT_SECRET;
 	}
 
 	// if key not exists null value
