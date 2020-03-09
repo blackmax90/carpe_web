@@ -128,7 +128,65 @@
 			</div>
 		</div><!-- // pop-content end -->
 	</div><!-- // pop-up end -->
-
+	
+	<!-- pop-up // 데이터 선택 시, 대화내용 팝업  // -->
+	<div id="" class="pop wrap-pop jqx-window jqx-popup" style="position: absolute; top: 30rem; left: calc(50% - 20rem); width: 40rem;">
+		<div id="" class="pop-header jqx-window-header">
+			<h1>Communication Data</h1>
+			<div class="jqx-window-close-button-background">
+				<div class="jqx-window-close-button jqx-icon-close"></div>
+			</div>
+		</div>
+		<div id="" class="pop-content msg">		
+			<h4 class="blind">조회된 컨텐츠</h4>
+			<!--// Content 영역 //-->
+			<div class="chatLog">
+				<h5>- 2020년 03월 09일 -</h5>
+				<div class="data_log other">
+					<div class="name">유르페우스</div>
+					<div class="log">
+						<span>주말에 뭐했니?</span>
+						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					</div>
+				</div>
+				<div class="data_log">
+					<div class="name">유재석</div>
+					<div class="log">
+						<span>집에 있었지- 왜?</span>
+						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					</div>
+				</div>
+				<div class="data_log other">
+					<div class="name">유산슬</div>
+					<div class="log">
+						<span>마스크 없어- 나가면 안돼~</span>
+						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					</div>
+				</div>
+				<div class="data_log other">
+					<div class="name">유르페우스</div>
+					<div class="log">
+						<span>주말에 뭐했니?</span>
+						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					</div>
+				</div>
+				<div class="data_log">
+					<div class="name">유재석</div>
+					<div class="log">
+						<span>집에 있었지- 왜?</span>
+						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					</div>
+				</div>
+				<div class="data_log other">
+					<div class="name">유산슬</div>
+					<div class="log">
+						<span>마스크 없어- 나가면 안돼~ 마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~</span>
+						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					</div>
+				</div>
+			</div><!--// content-box -->			
+		</div><!-- // pop-content end -->
+	</div><!-- // pop-up end -->
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
 	(function($) {

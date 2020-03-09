@@ -2519,6 +2519,13 @@ h5 {
   overflow: hidden;
 }
 
+.pop-content.msg {
+	height: 60rem;
+	background:#f5f5f5;
+	overflow-y:auto; 
+	overflow-x:hidden;
+}
+
 .pop.temp .pop-content > article,
 .pop.temp .pop-content .desc-area li,
 .pop.temp .pop-content .search-area {
@@ -2603,3 +2610,117 @@ h5 {
   line-height: 1.6rem;
 }
 
+.chatLog {
+	position:relative;
+	display:block;
+	float:left;
+	width:100%;
+	height:auto;
+}
+
+.chatLog h5 {
+	width: 100%;
+	margin-top: 2rem;
+	color: #333;
+	font-size: 1.4rem;
+	font-weight: 400;
+	text-align: center;
+}
+
+.chatLog h5:first-child {
+	margin-top: 0
+}
+
+.chatLog .data_log {
+	position: relative;
+	display: block;
+	float: left;
+	width: 100%;
+	height: auto;
+	margin-top: 1rem;
+}
+
+.chatLog .data_log .name {
+	margin-bottom: 0.2rem;
+	text-align: right;
+	font-weight: 700;
+}
+
+.chatLog .data_log .log {
+	position: relative;
+	display: block;
+	float: right;
+	width: 100%;
+	margin-top: 0.3rem;
+	text-align: right;
+}
+
+.chatLog .data_log .log span {
+	display: inline-block;
+	max-width: calc(100% - 4.5rem);
+	min-height: 3.2rem;
+	padding: 0.6rem 1rem;
+	color:#121212;
+	line-height: 2rem;
+	background: #EFE100;
+	box-shadow: 0 0.1rem 0.1rem 0 rgba(0, 0, 0, 0.2);
+	border-radius: 0.4rem;
+	word-break: break-all;
+	vertical-align: bottom;
+}
+
+.chatLog .data_log .log time {
+	display: inline-block;
+	margin: 0.6rem;
+	font-size: 1.2rem;
+}
+
+.chatLog .data_log .log span.atta {
+	display: contents;
+	padding: 0;
+	text-align: left;
+	background: none !important;
+}
+
+.chatLog .data_log .log span.atta span.thumbnailImage {
+	min-width: 9.6rem;
+	width: 36%;
+	padding-top: 36%;
+	max-width: 50%;
+	border-radius: 0.6rem;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+.chatLog .data_log .log.att span.atta, .chatLog .data_log .log.del_data span.atta{
+	float: right;
+	display: flow-root;
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 0.6rem;
+	box-shadow: none;
+}
+
+.chatLog .data_log .log.att span.atta span.thumbnailImage, .chatLog .data_log .log.del_data span.atta span.thumbnailImage {
+	float: right;
+}
+
+.chatLog .data_log.other .name {
+	text-align: left;
+}
+
+.chatLog .data_log.other .log {
+	float: left !important;
+	text-align: left;
+}
+
+.chatLog .data_log.other .log span {
+	background:#FFF;
+}
+
+.chatLog .data_log.other .log.att span.atta, 
+.chatLog .data_log.other .log.att span.atta span.thumbnailImage,
+.chatLog .data_log.other .log.del_data span.atta span.thumbnailImage {
+	float: left !important;
+}
