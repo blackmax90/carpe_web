@@ -22,7 +22,7 @@ import com.carpe.common.Consts;
 @Controller
 public class GpsController {
 	@Inject
-	private GpsServiceImpl service;
+	private GpsService service;
 
 	@RequestMapping(value = "/gps.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView gpsView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {

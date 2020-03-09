@@ -22,6 +22,8 @@ public class CarpeConfig {
 	private static String NCP_CLIENT_ID;
 	private static String NCP_CLIENT_SECRET;
 	
+	private static String SPCDE_INFO_SERVICE_KEY;
+	
 	@Value("#{carpe_config['case.code']}")
 	public void setCaseCode(String code) {
 		CASE_CODE = code;
@@ -87,6 +89,11 @@ public class CarpeConfig {
 		NCP_CLIENT_SECRET = sec;
 	}
 
+	@Value("#{carpe_config['data.go.kr.spcdeinfoservicekey']}")
+	public void setSpcdeInfoServiceKey(String spcdeInfoServiceKey) {
+		SPCDE_INFO_SERVICE_KEY = spcdeInfoServiceKey;
+	}
+
 	public static String getCaseCode() {
 		return CASE_CODE;
 	}
@@ -133,6 +140,10 @@ public class CarpeConfig {
 
 	public static String getNcpClientSecret() {
 		return NCP_CLIENT_SECRET;
+	}
+
+	public static String getSpcdeInfoServiceKey() {
+		return SPCDE_INFO_SERVICE_KEY;
 	}
 
 	// if key not exists null value
