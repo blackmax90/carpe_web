@@ -17,7 +17,7 @@
 
 	<entry key="mq.server">127.0.0.1</entry>
 	<entry key="mq.queue">carpe_request</entry>
-	<entry key="mq.id">admin</entry>
+	<entry key="mq.id">carpe_rest</entry>
 	<entry key="mq.pw">dfrc4738</entry>
 	<entry key="mq.vhost">Request</entry>
 

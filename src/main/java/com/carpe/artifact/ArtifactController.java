@@ -562,8 +562,8 @@ public class ArtifactController {
 			return mav;
 		}
 
-		List<Map> JumplistList = service.selectEventLogsList(paramMap);
-		int totalCnt = ((Long) service.selectEventLogsListCount(paramMap).get("cnt")).intValue();
+		List<Map> JumplistList = service.selectJumplistList(paramMap);
+		int totalCnt = ((Long) service.selectJumplistListCount(paramMap).get("cnt")).intValue();
 
 		mav.addObject("list", JumplistList);
 		mav.addObject("totalcount", totalCnt);
@@ -600,8 +600,8 @@ public class ArtifactController {
 			return mav;
 		}
 
-		List<Map> RegAmcacheFileEntriesList = service.selectEventLogsList(paramMap);
-		int totalCnt = ((Long) service.selectEventLogsListCount(paramMap).get("cnt")).intValue();
+		List<Map> RegAmcacheFileEntriesList = service.selectRegAmcacheFileEntriesList(paramMap);
+		int totalCnt = ((Long) service.selectRegAmcacheFileEntriesListCount(paramMap).get("cnt")).intValue();
 
 		mav.addObject("list", RegAmcacheFileEntriesList);
 		mav.addObject("totalcount", totalCnt);
@@ -637,8 +637,8 @@ public class ArtifactController {
 			return mav;
 		}
 
-		List<Map> RegInstalledProgramsList = service.selectEventLogsList(paramMap);
-		int totalCnt = ((Long) service.selectEventLogsListCount(paramMap).get("cnt")).intValue();
+		List<Map> RegInstalledProgramsList = service.selectRegInsatlledProgramsList(paramMap);
+		int totalCnt = ((Long) service.selectRegInsatlledProgramsListCount(paramMap).get("cnt")).intValue();
 
 		mav.addObject("list", RegInstalledProgramsList);
 		mav.addObject("totalcount", totalCnt);
@@ -674,8 +674,8 @@ public class ArtifactController {
 			return mav;
 		}
 
-		List<Map> RegOSInfoList = service.selectEventLogsList(paramMap);
-		int totalCnt = ((Long) service.selectEventLogsListCount(paramMap).get("cnt")).intValue();
+		List<Map> RegOSInfoList = service.selectRegOSInfoList(paramMap);
+		int totalCnt = ((Long) service.selectRegOSInfoListCount(paramMap).get("cnt")).intValue();
 
 		mav.addObject("list", RegOSInfoList);
 		mav.addObject("totalcount", totalCnt);
@@ -711,8 +711,8 @@ public class ArtifactController {
 			return mav;
 		}
 
-		List<Map> RegUSBDevicesList = service.selectEventLogsList(paramMap);
-		int totalCnt = ((Long) service.selectEventLogsListCount(paramMap).get("cnt")).intValue();
+		List<Map> RegUSBDevicesList = service.selectRegUSBDevicesList(paramMap);
+		int totalCnt = ((Long) service.selectRegUSBDevicesListCount(paramMap).get("cnt")).intValue();
 
 		mav.addObject("list", RegUSBDevicesList);
 		mav.addObject("totalcount", totalCnt);
@@ -748,8 +748,8 @@ public class ArtifactController {
 			return mav;
 		}
 
-		List<Map> RegUserAccountsList = service.selectEventLogsList(paramMap);
-		int totalCnt = ((Long) service.selectEventLogsListCount(paramMap).get("cnt")).intValue();
+		List<Map> RegUserAccountsList = service.selectRegUserAccountsList(paramMap);
+		int totalCnt = ((Long) service.selectRegUserAccountsListCount(paramMap).get("cnt")).intValue();
 
 		mav.addObject("list", RegUserAccountsList);
 		mav.addObject("totalcount", totalCnt);
@@ -772,11 +772,9 @@ public class ArtifactController {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
-		//paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
-		//paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
-		paramMap.put("case_id", "c1c16a681937b345f1990d10a9d0fdfcc8");
-		paramMap.put("evd_id", "e111111111111111111111111111111111");
-
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+		
 		try {
 			long pageSize = Long.parseLong((String) map.get("pageSize"));
 			paramMap.put("pageSize", pageSize);

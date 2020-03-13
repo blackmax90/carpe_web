@@ -396,7 +396,7 @@
 				,{text: 'product_name', dataField: 'product_name', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'size', dataField: 'size', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'version', dataField: 'version', width: '10%', cellsalign: 'left', align: 'center'}
-				,{text: 'product_name', dataField: 'product_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'product_version', dataField: 'product_version', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'long_path_hash', dataField: 'long_path_hash', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'binary_type', dataField: 'binary_type', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'pe_file_flag', dataField: 'pe_file_flag', width: '10%', cellsalign: 'left', align: 'center'}
