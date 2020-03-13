@@ -123,5 +123,101 @@
 		group by source, datetime
 		order by source, datetime
 	</select>
-
+	<!-- lv1 -->
+	<!-- lv1_os_win_event_logs -->
+	<select id="selectEventLogsList" parameterType="Map" resultType="Map">
+		SELECT case_id, evd_id, par_id, event_id, event_type, security_user_id, created_time, event_description_summary, error_level, keywords, provider_name, task_category, computer_name, event_data
+		FROM lv1_os_win_event_logs
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	<!-- lv1_os_win_jumplist -->
+	<select id="selectJumplistList" parameterType="Map" resultType="Map">
+		SELECT case_id, evd_id, par_id, app_id, app_name, target_file_path, arguments, volume_name, volume_serial_number,
+		target_file_created_time, target_file_last_modified_time, target_file_last_accessed_time, jump_list_type, drive_type, computer_name,
+		target_mac_address, target_file_size, entry_created_time, entry_last_accessed_time, entry_id,
+		most_recent_used, interaction_count, target_file_attributes, target_id_absolute_path, target_mft_entry_number, target_mft_sequence_number,
+		pin_status, file_birth_droid, volume_birth_droid, file_droid, volume_droid
+		FROM lv1_os_win_jumplist
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectJumplistListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_jumplist
+		<!--include refid="selectArtifactCondition" /-->
+	</select>	
+	<!-- lv1_os_win_reg_amcache_file_entries -->
+		<select id="selectRegAmcacheFileEntriesList" parameterType="Map" resultType="Map">
+		SELECT case_id, evd_id, par_id, file_name, key_last_updated_time, file_extension, program_name, program_id, key_id, sha1_hash, os_component_flag,
+		full_path, link_date, product_name, size, version, product_version, long_path_hash, binary_type, pe_file_flag, binary_file_version, 
+		binary_product_version, language_code, usn, legacy_flag, volume_guid, publisher, switch_back_context, description, last_modified_time, 
+		created_time, last_modified_2_time, pe_header_field_size_of_image, pe_header_hash,pe_header_checksum
+		FROM lv1_os_win_reg_amcache_file_entries
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegAmcacheFileEntriesCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_amcache_file_entries
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	<!-- lv1_os_win_reg_installed_programs -->
+		<select id="selectRegInsatlledProgramsList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_installed_programs
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectselectRegInsatlledProgramsListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_installed_programs
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	<!-- lv1_os_win_reg_os_info -->
+		<select id="selectRegOSInfoList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_os_info
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegOSInfoListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_os_info
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	<!-- lv1_os_win_reg_usb_devices -->
+		<select id="selectRegUSBDevicesList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_usb_devices
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegUSBDevicesListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_usb_devices
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	<!-- lv1_os_win_reg_user_accounts -->
+		<select id="selectRegUserAccountsList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_user_accounts
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegUserAccountsListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_user_accounts
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	<!-- lv1_app_web_chrome_visit_urls -->
+	<select id="selectChromeVisitUrlsList" parameterType="Map" resultType="Map">
+		SELECT case_id, evd_id, par_id, url, last_visited_time, title, visit_count, typed_count
+		FROM lv1_app_web_chrome_visit_urls
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromeVisitUrlsListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_app_web_chrome_visit_urls
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
 </mapper>

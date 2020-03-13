@@ -37,4 +37,40 @@ public interface ArtifactService {
 	public Map selectWebCookieListCount(Map<String, Object> paramMap) throws Exception;
 	
 	public List<Map> selectTimelineList(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1
+	// lv1_os_win_event_logs
+	public List<Map> selectEventLogsList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_jumplist
+	public List<Map> selectJumplistList(Map<String, Object> paramMap) throws Exception;
+	public Map selectJumplistListCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_amcache_file_entries	
+	public List<Map> selectRegAmcacheFileEntriesList(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegAmcacheFileEntriesListCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_installed_programs
+	public List<Map> selectRegInsatlledProgramsList(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegInsatlledProgramsListCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_os_info
+	public List<Map> selectRegOSInfoList(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegOSInfoListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_reg_usb_devices
+	public List<Map> selectRegUSBDevicesList(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegUSBDevicesListCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_user_accounts
+	public List<Map> selectRegUserAccountsList(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegUserAccountsListCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_chrome_visit_urls
+	public List<Map> selectChromeVisitUrlsList(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeVisitUrlsListCount(Map<String, Object> paramMap) throws Exception;
+	
+	
+	
 }
