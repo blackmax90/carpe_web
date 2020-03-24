@@ -129,64 +129,229 @@
 		</div><!-- // pop-content end -->
 	</div><!-- // pop-up end -->
 	
-	<!-- pop-up // 데이터 선택 시, 대화내용 팝업  // -->
-	<div id="" class="pop wrap-pop jqx-window jqx-popup" style="position: absolute; top: 30rem; left: calc(50% - 20rem); width: 40rem;">
+	
+	<!-- pop-up // 대화목록 팝업  // -->
+	<div id="" class="pop chatroom wrap-pop jqx-window jqx-popup" style="position: absolute; top: 50%; left: 50%; margin-top:-32rem; margin-left:-32rem; width: 40rem;">
 		<div id="" class="pop-header jqx-window-header">
 			<h1>Communication Data</h1>
 			<div class="jqx-window-close-button-background">
 				<div class="jqx-window-close-button jqx-icon-close"></div>
 			</div>
 		</div>
-		<div id="" class="pop-content msg">		
+		<div id="" class="pop-content">		
+			<h4 class="blind">대화 목록</h4>
+			<!--// Content 영역 //-->
+			<section class="search-date">
+				<div class="combo">
+					<span class="input-text-type-1 calendar"><input type="text" id="" placeholder="2020-01-01"/></span>
+					<span class="hyp">-</span>
+					<span class="input-text-type-1 calendar"><input type="text" id="" placeholder="2020-02-29"/></span>
+				</div>
+				<div class="btn-area">
+					<button type="button" class="btn-case-01 btn-search txt" id=""><span class="icon ico-search">검색</span></button>
+				</div>
+			</section>
+			<section class="chat-list mt20">
+				<ul class="list_v list_cont_wrap">				
+					<li class="empty-data">
+						<p>해당 기간 조회된 내용이 없습니다.</p>
+					</li>
+					<li>
+						<div class="cr-info">
+							<h6 title="카카오톡" class="cr-name text-ellipsis">카카오톡</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="이번에도 좋은 기능 왕창 안고 찾아온 8.7.7 버전 업데이트 안내">이번에도 좋은 기능 왕창 안고 찾아온 8.7.7 버전 업데이트 안내</p>
+					</li>
+					<li class="on">
+						<div class="cr-info">
+							<h6 title="유르페우스,유산슬" class="cr-name text-ellipsis">유르페우스,유산슬</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="마스크 없어- 나가면 안돼~ 마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~">
+							마스크 없어- 나가면 안돼~ 마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~
+						</p>
+					</li>
+					<li>
+						<div class="cr-info">
+							<h6 title="eh,노민혁,광훈,M,강욱,최재영,미미/29/여,박슬기,이진희,TAK,ㄱ김경숙 구원의주님(Dearro9),은지,류양환,𝓑𝓮𝓵𝓵𝓪,Human,지모,김보라,정배,상준님" class="cr-name text-ellipsis">eh,노민혁,광훈,M,강욱,최재영,미미/29/여,박슬기,이진희,TAK,ㄱ김경숙
+									구원의주님(Dearro9),은지,류양환,𝓑𝓮𝓵𝓵𝓪,Human,지모,김보라,정배,상준님</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="네, 저는 샀어요">네, 저는 샀어요</p>
+					</li>
+					<li>
+						<div class="cr-info">
+							<h6 title="(이름없음)" class="cr-name text-ellipsis">(이름없음)</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="번호 드렸습니다">번호 드렸습니다</p>
+					</li>
+					<li>
+						<div class="cr-info">
+							<h6 title="플러스친구" class="cr-name text-ellipsis">플러스친구</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="무료로 만들어 새로운 비즈니스 홈을 경험하세요!">무료로 만들어 새로운 비즈니스 홈을 경험하세요!</p>
+					</li>
+					<li>
+						<div class="cr-info">
+							<h6 title="카카오톡" class="cr-name text-ellipsis">카카오톡</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="이번에도 좋은 기능 왕창 안고 찾아온 8.7.7 버전 업데이트 안내">이번에도 좋은 기능 왕창 안고 찾아온 8.7.7 버전 업데이트 안내</p>
+					</li>
+					<li>
+						<div class="cr-info">
+							<h6 title="한별,병수,문형진,한현욱,혜린,김준석,영이,상준,JK,조순익,승희,백승진,고여은,임현,김남준,문각,박연주,박서희,숨,이정근,예진,Youdaehyun,이민욱,태횽,수,송지현,횬디,유민혁,EJ,송영윤,소명 So Myeong Choe,류재욱,동석,정규현,ㅅㅎ,Lucy, 아름,유아름,윤태림,최낙윤,상표,세웅,미현,ㅅㄹ,길은정,신민해,송,남규,민우,지선,Kevin,지우,강정훈,장미연,규,박헌경,DALE,이병완,😄,박찬혁,최신애,최민정,빽,박한민,dain⭐️,소영,채영,배재석,임소정,kim,이승민,지윤,이태헌,이다경,Jay,이아름,Minjoo,형진,김기태,황태현,L,이주희,정하민,Julie 짜요닝,김정호,전다훈,정지호,정승윤,joanne,🌟ㅎ으니,윤,이정욱,김은주,신건하,star,민수,권지연,우상현,션 킴,이진희,민정,이창용,배민구,정예인,Yoon,히지,김우찬(달타냥),재원♡,박찬곤,우병준,박지호,윤덕,전지혜Gia,오렌지라이프 이은총부지점장,김지언,김성현  SUNG HYUN KIM,다혜,^^,도윤,⚡,나르미"
+								class="cr-name text-ellipsis">한별,병수,문형진,한현욱,혜린,김준석,영이,상준,JK,조순익,승희,백승진,고여은,임현,김남준,문각,박연주,박서희,숨,이정근,예진,Youdaehyun,이민욱,태횽,수,송지현,횬디,유민혁,EJ,송영윤,소명
+								So Myeong Choe,류재욱,동석,정규현,ㅅㅎ,Lucy,
+								아름,유아름,윤태림,최낙윤,상표,세웅,미현,ㅅㄹ,길은정,신민해,송,남규,민우,지선,Kevin,지우,강정훈,장미연,규,박헌경,DALE,이병완,😄,박찬혁,최신애,최민정,빽,박한민,dain⭐️,소영,채영,배재석,임소정,kim,이승민,지윤,이태헌,이다경,Jay,이아름,Minjoo,형진,김기태,황태현,L,이주희,정하민,Julie
+								짜요닝,김정호,전다훈,정지호,정승윤,joanne,🌟ㅎ으니,윤,이정욱,김은주,신건하,star,민수,권지연,우상현,션
+								킴,이진희,민정,이창용,배민구,정예인,Yoon,히지,김우찬(달타냥),재원♡,박찬곤,우병준,박지호,윤덕,전지혜Gia,오렌지라이프
+								이은총부지점장,김지언,김성현 SUNG HYUN KIM,다혜,^^,도윤,⚡,나르미</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="저번에 여행일정 맞추느라 같이 만났어요.">저번에 여행일정 맞추느라 같이 만났어요.</p>
+					</li>
+					<li>
+						<div class="cr-info">
+							<h6 title="eh,노민혁,광훈,M,강욱,최재영,미미/29/여,박슬기,이진희,TAK,ㄱ김경숙 구원의주님(Dearro9),은지,류양환,𝓑𝓮𝓵𝓵𝓪,Human,지모,김보라,정배,상준님" class="cr-name text-ellipsis">eh,노민혁,광훈,M,강욱,최재영,미미/29/여,박슬기,이진희,TAK,ㄱ김경숙
+									구원의주님(Dearro9),은지,류양환,𝓑𝓮𝓵𝓵𝓪,Human,지모,김보라,정배,상준님</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="네, 저는 샀어요">네, 저는 샀어요</p>
+					</li>
+					<li>
+						<div class="cr-info">
+							<h6 title="(이름없음)" class="cr-name text-ellipsis">(이름없음)</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="번호 드렸습니다">번호 드렸습니다</p>
+					</li>
+					<li>
+						<div class="cr-info">
+							<h6 title="플러스친구" class="cr-name text-ellipsis">플러스친구</h6>
+							<time class="cr-date" datetime="2020-03-23T14:51:56+09:00">2020-03-23</time>
+						</div>
+						<p class="chat-data text-ellipsis" title="무료로 만들어 새로운 비즈니스 홈을 경험하세요!">무료로 만들어 새로운 비즈니스 홈을 경험하세요!</p>
+					</li>
+				</ul>
+			</section>
+			<!--// content-box -->			
+		</div><!-- // pop-content end -->
+	</div><!-- // pop-up end -->
+	
+	<!-- pop-up // 데이터 선택 시, 대화내용 팝업  // -->
+	<div id="dataLayer" class="pop msg wrap-pop jqx-window jqx-popup" style="position: absolute;top: 50%; left: 50%; margin-top:-32rem; margin-left:12rem; width: 40rem; display:none;">
+		<div id="" class="pop-header jqx-window-header">
+			<h1>Communication Data</h1>
+			<div class="btn-area">
+				<button type="button" class="btn-case-01" id=""><span class="icon ico-export">Export</span></button>
+			</div>
+			<div class="jqx-window-close-button-background">
+				<div class="jqx-window-close-button jqx-icon-close"></div>
+			</div>
+		</div>
+		<div id="" class="pop-content">		
 			<h4 class="blind">조회된 컨텐츠</h4>
 			<!--// Content 영역 //-->
 			<div class="chatLog">
-				<h5>- 2020년 03월 09일 -</h5>
-				<div class="data_log other">
-					<div class="name">유르페우스</div>
-					<div class="log">
-						<span>주말에 뭐했니?</span>
-						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+				<section class="day-wrap">
+					<h5>- 2020년 03월 09일 -</h5>
+					<div class="data_log other">
+						<div class="name">유르페우스</div>
+						<div class="log">
+							<span>주말에 뭐했니?</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
 					</div>
-				</div>
-				<div class="data_log">
-					<div class="name">유재석</div>
-					<div class="log">
-						<span>집에 있었지- 왜?</span>
-						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					<div class="data_log">
+						<div class="name">유재석</div>
+						<div class="log">
+							<span>집에 있었지- 왜?</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
 					</div>
-				</div>
-				<div class="data_log other">
-					<div class="name">유산슬</div>
-					<div class="log">
-						<span>마스크 없어- 나가면 안돼~</span>
-						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					<div class="data_log other">
+						<div class="name">유산슬</div>
+						<div class="log">
+							<span>마스크 없어- 나가면 안돼~</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
 					</div>
-				</div>
-				<div class="data_log other">
-					<div class="name">유르페우스</div>
-					<div class="log">
-						<span>주말에 뭐했니?</span>
-						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					<div class="data_log other">
+						<div class="name">유르페우스</div>
+						<div class="log">
+							<span>주말에 뭐했니?</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
 					</div>
-				</div>
-				<div class="data_log">
-					<div class="name">유재석</div>
-					<div class="log">
-						<span>집에 있었지- 왜?</span>
-						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					<div class="data_log">
+						<div class="name">유재석</div>
+						<div class="log">
+							<span>집에 있었지- 왜?</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
 					</div>
-				</div>
-				<div class="data_log other">
-					<div class="name">유산슬</div>
-					<div class="log">
-						<span>마스크 없어- 나가면 안돼~ 마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~</span>
-						<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+					<div class="data_log other">
+						<div class="name">유산슬</div>
+						<div class="log">
+							<span>마스크 없어- 나가면 안돼~ 마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
 					</div>
-				</div>
+				</section>
+				<section class="day-wrap">
+					<h5>- 2020년 03월 23일 -</h5>
+					<div class="data_log other">
+						<div class="name">유르페우스</div>
+						<div class="log">
+							<span>주말에 뭐했니?</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
+					</div>
+					<div class="data_log">
+						<div class="name">유재석</div>
+						<div class="log">
+							<span>집에 있었지- 왜?</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
+					</div>
+					<div class="data_log other">
+						<div class="name">유산슬</div>
+						<div class="log">
+							<span>마스크 없어- 나가면 안돼~</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
+					</div>
+					<div class="data_log other">
+						<div class="name">유르페우스</div>
+						<div class="log">
+							<span>주말에 뭐했니?</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
+					</div>
+					<div class="data_log">
+						<div class="name">유재석</div>
+						<div class="log">
+							<span>집에 있었지- 왜?</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
+					</div>
+					<div class="data_log other">
+						<div class="name">유산슬</div>
+						<div class="log">
+							<span>마스크 없어- 나가면 안돼~ 마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~마스크 없어- 나가면 안돼~</span>
+							<time datetime="2019-04-19T14:51:56+09:00">14:51</time>
+						</div>
+					</div>
+				</section>
 			</div><!--// content-box -->			
 		</div><!-- // pop-content end -->
 	</div><!-- // pop-up end -->
+	
+	
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
 	(function($) {

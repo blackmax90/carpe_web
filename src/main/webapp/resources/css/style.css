@@ -39,11 +39,13 @@ html {
 }
 
 body, div, p, span, em, small, a, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select, article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  word-break: break-all;
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	word-break: break-all;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 article, aside, canvas, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
@@ -315,6 +317,11 @@ body, input, select, button, textarea {
 
 .text-bold {
   font-weight: 700;
+}
+
+.empty-data {
+	line-height:inherit;
+	text-align:center;
 }
 
 dl { 
@@ -862,8 +869,24 @@ label {
   line-height: 3rem;
   box-sizing: border-box;
   border-radius: 0.3rem;
+	border: 1px solid rgba(0,0,0,0.15);
 }
 
+.combo .input-text-type-1.calendar {
+	width:48%;
+}
+
+.combo .input-text-type-1.calendar input{
+	display:block;
+	width:100%;
+}
+
+.combo .hyp {
+	display:inline-block;
+	float:left;
+	width:4%;
+	text-align:center;
+}
 
 .input-text-type-2 input { /* log-in */
   display: block;
@@ -1400,6 +1423,14 @@ label {
 
 .btn-case-01.btn-search .ico-search:before {
   margin-right: 0;
+}
+
+.btn-case-01.btn-search.txt{
+	width:7.6rem;
+}
+
+.btn-case-01.btn-search.txt .ico-search:before {
+  margin-right: 0.6rem;
 }
 
 .ico-view-list:before {
@@ -2049,7 +2080,7 @@ h5 {
 
 .mt5 { margin-top: 0.5rem !important; }
 .mt10 { margin-top: 1rem !important; }
-
+.mt20 { margin-top: 2rem !important; }
 
 
 /*--------------------------------------------------------------
@@ -2475,25 +2506,29 @@ h5 {
 .pop-header.jqx-window-header {
   position: relative;
   padding: 1rem 1rem 1rem 1.8rem;
-  line-height: 2rem;
+  line-height: 3rem;
   background: #00B4F0;
   background-image: linear-gradient(90deg, rgba(0,200,240,0.20) 0%, rgba(160,0,240,0.50) 100%);
 }
 
 .pop-header h1{
-  color: #FFF;
-  font-size: 1.6rem;
-  font-weight: 700;
-  line-height: calc(2rem - 1px);
+	display:inline-block;
+	float:left;
+	width:100%;
+	line-height:calc(3rem - 1px);
+	padding-right:3rem;
+	color: #FFF;
+	font-size: 1.6rem;
+	font-weight: 700;
 }
 
 .jqx-window-close-button-background {
   position: absolute;
-  top: 0.8rem;
+  top: 1.4rem;
   right: 0;
   width: 1.6rem;
   height: 1.6rem;
-  margin-right: 1rem;
+  margin-right: 1.5rem;
   margin-left: 0px;
   visibility: visible;
 }
@@ -2512,6 +2547,24 @@ h5 {
   margin-top: 2px;
 }
 
+.msg .pop-header h1{
+	display:inline-block;
+	float:left;
+	width:calc(100% - 13.2rem);
+	padding-right:1rem;
+	line-height:calc(3rem - 1px);
+}
+
+.msg .btn-area {
+	float:left;
+    display: inline-block;
+	margin-top:0;
+}
+
+.msg .jqx-window-close-button-background {
+  top: 1.4rem;
+}
+
 .pop-content,
 .pop-content.jqx-window-content {
   height: calc(100% - 4rem);
@@ -2519,11 +2572,15 @@ h5 {
   overflow: hidden;
 }
 
-.pop-content.msg {
+.msg .pop-content,
+.chatroom .pop-content {
 	height: 60rem;
-	background:#f5f5f5;
 	overflow-y:auto; 
 	overflow-x:hidden;
+}
+
+.msg .pop-content {
+	background:rgba(0,0,0,0.04);
 }
 
 .pop.temp .pop-content > article,
@@ -2541,6 +2598,13 @@ h5 {
 .pop.temp .container .jqx-splitter-panel.aside .cont-result {
   border: 1px solid #d9d9d9;
   background:#fafafa;
+}
+
+.pop-content section {
+	position:relative;
+	display:block;
+	float:left;
+	width:100%;
 }
 
 .pop-content dl > dt {
@@ -2618,6 +2682,14 @@ h5 {
 	height:auto;
 }
 
+.chatLog .day-wrap {
+	margin-top:2rem;
+}
+
+.chatLog .day-wrap:first-child {
+	margin-top:0;
+}
+
 .chatLog h5 {
 	width: 100%;
 	margin-top: 2rem;
@@ -2671,39 +2743,8 @@ h5 {
 
 .chatLog .data_log .log time {
 	display: inline-block;
-	margin: 0.6rem;
+	margin: 0.6rem 0 0.6rem 0.6rem;
 	font-size: 1.2rem;
-}
-
-.chatLog .data_log .log span.atta {
-	display: contents;
-	padding: 0;
-	text-align: left;
-	background: none !important;
-}
-
-.chatLog .data_log .log span.atta span.thumbnailImage {
-	min-width: 9.6rem;
-	width: 36%;
-	padding-top: 36%;
-	max-width: 50%;
-	border-radius: 0.6rem;
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-}
-
-.chatLog .data_log .log.att span.atta, .chatLog .data_log .log.del_data span.atta{
-	float: right;
-	display: flow-root;
-	width: 100%;
-	max-width: 100%;
-	margin-bottom: 0.6rem;
-	box-shadow: none;
-}
-
-.chatLog .data_log .log.att span.atta span.thumbnailImage, .chatLog .data_log .log.del_data span.atta span.thumbnailImage {
-	float: right;
 }
 
 .chatLog .data_log.other .name {
@@ -2719,8 +2760,76 @@ h5 {
 	background:#FFF;
 }
 
-.chatLog .data_log.other .log.att span.atta, 
-.chatLog .data_log.other .log.att span.atta span.thumbnailImage,
-.chatLog .data_log.other .log.del_data span.atta span.thumbnailImage {
-	float: left !important;
+.chatLog .data_log.other .log time {
+	margin: 0.6rem;
 }
+
+.chatroom .search-date {
+	position:relative;
+	display:block;
+	float:left; 
+    width: 100%;
+	padding:1rem;
+	line-height:3rem;
+	background:rgba(0,0,0,0.05);
+	border-radius:0.5rem;
+}
+
+.chatroom .search-date .combo {
+	width:calc(100% - 8.6rem);
+}
+.chatroom .search-date .btn-area {
+	display:inline-block;
+	float:right;
+	margin-top:0;
+}
+
+.chat-list .list_cont_wrap {
+	position:relative;
+	display:block;
+	float:left; 
+    width: 100%;
+    border-top: 1px solid #999;
+}
+
+.chat-list .list_cont_wrap li {
+	padding:0.5rem 1rem 0.6rem;
+	border:0.1rem solid transparent;
+	border-bottom:1px solid #d9d9d9;
+}
+
+.chat-list .list_cont_wrap li {
+	display:block;
+	float:left;
+	width:100%;
+	line-height:2.6rem;
+}
+.chat-list .list_cont_wrap li .cr-info,
+.chat-list .list_cont_wrap li .chat-data {
+	float:left;
+	width:100%;
+}
+.chat-list .list_cont_wrap li .cr-info .cr-name {
+	display:inline-block;	
+    float: left;
+	width:calc(100% - 7rem);
+	margin:0;
+	font-size:1.4rem;
+	font-weight:700;
+}
+.chat-list .list_cont_wrap li .cr-info .cr-date {
+	display:inline-block;
+	float:right;
+	text-align:right;
+}
+.chat-list .list_cont_wrap li .chat-data {
+	color:#111;
+	font-size:1.3rem;
+} 
+
+.chat-list .list_cont_wrap > li:hover,
+.chat-list .list_cont_wrap > li:active,
+.chat-list .list_cont_wrap > li.on { background:rgba(0,0,0,0.04); }
+
+.chat-list .list_cont_wrap > li.empty-data:hover,
+.chat-list .list_cont_wrap > li.empty-data:active { background:none; }
