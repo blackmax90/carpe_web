@@ -100,6 +100,7 @@ public class FileUploadController implements FileCopyStatus {
 				}
 			} finally {
 				sseList.remove(ticket);
+				paramList.remove(ticket);
 				emitter.complete();
 			}
 		}
@@ -168,16 +169,6 @@ public class FileUploadController implements FileCopyStatus {
 		file.transferTo(destFile);
 
 		return new ResponseEntity<>("File Uploaded Successfully.", HttpStatus.OK);
-	}
-
-	@RequestMapping(value = "/server_file_view.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView serverFileView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		// server root dir 정보를 carpe_config 에서 읽어들이고
-		// 그 외의 위치를 지정하지 못하게
-		mav.setViewName("carpe/test/server_file");
-
-		return mav;
 	}
 
 	@RequestMapping(value = "/add_evdnc_server_file.do", method = { RequestMethod.POST })
