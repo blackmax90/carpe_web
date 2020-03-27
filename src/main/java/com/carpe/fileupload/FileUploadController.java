@@ -64,7 +64,6 @@ public class FileUploadController implements FileCopyStatus {
 				if (paramMap.get("upload_type").equals(UPTYPE_EVDNC)) {
 					evdncService.insertEvdnc(paramMap);
 
-					/*
 					String caseId = paramMap.get("case_id") + "";
 					String mqMsg = "{'req_id':'1', 'req_type':'analyze', 'case_id':'" + caseId + "', 'evd_id':'" + evdId + "', 'options':'vss'}";
 
@@ -81,7 +80,6 @@ public class FileUploadController implements FileCopyStatus {
 
 					channel.close();
 					connection.close();
-					*/
 
 					json.put("msg", "Add Evidence Complete!");
 				}
