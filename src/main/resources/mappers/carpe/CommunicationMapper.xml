@@ -4,92 +4,93 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.carpe.mapper.communication">
-	<select id="selectCommunicationList" parameterType="Map" resultType="Map">
-	<!-- 
-		SELECT  @a:=@a+1 serial_number		       		
-			   ,ifnull(a.formatted_number, a.number) as call_number
-		       ,count(number) as cnt
-		  FROM  calls a , (SELECT @a:= 0) AS sn		 
+  <select id="selectCommunicationList" parameterType="Map" resultType="Map">
+  <!-- 
+    SELECT  @a:=@a+1 serial_number               
+         ,ifnull(a.formatted_number, a.number) as call_number
+           ,count(number) as cnt
+      FROM  calls a , (SELECT @a:= 0) AS sn     
          WHERE  case_id = #{case_id}
            AND  year(FROM_UNIXTIME(substr(a.regdate,1,10),'%Y-%m-%d %H:%i:%s')) = #{year}
       GROUP BY  call_number
       ORDER BY  cnt desc
       -->
-                  SELECT  @a:=@a+1 serial_number	
-                         ,number as call_number				         
-				         ,count(*) cnt
-                    FROM  calls_timeline, (SELECT @a:= 0) AS sn		
-                   WHERE  year(regdate) = #{year} 
-                     AND  case_id = #{case_id}
-                     AND  is_sent = 0
-                GROUP BY  number
-                ORDER BY  cnt desc LIMIT 40
-	</select>
+         SELECT  @a:=@a+1 serial_number  
+               , number as call_number                 
+               , count(*) cnt
+           FROM  calls_timeline, (SELECT @a:= 0) AS sn    
+          WHERE  year(regdate) = #{year} 
+            AND  case_id = #{case_id}
+       GROUP BY  number
+       ORDER BY  cnt desc LIMIT 40
+  </select>
 
-	<select id="selectCallStatCount" parameterType="Map" resultType="Map">
-			      SELECT  count(*) cnt
-			             ,month(regdate) as m
-                    FROM  calls_timeline
-                   WHERE  year(regdate) = #{year} 
-                     AND  case_id = #{case_id}
-                GROUP BY  number, m
-                ORDER BY  cnt desc LIMIT 1
-	</select>
-	
-	<select id="selectCallStat" parameterType="Map" resultType="Map">	    
-		 SELECT  number
-				,MAX(CASE WHEN m = '1' THEN `cnt` ELSE 0 END ) AS m1
-				,MAX(CASE WHEN m = '2' THEN `cnt` ELSE 0 END ) AS m2
-				,MAX(CASE WHEN m = '3' THEN `cnt` ELSE 0 END ) AS m3
-				,MAX(CASE WHEN m = '4' THEN `cnt` ELSE 0 END ) AS m4
-				,MAX(CASE WHEN m = '5' THEN `cnt` ELSE 0 END ) AS m5
-				,MAX(CASE WHEN m = '6' THEN `cnt` ELSE 0 END ) AS m6
-				,MAX(CASE WHEN m = '7' THEN `cnt` ELSE 0 END ) AS m7
-				,MAX(CASE WHEN m = '8' THEN `cnt` ELSE 0 END ) AS m8
-				,MAX(CASE WHEN m = '9' THEN `cnt` ELSE 0 END ) AS m9
-				,MAX(CASE WHEN m = '10' THEN `cnt` ELSE 0 END ) AS m10
-				,MAX(CASE WHEN m = '11' THEN `cnt` ELSE 0 END ) AS m11
-				,MAX(CASE WHEN m = '12' THEN `cnt` ELSE 0 END ) AS m12
-           FROM (
-				  SELECT  number
-				         ,month(regdate) as m
-				         ,count(*) cnt
+  <select id="selectCallStatCount" parameterType="Map" resultType="Map">
+         SELECT  count(*) cnt
+                , month(regdate) as m
+           FROM  calls_timeline
+          WHERE  year(regdate) = #{year} 
+            AND  case_id = #{case_id}
+       GROUP BY  number, m
+       ORDER BY  cnt desc LIMIT 1
+  </select>
+  
+  <select id="selectCallStat" parameterType="Map" resultType="Map">      
+          SELECT  number
+                , MAX(CASE WHEN m = '1' THEN `cnt` ELSE 0 END ) AS m1
+                , MAX(CASE WHEN m = '2' THEN `cnt` ELSE 0 END ) AS m2
+                , MAX(CASE WHEN m = '3' THEN `cnt` ELSE 0 END ) AS m3
+                , MAX(CASE WHEN m = '4' THEN `cnt` ELSE 0 END ) AS m4
+                , MAX(CASE WHEN m = '5' THEN `cnt` ELSE 0 END ) AS m5
+                , MAX(CASE WHEN m = '6' THEN `cnt` ELSE 0 END ) AS m6
+                , MAX(CASE WHEN m = '7' THEN `cnt` ELSE 0 END ) AS m7
+                , MAX(CASE WHEN m = '8' THEN `cnt` ELSE 0 END ) AS m8
+                , MAX(CASE WHEN m = '9' THEN `cnt` ELSE 0 END ) AS m9
+                , MAX(CASE WHEN m = '10' THEN `cnt` ELSE 0 END ) AS m10
+                , MAX(CASE WHEN m = '11' THEN `cnt` ELSE 0 END ) AS m11
+                , MAX(CASE WHEN m = '12' THEN `cnt` ELSE 0 END ) AS m12
+            FROM (
+                  SELECT  number
+                        , month(regdate) as m
+                        , count(*) cnt
                     FROM  calls_timeline
                    WHERE  year(regdate) = #{year} 
                      AND  case_id = #{case_id}
                      AND  is_sent = 0
                 GROUP BY  number, m
-                ORDER BY  cnt desc LIMIT 40
+                ORDER BY  cnt desc
                  ) a
         GROUP BY  number                 
-	</select>
-	
-	<select id="selectSmsStat" parameterType="Map" resultType="Map">
-  	     SELECT  number
-				,MAX(CASE WHEN m = '1' THEN `cnt` ELSE 0 END ) AS m1
-				,MAX(CASE WHEN m = '2' THEN `cnt` ELSE 0 END ) AS m2
-				,MAX(CASE WHEN m = '3' THEN `cnt` ELSE 0 END ) AS m3
-				,MAX(CASE WHEN m = '4' THEN `cnt` ELSE 0 END ) AS m4
-				,MAX(CASE WHEN m = '5' THEN `cnt` ELSE 0 END ) AS m5
-				,MAX(CASE WHEN m = '6' THEN `cnt` ELSE 0 END ) AS m6
-				,MAX(CASE WHEN m = '7' THEN `cnt` ELSE 0 END ) AS m7
-				,MAX(CASE WHEN m = '8' THEN `cnt` ELSE 0 END ) AS m8
-				,MAX(CASE WHEN m = '9' THEN `cnt` ELSE 0 END ) AS m9
-				,MAX(CASE WHEN m = '10' THEN `cnt` ELSE 0 END ) AS m10
-				,MAX(CASE WHEN m = '11' THEN `cnt` ELSE 0 END ) AS m11
-				,MAX(CASE WHEN m = '12' THEN `cnt` ELSE 0 END ) AS m12
+           LIMIT 40
+  </select>
+  
+  <select id="selectSmsStat" parameterType="Map" resultType="Map">
+         SELECT  number
+               , MAX(CASE WHEN m = '1' THEN `cnt` ELSE 0 END ) AS m1
+               , MAX(CASE WHEN m = '2' THEN `cnt` ELSE 0 END ) AS m2
+               , MAX(CASE WHEN m = '3' THEN `cnt` ELSE 0 END ) AS m3
+               , MAX(CASE WHEN m = '4' THEN `cnt` ELSE 0 END ) AS m4
+               , MAX(CASE WHEN m = '5' THEN `cnt` ELSE 0 END ) AS m5
+               , MAX(CASE WHEN m = '6' THEN `cnt` ELSE 0 END ) AS m6
+               , MAX(CASE WHEN m = '7' THEN `cnt` ELSE 0 END ) AS m7
+               , MAX(CASE WHEN m = '8' THEN `cnt` ELSE 0 END ) AS m8
+               , MAX(CASE WHEN m = '9' THEN `cnt` ELSE 0 END ) AS m9
+               , MAX(CASE WHEN m = '10' THEN `cnt` ELSE 0 END ) AS m10
+               , MAX(CASE WHEN m = '11' THEN `cnt` ELSE 0 END ) AS m11
+               , MAX(CASE WHEN m = '12' THEN `cnt` ELSE 0 END ) AS m12
            FROM (
-				  SELECT  number
-				         ,month(regdate) as m
-				         ,count(*) cnt
-                    FROM  calls_timeline
-                   WHERE  year(regdate) = #{year} 
-                     AND  case_id = #{case_id}
-                     AND  is_sent = 1
-                GROUP BY  number, m
-                ORDER BY  cnt desc LIMIT 40
-                 ) a
-        GROUP BY  number       
-	</select>
+                SELECT  number
+                      , month(regdate) as m
+                      , count(*) cnt
+                  FROM  calls_timeline
+                 WHERE  year(regdate) = #{year} 
+                   AND  case_id = #{case_id}
+                   AND  is_sent = 1
+              GROUP BY  number, m
+              ORDER BY  cnt desc
+                ) a
+       GROUP BY  number       
+          LIMIT 40
+  </select>
 
 </mapper>

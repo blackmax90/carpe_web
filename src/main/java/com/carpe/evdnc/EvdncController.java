@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carpe.common.CarpeConfig;
+import com.carpe.common.CommonUtil;
 import com.carpe.common.Consts;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -229,6 +231,65 @@ public class EvdncController {
 		mav.addObject("affected", affected);
 		mav.setViewName("jsonView");
 
+		return mav;
+	}
+
+	@RequestMapping(value = "/get_evdnc_dir.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEvdncDir(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		String baseDir = CarpeConfig.getEvdncImagePath();
+		String imgDir = baseDir;
+		String selDir = map.get("dir");
+		List<HashMap<String, String>> retList = new ArrayList<>();
+		HashMap<String, String> dirInfo = null;
+		mav.addObject("data", retList);
+		
+		if (CommonUtil.notEmpty(selDir)) {
+			imgDir += "/" + selDir;
+		}
+		
+		File f = new File(imgDir);
+		File baseF = new File(baseDir);
+		
+		if (f.exists() == false) {
+			return mav;
+		}
+
+		File[] fList = f.listFiles();
+		int idx = 0;
+		
+		if (imgDir.equals(baseDir) == false) {
+			String tmpPath = f.getCanonicalPath();
+			tmpPath = tmpPath.substring(0, tmpPath.lastIndexOf("\\"));
+			dirInfo = new HashMap<>();
+			dirInfo.put("id", (idx++) + "");
+			dirInfo.put("type", "B");
+			dirInfo.put("name", "..");
+			dirInfo.put("ext", "");
+			dirInfo.put("size", "");
+			dirInfo.put("path", tmpPath.replace(baseF.getCanonicalPath(), ""));
+			retList.add(dirInfo);
+		}
+		
+		for (File file : fList) {
+			long fileSize = file.length();
+			dirInfo = new HashMap<>();
+			dirInfo.put("id", (idx++) + "");
+			dirInfo.put("type", "F");
+			dirInfo.put("name", FilenameUtils.getBaseName(file.getName()));
+			dirInfo.put("ext", FilenameUtils.getExtension(file.getName()));
+			dirInfo.put("size", CommonUtil.getFileSize(fileSize));
+			dirInfo.put("path", file.getCanonicalPath().replace(baseF.getCanonicalPath(), ""));
+
+			if (file.isDirectory()) {
+				dirInfo.put("type", "D");
+				dirInfo.put("size", "");
+			}
+			
+			retList.add(dirInfo);
+		}
+		
 		return mav;
 	}
 }

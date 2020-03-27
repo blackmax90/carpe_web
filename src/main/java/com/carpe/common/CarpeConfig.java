@@ -13,6 +13,8 @@ public class CarpeConfig {
 	private static String EVDNC_BASE_PATH;
 	private static String EVDNC_BASE_TMP_PATH;
 
+	private static String EVDNC_IMAGE_PATH;
+
 	private static String MQ_SERVER;
 	private static String MQ_QUEUE;
 	private static String MQ_ID;
@@ -49,6 +51,15 @@ public class CarpeConfig {
 			EVDNC_BASE_TMP_PATH = path.substring(0, path.length() - 1);
 		} else {
 			EVDNC_BASE_TMP_PATH = path;
+		}
+	}
+
+	@Value("#{carpe_config['evdnc.image.path']}")
+	public void setEvdncImagePath(String path) {
+		if (path.endsWith("/") || path.endsWith("\\")) {
+			EVDNC_IMAGE_PATH = path.substring(0, path.length() - 1);
+		} else {
+			EVDNC_IMAGE_PATH = path;
 		}
 	}
 
@@ -108,6 +119,10 @@ public class CarpeConfig {
 
 	public static String getEvdncBaseTmpPath() {
 		return EVDNC_BASE_TMP_PATH;
+	}
+
+	public static String getEvdncImagePath() {
+		return EVDNC_IMAGE_PATH;
 	}
 
 	public static String getKey() {

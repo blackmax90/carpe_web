@@ -3,6 +3,7 @@ package com.carpe.common;
 import java.io.IOException;
 import java.io.StringReader;
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -111,5 +112,33 @@ public class CommonUtil {
 		}
 
 		return rsList;
+	}
+	
+	/**
+	 * Size를 단위에 맞게 변경하여 반환
+	 * @param size
+	 * @return
+	 */
+	public static String getFileSize(long size) {
+    String unit[] = {"B", "KB", "MB", "GB", "TB"};
+    String retSize = "";
+    int idx = 0;
+    double s = (double) size;
+    DecimalFormat df=new DecimalFormat("#.#");
+
+    try{
+      for (int x = 0; s / 1024 > 1 && x < unit.length; x++) {
+      	idx = x + 1;
+      	s /= 1024;
+      }
+
+      s = Math.round(s * 10.0) / 10.0;
+      retSize = String.format("%s %s", df.format(s), unit[idx]);
+    } catch (Exception e) {
+    	e.printStackTrace();
+    	retSize = "0.0 B";
+    }
+
+    return retSize;
 	}
 }
