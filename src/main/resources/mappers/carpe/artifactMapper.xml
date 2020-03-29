@@ -123,7 +123,10 @@
 		group by source, datetime
 		order by source, datetime
 	</select>
-	<!-- lv1 -->
+	
+	
+	<!-- ################# lv1 ################# -->
+	
 	<!-- lv1_os_win_event_logs -->
 	<select id="selectEventLogsList" parameterType="Map" resultType="Map">
 		SELECT case_id, evd_id, par_id, event_id, event_type, security_user_id, created_time, event_description_summary, error_level, keywords, provider_name, task_category, computer_name, event_data
@@ -160,21 +163,35 @@
 		<!--include refid="selectArtifactCondition" /-->
 		limit #{offset}, #{pageSize}
 	</select>
-	<select id="selectRegAmcacheFileEntriesCount" parameterType="Map" resultType="Map">
+	<select id="selectRegAmcacheFileEntriesListCount" parameterType="Map" resultType="Map">
 		SELECT count(*) as cnt FROM lv1_os_win_reg_amcache_file_entries
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
+
+	<!-- lv1_os_win_reg_amcache_program_entries -->
+		<select id="selectRegAmcacheProgramEntriesList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_amcache_program_entries
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegAmcacheProgramEntriesListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_amcache_program_entries
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
 	<!-- lv1_os_win_reg_installed_programs -->
-		<select id="selectRegInsatlledProgramsList" parameterType="Map" resultType="Map">
+		<select id="selectRegInstalledProgramsList" parameterType="Map" resultType="Map">
 		SELECT *
 		FROM lv1_os_win_reg_installed_programs
 		<!--include refid="selectArtifactCondition" /-->
 		limit #{offset}, #{pageSize}
 	</select>
-	<select id="selectselectRegInsatlledProgramsListCount" parameterType="Map" resultType="Map">
+	<select id="selectRegInstalledProgramsListCount" parameterType="Map" resultType="Map">
 		SELECT count(*) as cnt FROM lv1_os_win_reg_installed_programs
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
+	
 	<!-- lv1_os_win_reg_os_info -->
 		<select id="selectRegOSInfoList" parameterType="Map" resultType="Map">
 		SELECT *
@@ -217,6 +234,114 @@
 	</select>
 	<select id="selectChromeVisitUrlsListCount" parameterType="Map" resultType="Map">
 		SELECT count(*) as cnt FROM lv1_app_web_chrome_visit_urls
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+
+	<!-- lv1_os_win_reg_userassist -->
+	<select id="selectRegUserAssist" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_userassist
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegUserAssistCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_userassist
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_lnk_files -->
+	<select id="selectLnkFiles" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_lnk_files
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectLnkFilesCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_lnk_files
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_prefetch -->
+	<select id="selectPrefetch" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_prefetch
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectPrefetchCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_prefetch
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chrome_download -->
+	<select id="selectChromeDownload" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_app_web_chrome_download
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromeDownloadCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_app_web_chrome_download
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chrome_cookies -->
+	<select id="selectChromeCookie" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_app_web_chrome_cookies
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromeCookieCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_app_web_chrome_cookies
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chrome_cache -->
+	<select id="selectChromeCache" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_app_web_chrome_cache
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromeCacheCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_app_web_chrome_cache
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+
+	<!-- lv1_app_web_chrome_search_terms -->
+	<select id="selectChromeSearchTerms" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_app_web_chrome_search_terms
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromeSearchTermsCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_app_web_chrome_search_terms
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_fs_ntfs_logfile -->
+	<select id="selectNtfsLogfile" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_fs_ntfs_logfile
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectNtfsLogfileCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_fs_ntfs_logfile
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_fs_ntfs_usnjrnl -->
+	<select id="selectNtfsUsnjrnl" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_fs_ntfs_usnjrnl
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectNtfsUsnjrnlCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_fs_ntfs_usnjrnl
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	

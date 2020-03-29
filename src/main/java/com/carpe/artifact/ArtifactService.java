@@ -51,9 +51,13 @@ public interface ArtifactService {
 	public List<Map> selectRegAmcacheFileEntriesList(Map<String, Object> paramMap) throws Exception;
 	public Map selectRegAmcacheFileEntriesListCount(Map<String, Object> paramMap) throws Exception;
 	
+	// lv1_os_win_reg_amcache_program_entries	
+	public List<Map> selectRegAmcacheProgramEntriesList(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegAmcacheProgramEntriesListCount(Map<String, Object> paramMap) throws Exception;
+	
 	// lv1_os_win_reg_installed_programs
-	public List<Map> selectRegInsatlledProgramsList(Map<String, Object> paramMap) throws Exception;
-	public Map selectRegInsatlledProgramsListCount(Map<String, Object> paramMap) throws Exception;
+	public List<Map> selectRegInstalledProgramsList(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegInstalledProgramsListCount(Map<String, Object> paramMap) throws Exception;
 	
 	// lv1_os_win_reg_os_info
 	public List<Map> selectRegOSInfoList(Map<String, Object> paramMap) throws Exception;
@@ -71,6 +75,40 @@ public interface ArtifactService {
 	public List<Map> selectChromeVisitUrlsList(Map<String, Object> paramMap) throws Exception;
 	public Map selectChromeVisitUrlsListCount(Map<String, Object> paramMap) throws Exception;
 	
+	// lv1_os_win_reg_userassist
+	public List<Map> selectRegUserAssist(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegUserAssistCount(Map<String, Object> paramMap) throws Exception;
 	
+	// lv1_os_win_lnk_files
+	public List<Map> selectLnkFiles(Map<String, Object> paramMap) throws Exception;
+	public Map selectLnkFilesCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_prefetch
+	public List<Map> selectPrefetch(Map<String, Object> paramMap) throws Exception;
+	public Map selectPrefetchCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_chrome_download
+	public List<Map> selectChromeDownload(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeDownloadCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_chrome_cookies
+	public List<Map> selectChromeCookie(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeCookieCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_chrome_cache
+	public List<Map> selectChromeCache(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeCacheCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_search_terms
+	public List<Map> selectChromeSearchTerms(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeSearchTermsCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_fs_ntfs_logfile
+	public List<Map> selectNtfsLogfile(Map<String, Object> paramMap) throws Exception;
+	public Map selectNtfsLogfileCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_fs_ntfs_usnjrnl
+	public List<Map> selectNtfsUsnjrnl(Map<String, Object> paramMap) throws Exception;
+	public Map selectNtfsUsnjrnlCount(Map<String, Object> paramMap) throws Exception;
 	
 }

@@ -142,16 +142,27 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	public Map selectRegAmcacheFileEntriesListCount(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectRegAmcacheFileEntriesListCount", paramMap);
 	}
-	
-	// lv1_os_win_reg_installed_programs
+
+	// lv1_os_win_reg_amcache_program_entries
 	@Override
-	public List<Map> selectRegInsatlledProgramsList(Map<String, Object> paramMap) throws Exception {
-		return sqlSession.selectList(Namespace + ".selectRegInsatlledProgramsList", paramMap);
+	public List<Map> selectRegAmcacheProgramEntriesList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegAmcacheProgramEntriesList", paramMap);
 	}
 
 	@Override
-	public Map selectRegInsatlledProgramsListCount(Map<String, Object> paramMap) throws Exception {
-		return sqlSession.selectOne(Namespace + ".selectRegInsatlledProgramsListCount", paramMap);
+	public Map selectRegAmcacheProgramEntriesListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegAmcacheProgramEntriesListCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_installed_programs
+	@Override
+	public List<Map> selectRegInstalledProgramsList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegInstalledProgramsList", paramMap);
+	}
+
+	@Override
+	public Map selectRegInstalledProgramsListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegInstalledProgramsListCount", paramMap);
 	}
 	
 	// lv1_os_win_reg_os_info
@@ -197,5 +208,103 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	public Map selectChromeVisitUrlsListCount(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectChromeVisitUrlsListCount", paramMap);
 	}
+	
+	// lv1_os_win_reg_userassist
+	@Override
+	public List<Map> selectRegUserAssist(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegUserAssist", paramMap);
+	}
 
+	@Override
+	public Map selectRegUserAssistCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegUserAssistCount", paramMap);
+	}
+	
+	// lv1_os_win_lnk_files
+	@Override
+	public List<Map> selectLnkFiles(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectLnkFiles", paramMap);
+	}
+
+	@Override
+	public Map selectLnkFilesCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectLnkFilesCount", paramMap);
+	}
+	
+	// lv1_os_win_prefetch
+	@Override
+	public List<Map> selectPrefetch(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectPrefetch", paramMap);
+	}
+
+	@Override
+	public Map selectPrefetchCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectPrefetchCount", paramMap);
+	}
+	
+	// lv1_app_web_chrome_download
+	@Override
+	public List<Map> selectChromeDownload(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectChromeDownload", paramMap);
+	}
+
+	@Override
+	public Map selectChromeDownloadCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectChromeDownloadCount", paramMap);
+	}
+	
+	// lv1_app_web_chrome_cookies
+	@Override
+	public List<Map> selectChromeCookie(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectChromeCookie", paramMap);
+	}
+
+	@Override
+	public Map selectChromeCookieCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectChromeCookieCount", paramMap);
+	}
+	
+	// lv1_app_web_chrome_cache
+	@Override
+	public List<Map> selectChromeCache(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectChromeCache", paramMap);
+	}
+
+	@Override
+	public Map selectChromeCacheCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectChromeCacheCount", paramMap);
+	}
+
+	// lv1_app_web_chrome_search_terms
+	@Override
+	public List<Map> selectChromeSearchTerms(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectChromeSearchTerms", paramMap);
+	}
+
+	@Override
+	public Map selectChromeSearchTermsCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectChromeSearchTermsCount", paramMap);
+	}
+
+	// lv1_fs_ntfs_logfile
+	@Override
+	public List<Map> selectNtfsLogfile(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectNtfsLogfile", paramMap);
+	}
+
+	@Override
+	public Map selectNtfsLogfileCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectNtfsLogfileCount", paramMap);
+	}
+	
+	// lv1_fs_ntfs_usnjrnl
+	@Override
+	public List<Map> selectNtfsUsnjrnl(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectNtfsUsnjrnl", paramMap);
+	}
+
+	@Override
+	public Map selectNtfsUsnjrnlCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectNtfsUsnjrnlCount", paramMap);
+	}
 }
