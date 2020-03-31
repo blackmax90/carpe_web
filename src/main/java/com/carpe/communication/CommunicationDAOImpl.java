@@ -35,4 +35,14 @@ public class CommunicationDAOImpl implements CommunicationDAO {
 	public List<Map> selectSmsStat(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectSmsStat", paramMap);
 	}
+
+	@Override
+	public List<Map> selectCommunicationRoomList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectCommunicationRoomList", paramMap);
+	}
+
+	@Override
+	public List<Map> selectCommunicationDataList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectCommunicationDataList", paramMap);
+	}
 }

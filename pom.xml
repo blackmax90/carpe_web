@@ -229,6 +229,13 @@
 			<artifactId>sqlite-jdbc</artifactId>
 			<version>3.7.2</version>
 		</dependency>		
+		
+		<!-- opencsv -->
+		<dependency>
+		  <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>5.1</version>
+    </dependency>
 	</dependencies>
 	<build>
 		<plugins>
