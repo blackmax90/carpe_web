@@ -149,7 +149,9 @@
   </select>
 
   <select id="selectCommunicationDataList" parameterType="Map" resultType="Map">      
-    SELECT seqno, roomno, app, content, sender, sender_name, receiver, receiver_name, msg_type, isdelete, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate, case_id
+    SELECT seqno, roomno, app, content, sender, sender_name, receiver
+         , receiver_name, msg_type, isdelete, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate
+         , case_id
       FROM communication_data 
      WHERE 1=1
        AND case_id = #{case_id}

@@ -138,9 +138,6 @@ public class CommunicationController {
 
 	@RequestMapping(value = "/communication_export.do", method = { RequestMethod.POST })
 	public void getCommunicationExport(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, HttpServletResponse response, Model model) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("jsonView");
-
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
 		paramMap.put("roomno", map.get("roomno"));
