@@ -27,27 +27,10 @@
 		<!-- // header -->
 
 		<!-- nav -->
-		<nav class="nav bg-unit">
-			<div class="bg-img-nav">
-				<!--//
-					목록 추가는 <li> 생성
-					1Depth Menu class : 없음
-					2Depth Menu class="level02"
-					1Depth/2Depth Selected class="on" 
-				//-->
-				<ul>
-					<li><a href="/carpe/overview.do" class="icon overview">Overview</a></li>
-					<li><a href="/carpe/evdnc.do" class="icon evidence">Evidence</a></li>
-					<li class="on"><a href="#" class="icon analysis">Analysis</a></li>					
-						<li class="level02"><a href="/carpe/filesystem.do">Filesystem</a></li> 
-						<li class="level02 on"><a href="/carpe/artifact.do">Artifact</a></li>
-						<li class="level02"><a href="/carpe/search.do">String Search</a></li>
-					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>	
-					<li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
-					<li><a href="#" class="icon report">Report</a></li>
-				</ul>
-			</div>
-		</nav>
+		<c:import url="../common/left_nav.jsp">
+		  <c:param name="d1" value="analysis"></c:param>
+		  <c:param name="d2" value="artifact"></c:param>
+		</c:import>
 		<!-- // nav -->
 		
 		<!-- main -->
