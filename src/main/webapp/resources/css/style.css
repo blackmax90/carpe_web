@@ -1102,6 +1102,12 @@ label {
   text-transform: uppercase;
 }
 
+.radio-type-1 label:before {
+  top: 0.5rem;
+  width: 2rem;
+  height: 2rem;
+}
+
 .radio-type-1 label .text {
   padding-left: 0.6rem;
 }
@@ -1110,6 +1116,19 @@ label {
   margin-right: 0;
 }
 
+.radio-type-2 > input[type="radio"] { position:absolute; width:1px; height:1px; margin:-1px; padding:0; border:0; clip:rect(0 0 0 0); overflow:hidden;}
+.radio-type-2 > input[type="radio"] + label { position:relative; display:block; padding-left:30px; font-weight:400;}
+.radio-type-2 > input[type="radio"] + label:before,
+.radio-type-2 > input[type="radio"] + label:after { position:absolute; content:''; display:block; left:0; box-sizing:border-box; border-radius: 50%; }
+.radio-type-2 > input[type="radio"] + label:before { top:50%; width:20px; height:20px; margin-top:-10px; text-align:center; background-color:#FFFFFF; border:1px solid #999; }
+.radio-type-2 > input[type="radio"] + label:after { top:50%;left:5px; width:10px; height:10px; margin-top:-5px; background-color:#008cc8; transform:scale(0); transform-origin:50%; transition:transform 200ms ease-out;}
+.radio-type-2 > input[type="radio"] + label:after,
+.radio-type-2 > input[type="radio"]:checked + label:before { border:1px solid #008cc8; }
+.radio-type-2 > input[type="radio"]:checked + label:before { -webkit-animation: borderscale 300ms ease-in; background-color: #FFFFFF; }
+.radio-type-2 > input[type="radio"]:checked + label:after{transform:scale(1);}
+.radio-type-2 > input[type="radio"]:active + label:before{ transition-duration:0; filter:brightness(0.4);}
+.radio-type-2 > input[type="radio"]:disabled + label:before {color:#999; background-color:#4d4d4d; border:1px solid #CCC; box-shadow:none;}
+.radio-type-2 > input[type="radio"]:checked:disabled + label:after {width:8px;height:8px;background-color:#CCC; border:1px solid #808080;}
 
 /*--------------------------------------------------------------
 # Form
@@ -2081,6 +2100,7 @@ h5 {
 .mt5 { margin-top: 0.5rem !important; }
 .mt10 { margin-top: 1rem !important; }
 .mt20 { margin-top: 2rem !important; }
+.mr20 { margin-right: 2rem !important; }
 
 
 /*--------------------------------------------------------------
@@ -2743,7 +2763,7 @@ h5 {
 
 .chatLog .data_log .log time {
 	display: inline-block;
-	margin: 0.6rem;
+	margin: 0.6rem 0 0.6rem 0.6rem;
 	font-size: 1.2rem;
 }
 
