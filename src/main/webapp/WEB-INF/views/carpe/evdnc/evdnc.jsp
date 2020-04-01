@@ -123,10 +123,18 @@
           <dl>
             <dt>File Type :</dt>
             <dd>
-              <div class="radio">
-                <label><input type="radio" name="fileType" value="local" style="-webkit-appearance:radio;" />Local</label>
-                <label style="padding-left:5px;"><input type="radio" name="fileType" value="server" style="-webkit-appearance:radio;" />Server</label>
-              </div>
+            	<ul class="list-h">
+            		<li class="mr20">
+            			<div class="radio radio-type-2">
+			                <input type="radio" name="fileType" id="ftLocal" value="local" /><label for="ftLocal"><span class="text">Local</span></label>
+            			</div>
+            		</li>
+            		<li>
+            			<div class="radio radio-type-2">
+			                <input type="radio" name="fileType" id="ftServer" value="server" /><label for="ftServer"><span class="text">Server</span></label>
+            			</div>
+            		</li>
+            	</ul>
             </dd>
           </dl>  
           <dl id="localArea">
@@ -150,8 +158,8 @@
         </div>
         <div class="btn-area">
           <ul>
-          <li><button type="button" class="btn-case-01 bk" id="cancel" value="Cancel" >Cancel</button></li>
-          <li><button type="button" class="btn-case-01" id="ok" value="OK">OK</button></li>
+          <li><button type="button" class="btn-case-01 bk" id="cancel" value="Cancel" ><span class="icon ico-close">Cancel</span></button></li>
+          <li><button type="button" class="btn-case-01" id="ok" value="OK"><span class="icon ico-save">OK</span></button></li>
         </ul>
         </div>
       </form>
