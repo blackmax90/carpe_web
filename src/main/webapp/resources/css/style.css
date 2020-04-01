@@ -2600,7 +2600,9 @@ h5 {
 }
 
 .msg .pop-content {
+	width: 100% !important;
 	background:rgba(0,0,0,0.04);
+	box-sizing:border-box;
 }
 
 .pop.temp .pop-content > article,

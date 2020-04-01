@@ -580,7 +580,7 @@
           { width: 50, id: "type", header: [{ text: "" }] },
           { width: 250, id: "name", header: [{ text: "Name" }] },
           { width: 55, id: "ext", header: [{ text: "Ext" }] },
-          { width: 82, id: "size", header: [{ text: "Size" }] },
+          { /* width: 82, */ id: "size", header: [{ text: "Size" }] },
           { width: 250, id: "path", hidden: true, header: [{ text: "Path" }] }
         ],
         headerRowHeight: 30,
