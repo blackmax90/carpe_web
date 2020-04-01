@@ -32,28 +32,10 @@
     <!-- // header -->
 
     <!-- nav -->
-    <nav class="nav bg-unit">
-      <div class="bg-img-nav">
-        <!--//
-          목록 추가는 <li> 생성
-          1Depth Menu class : 없음
-          2Depth Menu class="level02"
-          1Depth/2Depth Selected class="on" 
-        //-->
-        <ul>
-          <li><a href="/carpe/overview.do" class="icon overview">Overview</a></li>
-          <li class="on"><a href="/carpe/evdnc.do" class="icon evidence">Evidence</a></li>
-          <li><a href="#" class="icon analysis">Analysis</a></li>
-          <!-- 2Depth Menu //-->
-            <li class="level02 hide"><a href="#">Filesystem</a></li> 
-            <li class="level02 hide"><a href="#">Artifact</a></li>
-          <!--// 2Depth Menu -->
-          <li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>
-          <li><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>
-          <li><a href="#" class="icon report">Report</a></li>
-        </ul>
-      </div>
-    </nav>
+		<c:import url="../common/left_nav.jsp">
+		  <c:param name="d1" value="evidence"></c:param>
+		  <c:param name="d2" value=""></c:param>
+		</c:import>
     <!-- // nav -->
 
     <!-- main -->
@@ -123,18 +105,10 @@
           <dl>
             <dt>File Type :</dt>
             <dd>
-            	<ul class="list-h">
-            		<li class="mr20">
-            			<div class="radio radio-type-2">
-			                <input type="radio" name="fileType" id="ftLocal" value="local" /><label for="ftLocal"><span class="text">Local</span></label>
-            			</div>
-            		</li>
-            		<li>
-            			<div class="radio radio-type-2">
-			                <input type="radio" name="fileType" id="ftServer" value="server" /><label for="ftServer"><span class="text">Server</span></label>
-            			</div>
-            		</li>
-            	</ul>
+              <div class="radio">
+                <label><input type="radio" name="fileType" value="local" style="-webkit-appearance:radio;" />Local</label>
+                <label style="padding-left:5px;"><input type="radio" name="fileType" value="server" style="-webkit-appearance:radio;" />Server</label>
+              </div>
             </dd>
           </dl>  
           <dl id="localArea">
@@ -158,8 +132,8 @@
         </div>
         <div class="btn-area">
           <ul>
-          <li><button type="button" class="btn-case-01 bk" id="cancel" value="Cancel" ><span class="icon ico-close">Cancel</span></button></li>
-          <li><button type="button" class="btn-case-01" id="ok" value="OK"><span class="icon ico-save">OK</span></button></li>
+          <li><button type="button" class="btn-case-01 bk" id="cancel" value="Cancel" >Cancel</button></li>
+          <li><button type="button" class="btn-case-01" id="ok" value="OK">OK</button></li>
         </ul>
         </div>
       </form>

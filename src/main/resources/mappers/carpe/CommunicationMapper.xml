@@ -93,4 +93,73 @@
           LIMIT 40
   </select>
 
+  <select id="selectCommunicationRoomList" parameterType="Map" resultType="Map">      
+    SELECT roomno, GROUP_CONCAT(DISTINCT name) AS name, content, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate
+     FROM (
+           SELECT roomno, name, content, regdate
+             FROM (
+                   SELECT a.roomno, b.sender_name AS name, b.content, b.regdate
+                     FROM (
+                          SELECT DISTINCT roomno
+                            FROM communication_data
+                           WHERE 1=1
+                             AND case_id = #{case_id}
+                             AND ((msg_type = '발신' AND receiver = #{number})
+                               OR (msg_type = '수신' AND sender = #{number}))
+                          ) a
+                        , communication_data b
+                    WHERE 1=1
+                      AND a.roomno = b.roomno
+                      <if test="sdate!=null and !sdate.equals('')">
+                      AND b.regdate >= #{sdate}
+                      </if>
+                      <if test="edate!=null and !edate.equals('')">
+                      <![CDATA[
+                      AND b.regdate <= #{edate}
+                      ]]>
+                      </if>
+                    UNION
+                   SELECT a.roomno, b.receiver_name AS name, b.content, b.regdate
+                     FROM (
+                          SELECT DISTINCT roomno
+                            FROM communication_data
+                           WHERE 1=1
+                             AND case_id = #{case_id}
+                             AND ((msg_type = '발신' AND receiver = #{number})
+                               OR (msg_type = '수신' AND sender = #{number}))
+                          ) a
+                        , communication_data b
+                    WHERE 1=1
+                      AND a.roomno = b.roomno
+                      <if test="sdate!=null and !sdate.equals('')">
+                      AND b.regdate >= #{sdate}
+                      </if>
+                      <if test="edate!=null and !edate.equals('')">
+                      <![CDATA[
+                      AND b.regdate <= #{edate}
+                      ]]>
+                      </if>
+                  ) AA
+            ORDER BY regdate DESC
+            LIMIT 18446744073709551615
+          ) A
+    WHERE 1=1
+      AND name != ''
+    GROUP BY roomno
+  </select>
+
+  <select id="selectCommunicationDataList" parameterType="Map" resultType="Map">      
+    SELECT seqno, roomno, app, content, sender, sender_name, receiver
+         , receiver_name, msg_type, isdelete, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate
+         , case_id
+      FROM communication_data 
+     WHERE 1=1
+       AND case_id = #{case_id}
+       AND roomno = #{roomno}
+     ORDER BY regdate DESC
+     <if test="sdata!=null and !sdata.equals('') and pageCnt!=null and !pageCnt.equals('')">
+     LIMIT ${sdata}, ${pageCnt}
+     </if>
+  </select>
+
 </mapper>

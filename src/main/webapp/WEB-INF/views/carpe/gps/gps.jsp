@@ -33,36 +33,10 @@
 		<!-- // header -->
 
 		<!-- nav -->
-		<nav class="nav bg-unit">
-			<div class="bg-img-nav">
-				<!--//
-					목록 추가는 <li> 생성
-					1Depth Menu class : 없음
-					2Depth Menu class="level02"
-					1Depth/2Depth Selected class="on"
-					2Depth Menu Class : 1Depth Menu = unselected 상태일 경우에는 class="hide" // 2019-10-20 추가
-				//-->
-				<ul>
-					<li><a href="/carpe/overview.do" class="icon overview">Overview</a></li>
-					<li><a href="/carpe/evdnc.do" class="icon evidence">Evidence</a></li>
-					<li><a href="#" class="icon analysis">Analysis</a></li>
-						<!-- 2Depth Menu //-->
-						<li class="level02 hide"><a href="#">Filesystem</a></li> 
-						<li class="level02 hide"><a href="#">Artifact</a></li>
-						<li class="level02 hide"><a href="#">String Search</a></li>
-						<!--// 2Depth Menu -->
-					<li><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>
-					<li class="on"><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>					
-						<!-- 2Depth Menu //-->
-						<li class="level02"><a href="/carpe/timeline_chart.do">Timeline</a></li>
-						<li class="level02"><a href="/carpe/communication.do">Communication</a></li> 
-						<li class="level02"><a href="/carpe/usage.do">Usage history</a></li>
-						<li class="level02 on"><a href="/carpe/gps.do">Location map</a></li>
-						<!--// 2Depth Menu -->
-					<li><a href="#" class="icon report">Report</a></li>
-				</ul>
-			</div>
-		</nav>
+		<c:import url="../common/left_nav.jsp">
+		  <c:param name="d1" value="visualization"></c:param>
+		  <c:param name="d2" value="locationmap"></c:param>
+		</c:import>
 		<!-- // nav -->
 
 		<!-- main -->

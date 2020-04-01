@@ -32,4 +32,14 @@ public class CommunicationServiceImpl implements CommunicationService {
 	public Map selectCallStatCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectCallStatCount(paramMap);
 	}
+
+	@Override
+	public List<Map> selectCommunicationRoomList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectCommunicationRoomList(paramMap);
+	}
+
+	@Override
+	public List<Map> selectCommunicationDataList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectCommunicationDataList(paramMap);
+	}
 }
