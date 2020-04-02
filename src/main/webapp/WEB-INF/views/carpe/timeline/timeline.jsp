@@ -66,11 +66,11 @@
 	<!-- // wrap -->
 
 	<!-- 공통 javascript 영역 -->
-	<script src="https://www.amcharts.com/lib/4/core.js"></script>
-	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-	<script src="https://www.amcharts.com/lib/4/plugins/timeline.js"></script>
-	<script src="https://www.amcharts.com/lib/4/plugins/bullets.js"></script>
-	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/core.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/charts.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/themes/animated.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/plugins/timeline.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/plugins/bullets.js"></script>
 	<!-- // 공통 javascript 영역 -->
 
 	<script>

@@ -96,9 +96,9 @@
 	</div><!-- // pop-up end -->
 
 	<!-- 공통 javascript 영역 -->
-	<script src="https://www.amcharts.com/lib/4/core.js"></script>
-	<script src="https://www.amcharts.com/lib/4/charts.js"></script>
-	<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/core.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/charts.js"></script>
+	<script src="/carpe/resources/amcharts_4.5.3/amcharts4/themes/animated.js"></script>
 	<!-- // 공통 javascript 영역 -->
 
 	<!-- 현재 페이지에 필요한 js -->

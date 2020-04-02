@@ -577,15 +577,17 @@
       //File Type Server Grid
       var grid = new dhx.Grid("grid_container", {
         columns: [
-          { width: 50, id: "type", header: [{ text: "" }] },
+          { width: 50, id: "ico", header: [{ text: "" }] },
           { width: 250, id: "name", header: [{ text: "Name" }] },
           { width: 55, id: "ext", header: [{ text: "Ext" }] },
           { /* width: 82, */ id: "size", header: [{ text: "Size" }] },
-          { width: 250, id: "path", hidden: true, header: [{ text: "Path" }] }
+          { id: "type", hidden: true, header: [{ text: "Type" }] },
+          { id: "path", hidden: true, header: [{ text: "Path" }] }
         ],
         headerRowHeight: 30,
         rowHeight: 30,
         height: 300,
+        htmlEnable: true,
         selection: "row"
       });
 

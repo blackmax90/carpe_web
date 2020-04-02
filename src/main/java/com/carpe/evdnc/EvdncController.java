@@ -264,6 +264,7 @@ public class EvdncController {
 			tmpPath = tmpPath.substring(0, tmpPath.lastIndexOf("\\"));
 			dirInfo = new HashMap<>();
 			dirInfo.put("id", (idx++) + "");
+			dirInfo.put("ico", "<div class=\"ftype_b\"></div>");
 			dirInfo.put("type", "B");
 			dirInfo.put("name", "..");
 			dirInfo.put("ext", "");
@@ -276,6 +277,7 @@ public class EvdncController {
 			long fileSize = file.length();
 			dirInfo = new HashMap<>();
 			dirInfo.put("id", (idx++) + "");
+			dirInfo.put("ico", "<div class=\"ftype_f\"></div>");
 			dirInfo.put("type", "F");
 			dirInfo.put("name", FilenameUtils.getBaseName(file.getName()));
 			dirInfo.put("ext", FilenameUtils.getExtension(file.getName()));
@@ -283,6 +285,7 @@ public class EvdncController {
 			dirInfo.put("path", file.getCanonicalPath().replace(baseF.getCanonicalPath(), ""));
 
 			if (file.isDirectory()) {
+				dirInfo.put("ico", "<div class=\"ftype_d\"></div>");
 				dirInfo.put("type", "D");
 				dirInfo.put("size", "");
 			}
