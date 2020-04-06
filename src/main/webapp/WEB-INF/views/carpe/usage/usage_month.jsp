@@ -111,7 +111,7 @@
                   </div><!-- // pop-content end -->
                 </div><!-- // pop-up end -->
             </div>
-            <div id="jqxGrid_Systemlog" role="grid" class="cont-result ofy-auto" style="width: calc(100% - 4rem); height:calc(100% - 8rem);"><!-- // Table 영역 // -->
+            <div id="jqxGrid_Systemlog" role="grid" class="cont-result" style="width: calc(100% - 4rem); height:calc(100% - 8rem);"><!-- // Table 영역 // -->
               <!--// Table Sample - Size Check //-->
               <table class="tbl-grid tbl-data-check ">
                 <colgroup>

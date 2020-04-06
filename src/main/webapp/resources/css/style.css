@@ -2372,6 +2372,11 @@ h5 {
 	margin-left:1rem;
 }
 
+.usage-m .container .jqx-splitter-panel .tbl-grid.tbl-data-check th, 
+.usage-m .container .jqx-splitter-panel .tbl-grid.tbl-data-check td {
+	line-height: 1.8rem;
+}
+
 .usage-m .container .jqx-splitter-panel .cont-result {
 	margin:0 2rem;
 }
@@ -2567,10 +2572,36 @@ h5 {
   margin-top: 2px;
 }
 
+.ftype_f {
+	width: 100%;
+    height: 100%;
+    background: url(../images/ico_file.svg) no-repeat center calc(50% - 0.1rem);
+    background-size: 1.6rem 2rem;
+}
+
+.ftype_d {
+	width: 100%;
+    height: 100%;
+    background: url(../images/ico_folder.svg) no-repeat center calc(50% - 0.1rem);
+    background-size: 2rem 1.8rem;
+}
+
+.ftype_b {
+	width: 100%;
+    height: 100%;
+    background: url(../images/ico_arr_back.svg) no-repeat center calc(50% - 0.1rem);
+    background-size: 1.2rem 2rem;
+}
+
+.msg .pop-header > div,
+.msg .pop-header.jqx-window-header > div{
+	width:100%;
+}
+
 .msg .pop-header h1{
 	display:inline-block;
 	float:left;
-	width:calc(100% - 13.2rem);
+	width:calc(100% - 12.2rem);
 	padding-right:1rem;
 	line-height:calc(3rem - 1px);
 }
@@ -2765,7 +2796,7 @@ h5 {
 
 .chatLog .data_log .log time {
 	display: inline-block;
-	margin: 0.6rem 0 0.6rem 0.6rem;
+	margin: 0.6rem;
 	font-size: 1.2rem;
 }
 
@@ -2780,10 +2811,6 @@ h5 {
 
 .chatLog .data_log.other .log span {
 	background:#FFF;
-}
-
-.chatLog .data_log.other .log time {
-	margin: 0.6rem;
 }
 
 .chatroom .search-date {
