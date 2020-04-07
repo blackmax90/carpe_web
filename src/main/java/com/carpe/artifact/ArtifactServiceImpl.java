@@ -111,6 +111,226 @@ public class ArtifactServiceImpl implements ArtifactService {
 		return dao.selectEventLogsListCount(paramMap);
 	}
 	
+	// lv1_os_win_event_logs_antiforensics
+	@Override
+	public List<Map> selectEventLogsAntiforensicsList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsAntiforensicsList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsAntiforensicsListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsAntiforensicsListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_applications
+	@Override
+	public List<Map> selectEventLogsApplicationsList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsApplicationsList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsApplicationsListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsApplicationsListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_dns
+	@Override
+	public List<Map> selectEventLogsDNSList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsDNSList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsDNSListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsDNSListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_file_handling
+	@Override
+	public List<Map> selectEventLogsFileHandlingList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsFileHandlingList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsFileHandlingListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsFileHandlingListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_logonoff
+	@Override
+	public List<Map> selectEventLogsLogonoffList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsLogonoffList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsLogonoffListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsLogonoffListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_ms_alerts
+	@Override
+	public List<Map> selectEventLogsMsAlertsList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsMsAlertsList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsMsAlertsListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsMsAlertsListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_msi_installer
+	@Override
+	public List<Map> selectEventLogsMsiInstallerList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsMsiInstallerList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsMsiInstallerListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsMsiInstallerListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_network
+	@Override
+	public List<Map> selectEventLogsNetworkList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsNetworkList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsNetworkListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsNetworkListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_others
+	@Override
+	public List<Map> selectEventLogsOthersList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsOthersList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsOthersListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsOthersListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_pconoff
+	@Override
+	public List<Map> selectEventLogsPConoffList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsPConoffList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsPConoffListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsPConoffListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_printer
+	@Override
+	public List<Map> selectEventLogsPrinterList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsPrinterList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsPrinterListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsPrinterListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_process
+	@Override
+	public List<Map> selectEventLogsProcessList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsProcessList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsProcessListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsProcessListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_registry_handling
+	@Override
+	public List<Map> selectEventLogsRegistryHandlingList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsRegistryHandlingList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsRegistryHandlingListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsRegistryHandlingListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_remoteonoff
+	@Override
+	public List<Map> selectEventLogsRemoteonoffList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsRemoteonoffList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsRemoteonoffListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsRemoteonoffListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_screen_saver
+	@Override
+	public List<Map> selectEventLogsScreenSaverList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsScreenSaverList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsScreenSaverListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsScreenSaverListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_shared_folder
+	@Override
+	public List<Map> selectEventLogsSharedFolderList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsSharedFolderList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsSharedFolderListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsSharedFolderListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_sleeponoff
+	@Override
+	public List<Map> selectEventLogsSleeponoffList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsSleeponoffList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsSleeponoffListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsSleeponoffListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_telemetry
+	@Override
+	public List<Map> selectEventLogsTelemetryList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsTelemetryList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsTelemetryListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsTelemetryListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_time_changed
+	@Override
+	public List<Map> selectEventLogsTimeChangedList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsTimeChangedList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsTimeChangedListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsTimeChangedListCount(paramMap);
+	}
+	
+	// lv1_os_win_event_logs_usb_devices
+	@Override
+	public List<Map> selectEventLogsUsbDevicesList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsUsbDevicesList(paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsUsbDevicesListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEventLogsUsbDevicesListCount(paramMap);
+	}
+	
 	// lv1_os_win_jumplist
 	@Override
 	public List<Map> selectJumplistList(Map<String, Object> paramMap) throws Exception {

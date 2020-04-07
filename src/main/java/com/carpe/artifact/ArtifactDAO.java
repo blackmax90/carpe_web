@@ -39,9 +39,91 @@ public interface ArtifactDAO {
 	public List<Map> selectTimelineList(Map<String, Object> paramMap) throws Exception;
 	
 	// lv1
+	
 	// lv1_os_win_event_logs
 	public List<Map> selectEventLogsList(Map<String, Object> paramMap) throws Exception;
 	public Map selectEventLogsListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_antiforensics
+	public List<Map> selectEventLogsAntiforensicsList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsAntiforensicsListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_applications
+	public List<Map> selectEventLogsApplicationsList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsApplicationsListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_dns
+	public List<Map> selectEventLogsDNSList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsDNSListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_file_handling
+	public List<Map> selectEventLogsFileHandlingList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsFileHandlingListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_logonoff
+	public List<Map> selectEventLogsLogonoffList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsLogonoffListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_ms_alerts
+	public List<Map> selectEventLogsMsAlertsList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsMsAlertsListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_msi_installer
+	public List<Map> selectEventLogsMsiInstallerList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsMsiInstallerListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_network
+	public List<Map> selectEventLogsNetworkList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsNetworkListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_others
+	public List<Map> selectEventLogsOthersList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsOthersListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_pconoff
+	public List<Map> selectEventLogsPConoffList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsPConoffListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_printer
+	public List<Map> selectEventLogsPrinterList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsPrinterListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_process
+	public List<Map> selectEventLogsProcessList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsProcessListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_registry_handling
+	public List<Map> selectEventLogsRegistryHandlingList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsRegistryHandlingListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_remoteonoff
+	public List<Map> selectEventLogsRemoteonoffList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsRemoteonoffListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_screen_saver
+	public List<Map> selectEventLogsScreenSaverList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsScreenSaverListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_shared_folder
+	public List<Map> selectEventLogsSharedFolderList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsSharedFolderListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_sleeponoff
+	public List<Map> selectEventLogsSleeponoffList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsSleeponoffListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_telemetry
+	public List<Map> selectEventLogsTelemetryList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsTelemetryListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_time_changed
+	public List<Map> selectEventLogsTimeChangedList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsTimeChangedListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_event_logs_usb_devices
+	public List<Map> selectEventLogsUsbDevicesList(Map<String, Object> paramMap) throws Exception;
+	public Map selectEventLogsUsbDevicesListCount(Map<String, Object> paramMap) throws Exception;
+
 	
 	// lv1_os_win_jumplist
 	public List<Map> selectJumplistList(Map<String, Object> paramMap) throws Exception;

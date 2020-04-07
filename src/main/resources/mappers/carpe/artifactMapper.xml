@@ -138,6 +138,249 @@
 		SELECT count(*) as cnt FROM lv1_os_win_event_logs
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
+
+	<!-- lv1_os_win_event_logs_antiforensics -->
+	<select id="selectEventLogsAntiforensicsList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_antiforensics
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsAntiforensicsListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_antiforensics
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_applications -->
+	<select id="selectEventLogsApplicationsList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_applications
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsApplicationsListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_applications
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_dns -->
+	<select id="selectEventLogsDNSList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_dns
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsDNSListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_dns
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_file_handling -->
+	<select id="selectEventLogsFileHandlingList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_file_handling
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsFileHandlingListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_file_handling
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_logonoff -->
+	<select id="selectEventLogsLogonoffList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_logonoff
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsLogonoffListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_logonoff
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_ms_alerts -->
+	<select id="selectEventLogsMsAlertsList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_ms_alerts
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsMsAlertsListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_ms_alerts
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_msi_installer -->
+	<select id="selectEventLogsMsiInstallerList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_msi_installer
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsMsiInstallerListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_msi_installer
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_network -->
+	<select id="selectEventLogsNetworkList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_network
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsNetworkListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_network
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_others -->
+	<select id="selectEventLogsOthersList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_others
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsOthersListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_others
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_pconoff -->
+	<select id="selectEventLogsPConoffList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_pconoff
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsPConoffListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_pconoff
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_printer -->
+	<select id="selectEventLogsPrinterList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_printer
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsPrinterListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_printer
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_process -->
+	<select id="selectEventLogsProcessList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_process
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsProcessListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_process
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_registry_handling -->
+	<select id="selectEventLogsRegistryHandlingList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_registry_handling
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsRegistryHandlingListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_registry_handling
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_remoteonoff -->
+	<select id="selectEventLogsRemoteonoffList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_remoteonoff
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsRemoteonoffListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_remoteonoff
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_screen_saver -->
+	<select id="selectEventLogsScreenSaverList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_screen_saver
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsScreenSaverListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_screen_saver
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_shared_folder -->
+	<select id="selectEventLogsSharedFolderList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_shared_folder
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsSharedFolderListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_shared_folder
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_sleeponoff -->
+	<select id="selectEventLogsSleeponoffList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_sleeponoff
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsSleeponoffListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_sleeponoff
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_telemetry -->
+	<select id="selectEventLogsTelemetryList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_telemetry
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsTelemetryListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_telemetry
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_time_changed -->
+	<select id="selectEventLogsTimeChangedList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_time_changed
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsTimeChangedListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_time_changed
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_event_logs_usb_devices -->
+	<select id="selectEventLogsUsbDevicesList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_event_logs_usb_devices
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEventLogsUsbDevicesListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_event_logs_usb_devices
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	
+	
 	<!-- lv1_os_win_jumplist -->
 	<select id="selectJumplistList" parameterType="Map" resultType="Map">
 		SELECT case_id, evd_id, par_id, app_id, app_name, target_file_path, arguments, volume_name, volume_serial_number,

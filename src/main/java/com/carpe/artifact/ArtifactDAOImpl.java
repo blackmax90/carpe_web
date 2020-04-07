@@ -109,7 +109,7 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 		return sqlSession.selectList(Namespace + ".selectTimelineList", paramMap);
 	}
 	
-	// lv1
+	// ####################### lv1 #############################
 	// lv1_os_win_event_logs
 	@Override
 	public List<Map> selectEventLogsList(Map<String, Object> paramMap) throws Exception {
@@ -121,6 +121,228 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 		return sqlSession.selectOne(Namespace + ".selectEventLogsListCount", paramMap);
 	}
 
+	// lv1_os_win_event_logs_antiforensics
+	@Override
+	public List<Map> selectEventLogsAntiforensicsList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsAntiforensicsList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsAntiforensicsListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsAntiforensicsListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_applications
+	@Override
+	public List<Map> selectEventLogsApplicationsList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsApplicationsList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsApplicationsListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsApplicationsListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_dns
+	@Override
+	public List<Map> selectEventLogsDNSList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsDNSList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsDNSListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsDNSListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_file_handling
+	@Override
+	public List<Map> selectEventLogsFileHandlingList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsFileHandlingList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsFileHandlingListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsFileHandlingListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_logonoff
+	@Override
+	public List<Map> selectEventLogsLogonoffList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsLogonoffList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsLogonoffListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsLogonoffListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_ms_alerts
+	@Override
+	public List<Map> selectEventLogsMsAlertsList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsMsAlertsList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsMsAlertsListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsMsAlertsListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_msi_installer
+	@Override
+	public List<Map> selectEventLogsMsiInstallerList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsMsiInstallerList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsMsiInstallerListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsMsiInstallerListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_network
+	@Override
+	public List<Map> selectEventLogsNetworkList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsNetworkList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsNetworkListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsNetworkListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_others
+	@Override
+	public List<Map> selectEventLogsOthersList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsOthersList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsOthersListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsOthersListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_pconoff
+	@Override
+	public List<Map> selectEventLogsPConoffList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsPConoffList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsPConoffListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsPConoffListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_printer
+	@Override
+	public List<Map> selectEventLogsPrinterList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsPrinterList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsPrinterListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsPrinterListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_process
+	@Override
+	public List<Map> selectEventLogsProcessList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsProcessList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsProcessListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsProcessListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_registry_handling
+	@Override
+	public List<Map> selectEventLogsRegistryHandlingList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsRegistryHandlingList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsRegistryHandlingListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsRegistryHandlingListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_remoteonoff
+	@Override
+	public List<Map> selectEventLogsRemoteonoffList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsRemoteonoffList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsRemoteonoffListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsRemoteonoffListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_screen_saver
+	@Override
+	public List<Map> selectEventLogsScreenSaverList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsScreenSaverList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsScreenSaverListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsScreenSaverListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_shared_folder
+	@Override
+	public List<Map> selectEventLogsSharedFolderList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsSharedFolderList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsSharedFolderListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsSharedFolderListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_sleeponoff
+	@Override
+	public List<Map> selectEventLogsSleeponoffList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsSleeponoffList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsSleeponoffListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsSleeponoffListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_telemetry
+	@Override
+	public List<Map> selectEventLogsTelemetryList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsTelemetryList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsTelemetryListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsTelemetryListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_time_changed
+	@Override
+	public List<Map> selectEventLogsTimeChangedList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsTimeChangedList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsTimeChangedListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsTimeChangedListCount", paramMap);
+	}
+	
+	// lv1_os_win_event_logs_usb_devices
+	@Override
+	public List<Map> selectEventLogsUsbDevicesList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectEventLogsUsbDevicesList", paramMap);
+	}
+
+	@Override
+	public Map selectEventLogsUsbDevicesListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectEventLogsUsbDevicesListCount", paramMap);
+	}
+	
+	
+	
 	// lv1_os_win_jumplist
 	@Override
 	public List<Map> selectJumplistList(Map<String, Object> paramMap) throws Exception {

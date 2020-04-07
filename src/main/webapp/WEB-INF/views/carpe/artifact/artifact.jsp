@@ -311,9 +311,9 @@
 			// ############### lv1 ###############
 			
 			// lv1_os_win_event_logs
-			artifactKind["EventLogs"] = {};
-			artifactKind["EventLogs"].url = "/carpe/eventlogs.do";
-			artifactKind["EventLogs"].columnSet = [
+			artifactKind["All"] = {};
+			artifactKind["All"].url = "/carpe/eventlogs.do";
+			artifactKind["All"].columnSet = [
 				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'event_type', dataField: 'event_type', width: '10%', cellsalign: 'left', align: 'center'}
@@ -326,6 +326,323 @@
 				,{text: 'task_category', dataField: 'task_category', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'computer_name', dataField: 'computer_name', width: '10%', cellsalign: 'left', align: 'center'}
 				,{text: 'event_data', dataField: 'event_data', width: '40%', cellsalign: 'left', align: 'center'}				
+			];
+			
+			// lv1_os_win_event_logs_antiforensics
+			artifactKind["Antiforensics"] = {};
+			artifactKind["Antiforensics"].url = "/carpe/eventlogs_antiforensics.do";
+			artifactKind["Antiforensics"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}				
+			];
+			
+			// lv1_os_win_event_logs_applications
+			artifactKind["Applications"] = {};
+			artifactKind["Applications"].url = "/carpe/eventlogs_apps.do";
+			artifactKind["Applications"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'application_name', dataField: 'application_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'path', dataField: 'path', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'resolver_name', dataField: 'resolver_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}
+			];
+			
+			// lv1_os_win_event_logs_dns
+			artifactKind["DNS"] = {};
+			artifactKind["DNS"].url = "/carpe/eventlogs_dns.do";
+			artifactKind["DNS"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'query_name', dataField: 'query_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}				
+			];
+			
+			// lv1_os_win_event_logs_file_handling
+			artifactKind["File Handling"] = {};
+			artifactKind["File Handling"].url = "/carpe/eventlogs_file_handle.do";
+			artifactKind["File Handling"].columnSet = [
+				{text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}				
+			];
+			
+			// lv1_os_win_event_logs_logonoff
+			artifactKind["Log On/Off"] = {};
+			artifactKind["Log On/Off"].url = "/carpe/eventlogs_log_onoff.do";
+			artifactKind["Log On/Off"].columnSet = [
+				{text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}				
+			];
+			
+			// lv1_os_win_event_logs_ms_alerts
+			artifactKind["MS Alerts"] = {};
+			artifactKind["MS Alerts"].url = "/carpe/eventlogs_ms_alerts.do";
+			artifactKind["MS Alerts"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'message', dataField: 'message', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'error_type', dataField: 'error_type', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'program_version', dataField: 'program_version', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}				
+			];
+			
+			// lv1_os_win_event_logs_msi_installer
+			artifactKind["MSI Installer"] = {};
+			artifactKind["MSI Installer"].url = "/carpe/eventlogs_msi.do";
+			artifactKind["MSI Installer"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'product_name', dataField: 'product_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'product_version', dataField: 'product_version', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'manufacturer', dataField: 'manufacturer', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}
+			];
+			
+			// lv1_os_win_event_logs_network
+			artifactKind["Network"] = {};
+			artifactKind["Network"].url = "/carpe/eventlogs_network.do";
+			artifactKind["Network"].columnSet = [
+				{text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'network_name', dataField: 'network_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'description', dataField: 'description', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'category', dataField: 'category', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}				
+			];
+			
+			// lv1_os_win_event_logs_others
+			artifactKind["Others"] = {};
+			artifactKind["Others"].url = "/carpe/eventlogs_others.do";
+			artifactKind["Others"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'name', dataField: 'name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_pconoff
+			artifactKind["PC On/Off"] = {};
+			artifactKind["PC On/Off"].url = "/carpe/eventlogs_pc_onoff.do";
+			artifactKind["PC On/Off"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_printer
+			artifactKind["Printer"] = {};
+			artifactKind["Printer"].url = "/carpe/eventlogs_printer.do";
+			artifactKind["Printer"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'location', dataField: 'location', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'size', dataField: 'size', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'pages', dataField: 'pages', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_process
+			artifactKind["Process"] = {};
+			artifactKind["Process"].url = "/carpe/eventlogs_process.do";
+			artifactKind["Process"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'process_name', dataField: 'process_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_registry_handling
+			artifactKind["Registry Handling"] = {};
+			artifactKind["Registry Handling"].url = "/carpe/eventlogs_reg_handle.do";
+			artifactKind["Registry Handling"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'registry_path', dataField: 'registry_path', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'registry_value_name', dataField: 'registry_value_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'old_value', dataField: 'old_value', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'new_value', dataField: 'new_value', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_remoteonoff
+			artifactKind["Remote On/Off"] = {};
+			artifactKind["Remote On/Off"].url = "/carpe/eventlogs_remote_onoff.do";
+			artifactKind["Remote On/Off"].columnSet = [
+				{text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'connection', dataField: 'connection', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'address', dataField: 'address', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_screen_saver
+			artifactKind["Screen Saver"] = {};
+			artifactKind["Screen Saver"].url = "/carpe/eventlogs_screen_saver.do";
+			artifactKind["Screen Saver"].columnSet = [
+				{text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_shared_folder
+			artifactKind["Shared Folder"] = {};
+			artifactKind["Shared Folder"].url = "/carpe/eventlogs_shared.do";
+			artifactKind["Shared Folder"].columnSet = [
+				{text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_sleeponoff
+			artifactKind["Sleep On/Off"] = {};
+			artifactKind["Sleep On/Off"].url = "/carpe/eventlogs_sleep.do";
+			artifactKind["Sleep On/Off"].columnSet = [
+				{text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time_sleep', dataField: 'time_sleep', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time_wake', dataField: 'time_wake', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_telemetry
+			artifactKind["Telemetry"] = {};
+			artifactKind["Telemetry"].url = "/carpe/eventlogs_telemetry.do";
+			artifactKind["Telemetry"].columnSet = [
+				{text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'program_path', dataField: 'program_path', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_time_changed
+			artifactKind["Time Changed"] = {};
+			artifactKind["Time Changed"].url = "/carpe/eventlogs_time_changed.do";
+			artifactKind["Time Changed"].columnSet = [
+				{text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time_old', dataField: 'time_old', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time_new', dataField: 'time_new', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
+			];
+			
+			// lv1_os_win_event_logs_usb_devices
+			artifactKind["USB Devices"] = {};
+			artifactKind["USB Devices"].url = "/carpe/eventlogs_usb.do";
+			artifactKind["USB Devices"].columnSet = [
+				 {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'task', dataField: 'task', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'device_instance_id', dataField: 'device_instance_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'description', dataField: 'description', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'manufacturer', dataField: 'manufacturer', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'model', dataField: 'model', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'revision', dataField: 'revision', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'serial_number', dataField: 'serial_number', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'parentid', dataField: 'parentid', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user', dataField: 'user', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'user_sid', dataField: 'user_sid', width: '40%', cellsalign: 'left', align: 'center'}				
+				,{text: 'event_id', dataField: 'event_id', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+				,{text: 'event_id_description', dataField: 'event_id_description', width: '10%', cellsalign: 'left', align: 'center'}								
 			];
 			
 			//lv1_os_win_jumplist

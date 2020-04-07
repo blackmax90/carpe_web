@@ -61,17 +61,46 @@ public class ArtifactController {
 			HttpSession session, Model model) throws Exception {
 		
 		// lv1
+		
+		List subRegList = new ArrayList();
+		addArtifactTreeNode(subRegList, "Reg Installed Programs", true, true, null);
+		addArtifactTreeNode(subRegList, "Reg USB Devices", true, true, null);
+		addArtifactTreeNode(subRegList, "Reg OS Info", true, true, null);
+		addArtifactTreeNode(subRegList, "Reg User Accounts", true, true, null);
+		addArtifactTreeNode(subRegList, "Reg UserAssist", true, true, null);
+		addArtifactTreeNode(subRegList, "Reg Amcache Program", true, true, null);
+		addArtifactTreeNode(subRegList, "Reg Amcache File", true, true, null);
+		
+		List subEvtList = new ArrayList();
+		addArtifactTreeNode(subEvtList, "All", true, true, null); // Event logs all
+		addArtifactTreeNode(subEvtList, "Antiforensics", true, true, null);
+		addArtifactTreeNode(subEvtList, "Applications", true, true, null);
+		addArtifactTreeNode(subEvtList, "DNS", true, true, null);
+		addArtifactTreeNode(subEvtList, "File Handling", true, true, null);
+		addArtifactTreeNode(subEvtList, "Log On/Off", true, true, null);
+		addArtifactTreeNode(subEvtList, "MS Alerts", true, true, null);
+		addArtifactTreeNode(subEvtList, "MSI Installer", true, true, null);
+		addArtifactTreeNode(subEvtList, "Network", true, true, null);
+		addArtifactTreeNode(subEvtList, "Others", true, true, null);
+		addArtifactTreeNode(subEvtList, "PC On/Off", true, true, null);
+		addArtifactTreeNode(subEvtList, "Printer", true, true, null);
+		addArtifactTreeNode(subEvtList, "Process", true, true, null);
+		addArtifactTreeNode(subEvtList, "Registry Handling", true, true, null);
+		addArtifactTreeNode(subEvtList, "Remote On/Off", true, true, null);
+		addArtifactTreeNode(subEvtList, "Screen Saver", true, true, null);
+		addArtifactTreeNode(subEvtList, "Shared Folder", true, true, null);
+		addArtifactTreeNode(subEvtList, "Sleep On/Off", true, true, null);
+		addArtifactTreeNode(subEvtList, "Telemetry", true, true, null);
+		addArtifactTreeNode(subEvtList, "Time Changed", true, true, null);
+		addArtifactTreeNode(subEvtList, "USB Devices", true, true, null);
+
 		List subLv1List = new ArrayList();
-		addArtifactTreeNode(subLv1List, "Reg Installed Programs", true, true, null);
-		addArtifactTreeNode(subLv1List, "Reg USB Devices", true, true, null);
-		addArtifactTreeNode(subLv1List, "Reg OS Info", true, true, null);
-		addArtifactTreeNode(subLv1List, "Reg User Accounts", true, true, null);
-		addArtifactTreeNode(subLv1List, "Reg UserAssist", true, true, null);
-		addArtifactTreeNode(subLv1List, "Reg Amcache Program", true, true, null);
-		addArtifactTreeNode(subLv1List, "Reg Amcache File", true, true, null);
-
-
-		addArtifactTreeNode(subLv1List, "EventLogs", true, true, null);
+		addArtifactTreeNode(subLv1List, "Registry", false, false, subRegList);
+		addArtifactTreeNode(subLv1List, "Event Logs", false, false, subEvtList);
+		
+		
+		
+		
 		addArtifactTreeNode(subLv1List, "NTFS $LogFile", true, true, null);
 		addArtifactTreeNode(subLv1List, "NTFS USN Journal", true, true, null);
 
@@ -551,6 +580,770 @@ public class ArtifactController {
 
 		return mav;
 	}
+	
+	// lv1_os_win_event_logs_antiforensics
+	@RequestMapping(value = "/eventlogs_antiforensics.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsAntiforensics(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsAntiforensicsList = service.selectEventLogsAntiforensicsList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsAntiforensicsListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsAntiforensicsList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_applications
+	@RequestMapping(value = "/eventlogs_apps.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsApps(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsAppList = service.selectEventLogsApplicationsList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsApplicationsListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsAppList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_dns
+	@RequestMapping(value = "/eventlogs_dns.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsDNS(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsDNSList = service.selectEventLogsDNSList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsDNSListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsDNSList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_file_handling
+	@RequestMapping(value = "/eventlogs_file_handle.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsFileHandle(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsFileHandleList = service.selectEventLogsFileHandlingList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsFileHandlingListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsFileHandleList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_logonoff
+	@RequestMapping(value = "/eventlogs_log_onoff.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsLogon(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsLogonoffList = service.selectEventLogsLogonoffList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsLogonoffListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsLogonoffList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_ms_alerts
+	@RequestMapping(value = "/eventlogs_ms_alerts.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsMsAlerts(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsMsAlertsList = service.selectEventLogsMsAlertsList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsMsAlertsListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsMsAlertsList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_msi_installer
+	@RequestMapping(value = "/eventlogs_msi.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsMsi(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsMsiList = service.selectEventLogsMsiInstallerList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsMsiInstallerListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsMsiList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_network
+	@RequestMapping(value = "/eventlogs_network.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsNetwork(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsNetworkList = service.selectEventLogsNetworkList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsNetworkListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsNetworkList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_others
+	@RequestMapping(value = "/eventlogs_others.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsOthers(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsOthersList = service.selectEventLogsOthersList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsOthersListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsOthersList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_pconoff
+	@RequestMapping(value = "/eventlogs_pc_onoff.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsPConoff(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsPConoffList = service.selectEventLogsPConoffList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsPConoffListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsPConoffList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_printer
+	@RequestMapping(value = "/eventlogs_printer.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsPrinter(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsPrinterList = service.selectEventLogsPrinterList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsPrinterListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsPrinterList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_process
+	@RequestMapping(value = "/eventlogs_process.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsProcess(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsProcessList = service.selectEventLogsProcessList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsProcessListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsProcessList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_registry_handling
+	@RequestMapping(value = "/eventlogs_reg_handle.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsRegHandle(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsRegHandleList = service.selectEventLogsRegistryHandlingList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsRegistryHandlingListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsRegHandleList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_remoteonoff
+	@RequestMapping(value = "/eventlogs_remote_onoff.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsRemoteOnOff (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsRemoteList = service.selectEventLogsRemoteonoffList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsRemoteonoffListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsRemoteList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_screen_saver
+	@RequestMapping(value = "/eventlogs_screen_saver.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsScreen(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsScreenSaveList = service.selectEventLogsScreenSaverList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsScreenSaverListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsScreenSaveList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_shared_folder
+	@RequestMapping(value = "/eventlogs_shared.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsShared(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsSharedList = service.selectEventLogsSharedFolderList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsSharedFolderListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsSharedList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_sleeponoff
+	@RequestMapping(value = "/eventlogs_sleep.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsSleep(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsSleepList = service.selectEventLogsSleeponoffList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsSleeponoffListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsSleepList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_telemetry
+	@RequestMapping(value = "/eventlogs_telemetry.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsTelemetry(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsTelemetryList = service.selectEventLogsTelemetryList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsTelemetryListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsTelemetryList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_time_changed
+	@RequestMapping(value = "/eventlogs_time_changed.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsTimeChanged(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsTimeChangedList = service.selectEventLogsTimeChangedList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsTimeChangedListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsTimeChangedList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+	// lv1_os_win_event_logs_usb_devices
+	@RequestMapping(value = "/eventlogs_usb.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getEventLogsUSB(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> EventLogsUSBList = service.selectEventLogsUsbDevicesList(paramMap);
+		int totalCnt = ((Long) service.selectEventLogsUsbDevicesListCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", EventLogsUSBList);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+	
+
+
+	
 	// lv1_os_win_jumplist
 	@RequestMapping(value = "/jumplist.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getJumplist(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
