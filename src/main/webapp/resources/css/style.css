@@ -1141,7 +1141,7 @@ label {
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 0.3rem;
 }
-
+/* 
 .select:after {
   position: absolute;
   top: 50%;
@@ -1156,7 +1156,7 @@ label {
   background: url(../images/ico_arr_next_off.svg) no-repeat right center;
   background-size: 1.4rem 1.2rem;
   content: "";
-}
+} */
 
 .select select {    
   position: relative;
@@ -1168,6 +1168,8 @@ label {
   color: #323333;
   font-size: 1.4rem;
   line-height: 2rem;
+  background: url(../images/ico_arr_down.svg) no-repeat calc(100% - 0.6rem) center;
+  background-size: 1.2rem 1.2rem;
 }
 
 /*--------------------------------------------------------------
@@ -2374,7 +2376,13 @@ h5 {
 
 .usage-m .container .jqx-splitter-panel .tbl-grid.tbl-data-check th, 
 .usage-m .container .jqx-splitter-panel .tbl-grid.tbl-data-check td {
+	width: 3%;
 	line-height: 1.8rem;
+}
+
+.usage-m .container .jqx-splitter-panel .tbl-grid.tbl-data-check th:first-child, 
+.usage-m .container .jqx-splitter-panel .tbl-grid.tbl-data-check td:first-child {
+    width: auto;
 }
 
 .usage-m .container .jqx-splitter-panel .cont-result {
