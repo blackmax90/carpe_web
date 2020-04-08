@@ -1,5 +1,10 @@
 package com.carpe.filesystem;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,15 +12,19 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import com.carpe.common.Consts;
 
@@ -224,5 +233,75 @@ public class FileSystemController {
 		mav.setViewName("carpe/filesystem/hexview/hexviewer");
 
 		return mav;
+	}
+
+	@RequestMapping(value = "/file_preview.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView filePreview(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+
+		mav.addAllObjects(map);
+		mav.setViewName("carpe/filesystem/file_preview");
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/get_image_preview.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public void getImagePreview(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, HttpServletResponse response, Model model) throws Exception {
+	  ServletOutputStream out = response.getOutputStream();
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("id", map.get("seq"));
+		paramMap.put("file_id", map.get("id"));
+
+		Map rsMap = service.selectFileInfo(paramMap);
+		
+		if (rsMap != null) {
+			File file = new File(rsMap.get("parent_path") + "/" + rsMap.get("name"));
+			response.setContentType("image/" + rsMap.get("extension")); 
+			
+			if (file != null && file.isFile() == true) {
+				FileInputStream fis = new FileInputStream(file);
+				byte[] buff = new byte[1024];
+				int len = 0;
+
+				try {
+					while ((len = fis.read(buff)) != -1) {
+						out.write(buff, 0, len); 
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				fis.close();
+      }
+		}
+	}
+
+	@RequestMapping(value = "/get_video_preview.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public StreamingResponseBody getVideoPreview(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		
+		paramMap.put("id", map.get("seq"));
+		paramMap.put("file_id", map.get("id"));
+
+		Map rsMap = service.selectFileInfo(paramMap);
+		
+		if (rsMap != null) {
+			File file = new File(rsMap.get("parent_path") + "/" + rsMap.get("name"));
+			
+			final InputStream is = new FileInputStream(file);
+
+      return os -> {
+      	byte[] data = new byte[2048];
+        int read = 0;
+        while ((read = is.read(data)) > 0) {
+            os.write(data, 0, read);
+        }
+        os.flush();
+        is.close();
+      };
+		}
+		
+		return null;
 	}
 }

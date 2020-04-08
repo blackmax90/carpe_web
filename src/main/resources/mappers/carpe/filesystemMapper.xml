@@ -46,7 +46,7 @@
 		  and a.par_id = b.par_id
 		order by a.dir_type, a.name
 	 -->
-		select a.file_id as id, a.name, a.dir_type, a.size, a.md5
+		select a.file_id as id, a.name, a.dir_type, a.size, a.md5, a.extension, a.id as seq
 				  , FROM_UNIXTIME(a.ctime, '%Y-%m-%d %H:%i:%s') as ctime
 				  , a.ctime_nano as ctime_nano
 				  , FROM_UNIXTIME(a.atime, '%Y-%m-%d %H:%i:%s') as atime
@@ -61,6 +61,14 @@
 				  and (a.dir_type = 3 or a.dir_type = 5)
 				  and a.par_id = b.par_id
 				order by a.dir_type, a.name
+	</select>
+
+	<select id="selectFileInfo" parameterType="Map" resultType="Map">
+    SELECT name, parent_path, extension
+      FROM file_info
+     WHERE 1=1
+       AND id = #{id}
+       AND file_id = #{file_id}
 	</select>
 
 	<select id="selectDateTreeMap" parameterType="Map" resultType="Map">
