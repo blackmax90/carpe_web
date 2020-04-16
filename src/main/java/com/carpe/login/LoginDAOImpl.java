@@ -19,4 +19,14 @@ public class LoginDAOImpl implements LoginDAO {
 	public UserVO selectUser(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectUser", paramMap);
 	}
+
+	@Override
+	public Map selectUserCnt(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectUserCnt", paramMap);
+	}
+
+	@Override
+	public void insertUser(Map<String, Object> paramMap) throws Exception {
+		sqlSession.insert(Namespace + ".insertUser", paramMap);
+	}
 }

@@ -5,6 +5,8 @@ public class UserVO {
 	private String id;
 	private String name;
 	private String password;
+	private String email;
+	private int grade;
 	private String acl;
 	
 	public String getId() {
@@ -37,6 +39,22 @@ public class UserVO {
 
 	public void setAcl(String acl) {
 		this.acl = acl;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
 
 }

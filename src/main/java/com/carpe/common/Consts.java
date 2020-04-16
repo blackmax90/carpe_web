@@ -16,6 +16,8 @@ public class Consts {
 
 	public static final long TREE_ROOT_ID = 5;
 	public static final long DIR_TYPE = 3;
+	
+	public static final int ADMIN_GRADE = 1;
 
 	public static HttpHeaders responseHeaders = new HttpHeaders();
 	

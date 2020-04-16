@@ -48,6 +48,7 @@
 
 			<exclude-mapping path="/resources/**" />
 			<exclude-mapping path="/login.do" />
+			<exclude-mapping path="/signup.do" />
 
 			<beans:ref bean="authenticationInterceptor" />
 		</interceptor>

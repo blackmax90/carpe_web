@@ -9,4 +9,25 @@
 		where id = #{user_id}
 		  and password = #{user_passwd}
 	</select>
+
+	<select id="selectUserCnt" parameterType="Map" resultType="Map">
+    SELECT COUNT(*) AS cnt
+      FROM investigator_info
+     WHERE 1=1
+       AND id = #{id}
+  </select>
+
+	<insert id="insertUser" parameterType="Map">
+    INSERT INTO investigator_info (
+           id
+         , name
+         , password
+         , email
+    ) VALUES (
+           #{id}
+         , #{name}
+         , #{password}
+         , #{email}
+    )
+	</insert>
 </mapper>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.carpe.mapper.config">
+  <select id="selectUserList" parameterType="Map" resultType="Map">
+    SELECT id, name 
+      FROM investigator_info
+     WHERE 1=1
+     <if test="negrade!=null and !negrade.equals('')">
+       AND grade != #{negrade}
+     </if>
+     <if test="grade!=null and !grade.equals('')">
+       AND grade == #{grade}
+     </if>
+  </select>
+
+  <select id="selectCaseUserAuthList" parameterType="Map" resultType="Map">
+    SELECT a.id, a.case_id, b.case_name, b.description
+      FROM case_user_auth a
+      LEFT JOIN case_info b
+        ON a.case_id = b.case_id
+     WHERE 1=1
+       AND a.id = #{id}
+  </select>
+
+	<select id="selectCaseList" parameterType="Map" resultType="Map">
+		SELECT case_id, case_name, description
+		  FROM case_info
+     WHERE 1=1
+       AND case_id NOT IN (
+           SELECT case_id
+             FROM case_user_auth
+            WHERE 1=1
+              AND id = #{id}
+           )
+		 ORDER BY create_date
+		 LIMIT #{offset}, #{pageSize}
+	</select>
+
+	<select id="selectCaseListCount" parameterType="Map" resultType="Map">
+		SELECT COUNT(*) cnt 
+      FROM case_info
+     WHERE 1=1
+       AND case_id NOT IN (
+           SELECT case_id
+             FROM case_user_auth
+            WHERE 1=1
+              AND id = #{id}
+           )
+	</select>
+
+	<insert id="insertCaseUserAuth" parameterType="Map">
+    INSERT IGNORE INTO case_user_auth (
+           id
+         , case_id
+    ) VALUES (
+           #{id}
+         , #{case_id}
+    )
+  </insert>
+
+	<delete id="deleteCaseUserAuth" parameterType="Map">
+    DELETE FROM case_user_auth
+     WHERE 1=1
+       AND id = #{id}
+       AND case_id = #{case_id}
+  </delete>
+</mapper>

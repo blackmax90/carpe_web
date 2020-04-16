@@ -16,4 +16,14 @@ public class LoginServiceImpl implements LoginService {
 	public UserVO selectUser(Map<String, Object> paramMap) throws Exception {
 		return dao.selectUser(paramMap);
 	}
+
+	@Override
+	public Map selectUserCnt(Map<String, Object> paramMap) throws Exception {
+		return dao.selectUserCnt(paramMap);
+	}
+
+	@Override
+	public void insertUser(Map<String, Object> paramMap) throws Exception {
+		dao.insertUser(paramMap);
+	}
 }

@@ -4,30 +4,51 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.carpe.mapper.caes">
-	<select id="selectCaseList" parameterType="Map" resultType="Map">
-		SELECT @a:=@a+1 serial_number
-		  , case_id, case_name, administrator, DATE_FORMAT(create_date, '%Y-%m-%d') AS create_date, description
-		  , (select count(*) from evidence_info where case_id = a.case_id) AS evd_cnt
-		FROM case_info a, (SELECT @a:= 0) AS sn
-		ORDER BY create_date
-		limit #{offset}, #{pageSize}
-	</select>
-	
-	<select id="selectCaseListCount" parameterType="Map" resultType="Map">
-		SELECT count(*) cnt FROM case_info
-	</select>
+  <select id="selectCaseList" parameterType="Map" resultType="Map">
+    SELECT @a:=@a+1 serial_number, A.*
+      FROM (
+           SELECT a.case_id, a.case_name, a.administrator, DATE_FORMAT(a.create_date, '%Y-%m-%d') AS create_date, a.description
+                , (select count(*) from evidence_info where case_id = a.case_id) AS evd_cnt
+             FROM case_info a
+             LEFT JOIN case_user_auth b
+               ON a.case_id = b.case_id
+            WHERE 1=1
+            <if test="id!=null and !id.equals('')">
+              AND b.id = #{id}
+            </if>
+            GROUP BY a.case_id 
+            ORDER BY a.create_date
+            LIMIT #{offset}, #{pageSize}
+           ) A
+         , (SELECT @a:= 0) AS sn
+  </select>
+  
+  <select id="selectCaseListCount" parameterType="Map" resultType="Map">
+    SELECT count(*) cnt 
+    FROM (
+         SELECT a.*
+           FROM case_info a
+           LEFT JOIN case_user_auth b
+             ON a.case_id = b.case_id
+          WHERE 1=1
+          <if test="id!=null and !id.equals('')">
+            AND b.id = #{id}
+          </if>
+          GROUP BY a.case_id 
+         ) A
+  </select>
 
-	<insert id="insertCase" parameterType="Map">
-		INSERT INTO case_info(case_id, case_name, administrator, create_date, description) 
-			VALUES(#{id}, #{name}, #{admin}, now(), #{desc})
-	</insert>
-	
-	<delete id="deleteCaseList" parameterType="Map">
-		DELETE 
-		  FROM case_info
-		 WHERE case_id in
-		  <foreach item="item" index="index" collection="caseList" open="(" close=")" separator=",">
-            #{item}
-   		  </foreach>
-	</delete>
+  <insert id="insertCase" parameterType="Map">
+    INSERT INTO case_info(case_id, case_name, administrator, create_date, description) 
+      VALUES(#{id}, #{name}, #{admin}, now(), #{desc})
+  </insert>
+  
+  <delete id="deleteCaseList" parameterType="Map">
+    DELETE 
+      FROM case_info
+     WHERE case_id in
+      <foreach item="item" index="index" collection="caseList" open="(" close=")" separator=",">
+           #{item}
+      </foreach>
+  </delete>
 </mapper>
