@@ -346,7 +346,8 @@ dl > dd {
   word-break: break-all;
 }
 
-ul.list-h {
+ul.list-h,
+ul.list-v {
   position: relative;
   display: block;
   width: 100%;
@@ -357,6 +358,11 @@ ul.list-h li {
   float: left;
 }
 
+ul.list-v li {
+  display: block;
+  float: left;
+  width:100%;
+}
 
 /*--------------------------------------------------------------
 # Layout
@@ -652,6 +658,21 @@ button.btn-case-01.btn-search:active {
 
 .temp button.btn-case-01.btn-search {
   margin-left: 0;
+}
+
+button.btn-get-arr {
+	width:100%;
+	min-width:2rem;
+  height: 8rem;
+  margin: 1rem 0;
+  line-height: 100%;
+  background-image: linear-gradient(90deg, #334455 0%, #778899 100%);
+}
+
+  
+button.btn-get-arr:hover,
+button.btn-get-arr:active {
+  background-image: linear-gradient(90deg, #112233 0%, #334455 100%);
 }
 
 button.btn-transparent {
@@ -1434,6 +1455,22 @@ label {
   background-size: 1.4rem 1.4rem;
 }
 
+.ico-get-left:before {
+	width: 100%;
+	height: 100%;
+  background-image: url("../images/ico_get_left.svg");
+	background-position-x: calc(50% - 0.1rem);
+  background-size: 1.2rem 1.8rem;
+}
+
+.ico-get-right:before {
+	width: 100%;
+	height: 100%;
+  background-image: url("../images/ico_get_right.svg");
+	background-position-x: calc(50% + 0.1rem);
+  background-size: 1.2rem 1.8rem;
+}
+
 .ico-search:before {
   width: 1.4rem;
   height: 100%;
@@ -1810,6 +1847,38 @@ h5 {
 
 .container .content-area .btn-area.division-line dl {
 	float:right;
+}
+
+.config .case-result,
+.config .case-control {
+	position:relative;
+	display:inline-block;
+	float:left;
+	height:100%;
+}
+
+.config .case-result {
+	width:49%;
+}
+
+.config .case-result .tit-area {
+	height:5rem;
+	padding: 2rem 2rem 1rem;
+}
+
+.container .jqx-splitter-panel.config .case-result .cont-result {
+	margin: 0 2rem;
+}
+
+.config .case-control {
+	width:2%;
+	text-align:center;
+}
+
+.config .case-control > ul {
+	position:absolute;
+	top:50%;
+	margin-top:-10rem;
 }
 
 .vsa-page .chart-area,
@@ -2196,9 +2265,16 @@ h5 {
 }
 
 .container .jqx-splitter-panel.aside .aside-result {
-  padding: 2rem 0 0 1rem;
+  padding: 0;
   box-sizing: border-box;
 }
+
+.container .jqx-splitter-panel.aside .aside-result .jqx-tree-dropdown-root {
+	width: calc(100%) !important;
+	padding: 2rem 0.5rem 2rem 1rem;
+	box-sizing: border-box;
+}
+
 
 .container .aside.jqx-widget-content,
 .container .aside.jqx-widget-content .jqx-widget-content {
@@ -2323,8 +2399,7 @@ h5 {
 	line-height: 2.8rem;
 }
 
-.vsa-page .container .content-box .tit-area > h3,
-.usage-m .container .content-box .tit-area > h3 { 
+.tit-area > h3.unit { 
 	position:relative;
 	display:inline-block;
 	float:left;
@@ -2334,8 +2409,7 @@ h5 {
 	color:#465A8C;
 }
 
-.vsa-page .container .content-box .tit-area > h3:before,
-.usage-m .container .content-box .tit-area > h3:before {
+.tit-area > h3.unit:before {
 	content:"";
 	position:absolute;
 	display:block;
@@ -2348,8 +2422,7 @@ h5 {
 	border-radius:50%;
 }
 
-.vsa-page .container .content-box .tit-area > h3:after,
-.usage-m .container .content-box .tit-area > h3:after {
+.tit-area > h3.unit:after {
 	clear:both;
 	content:"";
 	position:absolute;

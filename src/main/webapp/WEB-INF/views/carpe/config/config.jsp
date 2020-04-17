@@ -31,22 +31,26 @@
             <div id="jqxGrid_userlist" role="grid" align="left" class="cont-result">
             </div>
           </div>
-          <div class="content-area">        
+          <div class="content-area config">        
             <!--// Content 영역 -->    
-						<div style="width:47.5%; height: 100%; float: left">
-              <h1>User Case</h1>
+			<div class="case-result">
+              <div class="tit-area">
+              	<h3 class="unit">User Case</h3>
+              </div>
               <div id="jqxGrid_usercase" role="grid" align="left" class="cont-result">
                 <!--// Table 영역 //-->
               </div>
             </div>
-						<div style="width:5%; height: 100%; float: left; text-align: center;">
-              <div>
-                <input type="button" id="btnAdd" value="&lt;&lt;" style="width:40px;" /><br /><br />
-                <input type="button" id="btnDel" value="&gt;&gt;" style="width:40px;" />
-              </div>
+			<div class="case-control">
+              <ul class="list-v">
+                <li><button type="button" id="btnAdd" class="btn-get-arr" value="&lt;&lt;"><span class="icon ico-get-left"></span></button></li>
+                <li><button type="button" id="btnDel" class="btn-get-arr" value="&gt;&gt;"><span class="icon ico-get-right"></span></button></li>
+              </ul>
             </div>
-						<div style="width:47.5%; height: 100%; float: left">
-              <h1>Case List</h1>
+			<div class="case-result">
+              <div class="tit-area">
+              	<h3 class="unit">Case List</h3>
+              </div>
               <div id="jqxGrid_caselist" role="grid" align="left" class="cont-result">
                 <!--// Table 영역 //-->
               </div>

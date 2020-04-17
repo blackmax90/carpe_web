@@ -211,7 +211,7 @@
 	
 			$("#jqxGrid_Systemlog").jqxGrid({
 				width: '100%',	
-				height: 'calc(100% - 7rem)',
+				height: 'calc(100% - 3rem)',
 				source: dataAdapter,
 				pagerheight: 0,
 				altrows: true,

@@ -20,7 +20,7 @@
 <body>
 
   <!-- wrap -->
-  <div class="wrap analysis bg-theme blue">
+  <div class="wrap bg-theme blue">
 
     <!-- header -->
     <%@ include file="../common/header.jsp" %>
@@ -40,13 +40,13 @@
         <h3>Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
         <button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
       </section>
-      <section class="btn-area">
+     <!--  <section class="btn-area">
         <ul>
           <li>
             
           </li>
         </ul>        
-      </section>
+      </section> -->
       <article class="container">
         <h4 class="blind">조회된 컨텐츠</h4>
         <!--// Content 영역 //-->
@@ -1059,7 +1059,7 @@
       }
   
       var treeRootDir = expandArtifactTree();
-        $("#jqxTree_artifacts").jqxTree({ source: treeRootDir, allowDrag:false, width:'100%', height:'100%'});
+        $("#jqxTree_artifacts").jqxTree({ source: treeRootDir, allowDrag:false, width:'calc(100%)', height:'calc(100%)'});
   
         var treeItems = $("#jqxTree_artifacts").jqxTree('getItems');
   

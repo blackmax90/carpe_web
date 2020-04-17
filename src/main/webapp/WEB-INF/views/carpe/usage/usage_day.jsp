@@ -52,7 +52,7 @@
 				<div class="content-box">
 					<div class="content-area">
 						<div class="tit-area">
-							<h3>2019년 11월 26일</h3>
+							<h3 class="unit">2019년 11월 26일</h3>
 							<button type="button" class="fl btn-case-01" id=""><span>일자변경</span></button>
         					<div id="dateInput" class="input-calendar-jqx hide"></div>
 						</div>

@@ -54,7 +54,7 @@
         <div id="jqxSplitter" class="content-box">
           <div class="content-area">
             <div class="tit-area">
-              <h3>
+              <h3 class="unit">
                 ${year}년 
               </h3>
               <div class="select">
@@ -133,7 +133,7 @@
           </div>
           <div class="aside">
             <div class="tit-area">
-              <h3><span>7월</span> 통계결과</h3>
+              <h3 class="unit"><span>7월</span> 통계결과</h3>
             </div>
             <div id="ContentPanel" class="aside-result">
               <!--// Content 영역 //-->
