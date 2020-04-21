@@ -35,4 +35,14 @@ public class CaseDAOImpl implements CaseDAO {
 	public int deleteCaseList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.insert(Namespace + ".deleteCaseList", paramMap);
 	}
+
+	@Override
+	public Map selectCaseUserAuthCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectCaseUserAuthCount", paramMap);
+	}
+
+	@Override
+	public int deleteCaseUserAuth(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.insert(Namespace + ".deleteCaseUserAuth", paramMap);
+	}
 }

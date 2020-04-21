@@ -25,17 +25,25 @@
   
   <select id="selectCaseListCount" parameterType="Map" resultType="Map">
     SELECT count(*) cnt 
-    FROM (
-         SELECT a.*
-           FROM case_info a
-           LEFT JOIN case_user_auth b
-             ON a.case_id = b.case_id
-          WHERE 1=1
-          <if test="id!=null and !id.equals('')">
-            AND b.id = #{id}
-          </if>
-          GROUP BY a.case_id 
-         ) A
+      FROM (
+           SELECT a.*
+             FROM case_info a
+             LEFT JOIN case_user_auth b
+               ON a.case_id = b.case_id
+            WHERE 1=1
+            <if test="id!=null and !id.equals('')">
+              AND b.id = #{id}
+            </if>
+            GROUP BY a.case_id 
+           ) A
+  </select>
+
+  <select id="selectCaseUserAuthCount" parameterType="Map" resultType="Map">
+    SELECT count(*) cnt
+      FROM case_user_auth
+     WHERE 1=1
+       AND id = #{id}
+       AND case_id = #{case_id}
   </select>
 
   <insert id="insertCase" parameterType="Map">
@@ -46,6 +54,15 @@
   <delete id="deleteCaseList" parameterType="Map">
     DELETE 
       FROM case_info
+     WHERE case_id in
+      <foreach item="item" index="index" collection="caseList" open="(" close=")" separator=",">
+           #{item}
+      </foreach>
+  </delete>
+
+  <delete id="deleteCaseUserAuth" parameterType="Map">
+    DELETE 
+      FROM case_user_auth
      WHERE case_id in
       <foreach item="item" index="index" collection="caseList" open="(" close=")" separator=",">
            #{item}

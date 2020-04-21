@@ -33,6 +33,9 @@ public class CaseController {
   public ModelAndView caseView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
     ModelAndView mav = new ModelAndView();
 
+    session.removeAttribute(Consts.SESSION_CASE_ID);
+    session.removeAttribute(Consts.SESSION_CASE_NAME);
+
     mav.setViewName("carpe/case/case");
     return mav;
   }
@@ -99,6 +102,23 @@ public class CaseController {
     String caseId = map.get("id");
     String caseName = map.get("name");
     
+    //case 권한 체크
+    UserVO userInfo = (UserVO) session.getAttribute("userInfo");
+
+    if (userInfo.getGrade() != Consts.ADMIN_GRADE) {
+    	Map<String, Object> paramMap = new HashMap<String, Object>();
+    	paramMap.put("id", userInfo.getId());
+    	paramMap.put("case_id", caseId);
+
+    	Map rsMap = service.selectCaseUserAuthCount(paramMap);
+    	int cnt = Integer.parseInt(String.valueOf(rsMap.get("cnt")));
+
+    	if (cnt == 0) {
+    		mav.setViewName("forward:/login.do");
+    		return mav;
+    	}
+    }
+    
     session.setAttribute(Consts.SESSION_CASE_ID, caseId);
     session.setAttribute(Consts.SESSION_CASE_NAME, caseName);
 
@@ -119,6 +139,14 @@ public class CaseController {
   @RequestMapping(value = "/add_case.do", method = { RequestMethod.GET, RequestMethod.POST })
   public ModelAndView addcase(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
     ModelAndView mav = new ModelAndView();
+    mav.setViewName("jsonView");
+
+    UserVO userInfo = (UserVO) session.getAttribute("userInfo");
+    
+    if (userInfo.getGrade() != Consts.ADMIN_GRADE) {
+    	mav.addObject("affected", 0);
+    	return mav;
+    }
 
     Map<String, Object> paramMap = new HashMap<String, Object>();
 
@@ -137,7 +165,6 @@ public class CaseController {
     }
 
     mav.addObject("affected", affected);
-    mav.setViewName("jsonView");
 
     return mav;
   }
@@ -154,6 +181,14 @@ public class CaseController {
   @RequestMapping(value = "/delete_case.do", method = { RequestMethod.GET, RequestMethod.POST })
   public ModelAndView delCase(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
     ModelAndView mav = new ModelAndView();
+    mav.setViewName("jsonView");
+
+    UserVO userInfo = (UserVO) session.getAttribute("userInfo");
+    
+    if (userInfo.getGrade() != Consts.ADMIN_GRADE) {
+    	mav.addObject("affected", 0);
+    	return mav;
+    }
 
     Map<String, Object> paramMap = new HashMap<String, Object>();
 
@@ -168,12 +203,15 @@ public class CaseController {
     try {
       // case list delete
       affected = service.deleteCaseList(paramMap);
+
+      if (affected > 0) {
+      	service.deleteCaseUserAuth(paramMap);
+      }
     } catch (Exception e) {
       e.printStackTrace();
     }
 
     mav.addObject("affected", affected);
-    mav.setViewName("jsonView");
 
     return mav;
   }

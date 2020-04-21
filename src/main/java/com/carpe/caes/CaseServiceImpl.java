@@ -33,4 +33,14 @@ public class CaseServiceImpl implements CaseService {
 	public int deleteCaseList(Map<String, Object> paramMap) throws Exception {
 		return dao.deleteCaseList(paramMap);
 	}
+
+	@Override
+	public Map selectCaseUserAuthCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectCaseUserAuthCount(paramMap);
+	}
+
+	@Override
+	public int deleteCaseUserAuth(Map<String, Object> paramMap) throws Exception {
+		return dao.deleteCaseUserAuth(paramMap);
+	}
 }

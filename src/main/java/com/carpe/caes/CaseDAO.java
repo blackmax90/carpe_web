@@ -8,4 +8,6 @@ public interface CaseDAO {
 	public Map selectCaseListCount(Map<String, Object> paramMap) throws Exception;
 	public int insertCase(Map<String, Object> paramMap) throws Exception;
 	public int deleteCaseList(Map<String, Object> paramMap) throws Exception;
+	public Map selectCaseUserAuthCount(Map<String, Object> paramMap) throws Exception;
+	public int deleteCaseUserAuth(Map<String, Object> paramMap) throws Exception;
 }

@@ -7,6 +7,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import com.carpe.common.Consts;
+import com.carpe.login.UserVO;
+
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 
 	// preHandle() : 컨트롤러보다 먼저 수행되는 메서드
@@ -14,7 +17,7 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		//System.out.println(request.getRequestURI());
+		String reqUri = request.getRequestURI();
 		
 		HttpSession session = request.getSession();
 		Object obj = session.getAttribute("userInfo");
@@ -22,6 +25,13 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 		if (obj == null) {
 			response.sendRedirect("/carpe/login.do");
 			return false;
+		}
+
+		if (reqUri.startsWith("/carpe/config/")) {
+			if (((UserVO) obj).getGrade() != Consts.ADMIN_GRADE) {
+				response.sendRedirect("/carpe/login.do");
+				return false;
+			}
 		}
 
 		return true;
