@@ -408,6 +408,160 @@ public class ArtifactServiceImpl implements ArtifactService {
 		return dao.selectRegUserAccountsListCount(paramMap);
 	}
 	
+	// lv1_os_win_reg_file_connection
+	@Override
+	public List<Map> selectRegFileConnection(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegFileConnection(paramMap);
+	}
+
+	@Override
+	public Map selectRegFileConnectionCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegFileConnectionCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_known_dll
+	@Override
+	public List<Map> selectRegKnownDll(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegKnownDll(paramMap);
+	}
+
+	@Override
+	public Map selectRegKnownDllCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegKnownDllCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_mac_address
+	@Override
+	public List<Map> selectRegMacAddress(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegMacAddress(paramMap);
+	}
+
+	@Override
+	public Map selectRegMacAddressCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegMacAddressCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_mru_folder
+	@Override
+	public List<Map> selectRegMruFolder(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegMruFolder(paramMap);
+	}
+
+	@Override
+	public Map selectRegMruFolderCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegMruFolderCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_mui_cache
+	@Override
+	public List<Map> selectRegMuiCache(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegMuiCache(paramMap);
+	}
+
+	@Override
+	public Map selectRegMuiCacheCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegMuiCacheCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_network_drive
+	@Override
+	public List<Map> selectRegNetworkDrive(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegNetworkDrive(paramMap);
+	}
+
+	@Override
+	public Map selectRegNetworkDriveCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegNetworkDriveCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_network_interface
+	@Override
+	public List<Map> selectRegNetworkInterface(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegNetworkInterface(paramMap);
+	}
+
+	@Override
+	public Map selectRegNetworkInterfaceCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegNetworkInterfaceCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_network_profile
+	@Override
+	public List<Map> selectRegNetworkProfile(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegNetworkProfile(paramMap);
+	}
+
+	@Override
+	public Map selectRegNetworkProfileCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegNetworkProfileCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_recent_docs
+	@Override
+	public List<Map> selectRegRecentDocs(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegRecentDocs(paramMap);
+	}
+
+	@Override
+	public Map selectRegRecentDocsCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegRecentDocsCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_run_command
+	@Override
+	public List<Map> selectRegRunCommand(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegRunCommand(paramMap);
+	}
+
+	@Override
+	public Map selectRegRunCommandCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegRunCommandCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_search_keyword
+	@Override
+	public List<Map> selectRegSearchKeyword(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegSearchKeyword(paramMap);
+	}
+
+	@Override
+	public Map selectRegSearchKeywordCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegSearchKeywordCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_shim_cache
+	@Override
+	public List<Map> selectRegShimCache(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegShimCache(paramMap);
+	}
+
+	@Override
+	public Map selectRegShimCacheCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegShimCacheCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_start_list
+	@Override
+	public List<Map> selectRegStartList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegStartList(paramMap);
+	}
+
+	@Override
+	public Map selectRegStartListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegStartListCount(paramMap);
+	}
+	
+	// lv1_os_win_reg_system_service
+	@Override
+	public List<Map> selectRegSystemService(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegSystemService(paramMap);
+	}
+
+	@Override
+	public Map selectRegSystemServiceCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectRegSystemServiceCount(paramMap);
+	}
+	
 	// lv1_app_web_chrome_visit_urls
 	@Override
 	public List<Map> selectChromeVisitUrlsList(Map<String, Object> paramMap) throws Exception {
@@ -517,4 +671,16 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectNtfsUsnjrnlCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectNtfsUsnjrnlCount(paramMap);
 	}
+	
+	// lv2_os_app_history
+	@Override
+	public List<Map> selectAppHistory(Map<String, Object> paramMap) throws Exception {
+		return dao.selectAppHistory(paramMap);
+	}
+
+	@Override
+	public Map selectAppHistoryCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectAppHistoryCount(paramMap);
+	}
+	
 }

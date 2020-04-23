@@ -153,6 +153,62 @@ public interface ArtifactDAO {
 	public List<Map> selectRegUserAccountsList(Map<String, Object> paramMap) throws Exception;
 	public Map selectRegUserAccountsListCount(Map<String, Object> paramMap) throws Exception;
 	
+	// lv1_os_win_reg_file_connection
+	public List<Map> selectRegFileConnection(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegFileConnectionCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_known_dll
+	public List<Map> selectRegKnownDll(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegKnownDllCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_mac_address
+	public List<Map> selectRegMacAddress(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegMacAddressCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_mru_folder
+	public List<Map> selectRegMruFolder(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegMruFolderCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_mui_cache
+	public List<Map> selectRegMuiCache(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegMuiCacheCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_network_drive
+	public List<Map> selectRegNetworkDrive(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegNetworkDriveCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_network_interface
+	public List<Map> selectRegNetworkInterface(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegNetworkInterfaceCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_network_profile
+	public List<Map> selectRegNetworkProfile(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegNetworkProfileCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_recent_docs
+	public List<Map> selectRegRecentDocs(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegRecentDocsCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_run_command
+	public List<Map> selectRegRunCommand(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegRunCommandCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_search_keyword
+	public List<Map> selectRegSearchKeyword(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegSearchKeywordCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_shim_cache
+	public List<Map> selectRegShimCache(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegShimCacheCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_start_list
+	public List<Map> selectRegStartList(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegStartListCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_reg_system_service
+	public List<Map> selectRegSystemService(Map<String, Object> paramMap) throws Exception;
+	public Map selectRegSystemServiceCount(Map<String, Object> paramMap) throws Exception;
+	
 	// lv1_app_web_chrome_visit_urls
 	public List<Map> selectChromeVisitUrlsList(Map<String, Object> paramMap) throws Exception;
 	public Map selectChromeVisitUrlsListCount(Map<String, Object> paramMap) throws Exception;
@@ -193,5 +249,8 @@ public interface ArtifactDAO {
 	public List<Map> selectNtfsUsnjrnl(Map<String, Object> paramMap) throws Exception;
 	public Map selectNtfsUsnjrnlCount(Map<String, Object> paramMap) throws Exception;
 	
-	
+	// lv2_os_app_history
+	public List<Map> selectAppHistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectAppHistoryCount(Map<String, Object> paramMap) throws Exception;
+
 }

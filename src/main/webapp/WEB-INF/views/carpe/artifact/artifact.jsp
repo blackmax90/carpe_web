@@ -681,16 +681,16 @@
       ];
       
       //lv1_os_win_reg_amcache_file_entries
-      artifactKind["Reg Amcache File"] = {};
-      artifactKind["Reg Amcache File"].url = "/carpe/reg_amcache_file_entries.do";
-      artifactKind["Reg Amcache File"].columnSet = [
+      artifactKind["Amcache File"] = {};
+      artifactKind["Amcache File"].url = "/carpe/reg_amcache_file_entries.do";
+      artifactKind["Amcache File"].columnSet = [
          {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'key_last_updated_time', dataField: 'key_last_updated_time', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'file_extension', dataField: 'file_extension', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'program_id', dataField: 'program_id', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'key_id', dataField: 'key_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'related_programname', dataField: 'related_programname', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'sha1_hash', dataField: 'sha1_hash', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'os_component_flag', dataField: 'os_component_flag', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'full_path', dataField: 'full_path', width: '10%', cellsalign: 'left', align: 'center'}
@@ -706,25 +706,15 @@
         ,{text: 'binary_product_version', dataField: 'binary_product_version', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'language_code', dataField: 'language_code', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'usn', dataField: 'usn', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'legacy_flag', dataField: 'legacy_flag', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'volume_guid', dataField: 'volume_guid', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'publisher', dataField: 'publisher', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'switch_back_context', dataField: 'switch_back_context', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'description', dataField: 'description', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'last_modified_time', dataField: 'last_modified_time', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'created_time', dataField: 'created_time', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'last_modified_2_time', dataField: 'last_modified_2_time', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'pe_header_filed_size_of_image', dataField: 'pe_header_filed_size_of_image', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'pe_header_hash', dataField: 'pe_header_hash', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'pe_header_checksum', dataField: 'pe_header_checksum', width: '10%', cellsalign: 'left', align: 'center'}
       ];
 
       //lv1_os_win_reg_amcache_program_entries
-      artifactKind["Reg Amcache Program"] = {};
-      artifactKind["Reg Amcache Program"].url = "/carpe/reg_amcache_program_entries.do";
-      artifactKind["Reg Amcache Program"].columnSet = [
+      artifactKind["Amcache Program"] = {};
+      artifactKind["Amcache Program"].url = "/carpe/reg_amcache_program_entries.do";
+      artifactKind["Amcache Program"].columnSet = [
          {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'key_last_updated_time', dataField: 'key_last_updated_time', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'installed_time', dataField: 'installed_time', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'version', dataField: 'version', width: '10%', cellsalign: 'left', align: 'center'}
@@ -733,7 +723,6 @@
         ,{text: 'os_version_at_install_time', dataField: 'os_version_at_install_time', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'bundle_manifest_path', dataField: 'bundle_manifest_path', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'hide_in_control_panel_flag', dataField: 'hide_in_control_panel_flag', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'default_app_flag', dataField: 'default_app_flag', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'language_code', dataField: 'language_code', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'manifest_path', dataField: 'manifest_path', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'msi_package_code', dataField: 'msi_package_code', width: '10%', cellsalign: 'left', align: 'center'}
@@ -747,17 +736,14 @@
         ,{text: 'program_source', dataField: 'program_source', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'store_app_type', dataField: 'store_app_type', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'uninstall_string', dataField: 'uninstall_string', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'install_source', dataField: 'install_source', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'file_entries', dataField: 'file_entries', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'file_path', dataField: 'file_path', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'inboxmodernapp', dataField: 'inboxmodernapp', width: '10%', cellsalign: 'left', align: 'center'}
       ];
 
       
       //lv1_os_win_reg_installed_programs
-      artifactKind["Reg Installed Programs"] = {};
-      artifactKind["Reg Installed Programs"].url = "/carpe/reg_installed_programs.do";
-      artifactKind["Reg Installed Programs"].columnSet = [
+      artifactKind["Installed Programs"] = {};
+      artifactKind["Installed Programs"].url = "/carpe/reg_installed_programs.do";
+      artifactKind["Installed Programs"].columnSet = [
          {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'company', dataField: 'company', width: '10%', cellsalign: 'left', align: 'center'}
@@ -769,9 +755,9 @@
       ];
       
       //lv1_os_win_reg_os_info
-      artifactKind["Reg OS Info"] = {};
-      artifactKind["Reg OS Info"].url = "/carpe/reg_os_info.do";
-      artifactKind["Reg OS Info"].columnSet = [
+      artifactKind["OS Info"] = {};
+      artifactKind["OS Info"].url = "/carpe/reg_os_info.do";
+      artifactKind["OS Info"].columnSet = [
          {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'operating_system', dataField: 'operating_system', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'version_number', dataField: 'version_number', width: '10%', cellsalign: 'left', align: 'center'}
@@ -784,6 +770,7 @@
         ,{text: 'operating_system_version', dataField: 'operating_system_version', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'build_number', dataField: 'build_number', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'product_id', dataField: 'product_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'release_id', dataField: 'release_id', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'last_service_pack', dataField: 'last_service_pack', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'organization', dataField: 'organization', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'last_shutdown_time', dataField: 'last_shutdown_time', width: '10%', cellsalign: 'left', align: 'center'}
@@ -795,9 +782,9 @@
       ];
       
       //lv1_os_win_reg_usb_devices
-      artifactKind["Reg USB Devices"] = {};
-      artifactKind["Reg USB Devices"].url = "/carpe/reg_usb_devices.do";
-      artifactKind["Reg USB Devices"].columnSet = [
+      artifactKind["USB Devices"] = {};
+      artifactKind["USB Devices"].url = "/carpe/reg_usb_devices.do";
+      artifactKind["USB Devices"].columnSet = [
          {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'device_class_id', dataField: 'device_class_id', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'serial_number', dataField: 'serial_number', width: '10%', cellsalign: 'left', align: 'center'}
@@ -820,9 +807,9 @@
       ];
       
       //lv1_os_win_reg_user_accounts
-      artifactKind["Reg User Accounts"] = {};
-      artifactKind["Reg User Accounts"].url = "/carpe/reg_user_accounts.do";
-      artifactKind["Reg User Accounts"].columnSet = [
+      artifactKind["User Accounts"] = {};
+      artifactKind["User Accounts"].url = "/carpe/reg_user_accounts.do";
+      artifactKind["User Accounts"].columnSet = [
          {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'user_name', dataField: 'user_name', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'full_name', dataField: 'full_name', width: '10%', cellsalign: 'left', align: 'center'}
@@ -835,13 +822,211 @@
         ,{text: 'last_login_time', dataField: 'last_login_time', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'last_password_change_time', dataField: 'last_password_change_time', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'last_incorrect_password_login_time', dataField: 'last_incorrect_password_login_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'account_created_time', dataField: 'account_created_time', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'login_count', dataField: 'login_count', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'account_disabled', dataField: 'account_disabled', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'password_required', dataField: 'password_required', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'password_hint', dataField: 'password_hint', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'lm_hash', dataField: 'lm_hash', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'ntlm_hash', dataField: 'ntlm_hash', width: '10%', cellsalign: 'left', align: 'center'}
-      ];  
+      ];
+      
+      // lv1_os_win_reg_userassist
+      artifactKind["UserAssist"] = {};
+      artifactKind["UserAssist"].url = "/carpe/reg_userassist.do";
+      artifactKind["UserAssist"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'userassist_entry_number', dataField: 'userassist_entry_number', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'program_run_count', dataField: 'program_run_count', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'last_run_time', dataField: 'last_run_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'focus_count', dataField: 'focus_count', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'focus_seconds', dataField: 'focus_seconds', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_file_connection
+      artifactKind["File Connection"] = {};
+      artifactKind["File Connection"].url = "/carpe/reg_file_connection.do";
+      artifactKind["File Connection"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_path', dataField: 'file_path', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'command', dataField: 'command', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_type', dataField: 'file_type', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_known_dll
+      artifactKind["Known Dll"] = {};
+      artifactKind["Known Dll"].url = "/carpe/reg_known_dll.do";
+      artifactKind["Known Dll"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dll_directory', dataField: 'dll_directory', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dll_directory_32', dataField: 'dll_directory_32', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_mac_address
+      artifactKind["Mac Address"] = {};
+      artifactKind["Mac Address"].url = "/carpe/reg_mac_address.do";
+      artifactKind["Mac Address"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'mac_address', dataField: 'mac_address', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'description', dataField: 'description', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_mru_folder
+      artifactKind["MRU Folder"] = {};
+      artifactKind["MRU Folder"].url = "/carpe/reg_mru_folder.do";
+      artifactKind["MRU Folder"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'accessed_folder', dataField: 'accessed_folder', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'registry_order', dataField: 'registry_order', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'value', dataField: 'value', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_mui_cache
+      artifactKind["Mui Cache"] = {};
+      artifactKind["Mui Cache"].url = "/carpe/reg_mui_cache.do";
+      artifactKind["Mui Cache"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_path', dataField: 'file_path', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'data', dataField: 'data', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_network_drive
+      artifactKind["Network Drive"] = {};
+      artifactKind["Network Drive"].url = "/carpe/reg_network_drive.do";
+      artifactKind["Network Drive"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'network_drive_name', dataField: 'network_drive_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'ordering', dataField: 'ordering', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_network_interface
+      artifactKind["Network Interface"] = {};
+      artifactKind["Network Interface"].url = "/carpe/reg_network_interface.do";
+      artifactKind["Network Interface"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'enable_dhcp', dataField: 'enable_dhcp', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'ipaddress', dataField: 'ipaddress', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_ipaddress', dataField: 'dhcp_ipaddress', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_subnetmask', dataField: 'dhcp_subnetmask', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_server', dataField: 'dhcp_server', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_connforcebroadcastflag', dataField: 'dhcp_connforcebroadcastflag', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_domain', dataField: 'dhcp_domain', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_name_server', dataField: 'dhcp_name_server', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_default_gateway', dataField: 'dhcp_default_gateway', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_subnetmaskopt', dataField: 'dhcp_subnetmaskopt', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_interfaceoptions', dataField: 'dhcp_interfaceoptions', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_gatewayhardware', dataField: 'dhcp_gatewayhardware', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dhcp_gatewayhardwarecount', dataField: 'dhcp_gatewayhardwarecount', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'lease', dataField: 'lease', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'lease_obtained_time', dataField: 'lease_obtained_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'lease_terminate_time', dataField: 'lease_terminate_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 't1', dataField: 't1', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 't2', dataField: 't2', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'address_type', dataField: 'address_type', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'isservernapaware', dataField: 'isservernapaware', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'registeradaptername', dataField: 'registeradaptername', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'registrationenabled', dataField: 'registrationenabled', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_network_profile
+      artifactKind["Network Profile"] = {};
+      artifactKind["Network Profile"].url = "/carpe/reg_network_profile.do";
+      artifactKind["Network Profile"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'profile_name', dataField: 'profile_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'profile_guid', dataField: 'profile_guid', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'description', dataField: 'description', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'datecreated', dataField: 'datecreated', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'datelstconnected', dataField: 'datelstconnected', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dns', dataField: 'dns', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'default_gateway_mac', dataField: 'default_gateway_mac', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_recent_docs
+      artifactKind["Recent Docs"] = {};
+      artifactKind["Recent Docs"].url = "/carpe/reg_recent_docs.do";
+      artifactKind["Recent Docs"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_folder_name', dataField: 'file_folder_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_folder_link', dataField: 'file_folder_link', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'registry_order', dataField: 'registry_order', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'value', dataField: 'value', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_run_command
+      artifactKind["Run Command"] = {};
+      artifactKind["Run Command"].url = "/carpe/reg_run_command.do";
+      artifactKind["Run Command"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'command', dataField: 'command', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'ordering', dataField: 'ordering', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_search_keyword
+      artifactKind["Search Keyword"] = {};
+      artifactKind["Search Keyword"].url = "/carpe/reg_search_keyword.do";
+      artifactKind["Search Keyword"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'keyword', dataField: 'keyword', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'ordering', dataField: 'ordering', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_shim_cache
+      artifactKind["Shim Cache"] = {};
+      artifactKind["Shim Cache"].url = "/carpe/reg_shim_cache.do";
+      artifactKind["Shim Cache"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'file_path', dataField: 'file_path', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_start_list
+      artifactKind["Start List"] = {};
+      artifactKind["Start List"].url = "/carpe/reg_start_list.do";
+      artifactKind["Start List"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'path', dataField: 'path', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv1_os_win_reg_system_service
+      artifactKind["System Service"] = {};
+      artifactKind["System Service"].url = "/carpe/reg_system_service.do";
+      artifactKind["System Service"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'service_name', dataField: 'service_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'service_type', dataField: 'service_type', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'start_type', dataField: 'start_type', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'service_location', dataField: 'service_location', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'groups', dataField: 'groups', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'display_name', dataField: 'display_name', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'dependancy', dataField: 'dependancy', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'user_account', dataField: 'user_account', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'description', dataField: 'description', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'service_detail_information', dataField: 'service_detail_information', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'host_flag', dataField: 'host_flag', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'host_service', dataField: 'host_service', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'hosted_service_parameter', dataField: 'hosted_service_parameter', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'error_control', dataField: 'error_control', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'tag', dataField: 'tag', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
       
       // lv1_app_web_chrome_visit_urls
       artifactKind["Chrome Visit Urls"] = {};
@@ -854,22 +1039,7 @@
         ,{text: 'visit_count', dataField: 'visit_count', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'typed_count', dataField: 'typed_count', width: '10%', cellsalign: 'left', align: 'center'}
       ];
-      
-      // lv1_os_win_reg_userassist
-      artifactKind["Reg UserAssist"] = {};
-      artifactKind["Reg UserAssist"].url = "/carpe/reg_userassist.do";
-      artifactKind["Reg UserAssist"].columnSet = [
-         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'user_name', dataField: 'user_name', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'computer_name', dataField: 'computer_name', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'userassist_entry_number', dataField: 'userassist_entry_number', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'program_run_count', dataField: 'program_run_count', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'last_run_time', dataField: 'last_run_time', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'focus_count', dataField: 'focus_count', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'focus_seconds', dataField: 'focus_seconds', width: '10%', cellsalign: 'left', align: 'center'}
-      ];
-      
+
       // lv1_os_win_lnk_file
       artifactKind["LNK File"] = {};
       artifactKind["LNK File"].url = "/carpe/lnk_file.do";
@@ -1035,6 +1205,18 @@
         ,{text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'file_path_from_mft', dataField: 'file_path_from_mft', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+      // lv2_os_app_history
+      artifactKind["Application History"] = {};
+      artifactKind["Application History"].url = "/carpe/app_history.do";
+      artifactKind["Application History"].columnSet = [
+         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'process_name', dataField: 'process_name', width: '50%', cellsalign: 'left', align: 'center'}
+        ,{text: 'execution_time', dataField: 'execution_time', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'process_path', dataField: 'process_path', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'reference_file', dataField: 'reference_file', width: '10%', cellsalign: 'left', align: 'center'}
+        ,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
       ]
       
       // splitter

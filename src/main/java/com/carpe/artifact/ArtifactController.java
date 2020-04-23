@@ -63,13 +63,28 @@ public class ArtifactController {
 		// lv1
 		
 		List subRegList = new ArrayList();
-		addArtifactTreeNode(subRegList, "Reg Installed Programs", true, true, null);
-		addArtifactTreeNode(subRegList, "Reg USB Devices", true, true, null);
-		addArtifactTreeNode(subRegList, "Reg OS Info", true, true, null);
-		addArtifactTreeNode(subRegList, "Reg User Accounts", true, true, null);
-		addArtifactTreeNode(subRegList, "Reg UserAssist", true, true, null);
-		addArtifactTreeNode(subRegList, "Reg Amcache Program", true, true, null);
-		addArtifactTreeNode(subRegList, "Reg Amcache File", true, true, null);
+		addArtifactTreeNode(subRegList, "Installed Programs", true, true, null);
+		addArtifactTreeNode(subRegList, "USB Devices", true, true, null);
+		addArtifactTreeNode(subRegList, "OS Info", true, true, null);
+		addArtifactTreeNode(subRegList, "User Accounts", true, true, null);
+		addArtifactTreeNode(subRegList, "UserAssist", true, true, null);
+		addArtifactTreeNode(subRegList, "Amcache Program", true, true, null);
+		addArtifactTreeNode(subRegList, "Amcache File", true, true, null);
+		addArtifactTreeNode(subRegList, "File Connection", true, true, null);
+		addArtifactTreeNode(subRegList, "Known Dll", true, true, null);
+		addArtifactTreeNode(subRegList, "Mac Address", true, true, null);
+		addArtifactTreeNode(subRegList, "MRU Folder", true, true, null);
+		addArtifactTreeNode(subRegList, "Mui Cache", true, true, null);
+		addArtifactTreeNode(subRegList, "Network Drive", true, true, null);
+		addArtifactTreeNode(subRegList, "Network Interface", true, true, null);
+		addArtifactTreeNode(subRegList, "Network Profile", true, true, null);
+		addArtifactTreeNode(subRegList, "Recent Docs", true, true, null);
+		addArtifactTreeNode(subRegList, "Run Command", true, true, null);
+		addArtifactTreeNode(subRegList, "Search Keyword", true, true, null);
+		addArtifactTreeNode(subRegList, "Shim Cache", true, true, null);
+		addArtifactTreeNode(subRegList, "Start List", true, true, null);
+		addArtifactTreeNode(subRegList, "System Service", true, true, null);
+
 		
 		List subEvtList = new ArrayList();
 		addArtifactTreeNode(subEvtList, "All", true, true, null); // Event logs all
@@ -114,6 +129,10 @@ public class ArtifactController {
 		addArtifactTreeNode(subLv1List, "Chrome Cookies", true, true, null);
 		addArtifactTreeNode(subLv1List, "Chrome Cache", true, true, null);
 
+		
+		List subLv2List = new ArrayList();
+		addArtifactTreeNode(subLv2List, "Application History", true, true, null);
+
 
 		
 		List subWebList = new ArrayList();
@@ -139,7 +158,9 @@ public class ArtifactController {
 
 		List list = new ArrayList();
 		addArtifactTreeNode(list, "~2019", false, false, subList);
+		addArtifactTreeNode(list, "Lv2 Tables", false, false, subLv2List);
 		addArtifactTreeNode(list, "Lv1 Tables", false, false, subLv1List);
+
 
 		// addArtifactTreeNode(list, "Mobile", false, false, subListMobile);
 
@@ -1570,6 +1591,7 @@ public class ArtifactController {
 
 		return mav;
 	}
+	
 	// lv1_os_win_reg_user_accounts
 	@RequestMapping(value = "/reg_user_accounts.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getRegUserAccounts(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
@@ -1607,6 +1629,538 @@ public class ArtifactController {
 
 		return mav;
 	}
+	
+	// lv1_os_win_reg_file_connection
+		@RequestMapping(value = "/reg_file_connection.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegFileConnection(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegFileConnection = service.selectRegFileConnection(paramMap);
+			int totalCnt = ((Long) service.selectRegFileConnectionCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegFileConnection);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_known_dll
+		@RequestMapping(value = "/reg_known_dll.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegKnownDll(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegKnownDll = service.selectRegKnownDll(paramMap);
+			int totalCnt = ((Long) service.selectRegKnownDllCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegKnownDll);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_mac_address
+		@RequestMapping(value = "/reg_mac_address.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegMacAddress(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegMacAddress = service.selectRegMacAddress(paramMap);
+			int totalCnt = ((Long) service.selectRegMacAddressCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegMacAddress);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_mru_folder
+		@RequestMapping(value = "/reg_mru_folder.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegMruFolder(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegMruFolder = service.selectRegMruFolder(paramMap);
+			int totalCnt = ((Long) service.selectRegMruFolderCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegMruFolder);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_mui_cache
+		@RequestMapping(value = "/reg_mui_cache.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegMuiCache(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegMuiCache = service.selectRegMuiCache(paramMap);
+			int totalCnt = ((Long) service.selectRegMuiCacheCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegMuiCache);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_network_drive
+		@RequestMapping(value = "/reg_network_drive.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegNetworkDrive(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegNetworkDrive = service.selectRegNetworkDrive(paramMap);
+			int totalCnt = ((Long) service.selectRegNetworkDriveCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegNetworkDrive);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_network_interface
+		@RequestMapping(value = "/reg_network_interface.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegNetworkInterface(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegNetworkInterface = service.selectRegNetworkInterface(paramMap);
+			int totalCnt = ((Long) service.selectRegNetworkInterfaceCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegNetworkInterface);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_network_profile
+		@RequestMapping(value = "/reg_network_profile.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegNetworkProfile(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegNetworkProfile = service.selectRegNetworkProfile(paramMap);
+			int totalCnt = ((Long) service.selectRegNetworkProfileCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegNetworkProfile);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_recent_docs
+		@RequestMapping(value = "/reg_recent_docs.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegRecentDocs(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegRecentDocs = service.selectRegRecentDocs(paramMap);
+			int totalCnt = ((Long) service.selectRegRecentDocsCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegRecentDocs);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_run_command
+		@RequestMapping(value = "/reg_run_command.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegRunCommand(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegRunCommand = service.selectRegRunCommand(paramMap);
+			int totalCnt = ((Long) service.selectRegRunCommandCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegRunCommand);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_search_keyword
+		@RequestMapping(value = "/reg_search_keyword.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegSearchKeyword(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegSearchKeyword = service.selectRegSearchKeyword(paramMap);
+			int totalCnt = ((Long) service.selectRegSearchKeywordCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegSearchKeyword);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_shim_cache
+		@RequestMapping(value = "/reg_shim_cache.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegShimCache(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegShimCache = service.selectRegShimCache(paramMap);
+			int totalCnt = ((Long) service.selectRegShimCacheCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegShimCache);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_start_list
+		@RequestMapping(value = "/reg_start_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegStartList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegStartList = service.selectRegStartList(paramMap);
+			int totalCnt = ((Long) service.selectRegStartListCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegStartList);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+		
+		// lv1_os_win_reg_system_service
+		@RequestMapping(value = "/reg_system_service.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView getRegSystemService(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+				Model model) throws Exception {
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RegSystemService = service.selectRegSystemService(paramMap);
+			int totalCnt = ((Long) service.selectRegSystemServiceCount(paramMap).get("cnt")).intValue();
+
+			mav.addObject("list", RegSystemService);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
 	
 	// lv1_app_web_chrome_visit_urls
 	@RequestMapping(value = "/chrome_visit_urls.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -1987,5 +2541,44 @@ public class ArtifactController {
 
 		return mav;
 	}
-		
+
+	
+	// lv2_os_app_history
+	@RequestMapping(value = "/app_history.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getAppHistory(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		if (map.get("currentPage") == null && map.get("pageSize") == null) {
+			mav.addObject("totalcount", 0);
+			mav.addObject("list", new ArrayList());
+			return mav;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+		try {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		List<Map> AppHistory = service.selectAppHistory(paramMap);
+		int totalCnt = ((Long) service.selectAppHistoryCount(paramMap).get("cnt")).intValue();
+
+		mav.addObject("list", AppHistory);
+		mav.addObject("totalcount", totalCnt);
+
+		return mav;
+	}
+
 }

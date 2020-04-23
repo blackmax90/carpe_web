@@ -420,6 +420,160 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 		return sqlSession.selectOne(Namespace + ".selectRegUserAccountsListCount", paramMap);
 	}
 	
+	// lv1_os_win_reg_file_connection
+	@Override
+	public List<Map> selectRegFileConnection(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegFileConnection", paramMap);
+	}
+
+	@Override
+	public Map selectRegFileConnectionCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegFileConnectionCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_known_dll
+	@Override
+	public List<Map> selectRegKnownDll(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegKnownDll", paramMap);
+	}
+
+	@Override
+	public Map selectRegKnownDllCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegKnownDllCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_mac_address
+	@Override
+	public List<Map> selectRegMacAddress(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegMacAddress", paramMap);
+	}
+
+	@Override
+	public Map selectRegMacAddressCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegMacAddressCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_mru_folder
+	@Override
+	public List<Map> selectRegMruFolder(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegMruFolder", paramMap);
+	}
+
+	@Override
+	public Map selectRegMruFolderCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegMruFolderCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_mui_cache
+	@Override
+	public List<Map> selectRegMuiCache(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegMuiCache", paramMap);
+	}
+
+	@Override
+	public Map selectRegMuiCacheCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegMuiCacheCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_network_drive
+	@Override
+	public List<Map> selectRegNetworkDrive(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegNetworkDrive", paramMap);
+	}
+
+	@Override
+	public Map selectRegNetworkDriveCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegNetworkDriveCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_network_interface
+	@Override
+	public List<Map> selectRegNetworkInterface(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegNetworkInterface", paramMap);
+	}
+
+	@Override
+	public Map selectRegNetworkInterfaceCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegNetworkInterfaceCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_network_profile
+	@Override
+	public List<Map> selectRegNetworkProfile(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegNetworkProfile", paramMap);
+	}
+
+	@Override
+	public Map selectRegNetworkProfileCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegNetworkProfileCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_recent_docs
+	@Override
+	public List<Map> selectRegRecentDocs(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegRecentDocs", paramMap);
+	}
+
+	@Override
+	public Map selectRegRecentDocsCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegRecentDocsCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_run_command
+	@Override
+	public List<Map> selectRegRunCommand(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegRunCommand", paramMap);
+	}
+
+	@Override
+	public Map selectRegRunCommandCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegRunCommandCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_search_keyword
+	@Override
+	public List<Map> selectRegSearchKeyword(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegSearchKeyword", paramMap);
+	}
+
+	@Override
+	public Map selectRegSearchKeywordCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegSearchKeywordCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_shim_cache
+	@Override
+	public List<Map> selectRegShimCache(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegShimCache", paramMap);
+	}
+
+	@Override
+	public Map selectRegShimCacheCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegShimCacheCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_start_list
+	@Override
+	public List<Map> selectRegStartList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegStartList", paramMap);
+	}
+
+	@Override
+	public Map selectRegStartListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegStartListCount", paramMap);
+	}
+	
+	// lv1_os_win_reg_system_service
+	@Override
+	public List<Map> selectRegSystemService(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectRegSystemService", paramMap);
+	}
+
+	@Override
+	public Map selectRegSystemServiceCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectRegSystemServiceCount", paramMap);
+	}
+	
 	// lv1_app_web_chrome_visit_urls
 	@Override
 	public List<Map> selectChromeVisitUrlsList(Map<String, Object> paramMap) throws Exception {
@@ -528,5 +682,16 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	@Override
 	public Map selectNtfsUsnjrnlCount(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectNtfsUsnjrnlCount", paramMap);
+	}
+	
+	// lv2_os_app_history
+	@Override
+	public List<Map> selectAppHistory(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectAppHistory", paramMap);
+	}
+
+	@Override
+	public Map selectAppHistoryCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectAppHistoryCount", paramMap);
 	}
 }

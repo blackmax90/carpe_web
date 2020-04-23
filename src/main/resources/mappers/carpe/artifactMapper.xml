@@ -398,76 +398,242 @@
 	</select>	
 	<!-- lv1_os_win_reg_amcache_file_entries -->
 		<select id="selectRegAmcacheFileEntriesList" parameterType="Map" resultType="Map">
-		SELECT case_id, evd_id, par_id, file_name, key_last_updated_time, file_extension, program_name, program_id, key_id, sha1_hash, os_component_flag,
-		full_path, link_date, product_name, size, version, product_version, long_path_hash, binary_type, pe_file_flag, binary_file_version, 
-		binary_product_version, language_code, usn, legacy_flag, volume_guid, publisher, switch_back_context, description, last_modified_time, 
-		created_time, last_modified_2_time, pe_header_field_size_of_image, pe_header_hash,pe_header_checksum
-		FROM lv1_os_win_reg_amcache_file_entries
+		SELECT *
+		FROM lv1_os_win_reg_amcache_file
 		<!--include refid="selectArtifactCondition" /-->
 		limit #{offset}, #{pageSize}
 	</select>
 	<select id="selectRegAmcacheFileEntriesListCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_os_win_reg_amcache_file_entries
+		SELECT count(*) as cnt FROM lv1_os_win_reg_amcache_file
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 
 	<!-- lv1_os_win_reg_amcache_program_entries -->
 		<select id="selectRegAmcacheProgramEntriesList" parameterType="Map" resultType="Map">
 		SELECT *
-		FROM lv1_os_win_reg_amcache_program_entries
+		FROM lv1_os_win_reg_amcache_program
 		<!--include refid="selectArtifactCondition" /-->
 		limit #{offset}, #{pageSize}
 	</select>
 	<select id="selectRegAmcacheProgramEntriesListCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_os_win_reg_amcache_program_entries
+		SELECT count(*) as cnt FROM lv1_os_win_reg_amcache_program
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	
 	<!-- lv1_os_win_reg_installed_programs -->
 		<select id="selectRegInstalledProgramsList" parameterType="Map" resultType="Map">
 		SELECT *
-		FROM lv1_os_win_reg_installed_programs
+		FROM lv1_os_win_reg_installed_program
 		<!--include refid="selectArtifactCondition" /-->
 		limit #{offset}, #{pageSize}
 	</select>
 	<select id="selectRegInstalledProgramsListCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_os_win_reg_installed_programs
+		SELECT count(*) as cnt FROM lv1_os_win_reg_installed_program
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	
 	<!-- lv1_os_win_reg_os_info -->
 		<select id="selectRegOSInfoList" parameterType="Map" resultType="Map">
 		SELECT *
-		FROM lv1_os_win_reg_os_info
+		FROM lv1_os_win_reg_os_information
 		<!--include refid="selectArtifactCondition" /-->
 		limit #{offset}, #{pageSize}
 	</select>
 	<select id="selectRegOSInfoListCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_os_win_reg_os_info
+		SELECT count(*) as cnt FROM lv1_os_win_reg_os_information
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	<!-- lv1_os_win_reg_usb_devices -->
 		<select id="selectRegUSBDevicesList" parameterType="Map" resultType="Map">
 		SELECT *
-		FROM lv1_os_win_reg_usb_devices
+		FROM lv1_os_win_reg_usb_device
 		<!--include refid="selectArtifactCondition" /-->
 		limit #{offset}, #{pageSize}
 	</select>
 	<select id="selectRegUSBDevicesListCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_os_win_reg_usb_devices
+		SELECT count(*) as cnt FROM lv1_os_win_reg_usb_device
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	<!-- lv1_os_win_reg_user_accounts -->
 		<select id="selectRegUserAccountsList" parameterType="Map" resultType="Map">
 		SELECT *
-		FROM lv1_os_win_reg_user_accounts
+		FROM lv1_os_win_reg_user_account
 		<!--include refid="selectArtifactCondition" /-->
 		limit #{offset}, #{pageSize}
 	</select>
 	<select id="selectRegUserAccountsListCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_os_win_reg_user_accounts
+		SELECT count(*) as cnt FROM lv1_os_win_reg_user_account
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
+	
+	<!-- lv1_os_win_reg_file_connection -->
+		<select id="selectRegFileConnection" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_file_connection
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegFileConnectionCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_file_connection
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_known_dll -->
+		<select id="selectRegKnownDll" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_known_dll
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegKnownDllCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_known_dll
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_mac_address -->
+		<select id="selectRegMacAddress" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_mac_address
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegMacAddressCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_mac_address
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_mru_folder -->
+		<select id="selectRegMruFolder" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_mru_folder
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegMruFolderCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_mru_folder
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_mui_cache -->
+		<select id="selectRegMuiCache" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_mui_cache
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegMuiCacheCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_mui_cache
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_network_drive -->
+		<select id="selectRegNetworkDrive" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_network_drive
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegNetworkDriveCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_network_drive
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_network_interface -->
+		<select id="selectRegNetworkInterface" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_network_interface
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegNetworkInterfaceCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_network_interface
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_network_profile -->
+		<select id="selectRegNetworkProfile" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_network_profile
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegNetworkProfileCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_network_profile
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_recent_docs -->
+		<select id="selectRegRecentDocs" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_recent_docs
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegRecentDocsCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_recent_docs
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_run_command -->
+		<select id="selectRegRunCommand" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_run_command
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegRunCommandCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_run_command
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_search_keyword -->
+		<select id="selectRegSearchKeyword" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_search_keyword
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegSearchKeywordCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_search_keyword
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_shim_cache -->
+		<select id="selectRegShimCache" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_shim_cache
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegShimCacheCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_shim_cache
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_start_list -->
+		<select id="selectRegStartList" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_start_list
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegStartListCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_start_list
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_reg_system_service -->
+		<select id="selectRegSystemService" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv1_os_win_reg_system_service
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRegSystemServiceCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv1_os_win_reg_system_service
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
 	<!-- lv1_app_web_chrome_visit_urls -->
 	<select id="selectChromeVisitUrlsList" parameterType="Map" resultType="Map">
 		SELECT case_id, evd_id, par_id, url, last_visited_time, title, visit_count, typed_count
@@ -483,12 +649,12 @@
 	<!-- lv1_os_win_reg_userassist -->
 	<select id="selectRegUserAssist" parameterType="Map" resultType="Map">
 		SELECT *
-		FROM lv1_os_win_reg_userassist
+		FROM lv1_os_win_reg_user_assist
 		<!--include refid="selectArtifactCondition" /-->
 		limit #{offset}, #{pageSize}
 	</select>
 	<select id="selectRegUserAssistCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_os_win_reg_userassist
+		SELECT count(*) as cnt FROM lv1_os_win_reg_user_assist
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	
@@ -585,6 +751,18 @@
 	</select>
 	<select id="selectNtfsUsnjrnlCount" parameterType="Map" resultType="Map">
 		SELECT count(*) as cnt FROM lv1_fs_ntfs_usnjrnl
+		<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv2_os_app_history -->
+	<select id="selectAppHistory" parameterType="Map" resultType="Map">
+		SELECT *
+		FROM lv2_os_app_history
+		<!--include refid="selectArtifactCondition" /-->
+		limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectAppHistoryCount" parameterType="Map" resultType="Map">
+		SELECT count(*) as cnt FROM lv2_os_app_history
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	
