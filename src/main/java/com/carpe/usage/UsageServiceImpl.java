@@ -27,4 +27,9 @@ public class UsageServiceImpl implements UsageService {
 	public List<Map> selectUsageDayList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectUsageDayList(paramMap);
 	}
+
+	@Override
+	public List<Map> selectUsageDayDetailList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectUsageDayDetailList(paramMap);
+	}
 }

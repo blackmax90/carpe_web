@@ -31,4 +31,8 @@ public class UsageDAOImpl implements UsageDAO {
 		return sqlSession.selectList(Namespace + ".selectUsageDayList", paramMap);
 	}
 
+	@Override
+	public List<Map> selectUsageDayDetailList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectUsageDayDetailList", paramMap);
+	}
 }
