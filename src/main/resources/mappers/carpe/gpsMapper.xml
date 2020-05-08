@@ -20,7 +20,6 @@
 	</select>
 
 	<select id="selectGpsLinkList" parameterType="Map" resultType="Map">
-	
 		SELECT  latitude
 		       ,longitude 
 		  FROM  gps
@@ -28,5 +27,72 @@
 		   AND  case_id = #{case_id}
       ORDER BY  regdate asc
 	</select>
+
+	<select id="selectGpsFileList" parameterType="Map" resultType="Map">
+		SELECT DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') AS regdate
+		     , type
+         , name 
+		  FROM gps_file
+		 WHERE 1=1
+       AND case_id = #{case_id}
+       AND regdate >= #{sdate}
+       <![CDATA[
+       AND regdate <= #{edate}
+       ]]>
+     ORDER BY regdate ASC
+  </select>
+
+  <select id="selectCommunicationRoomList" parameterType="Map" resultType="Map">      
+    SELECT roomno, GROUP_CONCAT(DISTINCT name) AS name, content, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate
+     FROM (
+           SELECT roomno, name, content, regdate
+             FROM (
+                   SELECT roomno, sender_name AS name, content, regdate
+                     FROM communication_data
+                    WHERE 1=1
+                      <if test="sdate!=null and !sdate.equals('')">
+                      AND regdate >= #{sdate}
+                      </if>
+                      <if test="edate!=null and !edate.equals('')">
+                      <![CDATA[
+                      AND regdate <= #{edate}
+                      ]]>
+                      </if>
+                      AND roomno IS NOT NULL
+                    UNION
+                   SELECT roomno, receiver_name AS name, content, regdate
+                     FROM communication_data
+                    WHERE 1=1
+                      <if test="sdate!=null and !sdate.equals('')">
+                      AND regdate >= #{sdate}
+                      </if>
+                      <if test="edate!=null and !edate.equals('')">
+                      <![CDATA[
+                      AND regdate <= #{edate}
+                      ]]>
+                      AND roomno IS NOT NULL
+                      </if>
+                  ) AA
+            ORDER BY regdate DESC
+            LIMIT 18446744073709551615
+          ) A
+    WHERE 1=1
+      AND name != ''
+    GROUP BY roomno
+  </select>
+
+  <select id="selectCommunicationDataList" parameterType="Map" resultType="Map">      
+    SELECT seqno, roomno, app, content, sender, sender_name, receiver
+         , receiver_name, msg_type, isdelete, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate
+         , case_id
+      FROM communication_data 
+     WHERE 1=1
+       AND case_id = #{case_id}
+       AND roomno = #{roomno}
+     ORDER BY regdate DESC
+     <if test="sdata!=null and !sdata.equals('') and pageCnt!=null and !pageCnt.equals('')">
+     LIMIT ${sdata}, ${pageCnt}
+     </if>
+  </select>
 
 </mapper>

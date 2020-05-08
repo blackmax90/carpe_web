@@ -1,6 +1,10 @@
 package com.carpe.gps;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carpe.common.CarpeConfig;
+import com.carpe.common.CommonUtil;
 import com.carpe.common.Consts;
 
 @Controller
@@ -34,7 +39,7 @@ public class GpsController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/gps_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/gps/gps_list.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getGpsList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
@@ -50,7 +55,7 @@ public class GpsController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/gps_link_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/gps/gps_link_list.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getGpsLinkList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
@@ -66,6 +71,72 @@ public class GpsController {
 		}
 
 		mav.addObject("list", gpsList);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/gps/file_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getFileList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		String regdate = map.get("regdate");
+		
+		if (CommonUtil.empty(regdate)) {
+			mav.addObject("list", new ArrayList<Map>());
+			return mav;
+		}
+
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = df.parse(regdate);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.add(Calendar.HOUR, -1);
+		String sdate = df.format(cal.getTime());
+		cal.add(Calendar.HOUR, 2);
+		String edate = df.format(cal.getTime());
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("sdate", sdate);
+		paramMap.put("edate", edate);
+
+		List<Map> fileList = service.selectGpsFileList(paramMap);
+
+		mav.addObject("list", fileList);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/gps/communication_room_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getCommunicationRoomList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("sdate", map.get("sdate"));
+		paramMap.put("edate", map.get("edate"));
+		List<Map> roomList = service.selectCommunicationRoomList(paramMap);
+
+		mav.addObject("list", roomList);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/gps/communication_data_list.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getCommunicationDataList(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		paramMap.put("roomno", map.get("roomno"));
+		paramMap.put("sdata", map.get("sdata"));
+		paramMap.put("pageCnt", map.get("pageCnt"));
+		List<Map> dataList = service.selectCommunicationDataList(paramMap);
+
+		mav.addObject("list", dataList);
 
 		return mav;
 	}

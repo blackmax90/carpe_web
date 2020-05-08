@@ -29,9 +29,25 @@ public class GpsServiceImpl implements GpsService {
 	public List<Map> selectGpsList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectGpsList(paramMap);
 	}
+
 	@Override
 	public List<Map> selectGpsLinkList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectGpsLinkList(paramMap);
+	}
+
+	@Override
+	public List<Map> selectGpsFileList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectGpsFileList(paramMap);
+	}
+
+	@Override
+	public List<Map> selectCommunicationRoomList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectCommunicationRoomList(paramMap);
+	}
+
+	@Override
+	public List<Map> selectCommunicationDataList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectCommunicationDataList(paramMap);
 	}
 	
 	/**
