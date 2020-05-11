@@ -2706,9 +2706,10 @@ h5 {
 
 .msg .pop-content,
 .chatroom .pop-content {
-	height: 60rem;
+	height: 55rem;
 	overflow-y:auto; 
 	overflow-x:hidden;
+	box-sizing:border-box;
 }
 
 .msg .pop-content {

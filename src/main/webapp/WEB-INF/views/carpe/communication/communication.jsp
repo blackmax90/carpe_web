@@ -158,7 +158,7 @@
     });
 
     $("#sdate, #edate").jqxDateTimeInput({
-      width: '122px',
+      width: '100%',
       height: '30px',
       formatString: 'yyyy-MM-dd',
       readonly: true,
