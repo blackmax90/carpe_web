@@ -196,15 +196,6 @@
         $("#fileInfo").jqxWindow('open');
       });
 
-      /*
-      $("#sdate, #edate").jqxDateTimeInput({
-        width: '210px',
-        height: '30px',
-        formatString: 'yyyy-MM-dd HH:mm:ss',
-        showTimeButton: true,
-        showCalendarButton: true 
-      });
-      */
       $.datetimepicker.setLocale("ko");
       
       $("#sdate, #edate").datetimepicker({
@@ -333,7 +324,7 @@
 
       //대화리스트 Window
       $("#roomLayer").jqxWindow({
-          width: '62rem'
+          width: '52rem'
         , height: '60rem'
         , resizable: false
         , cancelButton: $('#cancel')
@@ -542,15 +533,6 @@
     date.setHours(date.getHours() + 2);
     $("#edate").datetimepicker("setOptions", {value: date});
     
-
-    /*
-    var date = $("#sdate").jqxDateTimeInput('val', 'date');
-    date.setHours(date.getHours() - 1);
-    $("#sdate").jqxDateTimeInput('setDate', date);
-    date.setHours(date.getHours() + 2);
-    $("#edate").jqxDateTimeInput('setDate', date);
-    */
-
     getRoomList();
 
     $("#roomLayer").jqxWindow('open');
