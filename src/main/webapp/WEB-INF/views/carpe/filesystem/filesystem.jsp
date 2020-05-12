@@ -37,7 +37,7 @@
     <main class="main">
       <section class="tit-area">
         <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%> </h3>
-        <h3>Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
+        <h3 id="evdname">Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
         <button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
       </section>
       <section class="btn-area">
@@ -127,6 +127,8 @@
       function expandDirTree(node) {
         var param = {}, querystr, list;
         if (node && node.value) {
+          param.evd_id = node.value["evd_id"];
+          param.evd_name = node.value["evd_name"];
           param.id = node.value["id"];
           param.attr = node.value["attr"];
         } else {
@@ -146,6 +148,7 @@
             }
 
             node.value["isLoaded"] = true;
+            $("#evdname").text("Evidence : " + node.value["evd_name"]);
 
             if (data) {
               var nextItem = $("#jqxTree_dirs").jqxTree('getNextItem', node.element);
@@ -167,24 +170,24 @@
       }
 
       var treeRootDir = expandDirTree();
-        $("#jqxTree_dirs").jqxTree({ source: treeRootDir, allowDrag:false, width:'calc(100%)', height:'calc(100%)'});
+      $("#jqxTree_dirs").jqxTree({ source: treeRootDir, allowDrag:false, width:'calc(100%)', height:'calc(100%)'});
 
-        $("#jqxTree_dirs").on("expand", function (event) {
-          var node = $("#jqxTree_dirs").jqxTree('getItem', event.args.element);
+      $("#jqxTree_dirs").on("expand", function (event) {
+        var node = $("#jqxTree_dirs").jqxTree('getItem', event.args.element);
 
-          if (node.value["isLoaded"]) {
-            if (node.value.childcount) {
-              node.icon = "<%=Consts.FOLDER_OPEN_IMAGE%>";
-              $('#jqxTree_dirs').jqxTree('updateItem', node, node);
-            }
-
-            return;
-          } else {
+        if (node.value["isLoaded"]) {
+          if (node.value.childcount) {
             node.icon = "<%=Consts.FOLDER_OPEN_IMAGE%>";
             $('#jqxTree_dirs').jqxTree('updateItem', node, node);
           }
 
-          expandDirTree(node);
+          return;
+        } else {
+          node.icon = "<%=Consts.FOLDER_OPEN_IMAGE%>";
+          $('#jqxTree_dirs').jqxTree('updateItem', node, node);
+        }
+
+        expandDirTree(node);
       });
 
       $("#jqxTree_dirs").on("collapse", function (event) {
@@ -194,11 +197,14 @@
       });
 
       var treeItems = $("#jqxTree_dirs").jqxTree('getItems');
+
+      /*
       if (treeItems && treeItems.length) {
         var firstItem = treeItems[0];
 
         $('#jqxTree_dirs').jqxTree('selectItem', firstItem);
       }
+      */
 
       var source = {
         datatype: "json",
@@ -247,8 +253,11 @@
         formatData : function(data) {
           var node = $('#jqxTree_dirs').jqxTree('getSelectedItem');
           if (node) {
+            data["evd_id"] = node.value["evd_id"];
+            data["evd_name"] = node.value["evd_name"];
             data["id"] = node.value["id"];
             data["attr"] = node.value["attr"];
+            $("#evdname").text("Evidence : " + node.value["evd_name"]);
           }
           //data["id"] = 5;
           return data;

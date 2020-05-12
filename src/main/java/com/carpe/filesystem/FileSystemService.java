@@ -9,4 +9,7 @@ public interface FileSystemService {
 	public List<Map> selectFileList(Map<String, Object> paramMap) throws Exception;
 	public List<Map> selectDateTreeMap(Map<String, Object> paramMap) throws Exception;
 	public Map selectFileInfo(Map<String, Object> paramMap) throws Exception;
+	public List<Map> getDirList(String evdid, String evdName) throws Exception;
+	public List<Map> getFileDirList(String evdid, String evdName, String dataAttr, String string) throws Exception;
+	public List getEvdncList(String caseid, String selEvdid) throws Exception;
 }

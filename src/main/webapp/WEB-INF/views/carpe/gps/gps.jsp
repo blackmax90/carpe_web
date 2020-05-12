@@ -10,11 +10,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>CARPE</title>    
   <link rel="stylesheet" type="text/css" href="/carpe/resources/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/carpe/resources/css/jquery.datetimepicker.min.css" />
 	<link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
 	<link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
 	<link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
 	
 	<script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="/carpe/resources/js/jquery.datetimepicker.full.min.js"></script>
 	<script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
 	<script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
@@ -194,6 +196,7 @@
         $("#fileInfo").jqxWindow('open');
       });
 
+      /*
       $("#sdate, #edate").jqxDateTimeInput({
         width: '210px',
         height: '30px',
@@ -201,16 +204,23 @@
         showTimeButton: true,
         showCalendarButton: true 
       });
+      */
+      $.datetimepicker.setLocale("ko");
       
+      $("#sdate, #edate").datetimepicker({
+        format: "Y-m-d H:i:s",
+        step: 10
+      });
+
       $("#sdate").val("");
       $("#edate").val("");
       
       $("#sdateSpan").click(function() {
-      	//$("#sdate").jqxDateTimeInput('open'); 
+      	$("#sdate").datetimepicker("show"); 
       });
       
       $("#edateSpan").click(function() {
-      	//$("#edate").jqxDateTimeInput('open'); 
+      	$("#edate").datetimepicker("show"); 
       });
 
       $("#btnExport").click(function() {
@@ -523,16 +533,26 @@
 
 	//////// 대화방 목록 ////////
   var openRoomListLayer = function() {
-    $("#sdate").val($("#infoTime").text());
-    $("#edate").val($("#infoTime").text());
+    $("#sdate").datetimepicker("setOptions", {value: $("#infoTime").text()});
+    $("#edate").datetimepicker("setOptions", {value: $("#infoTime").text()});
 
+    var date = $("#sdate").datetimepicker("getValue");
+    date.setHours(date.getHours() - 1);
+    $("#sdate").datetimepicker("setOptions", {value: date});
+    date.setHours(date.getHours() + 2);
+    $("#edate").datetimepicker("setOptions", {value: date});
+    
+
+    /*
     var date = $("#sdate").jqxDateTimeInput('val', 'date');
     date.setHours(date.getHours() - 1);
     $("#sdate").jqxDateTimeInput('setDate', date);
     date.setHours(date.getHours() + 2);
     $("#edate").jqxDateTimeInput('setDate', date);
+    */
 
     getRoomList();
+
     $("#roomLayer").jqxWindow('open');
   }
 

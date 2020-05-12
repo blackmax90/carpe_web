@@ -18,7 +18,9 @@
 		FROM evidence_info a, (SELECT @a:= 0) AS sn
 		WHERE a.case_id = #{case_id}
 		ORDER BY acquired_date
+    <if test="offset!=null and !offset.equals('') and pageSize!=null and !pageSize.equals('')">
 		limit #{offset}, #{pageSize}
+    </if>
 	</select>
 
 	<select id="selectEvdncListCount" parameterType="Map" resultType="Map">
