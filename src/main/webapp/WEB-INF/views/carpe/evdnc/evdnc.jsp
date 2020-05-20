@@ -451,7 +451,7 @@
           return;
         }
 
-        if ($("#fileType").val() == "local") {
+        if ($("input[name='fileType']:checked").val() == "local") {
           addLocalFile();
         } else {
           addServerFile();
