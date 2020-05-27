@@ -20,12 +20,53 @@
 	</select>
 
 	<select id="selectGpsLinkList" parameterType="Map" resultType="Map">
-		SELECT  latitude
-		       ,longitude 
-		  FROM  gps
-		 WHERE  DATE_FORMAT(regdate, '%Y-%m-%d') = substr(#{regdate},1,10)
-		   AND  case_id = #{case_id}
-      ORDER BY  regdate asc
+		SELECT substr(regdate,1,19) regd
+         , regdate
+         , source
+         , location
+         , latitude
+		     , longitude 
+		  FROM gps
+		 WHERE 1=1
+		   AND case_id = #{case_id}
+       AND regdate >= #{sdate}
+       <![CDATA[
+       AND regdate <= #{edate}
+       ]]>
+     <if test="timeType!=null and timeType==1 and stime!=null and !stime.equals('') and etime!=null and !etime.equals('')">
+       AND TIME(regdate) >= #{stime}
+       <![CDATA[
+       AND TIME(regdate) <= #{etime}
+       ]]>
+     </if>
+     <if test="timeType!=null and timeType==2 and stime!=null and !stime.equals('') and etime!=null and !etime.equals('')">
+       <![CDATA[
+       AND (TIME(regdate) >= #{stime}
+        OR TIME(regdate) <= #{etime})
+       ]]>
+     </if>
+     <if test="weekend!=null and weekend==1">
+       AND (DAYOFWEEK(regdate) = 1 OR DAYOFWEEK(regdate) = 7)
+     </if>
+     <if test="neweekend!=null and neweekend==1">
+       AND (DAYOFWEEK(regdate) != 1 AND DAYOFWEEK(regdate) != 7)
+     </if>
+     ORDER BY regdate ASC
+	</select>
+
+	<select id="selectGpsDateCount" parameterType="Map" resultType="Map">
+    SELECT regd, COUNT(regd) AS cnt
+      FROM (
+            SELECT SUBSTR(regdate, 1, 10) AS regd 
+              FROM gps 
+             WHERE 1=1
+		           AND case_id = #{case_id}
+               AND regdate >= #{sdate} 
+               <![CDATA[
+               AND regdate <= #{edate}
+               ]]>
+           ) A 
+     GROUP BY A.regd;
 	</select>
 
 	<select id="selectGpsFileList" parameterType="Map" resultType="Map">

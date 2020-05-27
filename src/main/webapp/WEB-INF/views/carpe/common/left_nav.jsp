@@ -35,7 +35,8 @@
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'timeline'}">on</c:if>"><a href="/carpe/timeline_chart.do">Timeline</a></li>
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'communication'}">on</c:if>"><a href="/carpe/communication.do">Communication</a></li> 
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'usagehistory'}">on</c:if>"><a href="/carpe/usage.do">Usage history</a></li>
-						<li class="level02 ${hideClass} <c:if test="${d2 eq 'locationmap'}">on</c:if>"><a href="/carpe/gps.do">Location map</a></li>
+						<li class="level02 ${hideClass} <c:if test="${d2 eq 'locationmap'}">on</c:if>"><a href="/carpe/gps/gps.do">Location map</a></li>
+<%-- 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'recyclebin'}">on</c:if>"><a href="/carpe/recyclebin/recyclebin.do">RecycleBin History</a></li> --%>
 						<!--// 2Depth Menu -->
 					<li class="<c:if test="${d1 eq 'report'}">on</c:if>"><a href="#" class="icon report">Report</a></li>
 				</ul>

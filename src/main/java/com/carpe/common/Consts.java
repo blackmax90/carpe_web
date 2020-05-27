@@ -19,6 +19,8 @@ public class Consts {
 	
 	public static final int ADMIN_GRADE = 1;
 
+	public static final int GPS_LIMIT_COUNT = 30;		//경유지 허용 최대 개수
+
 	public static HttpHeaders responseHeaders = new HttpHeaders();
 	
 	static {

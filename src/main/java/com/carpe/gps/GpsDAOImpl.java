@@ -27,6 +27,11 @@ public class GpsDAOImpl implements GpsDAO {
 	}
 
 	@Override
+	public List<Map> selectGpsDateCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectGpsDateCount", paramMap);
+	}
+
+	@Override
 	public List<Map> selectGpsFileList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectGpsFileList", paramMap);
 	}

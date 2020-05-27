@@ -29,7 +29,7 @@ public class GpsController {
 	@Inject
 	private GpsService service;
 
-	@RequestMapping(value = "/gps.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/gps/gps.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView gpsView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
@@ -60,11 +60,33 @@ public class GpsController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 
+		map.put("caseid", (String)session.getAttribute(Consts.SESSION_CASE_ID));
+		
+		Map<String, Object> retMap = service.getDetailPath(map);
+		List<Map> gpsList = (List<Map>) retMap.get("list");
+		
+		if (gpsList == null) {
+			gpsList = new ArrayList<>();
+		}
+
+		mav.addObject("ret", retMap.get("ret"));
+		mav.addObject("msg", retMap.get("msg"));
+		mav.addObject("list", gpsList);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/gps/gps_date_count.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getGpsDateCount(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
-		paramMap.put("regdate", map.get("regdate"));
+		paramMap.put("sdate", map.get("sdate"));
+		paramMap.put("edate", map.get("edate"));
 
-		List<Map> gpsList = service.getDetailPath(paramMap);
+		List<Map> gpsList = service.selectGpsDateCount(paramMap);
 		
 		if (gpsList == null) {
 			gpsList = new ArrayList<>();

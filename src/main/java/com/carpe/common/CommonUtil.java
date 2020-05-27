@@ -64,7 +64,7 @@ public class CommonUtil {
 		}
 		
 		try {
-			String url = "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getHoliDeInfo?solYear=" 
+			String url = "http://apis.data.go.kr/B090041/openapi/service/SpcdeInfoService/getRestDeInfo?solYear=" 
 					+ year + "&solMonth=" + month + "&ServiceKey=" + CarpeConfig.getSpcdeInfoServiceKey();
 
 			System.out.println("url : " + url);

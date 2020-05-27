@@ -164,7 +164,7 @@
 		</div><!-- // pop-content end -->
 	</div><!-- // pop-up end -->
 
-	<!-- pop-up //-->
+	<!-- pop-up //파일목록-->
 	<div id="fileInfo" class="pop wrap-pop">
 		<div class="pop-header jqx-window-header">
 			<h1>파일 정보</h1>
@@ -174,18 +174,115 @@
 			</div><!--// content-box -->			
 		</div><!-- // pop-content end -->
 	</div><!-- // pop-up end -->
-	
+
+	<!-- pop-up //이동 경로 설정-->
+	<div id="moveConfigPop" class="pop wrap-pop">
+		<div class="pop-header">
+			<h1>이동 경로 설정</h1>
+		</div>
+		<div class="pop-content">
+			<div class="combo">
+        <div>
+          <dl>
+            <dt></dt>
+            <dd>
+              <div>
+				        <span class="input-text-type-1 calendar" id="mcSdateSpan"><input type="text" id="mcSdate" /></span>
+				        <span class="hyp">-</span>
+				        <span class="input-text-type-1 calendar" id="mcEdateSpan"><input type="text" id="mcEdate" /></span>
+              </div>
+            </dd>
+          </dl>
+        </div>
+			</div>
+
+      <div class="btn-area">
+        <ul>
+          <li><button type="button" class="btn-case-01" id="btnMcOK">확인</button></li>
+          <li><button type="button" class="btn-case-01" id="btnMcCancel">취소</button></li>
+        </ul>
+      </div>
+		</div><!-- // pop-content end -->
+	</div><!-- // pop-up end -->
+
+	<!-- pop-up //이동 경로 설정-->
+	<div id="timeLinePop" class="pop wrap-pop">
+		<div class="pop-header">
+			<h1>분석 시점 설정</h1>
+		</div>
+		<div class="pop-content">
+			<div class="combo">
+        <span class="input-text-type-1 calendar" id="tlSdateSpan"><input type="text" id="tlSdate" /></span>
+        <span class="hyp">-</span>
+        <span class="input-text-type-1 calendar" id="tlEdateSpan"><input type="text" id="tlEdate" /></span>
+      </div>
+			<div class="combo">
+        <span class="input-text-type-1 calendar" id="tlStimeSpan"><input type="text" id="tlStime" /></span>
+        <span class="hyp">-</span>
+        <span class="input-text-type-1 calendar" id="tlEtimeSpan"><input type="text" id="tlEtime" /></span>
+      </div>
+			<ul>
+				<li class="checkbox checkbox-type-3">
+				  <input id="chk1" name="chk1" type="checkbox" />
+				  <label for="chk1"><span class="text">공휴일만</span></label>
+				  <input id="chk2" name="chk2" type="checkbox" />
+				  <label for="chk2"><span class="text">공휴일만 제외</span></label>
+        </li>
+				<li class="checkbox checkbox-type-3">
+				  <input id="chk3" name="chk3" type="checkbox" />
+				  <label for="chk3"><span class="text">주말만</span></label>
+				  <input id="chk4" name="chk4" type="checkbox" />
+				  <label for="chk4"><span class="text">주말만 제외</span></label>
+        </li>
+				<li class="checkbox checkbox-type-3">
+				  <input id="chk5" name="chk5" type="checkbox" />
+				  <label for="chk5"><span class="text">첫 데이터만</span></label>
+				  <input id="chk6" name="chk6" type="checkbox" />
+				  <label for="chk6"><span class="text">마지막 데이터만</span></label>
+        </li>
+      </ul>
+
+			<div class="btn-area">
+				<button type="button" class="btn-case-01" id="btnWork"><span class="icon">업무시간</span></button>
+				<button type="button" class="btn-case-01" id="btnNotWork"><span class="icon">비업무시간</span></button>
+				<button type="button" class="btn-case-01 btn-search txt" id="btnTlSearch"><span class="icon ico-search">검색</span></button>
+			</div>
+      
+      <div id="chartDiv" style="height:100px;">
+      </div>
+
+			<ul id="pathList">
+			  <li>위치 1 2020-01-01 12:34:56</li>
+			  <li>이동 - 10km 10시간 10분</li>
+			  <li>위치 2 2020-01-01 12:34:56</li>
+			  <li>이동 - 10km 10시간 10분</li>
+			  <li>위치 3 2020-01-01 12:34:56</li>
+			  <li>이동 - 10km 10시간 10분</li>
+			  <li>위치 4 2020-01-01 12:34:56</li>
+			  <li>이동 - 10km 10시간 10분</li>
+			  <li>위치 5 2020-01-01 12:34:56</li>
+      </ul>
+    </div>
+	</div><!-- // pop-up end -->
+
+  <script src="/carpe/resources/amcharts_4.5.3/amcharts4/core.js"></script>
+  <script src="/carpe/resources/amcharts_4.5.3/amcharts4/charts.js"></script>
+  <script src="/carpe/resources/amcharts_4.5.3/amcharts4/themes/animated.js"></script>
 	
 	<!-- 현재 페이지에 필요한 js -->
 	<script>
 	(function($) {
 		var map = null;
 		var polyLine = null;
+    var chart = null;
+    var xAxis = null;
 
 		$(document).ready(function() {
-			init();
+			initMap();
       initMapGrid();
       initFileGrid();
+			initPopup();
+      initChart();
 
       $("#btnComm").click(openRoomListLayer);
 
@@ -199,7 +296,23 @@
       $.datetimepicker.setLocale("ko");
       
       $("#sdate, #edate").datetimepicker({
-        format: "Y-m-d H:i:s",
+        format: "Y-m-d H:i:00",
+        step: 10
+      });
+
+      $("#mcSdate, #mcEdate").datetimepicker({
+        format: "Y-m-d H:i:00",
+        step: 10
+      });
+
+      $("#tlSdate, #tlEdate").datetimepicker({
+        format: "Y-m-d",
+        timepicker: false
+      });
+
+      $("#tlStime, #tlEtime").datetimepicker({
+        format: "H:i:00",
+        datepicker: false,
         step: 10
       });
 
@@ -214,8 +327,104 @@
       	$("#edate").datetimepicker("show"); 
       });
 
+      $("#mcSdateSpan").click(function() {
+      	$("#mcSdate").datetimepicker("show"); 
+      });
+      
+      $("#mcEdateSpan").click(function() {
+      	$("#mcEdate").datetimepicker("show"); 
+      });
+
+      $("#tlSdateSpan").click(function() {
+      	$("#tlSdate").datetimepicker("show"); 
+      });
+      
+      $("#tlEdateSpan").click(function() {
+      	$("#tlEdate").datetimepicker("show"); 
+      });
+
+      $("#tlStimeSpan").click(function() {
+      	$("#tlStime").datetimepicker("show"); 
+      });
+      
+      $("#tlEtimeSpan").click(function() {
+      	$("#tlEtime").datetimepicker("show"); 
+      });
+
       $("#btnExport").click(function() {
         exportCommData();
+      });
+
+      $("#chk1").change(function() {
+        if ($(this).prop("checked") == true) {
+          $("#chk2").prop("checked", false);
+        }
+      });
+
+      $("#chk2").change(function() {
+        if ($(this).prop("checked") == true) {
+          $("#chk1").prop("checked", false);
+        }
+      });
+
+      $("#chk3").change(function() {
+        if ($(this).prop("checked") == true) {
+          $("#chk4").prop("checked", false);
+        }
+      });
+
+      $("#chk4").change(function() {
+        if ($(this).prop("checked") == true) {
+          $("#chk3").prop("checked", false);
+        }
+      });
+
+      $("#chk5").change(function() {
+        if ($(this).prop("checked") == true) {
+          $("#chk6").prop("checked", false);
+        }
+      });
+
+      $("#chk6").change(function() {
+        if ($(this).prop("checked") == true) {
+          $("#chk5").prop("checked", false);
+        }
+      });
+
+      $("#btnMcOK").click(function() {
+        var sdate = $("#mcSdate").val();
+        var edate = $("#mcEdate").val();
+
+        if (!sdate || !edate) {
+          alert("시간을 입력해주세요");
+          return;
+        }
+
+        var sendData = {
+            sdate: sdate,
+            edate: edate,
+            mode: 0
+        };
+
+	   	  var data = getLinkList(sendData);
+	   	  drawPolyLine(data.list);
+        $("#moveConfigPop").jqxWindow('close');
+      });
+
+      //업무시간
+      $("#btnWork").click(function() {
+        $("#tlStime").val("09:00:00");
+        $("#tlEtime").val("17:59:59");
+      });
+
+      //비업무시간
+      $("#btnNotWork").click(function() {
+        $("#tlStime").val("18:00:00");
+        $("#tlEtime").val("08:59:59");
+      });
+
+      $("#btnTlSearch").click(function() {
+        makeTimeLine();
       });
 
       $("#dataLayerContent").scroll(function() {
@@ -229,9 +438,34 @@
           getCommData();
         }
       });
+
+      //맵 커스텀 버튼 생성
+      naver.maps.Event.once(map, 'init_stylemap', function() {
+        var btnAnaly = "<button type=\"button\" class=\"btn-case-01 txt mt10 mr20\">분석 시점 설정</button>";
+        var btnMove = "<button type=\"button\" class=\"btn-case-01 txt mt10 mr20\">이동 경로 설정</button>";
+        
+        var analyControl = new naver.maps.CustomControl(btnAnaly, {
+          position: naver.maps.Position.RIGHT_TOP
+        });
+
+        var moveControl = new naver.maps.CustomControl(btnMove, {
+          position: naver.maps.Position.RIGHT_TOP
+        });
+        
+        analyControl.setMap(map);
+        moveControl.setMap(map);
+
+        naver.maps.Event.addDOMListener(analyControl.getElement(), 'click', function() {
+          $("#timeLinePop").jqxWindow('open');
+        });
+
+        naver.maps.Event.addDOMListener(moveControl.getElement(), 'click', function() {
+          $("#moveConfigPop").jqxWindow('open');
+        });
+      });
 		});
 
-		var init = function() {
+		var initMap = function() {
 			//지도 api 객체 생성
 			map = new naver.maps.Map('map', {
 			  center: new naver.maps.LatLng(37.5642135, 127.0016985),
@@ -308,14 +542,15 @@
 	        }
 	      });
 		  });
+		};
 
+		var initPopup = function() {
       //지도정보 Window
       $("#mapInfo").jqxWindow({
           width: '40rem'
         , height: '29rem'
         , position: {x: 'calc(50% - 10rem)', y: '16rem'}
         , resizable: false
-        , cancelButton: $('#cancel')
         , autoOpen: false
         , resizable: false
         , isModal: true
@@ -327,7 +562,6 @@
           width: '52rem'
         , height: '60rem'
         , resizable: false
-        , cancelButton: $('#cancel')
         , autoOpen: false
         , resizable: false
         , isModal: true
@@ -339,7 +573,6 @@
           width: '40rem'
         , height: '60rem'
         , resizable: false
-        , cancelButton: $('#cancel')
         , autoOpen: false
         , resizable: false
         , isModal: true
@@ -351,43 +584,238 @@
           width: '80rem'
         , height: '60rem'
         , resizable: false
-        , cancelButton: $('#cancel')
         , autoOpen: false
         , resizable: false
         , isModal: true
         , modalOpacity: 0.3
       });
+
+      //설정 Window
+      var mapObj = $("#map");
+      var left = mapObj.offset().left;
+      var right = mapObj.offset().left + mapObj.width();
+      var top = mapObj.offset().top;
+
+      //이동경로설정 Window
+      $("#moveConfigPop").jqxWindow({
+          width: '42rem'
+        , height: '17rem'
+        , resizable: false
+        , cancelButton: $("#btnMcCancel")
+        , autoOpen: false
+        , resizable: false
+        , isModal: true
+        , modalOpacity: 0.3
+      });
+
+      //분석시점설정 Window
+      $("#timeLinePop").jqxWindow({
+          width: '40rem'
+        , height: '80%'
+        , resizable: false
+        , autoOpen: false 
+        , resizable: false
+        , isModal: false 
+        , position: [left, top]
+        , modalOpacity: 0.3
+      });
 		};
+
+    // TimeLine Chart 초기화
+    var initChart = function() {
+      // Themes begin
+      am4core.useTheme(am4themes_animated);
+      am4core.options.commercialLicense = true;
+      // Themes end
+          
+      chart = am4core.create("chartDiv", am4charts.XYChart);
+
+      chart.data = [
+        {regd: '2020-01-01', cnt: 3},
+        {regd: '2020-01-02', cnt: 5},
+        {regd: '2020-01-08', cnt: 2},
+        {regd: '2020-01-09', cnt: 8},
+        {regd: '2020-01-10', cnt: 4},
+        {regd: '2020-01-11', cnt: 5},
+        {regd: '2020-01-12', cnt: 6},
+        {regd: '2020-01-13', cnt: 7}
+      ];
+
+      // X축
+      xAxis = chart.xAxes.push(new am4charts.DateAxis());
+      xAxis.renderer.grid.template.location = 0;
+      xAxis.renderer.inside = true;
+      xAxis.renderer.visible = false;
+      xAxis.min = new Date('2020-01-01').getTime();
+      xAxis.max = new Date('2020-01-13').getTime();
+      xAxis.snapTooltip = false;
+      xAxis.tooltipPosition = "fixed";
+      xAxis.tooltipDateFormat = "yyyy-MM-dd eee";
+      xAxis.tooltip.dy = 33;
+      xAxis.tooltip.background.pointerLength = 0;
+
+      // Y축
+      var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+      yAxis.renderer.inside = true;
+      yAxis.renderer.visible = false;
+      yAxis.cursorTooltipEnabled = false;
+
+      // Value
+      var series = chart.series.push(new am4charts.ColumnSeries());
+      series.dataFields.valueY = "cnt";
+      series.dataFields.dateX = "regd";
+      series.columns.template.tooltipText = "[bold]{valueY}[/]";
+      series.columns.template.fillOpacity = .8;
+
+      series.columns.template.events.on("hit", function(ev) {
+        var sdate = ev.target.dataItem.dataContext.regd;
+        var edate = ev.target.dataItem.dataContext.regd;
+
+        $("input:checkbox[id^='chk']").prop("checked", false);
+
+        $("#tlSdate").val(sdate);
+        $("#tlEdate").val(edate);
+        $("#tlStime").val("");
+        $("#tlEtime").val("");
+
+        makeTimeLine();
+      });
+
+      var columnTemplate = series.columns.template;
+      columnTemplate.strokeWidth = 2;
+      columnTemplate.strokeOpacity = 1;
+
+      //Cursor
+      chart.cursor = new am4charts.XYCursor();
+      chart.cursor.xAxis = xAxis;
+      chart.cursor.lineY.disabled = true;
+      chart.cursor.lineX.strokeWidth = 0;
+      chart.cursor.lineX.fill = am4core.color("#8F3985");
+      chart.cursor.lineX.fillOpacity = 0.1;
+      chart.cursor.fullWidthLineX = true;
+
+      //Scroll
+      chart.scrollbarX = new am4core.Scrollbar();
+      chart.scrollbarX.parent = chart.bottomAxesContainer;
+      chart.scrollbarX.minHeight = 10;
+      chart.scrollbarX.marginBottom = 0;
+      chart.scrollbarX.startGrip.icon.disabled = true;
+      chart.scrollbarX.endGrip.icon.disabled = true;
+    };
+
+    //TimeLine 생성
+    var makeTimeLine = function() {
+      var sdate = $("#tlSdate").val();
+      var edate = $("#tlEdate").val();
+      var stime = $("#tlStime").val();
+      var etime = $("#tlEtime").val();
+
+      if (!sdate || !edate) {
+        alert("시간을 입력해주세요");
+        return;
+      }
+
+      if (stime == "" || etime == "") {
+        $("#tlStime").val("");
+        $("#tlEtime").val("");
+        stime = "";
+        etime = "";
+      }
+
+      sdate += " 00:00:00";
+      edate += " 23:59:59";
+
+      var sendData = {
+          sdate: sdate,
+          edate: edate,
+          stime: stime,
+          etime: etime,
+          mode: 1
+      };
+
+      $("input:checkbox[id^='chk']").each(function() {
+        if ($(this).is(":checked")) {
+          sendData[$(this).attr("id")] = 1;
+        }
+      });
+
+	    var data = getLinkList(sendData);
+      makeDateCountChart(sdate, edate);
+	    drawPolyLine(data.list);
+      makePathList(data.list);
+    };
 
     // map marker click event
 		var viewMapInfo = function(location, regd, source) {
-	   	getLinkList(regd);
+      var sdate = regd.substr(0, 10) + " 00:00:00";
+      var edate = regd.substr(0, 10) + " 23:59:59";
+      var sendData = {
+          sdate: sdate,
+          edate: edate,
+          mode: 0
+      };
+
+	   	var data = getLinkList(sendData);
+      drawPolyLine(data.list);
 	   	$("#infoTime").html(regd);
 	   	$("#infoLocation").html(location);
 	   	$("#infoSource").html(source);
       $("#mapInfo").jqxWindow('open');
 		};
 
-		var getLinkList = function(regdate) {
+		var getLinkList = function(sendData) {
+      var retData = null;
+
 		  $.ajax({
 			  url: "/carpe/gps/gps_link_list.do",
 		    dataType:'json',
-		    data: { regdate : regdate},
+		    data: sendData,
 		    async: false,
 		    contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
 		    success: function(data) {
-		      var linePath = [];
+          var ret = data.ret;
+          var msg = data.msg;
 
-		      $(data.list).each(function(i, list) {
-		    	  linePath[i] = new naver.maps.LatLng(list.latitude, list.longitude);
-		      });
+          if (ret != "0") {
+            alert(msg);
+          }
 
-		      console.log(linePath.length);
-		   	
-			    polyLine.setPath(linePath);
+          retData = data;
 		    }
 		  });
+
+      return retData;
 		};
+
+    //차트 데이터 변경
+		var makeDateCountChart = function(sdate, edate) {
+		  $.ajax({
+			  url: "/carpe/gps/gps_date_count.do",
+		    dataType:'json',
+		    data: {
+          sdate : sdate,
+          edate : edate
+        },
+		    contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+		    success: function(data) {
+          xAxis.min = new Date(sdate.substr(0, 10)).getTime();
+          xAxis.max = new Date(edate.substr(0, 10)).getTime();
+          chart.data = data.list;
+        }
+		  });
+		};
+
+    //라인 생성
+    var drawPolyLine = function(data) {
+		  var linePath = [];
+
+		  $(data).each(function(i, list) {
+		    linePath[i] = new naver.maps.LatLng(list.latitude, list.longitude);
+		  });
+
+			polyLine.setPath(linePath);
+	    console.log(linePath.length);
+    };
 
 		//Map Grid
     var initMapGrid = function() {
@@ -518,6 +946,50 @@
 		  	columnsheight: 40,
 		  	columns: columnSet
 		  });
+    };
+
+    //TimeLine 경로 리스트 생성
+    var makePathList = function(list) {
+      var html = "";
+
+		  $(list).each(function(i, data) {
+        if (html != "") {
+          var prevData = list[i - 1];
+          var diff = data.regdate.time - prevData.regdate.time;
+          var h = Math.ceil(diff / (1000 * 60 * 60));
+          diff = diff % (1000 * 60 * 60);
+          var m = Math.ceil(diff / (1000 * 60));
+
+          var latLng1 = new naver.maps.LatLng(data.latitude, data.longitude);
+          var latLng2 = new naver.maps.LatLng(prevData.latitude, prevData.longitude);
+          var distance = map.getProjection().getDistance(latLng1, latLng2);
+
+          var distStr = "";
+          var moveStr = "";
+
+          if (distance < 1000) {
+            distance = Math.round(distance);
+            distStr = "이동 - " + distance + "미터 ";
+          } else {
+            distance = Math.round(distance / 100) / 10;
+            distStr = "이동 - " + distance + "km ";
+          }
+
+          moveStr = distStr;
+
+          if (h > 0) {
+            moveStr += h + "시간 ";
+          }
+
+          moveStr += m + "분";
+          
+          html += "<li>" + moveStr + "</li>";
+        }
+
+        html += "<li>" + data.location + " " + data.regd + "</li>";
+		  });
+
+      $("#pathList").html(html);
     };
 
 	})(jQuery);
