@@ -181,27 +181,19 @@
 			<h1>이동 경로 설정</h1>
 		</div>
 		<div class="pop-content">
-			<div class="combo">
-        <div>
-          <dl>
-            <dt></dt>
-            <dd>
-              <div>
-				        <span class="input-text-type-1 calendar" id="mcSdateSpan"><input type="text" id="mcSdate" /></span>
-				        <span class="hyp">-</span>
-				        <span class="input-text-type-1 calendar" id="mcEdateSpan"><input type="text" id="mcEdate" /></span>
-              </div>
-            </dd>
-          </dl>
-        </div>
-			</div>
-
-      <div class="btn-area">
-        <ul>
-          <li><button type="button" class="btn-case-01" id="btnMcOK">확인</button></li>
-          <li><button type="button" class="btn-case-01" id="btnMcCancel">취소</button></li>
-        </ul>
-      </div>
+			<section class="search-date">
+				<div class="array combo">
+			        <span class="input-text-type-1 calendar" id="mcSdateSpan"><input type="text" id="mcSdate" /></span>
+			        <span class="hyp">-</span>
+			        <span class="input-text-type-1 calendar" id="mcEdateSpan"><input type="text" id="mcEdate" /></span>
+	            </div>
+			</section>
+			<section class="btn-area">
+			  <ul>
+			    <li><button type="button" class="btn-case-01" id="btnMcOK">확인</button></li>
+			    <li><button type="button" class="btn-case-01" id="btnMcCancel">취소</button></li>
+			  </ul>
+			</section>
 		</div><!-- // pop-content end -->
 	</div><!-- // pop-up end -->
 
@@ -211,58 +203,94 @@
 			<h1>분석 시점 설정</h1>
 		</div>
 		<div class="pop-content">
-			<div class="combo">
-        <span class="input-text-type-1 calendar" id="tlSdateSpan"><input type="text" id="tlSdate" /></span>
-        <span class="hyp">-</span>
-        <span class="input-text-type-1 calendar" id="tlEdateSpan"><input type="text" id="tlEdate" /></span>
-      </div>
-			<div class="combo">
-        <span class="input-text-type-1 calendar" id="tlStimeSpan"><input type="text" id="tlStime" /></span>
-        <span class="hyp">-</span>
-        <span class="input-text-type-1 calendar" id="tlEtimeSpan"><input type="text" id="tlEtime" /></span>
-      </div>
-			<ul>
-				<li class="checkbox checkbox-type-3">
-				  <input id="chk1" name="chk1" type="checkbox" />
-				  <label for="chk1"><span class="text">공휴일만</span></label>
-				  <input id="chk2" name="chk2" type="checkbox" />
-				  <label for="chk2"><span class="text">공휴일만 제외</span></label>
-        </li>
-				<li class="checkbox checkbox-type-3">
-				  <input id="chk3" name="chk3" type="checkbox" />
-				  <label for="chk3"><span class="text">주말만</span></label>
-				  <input id="chk4" name="chk4" type="checkbox" />
-				  <label for="chk4"><span class="text">주말만 제외</span></label>
-        </li>
-				<li class="checkbox checkbox-type-3">
-				  <input id="chk5" name="chk5" type="checkbox" />
-				  <label for="chk5"><span class="text">첫 데이터만</span></label>
-				  <input id="chk6" name="chk6" type="checkbox" />
-				  <label for="chk6"><span class="text">마지막 데이터만</span></label>
-        </li>
-      </ul>
-
-			<div class="btn-area">
-				<button type="button" class="btn-case-01" id="btnWork"><span class="icon">업무시간</span></button>
-				<button type="button" class="btn-case-01" id="btnNotWork"><span class="icon">비업무시간</span></button>
-				<button type="button" class="btn-case-01 btn-search txt" id="btnTlSearch"><span class="icon ico-search">검색</span></button>
-			</div>
-      
-      <div id="chartDiv" style="height:100px;">
-      </div>
-
-			<ul id="pathList">
-			  <li>위치 1 2020-01-01 12:34:56</li>
-			  <li>이동 - 10km 10시간 10분</li>
-			  <li>위치 2 2020-01-01 12:34:56</li>
-			  <li>이동 - 10km 10시간 10분</li>
-			  <li>위치 3 2020-01-01 12:34:56</li>
-			  <li>이동 - 10km 10시간 10분</li>
-			  <li>위치 4 2020-01-01 12:34:56</li>
-			  <li>이동 - 10km 10시간 10분</li>
-			  <li>위치 5 2020-01-01 12:34:56</li>
-      </ul>
-    </div>
+			<section>
+				<div class="tit-area"><h3 class="unit">분석 시점 검색</h3></div>
+				<div class="array mt10">
+					<ul class="list-v">
+						<li>
+							<div class="array combo">
+								<span class="input-text-type-1 calendar" id="tlSdateSpan"><input type="text" id="tlSdate" /></span>
+								<span class="hyp">-</span>
+								<span class="input-text-type-1 calendar" id="tlEdateSpan"><input type="text" id="tlEdate" /></span>
+							</div>
+						</li>
+						<li class="mt5">
+							<div class="array combo">
+								<span class="input-text-type-1 calendar" id="tlStimeSpan"><input type="text" id="tlStime" /></span>
+								<span class="hyp">-</span>
+								<span class="input-text-type-1 calendar" id="tlEtimeSpan"><input type="text" id="tlEtime" /></span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="array mt10">
+					<ul class="list-h w3ea">
+						<li>
+							<div class="checkbox checkbox-type-3">
+								<input id="chk1" name="chk1" type="checkbox" />
+								<label for="chk1"><span class="text">공휴일만</span></label>
+							</div>
+						</li>
+						<li>
+							<div class="checkbox checkbox-type-3">
+								<input id="chk2" name="chk2" type="checkbox" />
+								<label for="chk2"><span class="text">공휴일만 제외</span></label>
+							</div>
+						</li>
+						<li>
+							<div class="checkbox checkbox-type-3">
+								<input id="chk3" name="chk3" type="checkbox" />
+								<label for="chk3"><span class="text">주말만</span></label>
+							</div>
+						</li>
+						<li>
+							<div class="checkbox checkbox-type-3">
+								<input id="chk4" name="chk4" type="checkbox" />
+								<label for="chk4"><span class="text">주말만 제외</span></label>
+							</div>
+						</li>
+						<li>
+							<div class="checkbox checkbox-type-3">
+								<input id="chk5" name="chk5" type="checkbox" />
+								<label for="chk5"><span class="text">첫 데이터만</span></label>
+							</div>
+						</li>
+						<li>
+							<div class="checkbox checkbox-type-3">
+								<input id="chk6" name="chk6" type="checkbox" />
+								<label for="chk6"><span class="text">마지막 데이터만</span></label>
+							</div>
+						</li>
+					</ul>
+				</div>     
+				<div class="array btn-area mt10">
+					<ul class="fl w100p">
+						<li>
+							<button type="button" class="btn-case-01 bk" id="btnWork"><span class="icon">업무시간</span></button>
+						</li>
+						<li>
+							<button type="button" class="btn-case-01 bk" id="btnNotWork"><span class="icon">비업무시간</span></button>
+						</li>
+						<li class="fr">
+							<button type="button" class="btn-case-01 btn-search txt" id="btnTlSearch"><span class="icon ico-search">검색</span></button>
+						</li>
+					</ul>
+				</div>
+			</section>
+      		<section class="mt20">
+				<div class="tit-area"><h3 class="unit">타임라인</h3></div>
+	      		<div id="chartDiv" style="height:10rem;"></div>
+	      		<div class="route" id="pathList">
+					<dl class="list-v">
+						<dt>
+							<span>위치 1</span>
+							<p>2020-01-01 12:34:56</p>
+						</dt>
+						<dd>이동 - 10km 10시간 10분</dd>
+					</dl>
+	      		</div>
+      		</section>
+    	</div>
 	</div><!-- // pop-up end -->
 
   <script src="/carpe/resources/amcharts_4.5.3/amcharts4/core.js"></script>
@@ -610,8 +638,8 @@
 
       //분석시점설정 Window
       $("#timeLinePop").jqxWindow({
-          width: '40rem'
-        , height: '80%'
+          width: '42rem'
+        , height: '75rem'
         , resizable: false
         , autoOpen: false 
         , resizable: false
@@ -977,16 +1005,14 @@
 
           moveStr = distStr;
 
-          if (h > 0) {
-            moveStr += h + "시간 ";
-          }
-
-          moveStr += m + "분";
-          
-          html += "<li>" + moveStr + "</li>";
-        }
-
-        html += "<li>" + data.location + " " + data.regd + "</li>";
+			if (h > 0) {
+			moveStr += h + "시간 ";
+			}
+			moveStr += m + "분";
+			
+	        html += "<dl><dd>" + moveStr + "</dd></dl>";
+			}
+			html += "<dl><dt><span>" + data.location + "</span><p>" + data.regd + "</p></dt></dl>";
 		  });
 
       $("#pathList").html(html);
