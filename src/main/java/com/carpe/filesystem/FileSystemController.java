@@ -33,7 +33,8 @@ public class FileSystemController {
 	private FileSystemService service;
 
 	@RequestMapping(value = "/filesystem.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView filesystemView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public ModelAndView filesystemView(@RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("carpe/filesystem/filesystem");
@@ -43,6 +44,7 @@ public class FileSystemController {
 
 	/**
 	 * Directory Tree List
+	 * 
 	 * @param locale
 	 * @param map
 	 * @param session
@@ -51,7 +53,8 @@ public class FileSystemController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/dir_list.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView getDirList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+	public ModelAndView getDirList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
 		List list = new ArrayList();
 		String dataAttr = "";
 
@@ -60,29 +63,28 @@ public class FileSystemController {
 		}
 
 		if (map.get("evd_id") != null && map.get("evd_id") != "") {
-				session.setAttribute(Consts.SESSION_EVDNC_ID, map.get("evd_id"));
-				session.setAttribute(Consts.SESSION_EVDNC_NAME, map.get("evd_name"));
+			session.setAttribute(Consts.SESSION_EVDNC_ID, map.get("evd_id"));
+			session.setAttribute(Consts.SESSION_EVDNC_NAME, map.get("evd_name"));
 		}
-		
-		String caseid = (String)session.getAttribute(Consts.SESSION_CASE_ID);
-		String evdid = (String)session.getAttribute(Consts.SESSION_EVDNC_ID);
-		String evdName = (String)session.getAttribute(Consts.SESSION_EVDNC_NAME);
-		
+
+		String caseid = (String) session.getAttribute(Consts.SESSION_CASE_ID);
+		String evdid = (String) session.getAttribute(Consts.SESSION_EVDNC_ID);
+		String evdName = (String) session.getAttribute(Consts.SESSION_EVDNC_NAME);
+
 		try {
 			if (map.get("evd_id") == null || map.get("evd_id").equals("") == true) {
-				//evdnc list
+				// evdnc list
 				list = service.getEvdncList(caseid, evdid);
 			} else if (map.get("id") != null && map.get("id") != "") {
-				//file directory list
-				list = service.getFileDirList(evdid, evdName, dataAttr, map.get("id"), map.get("parentId"));
+				// file directory list
+				list = service.getFileDirList(evdid, evdName, dataAttr, map.get("par_id"), map.get("parentId"));
 			} else {
-				//partion directory list			
+				// partion directory list
 				list = service.getDirList(evdid, evdName);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("list", list);
@@ -90,9 +92,10 @@ public class FileSystemController {
 
 		return mav;
 	}
-	
+
 	/**
 	 * File Grid List
+	 * 
 	 * @param locale
 	 * @param map
 	 * @param session
@@ -101,7 +104,8 @@ public class FileSystemController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/file_list.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView getFileList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+	public ModelAndView getFileList(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 
@@ -109,10 +113,9 @@ public class FileSystemController {
 			session.setAttribute(Consts.SESSION_EVDNC_ID, map.get("evd_id"));
 			session.setAttribute(Consts.SESSION_EVDNC_NAME, map.get("evd_name"));
 		}
-		
-		if (map.get("evd_id") == null || map.get("evd_id").equals("") 
-				|| map.get("id") == null || map.get("id").equals("") 
-				|| (map.get("attr") != null && "par".equals(map.get("attr")))) {
+
+		if (map.get("evd_id") == null || map.get("evd_id").equals("") || map.get("id") == null
+				|| map.get("id").equals("") || (map.get("attr") != null && "par".equals(map.get("attr")))) {
 			mav.addObject("totalcount", 0);
 			return mav;
 		}
@@ -122,6 +125,7 @@ public class FileSystemController {
 		try {
 			long parentId = Long.parseLong((String) map.get("id"));
 			paramMap.put("id", parentId);
+			paramMap.put("par_id", map.get("par_id"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			mav.addObject("totalcount", 0);
@@ -129,7 +133,7 @@ public class FileSystemController {
 		}
 
 		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
-
+		
 		List<Map> fileList = service.selectFileList(paramMap);
 
 		mav.addObject("list", fileList);
@@ -139,7 +143,8 @@ public class FileSystemController {
 	}
 
 	@RequestMapping(value = "/filename_wordcloud.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView filesystemWordCloudView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public ModelAndView filesystemWordCloudView(@RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("carpe/filesystem/filename_wordcloud");
@@ -148,7 +153,8 @@ public class FileSystemController {
 	}
 
 	@RequestMapping(value = "/date_treemap.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView dateTreeMapView(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public ModelAndView dateTreeMapView(@RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("id", map.get("id"));
@@ -158,7 +164,8 @@ public class FileSystemController {
 	}
 
 	@RequestMapping(value = "/get_date_treemap.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView getDateTreeMap(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, Model model) throws Exception {
+	public ModelAndView getDateTreeMap(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
 
@@ -187,7 +194,8 @@ public class FileSystemController {
 	}
 
 	@RequestMapping(value = "/hexview.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView hewview(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public ModelAndView hewview(@RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("carpe/filesystem/hexview/hexviewer");
@@ -196,7 +204,8 @@ public class FileSystemController {
 	}
 
 	@RequestMapping(value = "/file_preview.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView filePreview(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public ModelAndView filePreview(@RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addAllObjects(map);
@@ -206,19 +215,20 @@ public class FileSystemController {
 	}
 
 	@RequestMapping(value = "/get_image_preview.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public void getImagePreview(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, HttpServletResponse response, Model model) throws Exception {
-	  ServletOutputStream out = response.getOutputStream();
+	public void getImagePreview(@RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletRequest requst, HttpServletResponse response, Model model) throws Exception {
+		ServletOutputStream out = response.getOutputStream();
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		
+
 		paramMap.put("id", map.get("seq"));
 		paramMap.put("file_id", map.get("id"));
 
 		Map rsMap = service.selectFileInfo(paramMap);
-		
+
 		if (rsMap != null) {
 			File file = new File(rsMap.get("parent_path") + "/" + rsMap.get("name"));
-			response.setContentType("image/" + rsMap.get("extension")); 
-			
+			response.setContentType("image/" + rsMap.get("extension"));
+
 			if (file != null && file.isFile() == true) {
 				FileInputStream fis = new FileInputStream(file);
 				byte[] buff = new byte[1024];
@@ -226,42 +236,43 @@ public class FileSystemController {
 
 				try {
 					while ((len = fis.read(buff)) != -1) {
-						out.write(buff, 0, len); 
+						out.write(buff, 0, len);
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 				fis.close();
-      }
+			}
 		}
 	}
 
 	@RequestMapping(value = "/get_video_preview.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public StreamingResponseBody getVideoPreview(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+	public StreamingResponseBody getVideoPreview(@RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletRequest requst, Model model) throws Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
-		
+
 		paramMap.put("id", map.get("seq"));
 		paramMap.put("file_id", map.get("id"));
 
 		Map rsMap = service.selectFileInfo(paramMap);
-		
+
 		if (rsMap != null) {
 			File file = new File(rsMap.get("parent_path") + "/" + rsMap.get("name"));
-			
+
 			final InputStream is = new FileInputStream(file);
 
-      return os -> {
-      	byte[] data = new byte[2048];
-        int read = 0;
-        while ((read = is.read(data)) > 0) {
-            os.write(data, 0, read);
-        }
-        os.flush();
-        is.close();
-      };
+			return os -> {
+				byte[] data = new byte[2048];
+				int read = 0;
+				while ((read = is.read(data)) > 0) {
+					os.write(data, 0, read);
+				}
+				os.flush();
+				is.close();
+			};
 		}
-		
+
 		return null;
 	}
 }

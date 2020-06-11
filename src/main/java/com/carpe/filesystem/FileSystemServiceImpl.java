@@ -76,6 +76,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 			value.put("evd_id", evdid);
 			value.put("evd_name", evdName);
 			value.put("id", dirList.get(i).get("par_id"));
+			value.put("par_id", dirList.get(i).get("par_id"));
 			value.put("attr", "par");
 			value.put("parentId", parentId);
 			value.put("isLoaded", false);
@@ -83,7 +84,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 
 			List loading = new ArrayList();
 			Map dummy = new HashMap();
-			dummy.put("label", "로딩중...");
+			dummy.put("label", "Loading...");
 			loading.add(dummy);
 
 			data.put("items", loading);
@@ -100,11 +101,11 @@ public class FileSystemServiceImpl implements FileSystemService {
 		paramMap.put("evd_id", evdid);
 		List<Map> retList = new ArrayList<>();
 
-		//parent가 partion 속성일 경우
-		if ("par".equals(dataAttr)) {
-			paramMap.put("par_id", id);
-		}
-
+		//parent媛� partion �냽�꽦�씪 寃쎌슦
+//		if ("par".equals(dataAttr)) {
+//			paramMap.put("par_id", id);
+//		}
+		paramMap.put("par_id", id);
 		paramMap.put("id", parentId);
 		List<Map> dirList = this.selectDirList(paramMap);
 
@@ -113,10 +114,11 @@ public class FileSystemServiceImpl implements FileSystemService {
 			data.put("label", dirList.get(i).get("name"));
 			data.put("icon", Consts.FOLDER_CLOSED_IMAGE);
 			data.put("iconsize", "18");
-
+			
 			Map value = new HashMap();
 			value.put("evd_id", evdid);
 			value.put("evd_name", evdName);
+			value.put("par_id",dirList.get(i).get("par_id"));
 			value.put("id", dirList.get(i).get("id"));
 			value.put("parentId", dirList.get(i).get("id"));
 			value.put("isLoaded", false);
@@ -125,7 +127,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 
 			List loading = new ArrayList();
 			Map dummy = new HashMap();
-			dummy.put("label", "로딩중...");
+			dummy.put("label", "Loading...");
 			loading.add(dummy);
 
 			data.put("items", loading);
@@ -172,7 +174,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 			} else {
 				List loading = new ArrayList();
 				Map dummy = new HashMap();
-				dummy.put("label", "로딩중...");
+				dummy.put("label", "Loading...");
 				loading.add(dummy);
 
 				data.put("items", loading);

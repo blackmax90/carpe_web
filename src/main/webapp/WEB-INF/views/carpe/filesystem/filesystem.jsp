@@ -129,6 +129,7 @@
         if (node && node.value) {
           param.evd_id = node.value["evd_id"];
           param.evd_name = node.value["evd_name"];
+          param.par_id = node.value["par_id"];
           param.id = node.value["id"];
           param.parentId = node.value["parentId"];
           param.attr = node.value["attr"];
@@ -257,6 +258,7 @@
             data["evd_id"] = node.value["evd_id"];
             data["evd_name"] = node.value["evd_name"];
             data["id"] = node.value["id"];
+            data["par_id"] = node.value["par_id"];
             data["attr"] = node.value["attr"];
             $("#evdname").text("Evidence : " + node.value["evd_name"]);
           }
