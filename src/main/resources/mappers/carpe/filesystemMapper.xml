@@ -8,6 +8,7 @@
 	<select id="selectPartList" parameterType="Map" resultType="Map">
 		SELECT  par_id
 		       ,par_name 
+           ,filesystem
 		  FROM  partition_info 
 		 WHERE  evd_id = #{evd_id}
 		order by par_name asc		  

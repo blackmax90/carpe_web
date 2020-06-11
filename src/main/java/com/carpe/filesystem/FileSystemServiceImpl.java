@@ -54,6 +54,19 @@ public class FileSystemServiceImpl implements FileSystemService {
 		List<Map> retList = new ArrayList<>();
 
 		for (int i = 0; i < dirList.size(); i++) {
+			String fileSystem = (String) dirList.get(i).get("filesystem");
+			long parentId = Consts.TREE_ROOT_ID;
+			
+			if ("TSK_FS_TYPE_EXT4".equals(fileSystem)) {
+				parentId = Consts.TSK_FS_TYPE_EXT4;
+			} else if ("TSK_FS_TYPE_FAT32".equals(fileSystem)) {
+				parentId = Consts.TSK_FS_TYPE_FAT32;
+			} else if ("TSK_FS_TYPE_NTFS_DETECT".equals(fileSystem)) {
+				parentId = Consts.TSK_FS_TYPE_NTFS_DETECT;
+			} else if ("TSK_FS_TYPE_NTFS".equals(fileSystem)) {
+				parentId = Consts.TSK_FS_TYPE_NTFS;
+			}
+
 			Map data = new HashMap();
 			data.put("label", dirList.get(i).get("par_name"));
 			data.put("icon", Consts.FOLDER_CLOSED_IMAGE);
@@ -64,6 +77,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 			value.put("evd_name", evdName);
 			value.put("id", dirList.get(i).get("par_id"));
 			value.put("attr", "par");
+			value.put("parentId", parentId);
 			value.put("isLoaded", false);
 			data.put("value", value);
 
@@ -81,17 +95,14 @@ public class FileSystemServiceImpl implements FileSystemService {
 	}
 
 	@Override
-	public List<Map> getFileDirList(String evdid, String evdName, String dataAttr, String id) throws Exception {
+	public List<Map> getFileDirList(String evdid, String evdName, String dataAttr, String id, String parentId) throws Exception {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("evd_id", evdid);
 		List<Map> retList = new ArrayList<>();
-		long parentId = Consts.TREE_ROOT_ID;
 
 		//parent가 partion 속성일 경우
 		if ("par".equals(dataAttr)) {
 			paramMap.put("par_id", id);
-		} else {
-			parentId = Long.parseLong(id);
 		}
 
 		paramMap.put("id", parentId);
@@ -107,6 +118,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 			value.put("evd_id", evdid);
 			value.put("evd_name", evdName);
 			value.put("id", dirList.get(i).get("id"));
+			value.put("parentId", dirList.get(i).get("id"));
 			value.put("isLoaded", false);
 			value.put("attr", "dir");
 			data.put("value", value);
@@ -145,6 +157,7 @@ public class FileSystemServiceImpl implements FileSystemService {
 			value.put("evd_id", evdid);
 			value.put("evd_name", evdName);
 			value.put("id", "");
+			value.put("parentId", "");
 			value.put("attr", "evd");
 			value.put("isLoaded", false);
 			data.put("value", value);

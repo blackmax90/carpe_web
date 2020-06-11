@@ -130,6 +130,7 @@
           param.evd_id = node.value["evd_id"];
           param.evd_name = node.value["evd_name"];
           param.id = node.value["id"];
+          param.parentId = node.value["parentId"];
           param.attr = node.value["attr"];
         } else {
           param.id = "";

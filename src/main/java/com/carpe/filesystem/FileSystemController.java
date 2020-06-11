@@ -74,7 +74,7 @@ public class FileSystemController {
 				list = service.getEvdncList(caseid, evdid);
 			} else if (map.get("id") != null && map.get("id") != "") {
 				//file directory list
-				list = service.getFileDirList(evdid, evdName, dataAttr, map.get("id"));
+				list = service.getFileDirList(evdid, evdName, dataAttr, map.get("id"), map.get("parentId"));
 			} else {
 				//partion directory list			
 				list = service.getDirList(evdid, evdName);
