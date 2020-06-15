@@ -22,4 +22,9 @@ public class OverviewServiceImpl implements OverviewService {
 	public List<Map> selectCaseUserList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectCaseUserList(paramMap);
 	}
+	
+	@Override
+	public List<Map> selectEvidenceList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEvidenceList(paramMap);
+	}
 }
