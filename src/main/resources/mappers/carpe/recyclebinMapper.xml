@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.recyclebin">
+  <select id="selectYearList" resultType="Map" parameterType="Map">
+    SELECT DISTINCT(DATE_FORMAT(deleted_time, '%Y')) AS year
+      FROM lv1_os_win_recyclebin
+     WHERE 1=1
+       AND case_id = #{case_id}
+     ORDER BY year DESC
+  </select>
+
+  <select id="selectRecyclebinYearList" resultType="Map" parameterType="Map">
+    SELECT A.month
+         , COUNT(A.month) AS cnt
+      FROM (
+           SELECT DATE_FORMAT(deleted_time, '%Y-%m') AS month
+             FROM lv1_os_win_recyclebin
+            WHERE 1=1
+              AND case_id = #{case_id}
+              AND YEAR(deleted_time) = #{searchDate}
+           ) A
+     GROUP BY A.month
+     ORDER BY A.month ASC
+  </select>
+
+  <select id="selectRecyclebinMonthList" resultType="Map" parameterType="Map">
+    SELECT A.day
+         , COUNT(A.day) AS cnt
+      FROM (
+           SELECT DATE_FORMAT(deleted_time, '%Y-%m-%d') AS day
+             FROM lv1_os_win_recyclebin
+            WHERE 1=1
+              AND case_id = #{case_id}
+              AND DATE_FORMAT(deleted_time, '%Y-%m') = #{searchDate}
+           ) A
+     GROUP BY A.day
+     ORDER BY A.day ASC
+  </select>
+
+  <select id="selectRecyclebinDayList" resultType="Map" parameterType="Map">
+    SELECT A.hour
+         , COUNT(A.hour) AS cnt
+      FROM (
+           SELECT DATE_FORMAT(deleted_time, '%Y-%m-%d %H') AS hour
+             FROM lv1_os_win_recyclebin
+            WHERE 1=1
+              AND case_id = #{case_id}
+              AND DATE_FORMAT(deleted_time, '%Y-%m-%d') = #{searchDate}
+           ) A
+     GROUP BY A.hour
+     ORDER BY A.hour ASC
+  </select>
+
+  <select id="selectRecyclebinHourList" resultType="Map" parameterType="Map">
+    SELECT DATE_FORMAT(FROM_UNIXTIME(FLOOR(UNIX_TIMESTAMP(deleted_time) / 300) * 300), '%Y-%m-%d %H:%i') AS min
+         , COUNT(deleted_time) AS cnt
+      FROM lv1_os_win_recyclebin
+     WHERE 1=1
+       AND case_id = #{case_id}
+       AND DATE_FORMAT(deleted_time, '%Y-%m-%d %H') = #{searchDate}
+     GROUP BY UNIX_TIMESTAMP(deleted_time) DIV 300
+     ORDER BY deleted_time ASC
+  </select>
+
+  <select id="selectRecyclebinList" resultType="Map" parameterType="Map">
+    SELECT file_name
+         , size AS size
+         , DATE_FORMAT(deleted_time, '%Y-%m-%d %H:%i:%d') AS dtime
+         , i_file_name
+      FROM lv1_os_win_recyclebin
+     WHERE 1=1
+       AND case_id = #{case_id}
+       AND DATE_FORMAT(deleted_time, '%Y-%m-%d %H:%i:%d') >= #{sdate}
+       <![CDATA[
+       AND DATE_FORMAT(deleted_time, '%Y-%m-%d %H:%i:%d') < #{edate}
+       ]]>
+     ORDER BY deleted_time DESC
+  </select>
+</mapper>

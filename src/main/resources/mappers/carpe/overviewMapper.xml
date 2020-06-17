@@ -19,7 +19,12 @@
 		  FROM  case_info a
 		 WHERE  a.case_id = #{case_id}
 	</select>
-
+	<select id="selectEvidenceList" parameterType="Map" resultType="Map">
+		SELECT a.evd_id, a.evd_name, a.evd_path, a.sub_type, a.timezone, a.acquired_date, a.md5 evd_md5, a.sha1 evd_sha1, a.sha3 evd_sha3, a.process_state,
+			   b.par_id, b.par_name, b.par_size, b.sector_size, b.md5 par_md5, b.sha1 par_sha1, b.sha3 par_sha3, b.start_sector, b.filesystem, b.par_label
+		  FROM evidence_info a, partition_info b
+		 WHERE a.evd_id = b.evd_id and a.case_id = #{case_id} 
+	</select>
 	<select id="selectCaseUserList" parameterType="Map" resultType="Map">
 		 SELECT  user_id
                 ,acl

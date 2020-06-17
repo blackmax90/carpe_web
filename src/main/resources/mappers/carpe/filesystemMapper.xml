@@ -8,6 +8,7 @@
 	<select id="selectPartList" parameterType="Map" resultType="Map">
 		SELECT  par_id
 		       ,par_name 
+           ,filesystem
 		  FROM  partition_info 
 		 WHERE  evd_id = #{evd_id}
 		order by par_name asc		  
@@ -15,7 +16,8 @@
 	
 	<select id="selectDirList" parameterType="Map" resultType="Map">
 		SELECT  a.file_id as id
-		       ,a.name 
+		       ,a.name
+		       ,a.par_id 
 		  FROM  file_info a
 		       ,partition_info b
 		 WHERE  a.parent_id = #{id}
@@ -59,6 +61,9 @@
 				where a.parent_id = #{id}
 				  and b.evd_id = #{evd_id}
 				  and (a.dir_type = 3 or a.dir_type = 5)
+				  <if test="par_id != null">
+				   AND  b.par_id =  #{par_id}
+		  		  </if>
 				  and a.par_id = b.par_id
 				order by a.dir_type, a.name
 	</select>

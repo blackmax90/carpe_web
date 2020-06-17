@@ -76,7 +76,7 @@
 				<div class="jqx-window-close-button jqx-icon-close" id="closeYear"></div>
 			</div>
 		</div>
-		<div id="" class="pop-content">
+<!-- 		<div id="" class="pop-content">
 			<ul>
 				
 				<li class="checkbox checkbox-type-3">
@@ -92,7 +92,7 @@
 					<label for="checkbox2019"><span class="text">2019</span></label>
 				</li>
 			</ul>
-		</div><!-- // pop-content end -->
+		</div>// pop-content end -->
 	</div><!-- // pop-up end -->
 
 	<!-- 공통 javascript 영역 -->
@@ -124,9 +124,28 @@
 		    })
 		    return dataList;
 		};
-		
 		dataList = getUsageYearList();
-
+		function getUniqueObjectArray(array, key) {
+			  var tempArray = [];
+			  for(var i = 0; i < array.length; i++) {
+			    var item = array[i]
+			    if(tempArray.indexOf(item[key].slice(0,-1)) == -1) {
+			    	tempArray.push(item[key].slice(0,-1));
+			    } 
+			  }
+			  return tempArray;
+			}
+		years = getUniqueObjectArray(dataList, "weekday");
+		var tmp = "<div id='' class='pop-content'><ul>";
+		
+		for(var i = 0; i < years.length; i++){
+			tmp += "<li class='checkbox checkbox-type-3'><input id='checkbox"+years[i]+"' name='checkYear' type='checkbox' value="+years[i]+" />"
+			tmp += "<label for='checkbox"+years[i]+"'><span class='text'>"+years[i]+"</span></label>"
+		}
+		tmp += "</ul></div>"
+		
+			
+		
 		// Themes begin
 		am4core.useTheme(am4themes_animated);
 		am4core.options.commercialLicense = true;
@@ -209,6 +228,7 @@
 		chart.data = dataList;
 		
 		$( document ).ready( function() {
+			$('#yearList').append(tmp)
 			$('#setYear').click(function(){
 				$('#yearList').show();
 			});

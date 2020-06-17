@@ -15,6 +15,10 @@ public class Consts {
 	public static final String SESSION_EVDNC_NAME = "evdnc_name";
 
 	public static final long TREE_ROOT_ID = 5;
+	public static final long TSK_FS_TYPE_EXT4 = 2;
+	public static final long TSK_FS_TYPE_FAT32 = 2;
+	public static final long TSK_FS_TYPE_NTFS_DETECT = 5;
+	public static final long TSK_FS_TYPE_NTFS = 5;
 	public static final long DIR_TYPE = 3;
 	
 	public static final int ADMIN_GRADE = 1;

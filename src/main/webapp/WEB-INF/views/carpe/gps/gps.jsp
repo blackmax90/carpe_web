@@ -281,13 +281,6 @@
 				<div class="tit-area"><h3 class="unit">타임라인</h3></div>
 	      		<div id="chartDiv" style="height:10rem;"></div>
 	      		<div class="route" id="pathList">
-					<dl class="list-v">
-						<dt>
-							<span>위치 1</span>
-							<p>2020-01-01 12:34:56</p>
-						</dt>
-						<dd>이동 - 10km 10시간 10분</dd>
-					</dl>
 	      		</div>
       		</section>
     	</div>
@@ -658,24 +651,11 @@
           
       chart = am4core.create("chartDiv", am4charts.XYChart);
 
-      chart.data = [
-        {regd: '2020-01-01', cnt: 3},
-        {regd: '2020-01-02', cnt: 5},
-        {regd: '2020-01-08', cnt: 2},
-        {regd: '2020-01-09', cnt: 8},
-        {regd: '2020-01-10', cnt: 4},
-        {regd: '2020-01-11', cnt: 5},
-        {regd: '2020-01-12', cnt: 6},
-        {regd: '2020-01-13', cnt: 7}
-      ];
-
       // X축
       xAxis = chart.xAxes.push(new am4charts.DateAxis());
       xAxis.renderer.grid.template.location = 0;
       xAxis.renderer.inside = true;
       xAxis.renderer.visible = false;
-      xAxis.min = new Date('2020-01-01').getTime();
-      xAxis.max = new Date('2020-01-13').getTime();
       xAxis.snapTooltip = false;
       xAxis.tooltipPosition = "fixed";
       xAxis.tooltipDateFormat = "yyyy-MM-dd eee";

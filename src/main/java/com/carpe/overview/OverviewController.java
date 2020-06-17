@@ -41,6 +41,7 @@ public class OverviewController {
 		String evidenceCnt = String.valueOf(overviewMap.get("evidence_cnt"));
 		
 		List<Map> caseUserList = service.selectCaseUserList(paramMap);
+		List<Map> evidenceList = service.selectEvidenceList(paramMap);
 		
 		model.addAttribute("caseName", caseName);
 		model.addAttribute("desc", description);
@@ -49,6 +50,7 @@ public class OverviewController {
 		model.addAttribute("caseUserCnt", caseUserCnt);
 		model.addAttribute("evidenceCnt", evidenceCnt);
 		mav.addObject("caseUserList", caseUserList);
+		mav.addObject("evidenceList", evidenceList);
 		mav.setViewName("carpe/overview/overview");
 		return mav;
 	}
