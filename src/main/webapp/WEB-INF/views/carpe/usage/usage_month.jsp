@@ -240,7 +240,7 @@
         }
         
         if (sIdx[d] == h || eIdx[d] == h) {
-          list += "\n                    <td class=\"ing on\"></td> ";
+          list += "\n                    <td class=\"ing on\"><span></span></td> ";
           workCnt ++;
 
           if (regTime < parseInt($("#start_time").val()) ||
