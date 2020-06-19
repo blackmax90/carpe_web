@@ -238,27 +238,29 @@
         if (dayStr < 10) {
             dayStr = "0" + dayStr;
         }
-        
-        if (sIdx[d] == h || eIdx[d] == h) {
-          list += "\n                    <td class=\"ing on\"><span></span></td> ";
-          workCnt ++;
 
+        if (dataArr[h][d] > 0) {
           if (regTime < parseInt($("#start_time").val()) ||
-        		  regTime > parseInt($("#end_time").val())) {
+              regTime > parseInt($("#end_time").val())) {
             nightCnt++;            
-            nightDayArr[d] = 1;
-          }
-        } else if (dataArr[h][d] > 0) {
-          if (regTime < parseInt($("#start_time").val())) {
-            list += "\n                    <td class=\"over\"></td> ";            
-            nightCnt++;            
-            nightDayArr[d] = 1;
-          } else if (regTime > parseInt($("#end_time").val())) {
-            list += "\n                    <td class=\"over\"></td> ";
-            nightCnt++;
             nightDayArr[d] = 1;
           } else {
-        	  list += "\n                    <td class=\"ing\"></td> ";
+            workCnt++;
+          }
+        }
+        
+        if (dataArr[h][d] == 2) {
+          list += "\n                    <td class=\"ing on\"><span></span></td> ";
+        } else if (dataArr[h][d] == 3) {
+          list += "\n                    <td class=\"ing off\"><span></span></td> ";
+        } else if (dataArr[h][d] == 4) {
+          list += "\n                    <td class=\"ing onoff\"><span></span></td> ";
+        } else if (dataArr[h][d] == 1) {
+          if (regTime < parseInt($("#start_time").val()) ||
+              regTime > parseInt($("#end_time").val())) {
+            list += "\n                    <td class=\"over\"></td> ";            
+          } else {
+            list += "\n                    <td class=\"ing\"></td> ";
           }
         } else {
           list += "\n                    <td id=\"td_" + dayStr + "\"></td> ";
