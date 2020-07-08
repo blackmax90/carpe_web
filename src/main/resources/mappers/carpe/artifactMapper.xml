@@ -532,6 +532,25 @@
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	
+	
+	<!-- lv1_os_win_reg_shellbag -->
+	<select id="selectShellbag"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_reg_shellbag
+	where case_id = #{case_id}
+		and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectShellbagCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_reg_shellbag
+	where case_id = #{case_id}
+				and evd_id = #{evd_id}
+				<!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	
 	<!-- lv1_os_win_reg_os_info -->
 		<select id="selectRegOSInfoList" parameterType="Map" resultType="Map">
 		SELECT *
@@ -849,86 +868,178 @@
 		  and evd_id = #{evd_id}
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
-	
-	<!-- lv1_os_win_prefetch -->
-	<select id="selectPrefetch" parameterType="Map" resultType="Map">
-		SELECT *
-		FROM lv1_os_win_prefetch
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-		limit #{offset}, #{pageSize}
-	</select>
-	<select id="selectPrefetchCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_os_win_prefetch
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-	</select>
-	
-	<!-- lv1_app_web_chrome_download -->
-	<select id="selectChromeDownload" parameterType="Map" resultType="Map">
-		SELECT *
-		FROM lv1_app_web_chrome_download
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-		limit #{offset}, #{pageSize}
-	</select>
-	<select id="selectChromeDownloadCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_app_web_chrome_download
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-	</select>
-	
-	<!-- lv1_app_web_chrome_cookies -->
-	<select id="selectChromeCookie" parameterType="Map" resultType="Map">
-		SELECT *
-		FROM lv1_app_web_chrome_cookies
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-		limit #{offset}, #{pageSize}
-	</select>
-	<select id="selectChromeCookieCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_app_web_chrome_cookies
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-	</select>
-	
-	<!-- lv1_app_web_chrome_cache -->
-	<select id="selectChromeCache" parameterType="Map" resultType="Map">
-		SELECT *
-		FROM lv1_app_web_chrome_cache
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-		limit #{offset}, #{pageSize}
-	</select>
-	<select id="selectChromeCacheCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_app_web_chrome_cache
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-	</select>
 
-	<!-- lv1_app_web_chrome_search_terms -->
-	<select id="selectChromeSearchTerms" parameterType="Map" resultType="Map">
-		SELECT *
-		FROM lv1_app_web_chrome_search_terms
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-		limit #{offset}, #{pageSize}
-	</select>
-	<select id="selectChromeSearchTermsCount" parameterType="Map" resultType="Map">
-		SELECT count(*) as cnt FROM lv1_app_web_chrome_search_terms
-		where case_id = #{case_id}
-		  and evd_id = #{evd_id}
-		<!--include refid="selectArtifactCondition" /-->
-	</select>
+	
+	  <!-- lv1_app_web_chrome_autofill -->
+	  <select id="selectChromeAutofill"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_autofill
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeAutofillCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_autofill
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_app_web_chrome_bookmarks -->
+	  <select id="selectChromeBookmarks"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_bookmarks
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeBookmarksCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_bookmarks
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_app_web_chrome_cookies -->
+	  <select id="selectChromeCookies"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_cookies
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeCookiesCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_cookies
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_app_web_chrome_download -->
+	  <select id="selectChromeDownload"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_download
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeDownloadCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_download
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_app_web_chrome_favicons -->
+	  <select id="selectChromeFavicons"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_favicons
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeFaviconsCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_favicons
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_app_web_chrome_logindata -->
+	  <select id="selectChromeLoginData"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_logindata
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeLoginDataCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_logindata
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_app_web_chrome_search_terms -->
+	  <select id="selectChromeSearchTerms"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_search_terms
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeSearchTermsCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_search_terms
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_app_web_chrome_shortcuts -->
+	  <select id="selectChromeShortcuts"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_shortcuts
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeShortcutsCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_shortcuts
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_app_web_chrome_top_sites -->
+	  <select id="selectChromeTopSites"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_top_sites
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeTopSitesCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_top_sites
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_app_web_chrome_visit_urls -->
+	  <select id="selectChromeVisitUrls"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_app_web_chrome_visit_urls
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectChromeVisitUrlsCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_app_web_chrome_visit_urls
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+
 	
 	<!-- lv1_fs_ntfs_logfile -->
 	<select id="selectNtfsLogfile" parameterType="Map" resultType="Map">
@@ -977,5 +1088,434 @@
 		  and evd_id = #{evd_id}
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
+	<!-- lv1_os_win_notification -->
+	<select id="selectNotification"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_notification
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectNotificationCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_notification
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_prefetch -->
+	<select id="selectPrefetch"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_prefetch
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectPrefetchCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_prefetch
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_prefetch_run_info -->
+	<select id="selectPrefetchRunInfo"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_prefetch_run_info
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectPrefetchRunInfoCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_prefetch_run_info
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_prefetch_volume_info -->
+	<select id="selectPrefetchVolumeInfo"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_prefetch_volume_info
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectPrefetchVolumeInfoCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_prefetch_volume_info
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_recyclebin -->
+	<select id="selectRecycleBin"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_recyclebin
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRecycleBinCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_recyclebin
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_sticky_note -->
+	<select id="selectStickyNote"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_sticky_note
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectStickyNoteCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_sticky_note
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_windows_timeline -->
+	<select id="selectWindowsTimeline"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_windows_timeline
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWindowsTimelineCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_windows_timeline
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_kakaotalk_new_chatLogs -->
+	<select id="selectKakaotalkNewChatlogs"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_kakaotalk_new_chatLogs
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectKakaotalkNewChatlogsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_kakaotalk_new_chatLogs
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+
+	
+	
+	
+	<!-- lv1_app_kakaotalk_chatLogs -->
+	<select id="selectKakaotalkChatlogs"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_kakaotalk_chatLogs
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectKakaotalkChatlogsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_kakaotalk_chatLogs
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_kakaotalk_chatLog_attachment -->
+	<select id="selectKakaotalkChatlogAttachment"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_kakaotalk_chatLog_attachment
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectKakaotalkChatlogAttachmentCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_kakaotalk_chatLog_attachment
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_kakaotalk_chatLogDrafts -->
+	<select id="selectKakaotalkChatlogDrafts"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_kakaotalk_chatLogDrafts
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectKakaotalkChatlogDraftsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_kakaotalk_chatLogDrafts
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+
+	  <!-- lv1_fs_ntfs_logfile_log_record -->
+	  <select id="selectLogRecord"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_fs_ntfs_logfile_log_record
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectLogRecordCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_fs_ntfs_logfile_log_record
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_fs_ntfs_logfile_restart_area -->
+	  <select id="selectRestartArea"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_fs_ntfs_logfile_restart_area
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectRestartAreaCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_fs_ntfs_logfile_restart_area
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_fs_ntfs_mft -->
+	  <select id="selectMFT"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_fs_ntfs_mft
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectMFTCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_fs_ntfs_mft
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+	
+	  <!-- lv1_fs_ntfs_usnjrnl -->
+	  <select id="selectUsnJrnl"  parameterType="Map" resultType="Map">
+	  SELECT *
+	  FROM lv1_fs_ntfs_usnjrnl
+	  where case_id = #{case_id}
+	      and evd_id = #{evd_id}
+	  <!--include refid="selectArtifactCondition" /-->
+	  limit #{offset}, #{pageSize}
+	  </select>
+	  <select id="selectUsnJrnlCount"  parameterType="Map" resultType="Map">
+	  SELECT count(*) as cnt
+	  FROM lv1_fs_ntfs_usnjrnl
+	  where case_id = #{case_id}
+	                and evd_id = #{evd_id}
+	              <!--include refid="selectArtifactCondition" /-->
+	  </select>
+
+	<!-- lv1_app_kakaotalk_mobile_chatlogs -->
+	<select id="selectKakaotalkMobileChatlogs"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_kakaotalk_mobile_chatlogs
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectKakaotalkMobileChatlogsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_kakaotalk_mobile_chatlogs
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_kakaotalk_mobile_chatrooms -->
+	<select id="selectKakaotalkMobileChatrooms"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_kakaotalk_mobile_chatrooms
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectKakaotalkMobileChatroomsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_kakaotalk_mobile_chatrooms
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_kakaotalk_mobile_friends -->
+	<select id="selectKakaotalkMobileFriends"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_kakaotalk_mobile_friends
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectKakaotalkMobileFriendsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_kakaotalk_mobile_friends
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_app_list -->
+	<select id="selectAppList"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_app_list
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectAppListCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_app_list
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_call_history -->
+	<select id="selectCallHistory"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_call_history
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectCallHistoryCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_call_history
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_emb_file -->
+	<select id="selectEmbFile"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_emb_file
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectEmbFileCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_emb_file
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_file_history -->
+	<select id="selectFileHistory"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_file_history
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFileHistoryCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_file_history
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_geodata -->
+	<select id="selectGeodata"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_geodata
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectGeodataCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_geodata
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_id_pw_hash -->
+	<select id="selectIdpwhash"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_id_pw_hash
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectIdpwhashCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_id_pw_hash
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_web_browser_history -->
+	<select id="selectWebBrowserHistory"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_web_browser_history
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWebBrowserHistoryCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_web_browser_history
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+
+	
 	
 </mapper>

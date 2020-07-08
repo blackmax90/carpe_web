@@ -197,6 +197,12 @@ public interface ArtifactService {
 	public List<Map> selectRegSearchKeyword(Map<String, Object> paramMap) throws Exception;
 	public Map selectRegSearchKeywordCount(Map<String, Object> paramMap) throws Exception;
 	
+	
+	// lv1_os_win_reg_shellbag
+	public List<Map> selectShellbag(Map<String, Object> paramMap) throws Exception;
+	public Map selectShellbagCount(Map<String, Object> paramMap) throws Exception;
+
+
 	// lv1_os_win_reg_shim_cache
 	public List<Map> selectRegShimCache(Map<String, Object> paramMap) throws Exception;
 	public Map selectRegShimCacheCount(Map<String, Object> paramMap) throws Exception;
@@ -221,10 +227,12 @@ public interface ArtifactService {
 	public List<Map> selectLnkFiles(Map<String, Object> paramMap) throws Exception;
 	public Map selectLnkFilesCount(Map<String, Object> paramMap) throws Exception;
 	
+	/*
 	// lv1_os_win_prefetch
 	public List<Map> selectPrefetch(Map<String, Object> paramMap) throws Exception;
 	public Map selectPrefetchCount(Map<String, Object> paramMap) throws Exception;
-	
+	*/
+	/*
 	// lv1_app_web_chrome_download
 	public List<Map> selectChromeDownload(Map<String, Object> paramMap) throws Exception;
 	public Map selectChromeDownloadCount(Map<String, Object> paramMap) throws Exception;
@@ -240,7 +248,49 @@ public interface ArtifactService {
 	// lv1_app_web_chrome_search_terms
 	public List<Map> selectChromeSearchTerms(Map<String, Object> paramMap) throws Exception;
 	public Map selectChromeSearchTermsCount(Map<String, Object> paramMap) throws Exception;
+	*/
 	
+	// lv1_app_web_chrome_autofill
+	public List<Map> selectChromeAutofill(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeAutofillCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_bookmarks
+	public List<Map> selectChromeBookmarks(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeBookmarksCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_cookies
+	public List<Map> selectChromeCookies(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeCookiesCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_download
+	public List<Map> selectChromeDownload(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeDownloadCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_favicons
+	public List<Map> selectChromeFavicons(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeFaviconsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_logindata
+	public List<Map> selectChromeLoginData(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeLoginDataCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_search_terms
+	public List<Map> selectChromeSearchTerms(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeSearchTermsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_shortcuts
+	public List<Map> selectChromeShortcuts(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeShortcutsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_top_sites
+	public List<Map> selectChromeTopSites(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeTopSitesCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chrome_visit_urls
+	public List<Map> selectChromeVisitUrls(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeVisitUrlsCount(Map<String, Object> paramMap) throws Exception;
+
+	/*
 	// lv1_fs_ntfs_logfile
 	public List<Map> selectNtfsLogfile(Map<String, Object> paramMap) throws Exception;
 	public Map selectNtfsLogfileCount(Map<String, Object> paramMap) throws Exception;
@@ -248,9 +298,115 @@ public interface ArtifactService {
 	// lv1_fs_ntfs_usnjrnl
 	public List<Map> selectNtfsUsnjrnl(Map<String, Object> paramMap) throws Exception;
 	public Map selectNtfsUsnjrnlCount(Map<String, Object> paramMap) throws Exception;
+	*/
 	
 	// lv2_os_app_history
 	public List<Map> selectAppHistory(Map<String, Object> paramMap) throws Exception;
 	public Map selectAppHistoryCount(Map<String, Object> paramMap) throws Exception;
 	
+	
+	// lv1_os_win_notification
+	public List<Map> selectNotification(Map<String, Object> paramMap) throws Exception;
+	public Map selectNotificationCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_prefetch
+	public List<Map> selectPrefetch(Map<String, Object> paramMap) throws Exception;
+	public Map selectPrefetchCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_prefetch_run_info
+	public List<Map> selectPrefetchRunInfo(Map<String, Object> paramMap) throws Exception;
+	public Map selectPrefetchRunInfoCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_prefetch_volume_info
+	public List<Map> selectPrefetchVolumeInfo(Map<String, Object> paramMap) throws Exception;
+	public Map selectPrefetchVolumeInfoCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_recyclebin
+	public List<Map> selectRecycleBin(Map<String, Object> paramMap) throws Exception;
+	public Map selectRecycleBinCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_sticky_note
+	public List<Map> selectStickyNote(Map<String, Object> paramMap) throws Exception;
+	public Map selectStickyNoteCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_windows_timeline
+	public List<Map> selectWindowsTimeline(Map<String, Object> paramMap) throws Exception;
+	public Map selectWindowsTimelineCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_kakaotalk_new_chatLogs
+	public List<Map> selectKakaotalkNewChatlogs(Map<String, Object> paramMap) throws Exception;
+	public Map selectKakaotalkNewChatlogsCount(Map<String, Object> paramMap) throws Exception;
+
+	
+	// lv1_app_kakaotalk_chatLogs
+	public List<Map> selectKakaotalkChatlogs(Map<String, Object> paramMap) throws Exception;
+	public Map selectKakaotalkChatlogsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_kakaotalk_chatLog_attachment
+	public List<Map> selectKakaotalkChatlogAttachment(Map<String, Object> paramMap) throws Exception;
+	public Map selectKakaotalkChatlogAttachmentCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_kakaotalk_chatLogDrafts
+	public List<Map> selectKakaotalkChatlogDrafts(Map<String, Object> paramMap) throws Exception;
+	public Map selectKakaotalkChatlogDraftsCount(Map<String, Object> paramMap) throws Exception;
+	
+	
+	// lv1_fs_ntfs_logfile_log_record
+	public List<Map> selectLogRecord(Map<String, Object> paramMap) throws Exception;
+	public Map selectLogRecordCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_fs_ntfs_logfile_restart_area
+	public List<Map> selectRestartArea(Map<String, Object> paramMap) throws Exception;
+	public Map selectRestartAreaCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_fs_ntfs_mft
+	public List<Map> selectMFT(Map<String, Object> paramMap) throws Exception;
+	public Map selectMFTCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_fs_ntfs_usnjrnl
+	public List<Map> selectUsnJrnl(Map<String, Object> paramMap) throws Exception;
+	public Map selectUsnJrnlCount(Map<String, Object> paramMap) throws Exception;
+
+
+	// lv1_app_kakaotalk_mobile_chatlogs
+	public List<Map> selectKakaotalkMobileChatlogs(Map<String, Object> paramMap) throws Exception;
+	public Map selectKakaotalkMobileChatlogsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_kakaotalk_mobile_chatrooms
+	public List<Map> selectKakaotalkMobileChatrooms(Map<String, Object> paramMap) throws Exception;
+	public Map selectKakaotalkMobileChatroomsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_kakaotalk_mobile_friends
+	public List<Map> selectKakaotalkMobileFriends(Map<String, Object> paramMap) throws Exception;
+	public Map selectKakaotalkMobileFriendsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_app_list
+	public List<Map> selectAppList(Map<String, Object> paramMap) throws Exception;
+	public Map selectAppListCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_call_history
+	public List<Map> selectCallHistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectCallHistoryCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_emb_file
+	public List<Map> selectEmbFile(Map<String, Object> paramMap) throws Exception;
+	public Map selectEmbFileCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_file_history
+	public List<Map> selectFileHistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectFileHistoryCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_geodata
+	public List<Map> selectGeodata(Map<String, Object> paramMap) throws Exception;
+	public Map selectGeodataCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_id_pw_hash
+	public List<Map> selectIdpwhash(Map<String, Object> paramMap) throws Exception;
+	public Map selectIdpwhashCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_web_browser_history
+	public List<Map> selectWebBrowserHistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectWebBrowserHistoryCount(Map<String, Object> paramMap) throws Exception;
+
+
 }

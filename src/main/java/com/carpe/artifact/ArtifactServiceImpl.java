@@ -529,6 +529,17 @@ public class ArtifactServiceImpl implements ArtifactService {
 		return dao.selectRegSearchKeywordCount(paramMap);
 	}
 	
+	// lv1_os_win_reg_shellbag
+	@Override
+	public List<Map> selectShellbag(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectShellbag(paramMap);
+		}
+
+	@Override
+	public Map selectShellbagCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectShellbagCount(paramMap);
+		}
+	
 	// lv1_os_win_reg_shim_cache
 	@Override
 	public List<Map> selectRegShimCache(Map<String, Object> paramMap) throws Exception {
@@ -594,7 +605,7 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectLnkFilesCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectLnkFilesCount(paramMap);
 	}
-	
+	/*
 	// lv1_os_win_prefetch
 	@Override
 	public List<Map> selectPrefetch(Map<String, Object> paramMap) throws Exception {
@@ -605,7 +616,8 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectPrefetchCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectPrefetchCount(paramMap);
 	}
-	
+	*/
+	/*
 	// lv1_app_web_chrome_download
 	@Override
 	public List<Map> selectChromeDownload(Map<String, Object> paramMap) throws Exception {
@@ -649,7 +661,118 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectChromeSearchTermsCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectChromeSearchTermsCount(paramMap);
 	}
-	
+	*/
+	// lv1_app_web_chrome_autofill
+	@Override
+	public List<Map> selectChromeAutofill(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeAutofill(paramMap);
+		}
+
+	@Override
+	public Map selectChromeAutofillCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeAutofillCount(paramMap);
+		}
+
+	// lv1_app_web_chrome_bookmarks
+	@Override
+	public List<Map> selectChromeBookmarks(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeBookmarks(paramMap);
+		}
+
+	@Override
+	public Map selectChromeBookmarksCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeBookmarksCount(paramMap);
+		}
+
+	// lv1_app_web_chrome_cookies
+	@Override
+	public List<Map> selectChromeCookies(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeCookies(paramMap);
+		}
+
+	@Override
+	public Map selectChromeCookiesCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeCookiesCount(paramMap);
+		}
+
+	// lv1_app_web_chrome_download
+	@Override
+	public List<Map> selectChromeDownload(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeDownload(paramMap);
+		}
+
+	@Override
+	public Map selectChromeDownloadCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeDownloadCount(paramMap);
+		}
+
+	// lv1_app_web_chrome_favicons
+	@Override
+	public List<Map> selectChromeFavicons(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeFavicons(paramMap);
+		}
+
+	@Override
+	public Map selectChromeFaviconsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeFaviconsCount(paramMap);
+		}
+
+	// lv1_app_web_chrome_logindata
+	@Override
+	public List<Map> selectChromeLoginData(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeLoginData(paramMap);
+		}
+
+	@Override
+	public Map selectChromeLoginDataCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeLoginDataCount(paramMap);
+		}
+
+	// lv1_app_web_chrome_search_terms
+	@Override
+	public List<Map> selectChromeSearchTerms(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeSearchTerms(paramMap);
+		}
+
+	@Override
+	public Map selectChromeSearchTermsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeSearchTermsCount(paramMap);
+		}
+
+	// lv1_app_web_chrome_shortcuts
+	@Override
+	public List<Map> selectChromeShortcuts(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeShortcuts(paramMap);
+		}
+
+	@Override
+	public Map selectChromeShortcutsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeShortcutsCount(paramMap);
+		}
+
+	// lv1_app_web_chrome_top_sites
+	@Override
+	public List<Map> selectChromeTopSites(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeTopSites(paramMap);
+		}
+
+	@Override
+	public Map selectChromeTopSitesCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeTopSitesCount(paramMap);
+		}
+
+	// lv1_app_web_chrome_visit_urls
+	@Override
+	public List<Map> selectChromeVisitUrls(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeVisitUrls(paramMap);
+		}
+
+	@Override
+	public Map selectChromeVisitUrlsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeVisitUrlsCount(paramMap);
+		}
+
+	/*
 	// lv1_fs_ntfs_logfile
 	@Override
 	public List<Map> selectNtfsLogfile(Map<String, Object> paramMap) throws Exception {
@@ -671,6 +794,7 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectNtfsUsnjrnlCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectNtfsUsnjrnlCount(paramMap);
 	}
+	*/
 	
 	// lv2_os_app_history
 	@Override
@@ -683,4 +807,282 @@ public class ArtifactServiceImpl implements ArtifactService {
 		return dao.selectAppHistoryCount(paramMap);
 	}
 	
+	// lv1_os_win_notification
+	@Override
+	public List<Map> selectNotification(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectNotification(paramMap);
+		}
+
+	@Override
+	public Map selectNotificationCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectNotificationCount(paramMap);
+		}
+
+	// lv1_os_win_prefetch
+	@Override
+	public List<Map> selectPrefetch(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectPrefetch(paramMap);
+		}
+
+	@Override
+	public Map selectPrefetchCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectPrefetchCount(paramMap);
+		}
+
+	// lv1_os_win_prefetch_run_info
+	@Override
+	public List<Map> selectPrefetchRunInfo(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectPrefetchRunInfo(paramMap);
+		}
+
+	@Override
+	public Map selectPrefetchRunInfoCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectPrefetchRunInfoCount(paramMap);
+		}
+
+	// lv1_os_win_prefetch_volume_info
+	@Override
+	public List<Map> selectPrefetchVolumeInfo(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectPrefetchVolumeInfo(paramMap);
+		}
+
+	@Override
+	public Map selectPrefetchVolumeInfoCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectPrefetchVolumeInfoCount(paramMap);
+		}
+
+	// lv1_os_win_recyclebin
+	@Override
+	public List<Map> selectRecycleBin(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectRecycleBin(paramMap);
+		}
+
+	@Override
+	public Map selectRecycleBinCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectRecycleBinCount(paramMap);
+		}
+
+	// lv1_os_win_sticky_note
+	@Override
+	public List<Map> selectStickyNote(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectStickyNote(paramMap);
+		}
+
+	@Override
+	public Map selectStickyNoteCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectStickyNoteCount(paramMap);
+		}
+
+	// lv1_os_win_windows_timeline
+	@Override
+	public List<Map> selectWindowsTimeline(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWindowsTimeline(paramMap);
+		}
+
+	@Override
+	public Map selectWindowsTimelineCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWindowsTimelineCount(paramMap);
+		}
+	
+	// lv1_app_kakaotalk_new_chatLogs
+	@Override
+	public List<Map> selectKakaotalkNewChatlogs(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkNewChatlogs(paramMap);
+	}
+
+	@Override
+	public Map selectKakaotalkNewChatlogsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkNewChatlogsCount(paramMap);
+	}
+
+	// lv1_app_kakaotalk_chatLogs
+	@Override
+	public List<Map> selectKakaotalkChatlogs(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkChatlogs(paramMap);
+	}
+
+	@Override
+	public Map selectKakaotalkChatlogsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkChatlogsCount(paramMap);
+	}
+
+	// lv1_app_kakaotalk_chatLog_attachment
+	@Override
+	public List<Map> selectKakaotalkChatlogAttachment(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkChatlogAttachment(paramMap);
+	}
+
+	@Override
+	public Map selectKakaotalkChatlogAttachmentCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkChatlogAttachmentCount(paramMap);
+	}
+
+	// lv1_app_kakaotalk_chatLogDrafts
+	@Override
+	public List<Map> selectKakaotalkChatlogDrafts(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkChatlogDrafts(paramMap);
+	}
+
+	@Override
+	public Map selectKakaotalkChatlogDraftsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkChatlogDraftsCount(paramMap);
+	}
+
+	// lv1_fs_ntfs_logfile_log_record
+	@Override
+	public List<Map> selectLogRecord(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectLogRecord(paramMap);
+	}
+
+	@Override
+	public Map selectLogRecordCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectLogRecordCount(paramMap);
+	}
+
+	// lv1_fs_ntfs_logfile_restart_area
+	@Override
+	public List<Map> selectRestartArea(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectRestartArea(paramMap);
+	}
+
+	@Override
+	public Map selectRestartAreaCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectRestartAreaCount(paramMap);
+	}
+
+	// lv1_fs_ntfs_mft
+	@Override
+	public List<Map> selectMFT(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectMFT(paramMap);
+	}
+
+	@Override
+	public Map selectMFTCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectMFTCount(paramMap);
+	}
+
+	// lv1_fs_ntfs_usnjrnl
+	@Override
+	public List<Map> selectUsnJrnl(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectUsnJrnl(paramMap);
+	}
+
+	@Override
+	public Map selectUsnJrnlCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectUsnJrnlCount(paramMap);
+	}
+
+	// lv1_app_kakaotalk_mobile_chatlogs
+	@Override
+	public List<Map> selectKakaotalkMobileChatlogs(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkMobileChatlogs(paramMap);
+	}
+
+	@Override
+	public Map selectKakaotalkMobileChatlogsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkMobileChatlogsCount(paramMap);
+	}
+
+	// lv1_app_kakaotalk_mobile_chatrooms
+	@Override
+	public List<Map> selectKakaotalkMobileChatrooms(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkMobileChatrooms(paramMap);
+	}
+
+	@Override
+	public Map selectKakaotalkMobileChatroomsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkMobileChatroomsCount(paramMap);
+	}
+
+	// lv1_app_kakaotalk_mobile_friends
+	@Override
+	public List<Map> selectKakaotalkMobileFriends(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkMobileFriends(paramMap);
+	}
+
+	@Override
+	public Map selectKakaotalkMobileFriendsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectKakaotalkMobileFriendsCount(paramMap);
+	}
+
+	// lv1_os_and_app_list
+	@Override
+	public List<Map> selectAppList(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectAppList(paramMap);
+	}
+
+	@Override
+	public Map selectAppListCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectAppListCount(paramMap);
+	}
+
+	// lv1_os_and_call_history
+	@Override
+	public List<Map> selectCallHistory(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectCallHistory(paramMap);
+	}
+
+	@Override
+	public Map selectCallHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectCallHistoryCount(paramMap);
+	}
+
+	// lv1_os_and_emb_file
+	@Override
+	public List<Map> selectEmbFile(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectEmbFile(paramMap);
+	}
+
+	@Override
+	public Map selectEmbFileCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectEmbFileCount(paramMap);
+	}
+
+	// lv1_os_and_file_history
+	@Override
+	public List<Map> selectFileHistory(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFileHistory(paramMap);
+	}
+
+	@Override
+	public Map selectFileHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFileHistoryCount(paramMap);
+	}
+
+	// lv1_os_and_geodata
+	@Override
+	public List<Map> selectGeodata(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectGeodata(paramMap);
+	}
+
+	@Override
+	public Map selectGeodataCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectGeodataCount(paramMap);
+	}
+
+	// lv1_os_and_id_pw_hash
+	@Override
+	public List<Map> selectIdpwhash(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectIdpwhash(paramMap);
+	}
+
+	@Override
+	public Map selectIdpwhashCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectIdpwhashCount(paramMap);
+	}
+
+	// lv1_os_and_web_browser_history
+	@Override
+	public List<Map> selectWebBrowserHistory(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWebBrowserHistory(paramMap);
+	}
+
+	@Override
+	public Map selectWebBrowserHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWebBrowserHistoryCount(paramMap);
+	}
+
+
+
+
 }

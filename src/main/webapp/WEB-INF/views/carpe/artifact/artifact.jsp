@@ -744,14 +744,36 @@
       artifactKind["Installed Programs"] = {};
       artifactKind["Installed Programs"].url = "/carpe/reg_installed_programs.do";
       artifactKind["Installed Programs"].columnSet = [
-         {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'company', dataField: 'company', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'created_date', dataField: 'created_date', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'key_last_updated_time', dataField: 'key_last_updated_time', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'install_size', dataField: 'install_size', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'version', dataField: 'version', width: '10%', cellsalign: 'left', align: 'center'}
-        ,{text: 'potential_location', dataField: 'potential_location', width: '10%', cellsalign: 'left', align: 'center'}
+    	  {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'company', dataField: 'company', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'created_date', dataField: 'created_date', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'key_last_updated_time', dataField: 'key_last_updated_time', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'install_size', dataField: 'install_size', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'version', dataField: 'version', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'potential_location', dataField: 'potential_location', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'useraccount', dataField: 'useraccount', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'backup_flag', dataField: 'backup_flag', width: '10%', cellsalign: 'left', align: 'center'},
+    	  {text: 'source_location', dataField: 'source_location', width: '10%', cellsalign: 'left', align: 'center'},
+    	  ];
+      
+   // lv1_os_win_reg_shellbag
+      artifactKind["Shellbag"] = {};
+      artifactKind["Shellbag"].url = "/carpe/win_reg_shellbag.do";
+      artifactKind["Shellbag"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'user_name', dataField: 'user_name', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'bag_path', dataField: 'bag_path', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'shell_type', dataField: 'shell_type', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'value', dataField: 'value', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'modification_time', dataField: 'modification_time', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'access_time', dataField: 'access_time', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'creation_time', dataField: 'creation_time', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'last_written_time', dataField: 'last_written_time', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'size', dataField: 'size', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'mft_entry_number', dataField: 'mft_entry_number', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'mft_sequence', dataField: 'mft_sequence', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'filesystem', dataField: 'filesystem', width: '10%', cellsalign: 'left', align: 'center'},
       ];
       
       //lv1_os_win_reg_os_info
@@ -1074,7 +1096,7 @@
         ,{text: 'volume_droid', dataField: 'volume_droid', width: '10%', cellsalign: 'left', align: 'center'}
       ];
       
-      
+      /*
       // lv1_os_win_prefetch
       artifactKind["Prefetch"] = {};
       artifactKind["Prefetch"].url = "/carpe/prefetch.do";
@@ -1098,7 +1120,8 @@
         ,{text: 'volume_2_name', dataField: 'volume_2_name', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'volume_2_created_time', dataField: 'volume_2_created_time', width: '10%', cellsalign: 'left', align: 'center'}
       ];
-      
+      */
+      /*
       // lv1_app_web_chrome_download
       artifactKind["Chrome Download"] = {};
       artifactKind["Chrome Download"].url = "/carpe/chrome_download.do";
@@ -1162,7 +1185,79 @@
         ,{text: 'search_url_type', dataField: 'search_url_type', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'searched_time', dataField: 'searched_time', width: '10%', cellsalign: 'left', align: 'center'}
       ];
-      
+      */
+   // lv1_app_web_chrome_autofill
+      artifactKind["Chrome Autofill"] = {};
+      artifactKind["Chrome Autofill"].url = "/carpe/web_chrome_autofill.do";
+      artifactKind["Chrome Autofill"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'name', dataField: 'name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'value', dataField: 'value', width: '10%', cellsalign: 'left', align: 'center'},{text: 'value_lower', dataField: 'value_lower', width: '10%', cellsalign: 'left', align: 'center'},{text: 'date_created', dataField: 'date_created', width: '10%', cellsalign: 'left', align: 'center'},{text: 'date_last_used', dataField: 'date_last_used', width: '10%', cellsalign: 'left', align: 'center'},{text: 'count', dataField: 'count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_chrome_bookmarks
+      artifactKind["Chrome Bookmarks"] = {};
+      artifactKind["Chrome Bookmarks"].url = "/carpe/web_chrome_bookmarks.do";
+      artifactKind["Chrome Bookmarks"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'date_added', dataField: 'date_added', width: '10%', cellsalign: 'left', align: 'center'},{text: 'guid', dataField: 'guid', width: '10%', cellsalign: 'left', align: 'center'},{text: 'id', dataField: 'id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_visited_desktop', dataField: 'last_visited_desktop', width: '10%', cellsalign: 'left', align: 'center'},{text: 'name', dataField: 'name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'path', dataField: 'path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_chrome_cookies
+      artifactKind["Chrome Cookies"] = {};
+      artifactKind["Chrome Cookies"].url = "/carpe/web_chrome_cookies.do";
+      artifactKind["Chrome Cookies"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'creation_utc', dataField: 'creation_utc', width: '10%', cellsalign: 'left', align: 'center'},{text: 'host_key', dataField: 'host_key', width: '10%', cellsalign: 'left', align: 'center'},{text: 'name', dataField: 'name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'path', dataField: 'path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'expires_utc', dataField: 'expires_utc', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_secure', dataField: 'is_secure', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_httponly', dataField: 'is_httponly', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_access_utc', dataField: 'last_access_utc', width: '10%', cellsalign: 'left', align: 'center'},{text: 'has_expires', dataField: 'has_expires', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_persistent', dataField: 'is_persistent', width: '10%', cellsalign: 'left', align: 'center'},{text: 'priority', dataField: 'priority', width: '10%', cellsalign: 'left', align: 'center'},{text: 'encrypted_value', dataField: 'encrypted_value', width: '10%', cellsalign: 'left', align: 'center'},{text: 'samesite', dataField: 'samesite', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_chrome_download
+      artifactKind["Chrome Download"] = {};
+      artifactKind["Chrome Download"].url = "/carpe/web_chrome_download.do";
+      artifactKind["Chrome Download"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'download_source', dataField: 'download_source', width: '10%', cellsalign: 'left', align: 'center'},{text: 'saved_to', dataField: 'saved_to', width: '10%', cellsalign: 'left', align: 'center'},{text: 'state', dataField: 'state', width: '10%', cellsalign: 'left', align: 'center'},{text: 'interrupt_reason', dataField: 'interrupt_reason', width: '10%', cellsalign: 'left', align: 'center'},{text: 'opened_by_user_flag', dataField: 'opened_by_user_flag', width: '10%', cellsalign: 'left', align: 'center'},{text: 'start_time', dataField: 'start_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'end_time', dataField: 'end_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'download_bytes', dataField: 'download_bytes', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_size_bytes', dataField: 'file_size_bytes', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_chrome_favicons
+      artifactKind["Chrome Favicons"] = {};
+      artifactKind["Chrome Favicons"].url = "/carpe/web_chrome_favicons.do";
+      artifactKind["Chrome Favicons"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'id', dataField: 'id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'icon_id', dataField: 'icon_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'icon_url', dataField: 'icon_url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_updated', dataField: 'last_updated', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_requested', dataField: 'last_requested', width: '10%', cellsalign: 'left', align: 'center'},{text: 'image_data', dataField: 'image_data', width: '10%', cellsalign: 'left', align: 'center'},{text: 'width', dataField: 'width', width: '10%', cellsalign: 'left', align: 'center'},{text: 'height', dataField: 'height', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_chrome_logindata
+      artifactKind["Chrome Login Data"] = {};
+      artifactKind["Chrome Login Data"].url = "/carpe/web_chrome_logindata.do";
+      artifactKind["Chrome Login Data"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'id', dataField: 'id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'origin_url', dataField: 'origin_url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'action_url', dataField: 'action_url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'username_element', dataField: 'username_element', width: '10%', cellsalign: 'left', align: 'center'},{text: 'username_value', dataField: 'username_value', width: '10%', cellsalign: 'left', align: 'center'},{text: 'password_element', dataField: 'password_element', width: '10%', cellsalign: 'left', align: 'center'},{text: 'password_value', dataField: 'password_value', width: '10%', cellsalign: 'left', align: 'center'},{text: 'signon_realm', dataField: 'signon_realm', width: '10%', cellsalign: 'left', align: 'center'},{text: 'date_created', dataField: 'date_created', width: '10%', cellsalign: 'left', align: 'center'},{text: 'date_last_used', dataField: 'date_last_used', width: '10%', cellsalign: 'left', align: 'center'},{text: 'form_data', dataField: 'form_data', width: '10%', cellsalign: 'left', align: 'center'},{text: 'blacklisted_by_user', dataField: 'blacklisted_by_user', width: '10%', cellsalign: 'left', align: 'center'},{text: 'scheme', dataField: 'scheme', width: '10%', cellsalign: 'left', align: 'center'},{text: 'password_type', dataField: 'password_type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'times_used', dataField: 'times_used', width: '10%', cellsalign: 'left', align: 'center'},{text: 'dated_synced', dataField: 'dated_synced', width: '10%', cellsalign: 'left', align: 'center'},{text: 'displayed_name', dataField: 'displayed_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'icon_url', dataField: 'icon_url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'federation_url', dataField: 'federation_url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'skip_zero_click', dataField: 'skip_zero_click', width: '10%', cellsalign: 'left', align: 'center'},{text: 'generation_upload_status', dataField: 'generation_upload_status', width: '10%', cellsalign: 'left', align: 'center'},{text: 'possible_username_pairs', dataField: 'possible_username_pairs', width: '10%', cellsalign: 'left', align: 'center'},{text: 'submit_element', dataField: 'submit_element', width: '10%', cellsalign: 'left', align: 'center'},{text: 'preferred', dataField: 'preferred', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_chrome_search_terms
+      artifactKind["Chrome Search Terms"] = {};
+      artifactKind["Chrome Search Terms"].url = "/carpe/web_chrome_search_terms.do";
+      artifactKind["Chrome Search Terms"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'search_term', dataField: 'search_term', width: '10%', cellsalign: 'left', align: 'center'},{text: 'searched_time', dataField: 'searched_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'search_url_type', dataField: 'search_url_type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_chrome_shortcuts
+      artifactKind["Chrome Shortcuts"] = {};
+      artifactKind["Chrome Shortcuts"].url = "/carpe/web_chrome_shortcuts.do";
+      artifactKind["Chrome Shortcuts"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'text', dataField: 'text', width: '10%', cellsalign: 'left', align: 'center'},{text: 'fill_into_edit', dataField: 'fill_into_edit', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'contents', dataField: 'contents', width: '10%', cellsalign: 'left', align: 'center'},{text: 'description', dataField: 'description', width: '10%', cellsalign: 'left', align: 'center'},{text: 'keyword', dataField: 'keyword', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_access_time', dataField: 'last_access_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'number_of_hits', dataField: 'number_of_hits', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_chrome_top_sites
+      artifactKind["Chrome Top Sites"] = {};
+      artifactKind["Chrome Top Sites"].url = "/carpe/web_chrome_top_sites.do";
+      artifactKind["Chrome Top Sites"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'title', dataField: 'title', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url_rank', dataField: 'url_rank', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_chrome_visit_urls
+      artifactKind["Chrome Visit Urls"] = {};
+      artifactKind["Chrome Visit Urls"].url = "/carpe/web_chrome_visit_urls.do";
+      artifactKind["Chrome Visit Urls"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_visited_time', dataField: 'last_visited_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'title', dataField: 'title', width: '10%', cellsalign: 'left', align: 'center'},{text: 'visit_count', dataField: 'visit_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'typed_count', dataField: 'typed_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+
+      /*
       // lv1_fs_ntfs_logfile
       artifactKind["NTFS $LogFile"] = {};
       artifactKind["NTFS $LogFile"].url = "/carpe/ntfs_logfile.do";
@@ -1206,7 +1301,7 @@
         ,{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'file_path_from_mft', dataField: 'file_path_from_mft', width: '10%', cellsalign: 'left', align: 'center'}
       ];
-      
+      */
       // lv2_os_app_history
       artifactKind["Application History"] = {};
       artifactKind["Application History"].url = "/carpe/app_history.do";
@@ -1218,6 +1313,218 @@
         ,{text: 'reference_file', dataField: 'reference_file', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
       ]
+      
+   // lv1_os_win_notification
+      artifactKind["Notification"] = {};
+      artifactKind["Notification"].url = "/carpe/win_notification.do";
+      artifactKind["Notification"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_prefetch
+      artifactKind["Prefetch"] = {};
+      artifactKind["Prefetch"].url = "/carpe/win_prefetch.do";
+      artifactKind["Prefetch"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'prefetch_name', dataField: 'prefetch_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'program_name', dataField: 'program_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'program_path', dataField: 'program_path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'program_run_count', dataField: 'program_run_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_created_time', dataField: 'file_created_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_hash', dataField: 'file_hash', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_run_time', dataField: 'last_run_time', width: '10%', cellsalign: 'left', align: 'center'},{text: '2nd_last_run_time', dataField: '2nd_last_run_time', width: '10%', cellsalign: 'left', align: 'center'},{text: '3rd_last_run_time', dataField: '3rd_last_run_time', width: '10%', cellsalign: 'left', align: 'center'},{text: '4th_last_run_time', dataField: '4th_last_run_time', width: '10%', cellsalign: 'left', align: 'center'},{text: '5th_last_run_time', dataField: '5th_last_run_time', width: '10%', cellsalign: 'left', align: 'center'},{text: '6th_last_run_time', dataField: '6th_last_run_time', width: '10%', cellsalign: 'left', align: 'center'},{text: '7th_last_run_time', dataField: '7th_last_run_time', width: '10%', cellsalign: 'left', align: 'center'},{text: '8th_last_run_time', dataField: '8th_last_run_time', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_prefetch_run_info
+      artifactKind["Prefetch Run Info"] = {};
+      artifactKind["Prefetch Run Info"].url = "/carpe/win_prefetch_run_info.do";
+      artifactKind["Prefetch Run Info"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'prefetch_name', dataField: 'prefetch_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_ext', dataField: 'file_ext', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'logical_path', dataField: 'logical_path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'device_path', dataField: 'device_path', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_prefetch_volume_info
+      artifactKind["Prefetch Volume Info"] = {};
+      artifactKind["Prefetch Volume Info"].url = "/carpe/win_prefetch_volume_info.do";
+      artifactKind["Prefetch Volume Info"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'prefetch_name', dataField: 'prefetch_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'device_path', dataField: 'device_path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'creation_time', dataField: 'creation_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'serial_number', dataField: 'serial_number', width: '10%', cellsalign: 'left', align: 'center'},{text: 'directories', dataField: 'directories', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_recyclebin
+      artifactKind["Recycle Bin"] = {};
+      artifactKind["Recycle Bin"].url = "/carpe/win_recyclebin.do";
+      artifactKind["Recycle Bin"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'size', dataField: 'size', width: '10%', cellsalign: 'left', align: 'center'},{text: 'deleted_time', dataField: 'deleted_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'i_file_name', dataField: 'i_file_name', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_sticky_note
+      artifactKind["Sticky Note"] = {};
+      artifactKind["Sticky Note"].url = "/carpe/win_sticky_note.do";
+      artifactKind["Sticky Note"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'note_id', dataField: 'note_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'content', dataField: 'content', width: '10%', cellsalign: 'left', align: 'center'},{text: 'activated', dataField: 'activated', width: '10%', cellsalign: 'left', align: 'center'},{text: 'createdtime', dataField: 'createdtime', width: '10%', cellsalign: 'left', align: 'center'},{text: 'modifiedtime', dataField: 'modifiedtime', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_windows_timeline
+      artifactKind["Windows Timeline"] = {};
+      artifactKind["Windows Timeline"].url = "/carpe/win_windows_timeline.do";
+      artifactKind["Windows Timeline"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'program_name​', dataField: 'program_name​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'display_name​', dataField: 'display_name​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'content​', dataField: 'content​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'activity_type​', dataField: 'activity_type​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'focus_seconds​', dataField: 'focus_seconds​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'start_time​', dataField: 'start_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'end_time​', dataField: 'end_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'activity_id', dataField: 'activity_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'platform​', dataField: 'platform​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'created_time​', dataField: 'created_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'created_in_cloud_time​', dataField: 'created_in_cloud_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_modified_time​', dataField: 'last_modified_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_modified_on_client_time​', dataField: 'last_modified_on_client_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'original_last_modified_on_client_time​', dataField: 'original_last_modified_on_client_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'local_only_flag​', dataField: 'local_only_flag​', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      
+   	// lv1_app_kakaotalk_new_chatLogs
+      artifactKind["New Chatlogs"] = {};
+      artifactKind["New Chatlogs"].url = "/carpe/app_kakaotalk_new_chatLogs.do";
+      artifactKind["New Chatlogs"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'logId', dataField: 'logId', width: '10%', cellsalign: 'left', align: 'center'},{text: 'authorId', dataField: 'authorId', width: '10%', cellsalign: 'left', align: 'center'},{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'clientMsgId', dataField: 'clientMsgId', width: '10%', cellsalign: 'left', align: 'center'},{text: 'sendAt', dataField: 'sendAt', width: '10%', cellsalign: 'left', align: 'center'},{text: 'message', dataField: 'message', width: '10%', cellsalign: 'left', align: 'center'},{text: 'attachment', dataField: 'attachment', width: '10%', cellsalign: 'left', align: 'center'},{text: 'pc_logout', dataField: 'pc_logout', width: '10%', cellsalign: 'left', align: 'center'},{text: 'prev_msg_missing', dataField: 'prev_msg_missing', width: '10%', cellsalign: 'left', align: 'center'},{text: 'next_msg_missing', dataField: 'next_msg_missing', width: '10%', cellsalign: 'left', align: 'center'},{text: 'deleted', dataField: 'deleted', width: '10%', cellsalign: 'left', align: 'center'},{text: 'prevLogId', dataField: 'prevLogId', width: '10%', cellsalign: 'left', align: 'center'},{text: 'feed_flags', dataField: 'feed_flags', width: '10%', cellsalign: 'left', align: 'center'},{text: 'write_on_pc', dataField: 'write_on_pc', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_link_message', dataField: 'is_link_message', width: '10%', cellsalign: 'left', align: 'center'},{text: 'referrer', dataField: 'referrer', width: '10%', cellsalign: 'left', align: 'center'},{text: 'supplement', dataField: 'supplement', width: '10%', cellsalign: 'left', align: 'center'},{text: 'rewrite', dataField: 'rewrite', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_encrypt_delete_msg', dataField: 'is_encrypt_delete_msg', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+      
+   // lv1_app_kakaotalk_chatLogs
+      artifactKind["Kakaotalk Chatlogs"] = {};
+      artifactKind["Kakaotalk Chatlogs"].url = "/carpe/app_kakaotalk_chatLogs.do";
+      artifactKind["Kakaotalk Chatlogs"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'logId', dataField: 'logId', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'authorId', dataField: 'authorId', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'clientMsgId', dataField: 'clientMsgId', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'sendAt', dataField: 'sendAt', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'message', dataField: 'message', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'attachement', dataField: 'attachement', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'pc_logout', dataField: 'pc_logout', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'prev_msg_missing', dataField: 'prev_msg_missing', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'next_msg_missing', dataField: 'next_msg_missing', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'deleted', dataField: 'deleted', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'prevLogId', dataField: 'prevLogId', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'feed_flags', dataField: 'feed_flags', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'write_on_pc', dataField: 'write_on_pc', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'is_link_message', dataField: 'is_link_message', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'referer', dataField: 'referer', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'supplement', dataField: 'supplement', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'rewrite', dataField: 'rewrite', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'is_encrypt_delete_msg', dataField: 'is_encrypt_delete_msg', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_kakaotalk_chatLog_attachment
+      artifactKind["Kakaotalk Chatlog Attachment"] = {};
+      artifactKind["Kakaotalk Chatlog Attachment"].url = "/carpe/app_kakaotalk_chatLog_attachment.do";
+      artifactKind["Kakaotalk Chatlog Attachment"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'logId', dataField: 'logId', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'attach_thumbnailData', dataField: 'attach_thumbnailData', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'attach_fullData', dataField: 'attach_fullData', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'attach_downloadLocalFile', dataField: 'attach_downloadLocalFile', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'attach_lastWriteTime', dataField: 'attach_lastWriteTime', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'serverStatusCode', dataField: 'serverStatusCode', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'sendLogStatus', dataField: 'sendLogStatus', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_kakaotalk_chatLogDrafts
+      artifactKind["Kakaotalk Chatlog Drafts"] = {};
+      artifactKind["Kakaotalk Chatlog Drafts"].url = "/carpe/app_kakaotalk_chatLogDrafts.do";
+      artifactKind["Kakaotalk Chatlog Drafts"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'clientMsgId', dataField: 'clientMsgId', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'message', dataField: 'message', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'extra', dataField: 'extra', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'attach_data', dataField: 'attach_data', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'supplement', dataField: 'supplement', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'lastknownstate', dataField: 'lastknownstate', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+
+   // lv1_fs_ntfs_logfile_log_record
+      artifactKind["Log Record"] = {};
+      artifactKind["Log Record"].url = "/carpe/ntfs_logfile_log_record.do";
+      artifactKind["Log Record"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'lsn', dataField: 'lsn', width: '10%', cellsalign: 'left', align: 'center'},{text: 'transaction_id', dataField: 'transaction_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'redo_op', dataField: 'redo_op', width: '10%', cellsalign: 'left', align: 'center'},{text: 'undo_op', dataField: 'undo_op', width: '10%', cellsalign: 'left', align: 'center'},{text: 'target_file_number', dataField: 'target_file_number', width: '10%', cellsalign: 'left', align: 'center'},{text: 'target_reference', dataField: 'target_reference', width: '10%', cellsalign: 'left', align: 'center'},{text: 'target_attribute_name', dataField: 'target_attribute_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_path', dataField: 'file_path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'offset_in_target', dataField: 'offset_in_target', width: '10%', cellsalign: 'left', align: 'center'},{text: 'lcn', dataField: 'lcn', width: '10%', cellsalign: 'left', align: 'center'},{text: 'redo_data', dataField: 'redo_data', width: '10%', cellsalign: 'left', align: 'center'},{text: 'undo_data', dataField: 'undo_data', width: '10%', cellsalign: 'left', align: 'center'},{text: 'attribute', dataField: 'attribute', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_fs_ntfs_logfile_restart_area
+      artifactKind["Restart Area"] = {};
+      artifactKind["Restart Area"].url = "/carpe/ntfs_logfile_restart_area.do";
+      artifactKind["Restart Area"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'lsn', dataField: 'lsn', width: '10%', cellsalign: 'left', align: 'center'},{text: 'version', dataField: 'version', width: '10%', cellsalign: 'left', align: 'center'},{text: 'start_of_checkpoint', dataField: 'start_of_checkpoint', width: '10%', cellsalign: 'left', align: 'center'},{text: 'open_attribute_table_lsn', dataField: 'open_attribute_table_lsn', width: '10%', cellsalign: 'left', align: 'center'},{text: 'open_attribute_table_length', dataField: 'open_attribute_table_length', width: '10%', cellsalign: 'left', align: 'center'},{text: 'attributes_names_lsn', dataField: 'attributes_names_lsn', width: '10%', cellsalign: 'left', align: 'center'},{text: 'attributes_names_length', dataField: 'attributes_names_length', width: '10%', cellsalign: 'left', align: 'center'},{text: 'dirty_page_table_lsn', dataField: 'dirty_page_table_lsn', width: '10%', cellsalign: 'left', align: 'center'},{text: 'dirty_page_table_length', dataField: 'dirty_page_table_length', width: '10%', cellsalign: 'left', align: 'center'},{text: 'transaction_table_lsn', dataField: 'transaction_table_lsn', width: '10%', cellsalign: 'left', align: 'center'},{text: 'transaction_table_length', dataField: 'transaction_table_length', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_fs_ntfs_mft
+      artifactKind["MFT"] = {};
+      artifactKind["MFT"].url = "/carpe/ntfs_mft.do";
+      artifactKind["MFT"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'},{text: 'mft_reference_number', dataField: 'mft_reference_number', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_in_use', dataField: 'is_in_use', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_directory', dataField: 'is_directory', width: '10%', cellsalign: 'left', align: 'center'},{text: 'lsn', dataField: 'lsn', width: '10%', cellsalign: 'left', align: 'center'},{text: 'path', dataField: 'path', width: '10%', cellsalign: 'left', align: 'center'},{text: '$SI_mtime', dataField: '$SI_mtime', width: '10%', cellsalign: 'left', align: 'center'},{text: '$SI_atime', dataField: '$SI_atime', width: '10%', cellsalign: 'left', align: 'center'},{text: '$SI_ctime', dataField: '$SI_ctime', width: '10%', cellsalign: 'left', align: 'center'},{text: '$SI_etime', dataField: '$SI_etime', width: '10%', cellsalign: 'left', align: 'center'},{text: '$SI_usn', dataField: '$SI_usn', width: '10%', cellsalign: 'left', align: 'center'},{text: '$FN_mtime', dataField: '$FN_mtime', width: '10%', cellsalign: 'left', align: 'center'},{text: '$FN_atime', dataField: '$FN_atime', width: '10%', cellsalign: 'left', align: 'center'},{text: '$FN_ctime', dataField: '$FN_ctime', width: '10%', cellsalign: 'left', align: 'center'},{text: '$FN_etime', dataField: '$FN_etime', width: '10%', cellsalign: 'left', align: 'center'},{text: '$OBJID_timestamp', dataField: '$OBJID_timestamp', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_size', dataField: 'file_size', width: '10%', cellsalign: 'left', align: 'center'},{text: 'ads_list', dataField: 'ads_list', width: '10%', cellsalign: 'left', align: 'center'},{text: 'wsl_mtime', dataField: 'wsl_mtime', width: '10%', cellsalign: 'left', align: 'center'},{text: 'wsl_atime', dataField: 'wsl_atime', width: '10%', cellsalign: 'left', align: 'center'},{text: 'wsl_chtime', dataField: 'wsl_chtime', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_fs_ntfs_usnjrnl
+      artifactKind["UsnJrnl"] = {};
+      artifactKind["UsnJrnl"].url = "/carpe/ntfs_usnjrnl.do";
+      artifactKind["UsnJrnl"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'usn_value', dataField: 'usn_value', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'},{text: 'reason', dataField: 'reason', width: '10%', cellsalign: 'left', align: 'center'},{text: 'mft_reference_number', dataField: 'mft_reference_number', width: '10%', cellsalign: 'left', align: 'center'},{text: 'parent_mft_reference_number', dataField: 'parent_mft_reference_number', width: '10%', cellsalign: 'left', align: 'center'},{text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_path_from_mft', dataField: 'file_path_from_mft', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+   // lv1_app_kakaotalk_mobile_chatlogs
+      artifactKind["Chatlogs"] = {};
+      artifactKind["Chatlogs"].url = "/carpe/app_kakaotalk_mobile_chatlogs.do";
+      artifactKind["Chatlogs"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: '_id', dataField: '_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'id', dataField: 'id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chat_id', dataField: 'chat_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'user_id', dataField: 'user_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'message', dataField: 'message', width: '10%', cellsalign: 'left', align: 'center'},{text: 'attachment', dataField: 'attachment', width: '10%', cellsalign: 'left', align: 'center'},{text: 'created_at', dataField: 'created_at', width: '10%', cellsalign: 'left', align: 'center'},{text: 'deleted_at', dataField: 'deleted_at', width: '10%', cellsalign: 'left', align: 'center'},{text: 'client_message_id', dataField: 'client_message_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'prev_id', dataField: 'prev_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'v', dataField: 'v', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+   // lv1_app_kakaotalk_mobile_chatrooms
+      artifactKind["Chatrooms"] = {};
+      artifactKind["Chatrooms"].url = "/carpe/app_kakaotalk_mobile_chatrooms.do";
+      artifactKind["Chatrooms"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: '_id', dataField: '_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'id', dataField: 'id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'members', dataField: 'members', width: '10%', cellsalign: 'left', align: 'center'},{text: 'active_member_ids', dataField: 'active_member_ids', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_log_id', dataField: 'last_log_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_message', dataField: 'last_message', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_updated_at', dataField: 'last_updated_at', width: '10%', cellsalign: 'left', align: 'center'},{text: 'unread_count', dataField: 'unread_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'watermarks', dataField: 'watermarks', width: '10%', cellsalign: 'left', align: 'center'},{text: 'temporary_message', dataField: 'temporary_message', width: '10%', cellsalign: 'left', align: 'center'},{text: 'v', dataField: 'v', width: '10%', cellsalign: 'left', align: 'center'},{text: 'ext', dataField: 'ext', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_read_log_id', dataField: 'last_read_log_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_update_seen_id', dataField: 'last_update_seen_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'active_members_count', dataField: 'active_members_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'meta', dataField: 'meta', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_hint', dataField: 'is_hint', width: '10%', cellsalign: 'left', align: 'center'},{text: 'private_meta', dataField: 'private_meta', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_chat_log_type', dataField: 'last_chat_log_type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'schat_token', dataField: 'schat_token', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_skey_token', dataField: 'last_skey_token', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_pk_tokens', dataField: 'last_pk_tokens', width: '10%', cellsalign: 'left', align: 'center'},{text: 'link_id', dataField: 'link_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'moim_meta', dataField: 'moim_meta', width: '10%', cellsalign: 'left', align: 'center'},{text: 'invite_info', dataField: 'invite_info', width: '10%', cellsalign: 'left', align: 'center'},{text: 'blinded_member_ids', dataField: 'blinded_member_ids', width: '10%', cellsalign: 'left', align: 'center'},{text: 'mute_until_at', dataField: 'mute_until_at', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_joined_log_id', dataField: 'last_joined_log_id', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_kakaotalk_mobile_friends
+      artifactKind["Friends"] = {};
+      artifactKind["Friends"].url = "/carpe/app_kakaotalk_mobile_friends.do";
+      artifactKind["Friends"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: '_id', dataField: '_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'id', dataField: 'id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'members', dataField: 'members', width: '10%', cellsalign: 'left', align: 'center'},{text: 'active_member_ids', dataField: 'active_member_ids', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_log_id', dataField: 'last_log_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_message', dataField: 'last_message', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_updated_at', dataField: 'last_updated_at', width: '10%', cellsalign: 'left', align: 'center'},{text: 'unread_count', dataField: 'unread_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'watermarks', dataField: 'watermarks', width: '10%', cellsalign: 'left', align: 'center'},{text: 'temporary_message', dataField: 'temporary_message', width: '10%', cellsalign: 'left', align: 'center'},{text: 'v', dataField: 'v', width: '10%', cellsalign: 'left', align: 'center'},{text: 'ext', dataField: 'ext', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_read_log_id', dataField: 'last_read_log_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_update_seen_id', dataField: 'last_update_seen_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'active_members_count', dataField: 'active_members_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'meta', dataField: 'meta', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_hint', dataField: 'is_hint', width: '10%', cellsalign: 'left', align: 'center'},{text: 'private_meta', dataField: 'private_meta', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_chat_log_type', dataField: 'last_chat_log_type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'schat_token', dataField: 'schat_token', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_skey_token', dataField: 'last_skey_token', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_pk_tokens', dataField: 'last_pk_tokens', width: '10%', cellsalign: 'left', align: 'center'},{text: 'link_id', dataField: 'link_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'moim_meta', dataField: 'moim_meta', width: '10%', cellsalign: 'left', align: 'center'},{text: 'invite_info', dataField: 'invite_info', width: '10%', cellsalign: 'left', align: 'center'},{text: 'blinded_member_ids', dataField: 'blinded_member_ids', width: '10%', cellsalign: 'left', align: 'center'},{text: 'mute_until_at', dataField: 'mute_until_at', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_joined_log_id', dataField: 'last_joined_log_id', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_and_app_list
+      artifactKind["App List"] = {};
+      artifactKind["App List"].url = "/carpe/and_app_list.do";
+      artifactKind["App List"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_deleted', dataField: 'is_deleted', width: '10%', cellsalign: 'left', align: 'center'},{text: 'category', dataField: 'category', width: '10%', cellsalign: 'left', align: 'center'},{text: 'package_name', dataField: 'package_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'app_name', dataField: 'app_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'version', dataField: 'version', width: '10%', cellsalign: 'left', align: 'center'},{text: 'installed_time', dataField: 'installed_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'apk_changed_time', dataField: 'apk_changed_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'updated_time', dataField: 'updated_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'deleted_time', dataField: 'deleted_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'fs_ctime', dataField: 'fs_ctime', width: '10%', cellsalign: 'left', align: 'center'},{text: 'fs_crtime', dataField: 'fs_crtime', width: '10%', cellsalign: 'left', align: 'center'},{text: 'fs_atime', dataField: 'fs_atime', width: '10%', cellsalign: 'left', align: 'center'},{text: 'fs_mtime', dataField: 'fs_mtime', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_updated', dataField: 'is_updated', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_and_call_history
+      artifactKind["Call History"] = {};
+      artifactKind["Call History"].url = "/carpe/and_call_history.do";
+      artifactKind["Call History"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'package_name', dataField: 'package_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'},{text: 'time_duration', dataField: 'time_duration', width: '10%', cellsalign: 'left', align: 'center'},{text: 'phonenumber', dataField: 'phonenumber', width: '10%', cellsalign: 'left', align: 'center'},{text: 'account', dataField: 'account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'digit_positive', dataField: 'digit_positive', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file', dataField: 'file', width: '10%', cellsalign: 'left', align: 'center'},{text: 'contents', dataField: 'contents', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_and_emb_file
+      artifactKind["Emb File"] = {};
+      artifactKind["Emb File"].url = "/carpe/and_emb_file.do";
+      artifactKind["Emb File"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_compressed', dataField: 'is_compressed', width: '10%', cellsalign: 'left', align: 'center'},{text: 'parent_path', dataField: 'parent_path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'name', dataField: 'name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'extension', dataField: 'extension', width: '10%', cellsalign: 'left', align: 'center'},{text: 'mod_time', dataField: 'mod_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'size', dataField: 'size', width: '10%', cellsalign: 'left', align: 'center'},{text: 'compressed_size', dataField: 'compressed_size', width: '10%', cellsalign: 'left', align: 'center'},{text: 'CRC', dataField: 'CRC', width: '10%', cellsalign: 'left', align: 'center'},{text: 'created_system', dataField: 'created_system', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source_path', dataField: 'source_path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_and_file_history
+      artifactKind["File History"] = {};
+      artifactKind["File History"].url = "/carpe/and_file_history.do";
+      artifactKind["File History"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'package_name', dataField: 'package_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file', dataField: 'file', width: '10%', cellsalign: 'left', align: 'center'},{text: 'phonenumber', dataField: 'phonenumber', width: '10%', cellsalign: 'left', align: 'center'},{text: 'account', dataField: 'account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'contents', dataField: 'contents', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_and_geodata
+      artifactKind["Geodata"] = {};
+      artifactKind["Geodata"].url = "/carpe/and_geodata.do";
+      artifactKind["Geodata"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'package_name', dataField: 'package_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'},{text: 'geodata', dataField: 'geodata', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file', dataField: 'file', width: '10%', cellsalign: 'left', align: 'center'},{text: 'contents', dataField: 'contents', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_and_id_pw_hash
+      artifactKind["Id&pw hash"] = {};
+      artifactKind["Id&pw hash"].url = "/carpe/and_id_pw_hash.do";
+      artifactKind["Id&pw hash"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'package_name', dataField: 'package_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'account', dataField: 'account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'pwd', dataField: 'pwd', width: '10%', cellsalign: 'left', align: 'center'},{text: 'contents', dataField: 'contents', width: '10%', cellsalign: 'left', align: 'center'},{text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_and_web_browser_history
+      artifactKind["Web Browser History"] = {};
+      artifactKind["Web Browser History"].url = "/carpe/and_web_browser_history.do";
+      artifactKind["Web Browser History"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'package_name', dataField: 'package_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'account', dataField: 'account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'digit_positive', dataField: 'digit_positive', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file', dataField: 'file', width: '10%', cellsalign: 'left', align: 'center'},{text: 'contents', dataField: 'contents', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+
       
       // splitter
       $('#jqxSplitter').jqxSplitter({ width: '100%', height: '100%', panels: [{ min: 150, size: 200 }, { min: 300 }] });
