@@ -1516,6 +1516,40 @@
 	            <!--include refid="selectArtifactCondition" /-->
 	</select>
 
+	<!-- lv1_os_win_icon_cache -->
 	
+	<select id="selectIconCache"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_icon_cache
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectIconCacheCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_icon_cache
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_win_jumplist_automatics -->
+	<select id="selectJumplistAutomatics"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_jumplist_automatics
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectJumplistAutomaticsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_jumplist_automatics
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+
 	
 </mapper>

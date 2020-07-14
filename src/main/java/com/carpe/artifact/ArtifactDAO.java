@@ -401,5 +401,12 @@ public interface ArtifactDAO {
 	public List<Map> selectWebBrowserHistory(Map<String, Object> paramMap) throws Exception;
 	public Map selectWebBrowserHistoryCount(Map<String, Object> paramMap) throws Exception;
 
+	// lv1_os_win_icon_cache
+	public List<Map> selectIconCache(Map<String, Object> paramMap) throws Exception;
+	public Map selectIconCacheCount(Map<String, Object> paramMap) throws Exception;
 
+
+	// lv1_os_win_jumplist_automatics
+	public List<Map> selectJumplistAutomatics(Map<String, Object> paramMap) throws Exception;
+	public Map selectJumplistAutomaticsCount(Map<String, Object> paramMap) throws Exception;
 }

@@ -186,6 +186,17 @@ public class ArtifactController {
 		//addArtifactTreeNode(subLv1List, "NTFS USN Journal", true, true, null);
 
 		addArtifactTreeNode(subLv1List, "LNK File", true, true, null);
+		
+		
+		List subJumpList = new ArrayList();
+		addArtifactTreeNode(subLv1List, "Jumplist", true, true, subJumpList);
+		// lv1_os_win_jumplist_automatics
+		addArtifactTreeNode(subJumpList, "Jumplist Automatics", true, true, null);
+		
+		// lv1_os_win_icon_cache
+		addArtifactTreeNode(subLv1List, "Icon Cache", true, true, null);
+	
+		
 		addArtifactTreeNode(subLv1List, "Mobile", true, true, subMobileList);
 		//addArtifactTreeNode(subLv1List, "Prefetch", true, true, null);
 
@@ -3282,6 +3293,76 @@ public class ArtifactController {
 			return mav;
 		}
 	
+	// lv1_os_win_icon_cache
+		@RequestMapping(value ="/win_icon_cache.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getIconCache (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+		    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+				mav.setViewName("jsonView");
+
+				if (map.get("currentPage") == null && map.get("pageSize") == null) {
+					mav.addObject("totalcount", 0);
+					mav.addObject("list", new ArrayList());
+					return mav;
+				}
+
+				Map<String, Object> paramMap = new HashMap<String, Object>();
+
+				paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+				paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+				try {
+					long pageSize = Long.parseLong((String) map.get("pageSize"));
+					paramMap.put("pageSize", pageSize);
+					long currentPage = Long.parseLong((String) map.get("currentPage"));
+					paramMap.put("offset", (currentPage - 1) * pageSize);
+				} catch (Exception e) {
+					e.printStackTrace();
+					mav.addObject("totalcount", 0);
+					return mav;
+				}
+
+				List<Map> IconCache = service.selectIconCache(paramMap);
+				int totalCnt = ((Long) service.selectIconCacheCount(paramMap).get("cnt")).intValue();
+				mav.addObject("list", IconCache);
+				mav.addObject("totalcount", totalCnt);
+
+				return mav;
+			}
+
+		// lv1_os_win_jumplist_automatics
+		@RequestMapping(value ="/win_jumplist_automatics.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getJumplistAutomatics (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+		    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+				mav.setViewName("jsonView");
+
+				if (map.get("currentPage") == null && map.get("pageSize") == null) {
+					mav.addObject("totalcount", 0);
+					mav.addObject("list", new ArrayList());
+					return mav;
+				}
+
+				Map<String, Object> paramMap = new HashMap<String, Object>();
+
+				paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+				paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+				try {
+					long pageSize = Long.parseLong((String) map.get("pageSize"));
+					paramMap.put("pageSize", pageSize);
+					long currentPage = Long.parseLong((String) map.get("currentPage"));
+					paramMap.put("offset", (currentPage - 1) * pageSize);
+				} catch (Exception e) {
+					e.printStackTrace();
+					mav.addObject("totalcount", 0);
+					return mav;
+				}
+
+				List<Map> JumplistAutomatics = service.selectJumplistAutomatics(paramMap);
+				int totalCnt = ((Long) service.selectJumplistAutomaticsCount(paramMap).get("cnt")).intValue();
+				mav.addObject("list", JumplistAutomatics);
+				mav.addObject("totalcount", totalCnt);
+
+				return mav;
+			}
+
 	// lv1_app_kakaotalk_new_chatLogs
 	@RequestMapping(value ="/app_kakaotalk_new_chatLogs.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getKakaotalkNewChatlogs (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
 	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
@@ -3912,8 +3993,7 @@ public class ArtifactController {
 
 			return mav;
 		}
-
-
+	
 
 
 }
