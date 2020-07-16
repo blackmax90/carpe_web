@@ -1363,7 +1363,32 @@
       {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'program_name​', dataField: 'program_name​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'display_name​', dataField: 'display_name​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'content​', dataField: 'content​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'activity_type​', dataField: 'activity_type​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'focus_seconds​', dataField: 'focus_seconds​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'start_time​', dataField: 'start_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'end_time​', dataField: 'end_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'activity_id', dataField: 'activity_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'platform​', dataField: 'platform​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'created_time​', dataField: 'created_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'created_in_cloud_time​', dataField: 'created_in_cloud_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_modified_time​', dataField: 'last_modified_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_modified_on_client_time​', dataField: 'last_modified_on_client_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'original_last_modified_on_client_time​', dataField: 'original_last_modified_on_client_time​', width: '10%', cellsalign: 'left', align: 'center'},{text: 'local_only_flag​', dataField: 'local_only_flag​', width: '10%', cellsalign: 'left', align: 'center'}
       ];
 
+   // lv1_os_win_icon_cache
+      artifactKind["Icon Cache"] = {};
+      artifactKind["Icon Cache"].url = "/carpe/win_icon_cache.do";
+      artifactKind["Icon Cache"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'owner', dataField: 'owner', width: '10%', cellsalign: 'left', align: 'center'},{text: 'filename', dataField: 'filename', width: '10%', cellsalign: 'left', align: 'center'},{text: 'filesize', dataField: 'filesize', width: '10%', cellsalign: 'left', align: 'center'},{text: 'imagetype', dataField: 'imagetype', width: '10%', cellsalign: 'left', align: 'center'},{text: 'data', dataField: 'data', width: '10%', cellsalign: 'left', align: 'center'},{text: 'sha1', dataField: 'sha1', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_jumplist_automatics
+      artifactKind["Jumplist Automatics"] = {};
+      artifactKind["Jumplist Automatics"].url = "/carpe/win_jumplist_automatics.do";
+      artifactKind["Jumplist Automatics"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_path', dataField: 'file_path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'record_time', dataField: 'record_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'access_count', dataField: 'access_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'entry_id', dataField: 'entry_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_ext', dataField: 'file_ext', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_attribute', dataField: 'file_attribute', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_size', dataField: 'file_size', width: '10%', cellsalign: 'left', align: 'center'},{text: 'app_id', dataField: 'app_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'application_name', dataField: 'application_name', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
       
+     
+      // lv1_os_win_thumbnail_cache
+      artifactKind["Thumbnail Cache"] = {};
+      artifactKind["Thumbnail Cache"].url = "/carpe/win_thumbnail_cache.do";
+      artifactKind["Thumbnail Cache"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'owner', dataField: 'owner', width: '10%', cellsalign: 'left', align: 'center'},{text: 'filename', dataField: 'filename', width: '10%', cellsalign: 'left', align: 'center'},{text: 'filesize', dataField: 'filesize', width: '10%', cellsalign: 'left', align: 'center'},{text: 'imagetype', dataField: 'imagetype', width: '10%', cellsalign: 'left', align: 'center'},{text: 'data', dataField: 'data', width: '10%', cellsalign: 'left', align: 'center'},{text: 'sha1', dataField: 'sha1', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+
+
+
    	// lv1_app_kakaotalk_new_chatLogs
       artifactKind["New Chatlogs"] = {};
       artifactKind["New Chatlogs"].url = "/carpe/app_kakaotalk_new_chatLogs.do";

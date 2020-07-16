@@ -1094,5 +1094,41 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	    return sqlSession.selectOne(Namespace + ".selectWebBrowserHistoryCount", paramMap);
 	}
 
+	
+	// lv1_os_win_icon_cache
+	@Override
+	public List<Map> selectIconCache(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectIconCache", paramMap);
+	}
+
+	@Override
+	public Map selectIconCacheCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectIconCacheCount", paramMap);
+	}
+	
+	// lv1_os_win_thumbnail_cache
+	@Override
+	public List<Map> selectThumbnailCache(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectThumbnailCache", paramMap);
+	}
+
+	@Override
+	public Map selectThumbnailCacheCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectThumbnailCacheCount", paramMap);
+	}
+
+
+
+	// lv1_os_win_jumplist_automatics
+	@Override
+	public List<Map> selectJumplistAutomatics(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectJumplistAutomatics", paramMap);
+	}
+
+	@Override
+	public Map selectJumplistAutomaticsCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectJumplistAutomaticsCount", paramMap);
+	}
+
 
 }

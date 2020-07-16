@@ -1083,6 +1083,39 @@ public class ArtifactServiceImpl implements ArtifactService {
 	}
 
 
+	// lv1_os_win_icon_cache
+	@Override
+	public List<Map> selectIconCache(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectIconCache(paramMap);
+	}
+
+	@Override
+	public Map selectIconCacheCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectIconCacheCount(paramMap);
+	}
+
+	// lv1_os_win_jumplist_automatics
+	@Override
+	public List<Map> selectJumplistAutomatics(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectJumplistAutomatics(paramMap);
+	}
+
+	@Override
+	public Map selectJumplistAutomaticsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectJumplistAutomaticsCount(paramMap);
+	}
+
+
+	// lv1_os_win_thumbnail_cache
+	@Override
+	public List<Map> selectThumbnailCache(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectThumbnailCache(paramMap);
+	}
+
+	@Override
+	public Map selectThumbnailCacheCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectThumbnailCacheCount(paramMap);
+	}
 
 
 }
