@@ -1106,5 +1106,16 @@ public class ArtifactServiceImpl implements ArtifactService {
 	}
 
 
+	// lv1_os_win_thumbnail_cache
+	@Override
+	public List<Map> selectThumbnailCache(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectThumbnailCache(paramMap);
+	}
+
+	@Override
+	public Map selectThumbnailCacheCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectThumbnailCacheCount(paramMap);
+	}
+
 
 }

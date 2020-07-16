@@ -195,7 +195,10 @@ public class ArtifactController {
 		
 		// lv1_os_win_icon_cache
 		addArtifactTreeNode(subLv1List, "Icon Cache", true, true, null);
-	
+		
+		// lv1_os_win_thumbnail_cache
+		addArtifactTreeNode(subLv1List, "Thumbnail Cache", true, true, null);
+
 		
 		addArtifactTreeNode(subLv1List, "Mobile", true, true, subMobileList);
 		//addArtifactTreeNode(subLv1List, "Prefetch", true, true, null);
@@ -3362,6 +3365,42 @@ public class ArtifactController {
 
 				return mav;
 			}
+		
+		// lv1_os_win_thumbnail_cache
+		@RequestMapping(value ="/win_thumbnail_cache.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getThumbnailCache (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+		    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+				mav.setViewName("jsonView");
+
+				if (map.get("currentPage") == null && map.get("pageSize") == null) {
+					mav.addObject("totalcount", 0);
+					mav.addObject("list", new ArrayList());
+					return mav;
+				}
+
+				Map<String, Object> paramMap = new HashMap<String, Object>();
+
+				paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+				paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+				try {
+					long pageSize = Long.parseLong((String) map.get("pageSize"));
+					paramMap.put("pageSize", pageSize);
+					long currentPage = Long.parseLong((String) map.get("currentPage"));
+					paramMap.put("offset", (currentPage - 1) * pageSize);
+				} catch (Exception e) {
+					e.printStackTrace();
+					mav.addObject("totalcount", 0);
+					return mav;
+				}
+
+				List<Map> ThumbnailCache = service.selectThumbnailCache(paramMap);
+				int totalCnt = ((Long) service.selectThumbnailCacheCount(paramMap).get("cnt")).intValue();
+				mav.addObject("list", ThumbnailCache);
+				mav.addObject("totalcount", totalCnt);
+
+				return mav;
+			}
+
 
 	// lv1_app_kakaotalk_new_chatLogs
 	@RequestMapping(value ="/app_kakaotalk_new_chatLogs.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getKakaotalkNewChatlogs (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
@@ -3994,6 +4033,10 @@ public class ArtifactController {
 			return mav;
 		}
 	
+	
+
+
+
 
 
 }

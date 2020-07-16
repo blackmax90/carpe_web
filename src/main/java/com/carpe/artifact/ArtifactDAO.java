@@ -405,6 +405,10 @@ public interface ArtifactDAO {
 	public List<Map> selectIconCache(Map<String, Object> paramMap) throws Exception;
 	public Map selectIconCacheCount(Map<String, Object> paramMap) throws Exception;
 
+	// lv1_os_win_thumbnail_cache
+	public List<Map> selectThumbnailCache(Map<String, Object> paramMap) throws Exception;
+	public Map selectThumbnailCacheCount(Map<String, Object> paramMap) throws Exception;
+
 
 	// lv1_os_win_jumplist_automatics
 	public List<Map> selectJumplistAutomatics(Map<String, Object> paramMap) throws Exception;
