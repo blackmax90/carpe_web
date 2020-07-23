@@ -12,6 +12,7 @@
   <title>CARPE</title>
   <link href="/carpe/resources/css/common.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" type="text/css" href="/carpe/resources/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/carpe/resources/css/jquery.datetimepicker.min.css" />
   <link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
@@ -40,19 +41,68 @@
         <h3 id="evdname">Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
         <button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
       </section>
-      <section class="btn-area">
-        <ul>
-          <li>
-            <button type="button" class="btn-case-02" id="btnFileNameWordCloud"><span>Word Cloud</span></button>
-          </li>
-          <li>
-            <button type="button" class="btn-case-02" id="btnDateTreeMap"><span>Data Tree Map</span></button>
-          </li>
-          <li>
-            <button type="button" class="btn-case-02" id="btnHexView"><span>HEX VIEW</span></button>
-          </li>
-        </ul>        
-      </section>
+			<section class="search-area bg-unit">
+				<form action="/carpe/filesystem_csv_export.do" id="frm" name="frm" method="post">
+          <input type="hidden" name="searchFlag" id="searchFlag" value="0" />
+          <input type="hidden" name="evd_id" id="evd_id" value="" />
+          <input type="hidden" name="evd_name" id="evd_name" value="" />
+          <input type="hidden" name="id" id="id" value="" />
+          <input type="hidden" name="par_id" id="par_id" value="" />
+          <input type="hidden" name="attr" id="attr" value="" />
+					<legend class="blind">조회조건 선택</legend>
+					<ul class="search-item-area">
+						<li>
+							<div class="input-text input-text-type-1 fl">
+								<input id="search_fname" name="search_fname" type="text" placeholder="파일명" />
+							</div>
+						</li>
+						<li>
+							<div class="input-text input-text-type-1 fl">
+								<input id="search_ssize" name="search_ssize" type="text" placeholder="최소 용량" />
+							</div>
+						</li>
+						<li>
+							<div class="input-text input-text-type-1 fl">
+								<input id="search_esize" name="search_esize" type="text" placeholder="최대 용량" />
+							</div>
+						</li>
+						<li>
+              <div class="select">
+                <select name="search_timeType" id="search_timeType">
+                  <option value="MT">Modified Time</option>
+                  <option value="CT">Created Time</option>
+                  <option value="AT">Accessed Time</option>
+                </select>
+              </div>
+						</li>
+						<li>
+							<div class="input-text-type-1 calendar">
+  						  <input id="search_stime" name="search_stime" type="text" placeholder="시작일" />
+              </div>
+						</li>
+						<li>
+							<div class="input-text-type-1 calendar">
+  						  <input id="search_etime" name="search_etime" type="text" placeholder="종료일" />
+              </div>
+						  <button type="button" class="btn-case-01 btn-search" id="btnSearch"><span class="icon ico-search"></span></button>
+            </li>
+					</ul>
+          <ul class="btn-sort-area">
+            <li>
+              <button type="button" class="btn-case-02" id="btnCsvExport"><span>CSV Export</span></button>
+            </li>
+            <li>
+              <button type="button" class="btn-case-02" id="btnFileNameWordCloud"><span>Word Cloud</span></button>
+            </li>
+            <li>
+              <button type="button" class="btn-case-02" id="btnDateTreeMap"><span>Data Tree Map</span></button>
+            </li>
+            <li>
+              <button type="button" class="btn-case-02" id="btnHexView"><span>HEX VIEW</span></button>
+            </li>
+          </ul>        
+				</form>
+			</section>
       <article class="container">
         <h4 class="blind">조회된 컨텐츠</h4>
 
@@ -65,7 +115,7 @@
 
           <div class="content-area">
             <div id="jqxGrid_files" role="grid" class="cont-result"><!--// Table 영역 //--></div>
-            <div id="paing" class="paging-area" style="display:none">
+            <div id="paging" class="paging-area" style="display:none">
               <!--// Table Paging 영역 - 위치고정 //-->
               <div class="paginate">
               </div>
@@ -81,6 +131,7 @@
 
   <!-- 공통 javascript 영역 -->
   <script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="/carpe/resources/js/jquery.datetimepicker.full.min.js"></script>
   <script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
   <script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
   <script type="text/javascript" src="/carpe/resources/js/common.js"></script>
@@ -91,6 +142,22 @@
   <script>
   (function($) {
     $(document).ready(function() {
+      //검색 datetimepicker
+      $.datetimepicker.setLocale("ko");
+
+      $("#search_stime, #search_etime").datetimepicker({
+        format: "Y-m-d H:i:00",
+        step: 10
+      });
+
+      //검색
+			$("#btnSearch").click(function(e) {
+        $("#searchFlag").val("1");
+        $("#paging").show();
+        currentPage = 1;
+				$("#jqxGrid_files").jqxGrid('updateBoundData');
+			});
+
       // Word Cloud
       $('#btnFileNameWordCloud').click(function(e) {
         var popUrl = "/carpe/filename_wordcloud.do";
@@ -250,6 +317,22 @@
         , {text: 'Seq', dataField: 'seq', width: '150px', cellsalign: 'center', align: 'center'}
       ];
 
+      var pagesize = <%=Consts.PAGE_SZIE%>;
+      var currentPage = 1;
+      var lastPage = 1;
+      var currentRowCount = 0;
+      var currentPageOffset = 1;
+
+      var updateBound = function(e) {
+        if (currentPage === e.data.value) {
+          return;
+        }
+  
+        currentPage = e.data.value;
+        $("#paging").show();
+        $("#jqxGrid_files").jqxGrid('updateBoundData');
+      };
+
       var dataAdapter = new $.jqx.dataAdapter(source, {
         contentType : 'application/json; charset=utf-8',
         formatData : function(data) {
@@ -260,6 +343,15 @@
             data["id"] = node.value["id"];
             data["par_id"] = node.value["par_id"];
             data["attr"] = node.value["attr"];
+            data["search_flag"] = $("#searchFlag").val();
+            data["search_fname"] = $("#search_fname").val();
+            data["search_ssize"] = $("#search_ssize").val();
+            data["search_esize"] = $("#search_esize").val();
+            data["search_timeType"] = $("#search_timeType").val();
+            data["search_stime"] = $("#search_stime").val();
+            data["search_etime"] = $("#search_etime").val();
+            data["currentPage"] = currentPage;
+            data["pageSize"] = pagesize;
             $("#evdname").text("Evidence : " + node.value["evd_name"]);
           }
           //data["id"] = 5;
@@ -268,6 +360,82 @@
         beforeSend : function(xhr) {
         },
         downloadComplete : function(data, status, xhr) {
+          var totalcount = data['totalcount'] || 0;
+          currentRowCount = data['list'] ? data['list'].length : 0;
+  
+          $('#paging').empty();
+  
+          if (totalcount < 1) {
+            return;
+          }
+
+          var $divpageele = $('<div class="paginate">');
+          var $firstele = $('<button type="button" class="btn-paging icon ico-first"><span class="ir">처음</span></button>');
+          var $firsteleDis = $('<button type="button" class="btn-paging icon ico-first" disabled="disabled"><span class="ir">처음</span></button>');
+          var $prevele = $('<button type="button" class="btn-paging icon ico-prev"><span class="ir">이전</span></button>');
+          var $preveleDis = $('<button type="button" class="btn-paging icon ico-prev" disabled="disabled"><span class="ir">이전</span></button>');
+          var $spanele = $('<span class="num">');
+          var $nextele = $('<button class="btn-paging icon ico-next"><span class="ir">다음</span></button>');
+          var $nexteleDis = $('<button class="btn-paging icon ico-next" disabled="disabled"><span class="ir">다음</span></button>');
+          var $lastele = $('<button class="btn-paging icon ico-last"><span class="ir">마지막</span></button>');
+          var $lasteleDis = $('<button class="btn-paging icon ico-last" disabled="disabled"><span class="ir">마지막</span></button>');
+          var $aele
+          
+          if (currentPage % 10 === 0) {
+            currentPageOffset = currentPage - 1;
+          } else {
+            currentPageOffset = currentPage;
+          }
+
+          currentPageOffset = Math.floor(currentPageOffset / 10) * 10 + 1;
+          lastPage = Math.ceil(totalcount/pagesize);
+
+          $firstele.on("click", { value: 1 }, updateBound);
+          $lastele.on("click", { value: lastPage}, updateBound);
+
+          if (currentPageOffset - 10 < 1) {
+            $prevele.on("click", { value: 1 }, updateBound);
+          } else {
+            $prevele.on("click", { value: (currentPageOffset - 10) }, updateBound);
+          }
+
+          if (currentPageOffset + 10 > lastPage) {
+            $nextele.on("click", { value: lastPage }, updateBound);
+          } else {
+            $nextele.on("click", { value: (currentPageOffset + 10) }, updateBound);
+          }
+
+          for(i = currentPageOffset, j = 1; (j <= 10) && (i <= lastPage); i++, j++) {
+            if (i === currentPage) {
+              $aele = $('<strong class="on">&nbsp;' + i + '&nbsp;</strong>');
+              $spanele.append($aele);
+            } else {
+              $aele = $('<a href="#">&nbsp;' + i + '&nbsp;</a>');
+              $aele.on("click", { value: i }, updateBound);
+              $spanele.append($aele);
+            }            
+          }
+
+          if (currentPage == 1) {
+            $divpageele.append($firsteleDis);
+            $divpageele.append($preveleDis);                        
+          } else {
+            $divpageele.append($firstele);
+            $divpageele.append($prevele);
+          }          
+          
+          $divpageele.append($spanele);
+          
+          if (currentPage == lastPage) {
+            $divpageele.append($nexteleDis);
+            $divpageele.append($lasteleDis);
+          } else {
+            $divpageele.append($nextele);
+            $divpageele.append($lastele);
+          }
+
+          
+          $('#paging').append($divpageele);  
         },
         loadComplete : function(data) {
         },
@@ -280,6 +448,7 @@
         localizationobj.emptydatastring = " ";
 
         $("#jqxGrid_files").jqxGrid('localizestrings', localizationobj);
+        $("#jqxGrid_files").jqxGrid('pagesize', currentRowCount);
       });
 
       $("#jqxGrid_files").jqxGrid({
@@ -288,6 +457,8 @@
         source: dataAdapter,
         columnsresize: true,
         pagerheight: 0,
+        pageable: true,
+        pagerrenderer: function() { return  ''; },
         altrows: true,
         scrollbarsize: 12,
         autoshowloadelement: true,
@@ -333,8 +504,26 @@
       });
 
       $("#jqxTree_dirs").on('select',function (event){
+        $("#searchFlag").val("0");
+        $("#paging").hide();
+        currentPage = 1;
         $("#jqxGrid_files").jqxGrid('updateBoundData');
       });
+    });
+
+    //CSV Export
+    $("#btnCsvExport").click(function() {
+      var node = $('#jqxTree_dirs').jqxTree('getSelectedItem');
+
+      if (node) {
+        $("#evd_id").val(node.value["evd_id"]);
+        $("#evd_name").val(node.value["evd_name"]);
+        $("#id").val(node.value["id"]);
+        $("#par_id").val(node.value["par_id"]);
+        $("#attr").val(node.value["attr"]);
+      }
+
+      $("#frm").submit();
     });
   })(jQuery);
   </script>

@@ -48,24 +48,131 @@
 		  and a.par_id = b.par_id
 		order by a.dir_type, a.name
 	 -->
-		select a.file_id as id, a.name, a.dir_type, a.size, a.md5, a.extension, a.id as seq
-				  , FROM_UNIXTIME(a.ctime, '%Y-%m-%d %H:%i:%s') as ctime
-				  , a.ctime_nano as ctime_nano
-				  , FROM_UNIXTIME(a.atime, '%Y-%m-%d %H:%i:%s') as atime
-				  , a.atime_nano as atime_nano
-				  , FROM_UNIXTIME(a.mtime, '%Y-%m-%d %H:%i:%s') as mtime
-				  , a.mtime_nano as mtime_nano
-				  , FROM_UNIXTIME(a.etime, '%Y-%m-%d %H:%i:%s') as etime
-				  , a.etime_nano as etime_nano
-				from file_info a, partition_info b
-				where a.parent_id = #{id}
-				  and b.evd_id = #{evd_id}
-				  and (a.dir_type = 3 or a.dir_type = 5)
-				  <if test="par_id != null">
-				   AND  b.par_id =  #{par_id}
-		  		  </if>
-				  and a.par_id = b.par_id
-				order by a.dir_type, a.name
+		SELECT a.file_id AS id, a.name, a.dir_type, a.size, a.md5, a.extension, a.id AS seq
+				 , FROM_UNIXTIME(a.ctime, '%Y-%m-%d %H:%i:%s') AS ctime
+				 , a.ctime_nano AS ctime_nano
+				 , FROM_UNIXTIME(a.atime, '%Y-%m-%d %H:%i:%s') AS atime
+				 , a.atime_nano AS atime_nano
+				 , FROM_UNIXTIME(a.mtime, '%Y-%m-%d %H:%i:%s') AS mtime
+				 , a.mtime_nano AS mtime_nano
+				 , FROM_UNIXTIME(a.etime, '%Y-%m-%d %H:%i:%s') AS etime
+				 , a.etime_nano AS etime_nano
+			FROM file_info a, partition_info b
+ 		 WHERE 1=1
+			 <if test="id != null and !id.equals('')">
+       AND a.parent_id = #{id}
+       </if>
+			 AND b.evd_id = #{evd_id}
+			 AND (a.dir_type = 3 OR a.dir_type = 5)
+			 <if test="par_id != null and !par_id.equals('')">
+		   AND  b.par_id = #{par_id}
+	 		 </if>
+			 AND a.par_id = b.par_id
+			 <if test="search_fname != null and !search_fname.equals('')">
+			 AND a.name LIKE CONCAT(#{search_fname}, '%')
+       </if>
+			 <if test="search_ssize != null and !search_ssize.equals('')">
+			 AND a.size >= #{search_ssize}
+       </if>
+			 <if test="search_esize != null and !search_esize.equals('')">
+       <![CDATA[
+			 AND a.size <= #{search_esize}
+       ]]>
+       </if>
+       <if test="search_timeType != null and !search_timeType.equals('')">
+         <if test="search_timeType.equals('MT')">
+			     <if test="search_stime != null and !search_stime.equals('')">
+			     AND a.mtime >= UNIX_TIMESTAMP(#{search_stime})
+           </if>
+			     <if test="search_etime != null and !search_etime.equals('')">
+           <![CDATA[
+			     AND a.mtime <= UNIX_TIMESTAMP(#{search_etime})
+           ]]>
+           </if>
+         </if>
+         <if test="search_timeType.equals('CT')">
+			     <if test="search_stime != null and !search_stime.equals('')">
+			     AND a.ctime >= UNIX_TIMESTAMP(#{search_stime})
+           </if>
+			     <if test="search_etime != null and !search_etime.equals('')">
+           <![CDATA[
+			     AND a.ctime <= UNIX_TIMESTAMP(#{search_etime})
+           ]]>
+           </if>
+         </if>
+         <if test="search_timeType.equals('AT')">
+			     <if test="search_stime != null and !search_stime.equals('')">
+			     AND a.atime >= UNIX_TIMESTAMP(#{search_stime})
+           </if>
+			     <if test="search_etime != null and !search_etime.equals('')">
+           <![CDATA[
+			     AND a.atime <= UNIX_TIMESTAMP(#{search_etime})
+           ]]>
+           </if>
+         </if>
+       </if>
+		 ORDER BY a.dir_type, a.name
+     <if test="offset != null and !offset.equals('') and pageSize != null and !pageSize.equals('')">
+		 LIMIT #{offset}, #{pageSize}
+     </if>
+	</select>
+
+	<select id="selectFileListCount" parameterType="Map" resultType="Map">
+		SELECT COUNT(*) AS cnt
+			FROM file_info a, partition_info b
+ 		 WHERE 1=1
+			 <if test="id != null">
+       AND a.parent_id = #{id}
+       </if>
+			 AND b.evd_id = #{evd_id}
+			 AND (a.dir_type = 3 OR a.dir_type = 5)
+			 <if test="par_id != null">
+		   AND  b.par_id = #{par_id}
+	 		 </if>
+			 AND a.par_id = b.par_id
+			 <if test="search_fname != null and !search_fname.equals('')">
+			 AND a.name LIKE CONCAT(#{search_fname}, '%')
+       </if>
+			 <if test="search_ssize != null and !search_ssize.equals('')">
+			 AND a.size >= #{search_ssize}
+       </if>
+			 <if test="search_esize != null and !search_esize.equals('')">
+       <![CDATA[
+			 AND a.size <= #{search_esize}
+       ]]>
+       </if>
+       <if test="search_timeType != null and !search_timeType.equals('')">
+         <if test="search_timeType.equals('MT')">
+			     <if test="search_stime != null and !search_stime.equals('')">
+			     AND a.mtime >= UNIX_TIMESTAMP(#{search_stime})
+           </if>
+			     <if test="search_etime != null and !search_etime.equals('')">
+           <![CDATA[
+			     AND a.mtime <= UNIX_TIMESTAMP(#{search_etime})
+           ]]>
+           </if>
+         </if>
+         <if test="search_timeType.equals('CT')">
+			     <if test="search_stime != null and !search_stime.equals('')">
+			     AND a.ctime >= UNIX_TIMESTAMP(#{search_stime})
+           </if>
+			     <if test="search_etime != null and !search_etime.equals('')">
+           <![CDATA[
+			     AND a.ctime <= UNIX_TIMESTAMP(#{search_etime})
+           ]]>
+           </if>
+         </if>
+         <if test="search_timeType.equals('AT')">
+			     <if test="search_stime != null and !search_stime.equals('')">
+			     AND a.atime >= UNIX_TIMESTAMP(#{search_stime})
+           </if>
+			     <if test="search_etime != null and !search_etime.equals('')">
+           <![CDATA[
+			     AND a.atime <= UNIX_TIMESTAMP(#{search_etime})
+           ]]>
+           </if>
+         </if>
+       </if>
 	</select>
 
 	<select id="selectFileInfo" parameterType="Map" resultType="Map">

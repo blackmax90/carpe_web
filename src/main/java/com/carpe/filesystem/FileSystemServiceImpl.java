@@ -37,6 +37,11 @@ public class FileSystemServiceImpl implements FileSystemService {
 	}
 
 	@Override
+	public Map selectFileListCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectFileListCount(paramMap);
+	}
+
+	@Override
 	public List<Map> selectDateTreeMap(Map<String, Object> paramMap) throws Exception {
 		return dao.selectDateTreeMap(paramMap);
 	}

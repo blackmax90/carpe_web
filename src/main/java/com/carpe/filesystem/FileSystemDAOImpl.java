@@ -1,5 +1,6 @@
 package com.carpe.filesystem;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +29,14 @@ public class FileSystemDAOImpl implements FileSystemDAO {
 
 	@Override
 	public List<Map> selectFileList(Map<String, Object> paramMap) throws Exception {
-		return sqlSession.selectList(Namespace + ".selectFileList", paramMap);
+		List<Map> returnList = new ArrayList<>();
+		sqlSession.select(Namespace + ".selectFileList", paramMap, new FileSystemResultHandler(returnList));
+		return returnList;
+	}
+
+	@Override
+	public Map selectFileListCount(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectOne(Namespace + ".selectFileListCount", paramMap);
 	}
 
 	@Override

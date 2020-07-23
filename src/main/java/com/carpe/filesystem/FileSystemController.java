@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +27,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import com.carpe.common.CommonUtil;
 import com.carpe.common.Consts;
+import com.opencsv.CSVWriter;
 
 @Controller
 public class FileSystemController {
@@ -108,38 +113,187 @@ public class FileSystemController {
 			Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("jsonView");
+		String searchFlag = map.get("search_flag");
 
 		if (map.get("evd_id") != null && map.get("evd_id").equals("") == false) {
 			session.setAttribute(Consts.SESSION_EVDNC_ID, map.get("evd_id"));
 			session.setAttribute(Consts.SESSION_EVDNC_NAME, map.get("evd_name"));
 		}
 
-		if (map.get("evd_id") == null || map.get("evd_id").equals("") || map.get("id") == null
-				|| map.get("id").equals("") || (map.get("attr") != null && "par".equals(map.get("attr")))) {
+		if (map.get("evd_id") == null || map.get("evd_id").equals("")) {
+			mav.addObject("totalcount", 0);
+			return mav;
+		}
+
+		if ("1".equals(searchFlag) == false && (map.get("id") == null || map.get("id").equals("") 
+				|| (map.get("attr") != null && "par".equals(map.get("attr"))))) {
 			mav.addObject("totalcount", 0);
 			return mav;
 		}
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("par_id", map.get("par_id"));
 
-		try {
-			long parentId = Long.parseLong((String) map.get("id"));
-			paramMap.put("id", parentId);
-			paramMap.put("par_id", map.get("par_id"));
-		} catch (Exception e) {
-			e.printStackTrace();
-			mav.addObject("totalcount", 0);
-			return mav;
+		if ("1".equals(searchFlag) == false) {
+			try {
+				long parentId = Long.parseLong((String) map.get("id"));
+				paramMap.put("id", parentId);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+		} else {
+			long pageSize = Long.parseLong((String) map.get("pageSize"));
+			paramMap.put("pageSize", pageSize);
+			long currentPage = Long.parseLong((String) map.get("currentPage"));
+			paramMap.put("offset", (currentPage - 1) * pageSize);
+		
+			paramMap.put("search_fname", map.get("search_fname"));
+			paramMap.put("search_ssize", map.get("search_ssize"));
+			paramMap.put("search_esize", map.get("search_esize"));
+			paramMap.put("search_timeType", map.get("search_timeType"));
+			paramMap.put("search_stime", map.get("search_stime"));
+			paramMap.put("search_etime", map.get("search_etime"));
 		}
 
 		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
 		
 		List<Map> fileList = service.selectFileList(paramMap);
 
-		mav.addObject("list", fileList);
-		mav.addObject("totalcount", fileList.size());
+		if ("1".equals(searchFlag) == false) {
+			mav.addObject("list", fileList);
+			mav.addObject("totalcount", fileList.size());
+		} else {
+			int totalCnt = ((Long) service.selectFileListCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", fileList);
+			mav.addObject("totalcount", totalCnt);
+		}
 
 		return mav;
+	}
+	
+	/**
+	 * Filesystem CSV Export
+	 * 
+	 * @param locale
+	 * @param map
+	 * @param session
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/filesystem_csv_export.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public void filesystemCsvExport(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletResponse response, Model model) throws Exception {
+		String searchFlag = map.get("searchFlag");
+
+		if (map.get("evd_id") != null && map.get("evd_id").equals("") == false) {
+			session.setAttribute(Consts.SESSION_EVDNC_ID, map.get("evd_id"));
+			session.setAttribute(Consts.SESSION_EVDNC_NAME, map.get("evd_name"));
+		}
+
+		if (map.get("evd_id") == null || map.get("evd_id").equals("")) {
+			return;
+		}
+
+		if ("1".equals(searchFlag) == false && (map.get("id") == null || map.get("id").equals("") 
+				|| (map.get("attr") != null && "par".equals(map.get("attr"))))) {
+			return;
+		}
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("par_id", map.get("par_id"));
+
+		if ("1".equals(searchFlag) == false) {
+			try {
+				long parentId = Long.parseLong((String) map.get("id"));
+				paramMap.put("id", parentId);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return;
+			}
+		} else {
+			paramMap.put("search_fname", map.get("search_fname"));
+			paramMap.put("search_ssize", map.get("search_ssize"));
+			paramMap.put("search_esize", map.get("search_esize"));
+			paramMap.put("search_timeType", map.get("search_timeType"));
+			paramMap.put("search_stime", map.get("search_stime"));
+			paramMap.put("search_etime", map.get("search_etime"));
+		}
+
+		paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+		
+		List<Map> fileList = service.selectFileList(paramMap);
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+		String fileName = "filesystem_data_" + df.format(new Date()) + ".csv";
+
+		response.setContentType("text/csv; charset=MS949");
+	  response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+		CSVWriter csvWriter = new CSVWriter(response.getWriter());
+		
+		String[] keys = {"name", "size", "md5", "dir_type", "mtime", "ctime", "atime"};
+		String[] header = {"Name", "Size", "MD5", "Category", "Modified Time", "Create Time", "Accessed Time"};
+		csvWriter.writeNext(header);
+		
+		for (Map data : fileList) {
+			String[] buff = new String[keys.length];
+			int idx = 0;
+
+			for (String key : keys) {
+				String val = String.valueOf(data.get(key));
+
+				if (key.equals("dir_type")) {
+					String tmp = "etc";
+
+					if ("3".equals(val)) {
+						tmp = "Directory";
+					} else if ("5".equals(val)) {
+						tmp = "File";
+					}
+					
+					val = tmp;
+				}
+
+				buff[idx++] = val;
+			}
+
+		  csvWriter.writeNext(buff);
+		}
+		
+		csvWriter.close();
+	}
+
+	/**
+	 * CSV 본문 생성
+	 * @param fileList
+	 * @return
+	 */
+	private String makeContent(List<Map> fileList) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("Name").append(",")
+		  .append("Size").append(",")
+		  .append("MD5").append(",")
+		  .append("Category").append(",")
+		  .append("Modified Time").append(",")
+		  .append("Create Time").append(",")
+		  .append("Accessed Time")
+		  ;
+
+		for (Map rsMap : fileList) {
+			sb.append("\n")
+			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("name") + "")).append(",")
+			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("size") + "")).append(",")
+			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("md5") + "")).append(",")
+			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("dir_type") + "")).append(",")
+			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("mtime") + "")).append(",")
+			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("ctime") + "")).append(",")
+			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("atime") + ""))
+			  ;
+		}
+
+		return sb.toString();
 	}
 
 	@RequestMapping(value = "/filename_wordcloud.do", method = { RequestMethod.GET, RequestMethod.POST })

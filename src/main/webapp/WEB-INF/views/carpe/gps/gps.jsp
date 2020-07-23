@@ -129,9 +129,9 @@
 			<!--// Content 영역 //-->
 			<section class="search-date">
 				<div class="combo">
-					<span class="input-text-type-1 calendar" id="sdateSpan"><input type="text" id="sdate" /></span>
+					<span class="input-text-type-1 calendar" id="sdateSpan"><input type="text" id="sdate" placeholder="시작일" /></span>
 					<span class="hyp">-</span>
-					<span class="input-text-type-1 calendar" id="edateSpan"><input type="text" id="edate" /></span>
+					<span class="input-text-type-1 calendar" id="edateSpan"><input type="text" id="edate" placeholder="종료일" /></span>
 				</div>
 				<div class="btn-area">
 					<button type="button" class="btn-case-01 btn-search txt" id="btnSearch"><span class="icon ico-search">검색</span></button>
@@ -183,9 +183,9 @@
 		<div class="pop-content">
 			<section class="search-date">
 				<div class="array combo">
-			        <span class="input-text-type-1 calendar" id="mcSdateSpan"><input type="text" id="mcSdate" /></span>
+			        <span class="input-text-type-1 calendar" id="mcSdateSpan"><input type="text" id="mcSdate" placeholder="시작일" /></span>
 			        <span class="hyp">-</span>
-			        <span class="input-text-type-1 calendar" id="mcEdateSpan"><input type="text" id="mcEdate" /></span>
+			        <span class="input-text-type-1 calendar" id="mcEdateSpan"><input type="text" id="mcEdate" placeholder="종료일" /></span>
 	            </div>
 			</section>
 			<section class="btn-area">
@@ -209,16 +209,16 @@
 					<ul class="list-v">
 						<li>
 							<div class="array combo">
-								<span class="input-text-type-1 calendar" id="tlSdateSpan"><input type="text" id="tlSdate" /></span>
+								<span class="input-text-type-1 calendar" id="tlSdateSpan"><input type="text" id="tlSdate" placeholder="시작일" /></span>
 								<span class="hyp">-</span>
-								<span class="input-text-type-1 calendar" id="tlEdateSpan"><input type="text" id="tlEdate" /></span>
+								<span class="input-text-type-1 calendar" id="tlEdateSpan"><input type="text" id="tlEdate" placeholder="종료일" /></span>
 							</div>
 						</li>
 						<li class="mt5">
 							<div class="array combo">
-								<span class="input-text-type-1 calendar" id="tlStimeSpan"><input type="text" id="tlStime" /></span>
+								<span class="input-text-type-1 calendar" id="tlStimeSpan"><input type="text" id="tlStime" placeholder="시작시간" /></span>
 								<span class="hyp">-</span>
-								<span class="input-text-type-1 calendar" id="tlEtimeSpan"><input type="text" id="tlEtime" /></span>
+								<span class="input-text-type-1 calendar" id="tlEtimeSpan"><input type="text" id="tlEtime" placeholder="종료시간" /></span>
 							</div>
 						</li>
 					</ul>

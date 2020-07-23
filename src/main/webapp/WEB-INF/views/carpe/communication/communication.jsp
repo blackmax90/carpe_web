@@ -157,10 +157,20 @@
       , modalOpacity: 0.3
     });
 
-    $("#sdate, #edate").jqxDateTimeInput({
+    $("#sdate").jqxDateTimeInput({
       width: '100%',
       height: '30px',
       formatString: 'yyyy-MM-dd',
+      placeHolder: "시작일",
+      readonly: true,
+      showCalendarButton: false
+    });
+
+    $("#edate").jqxDateTimeInput({
+      width: '100%',
+      height: '30px',
+      formatString: 'yyyy-MM-dd',
+      placeHolder: "종료일",
       readonly: true,
       showCalendarButton: false
     });
@@ -250,41 +260,6 @@
 			html += "</li> ";
 		} else {
 			$.each(list, function(idx, row) {
-			  html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
-			  html += "	<div class=\"cr-info\"> ";
-			  html += "		<h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
-			  html += "		<time class=\"cr-date\" datetime=\"" + row.regdate + "\">" + row.regdate.substr(0, 10) + "</time> ";
-			  html += "	</div> ";
-			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.content + "\">" + row.content + "</p> ";
-			  html += "</li> ";
-			  html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
-			  html += "	<div class=\"cr-info\"> ";
-			  html += "		<h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
-			  html += "		<time class=\"cr-date\" datetime=\"" + row.regdate + "\">" + row.regdate.substr(0, 10) + "</time> ";
-			  html += "	</div> ";
-			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.content + "\">" + row.content + "</p> ";
-			  html += "</li> ";
-			  html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
-			  html += "	<div class=\"cr-info\"> ";
-			  html += "		<h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
-			  html += "		<time class=\"cr-date\" datetime=\"" + row.regdate + "\">" + row.regdate.substr(0, 10) + "</time> ";
-			  html += "	</div> ";
-			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.content + "\">" + row.content + "</p> ";
-			  html += "</li> ";
-			  html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
-			  html += "	<div class=\"cr-info\"> ";
-			  html += "		<h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
-			  html += "		<time class=\"cr-date\" datetime=\"" + row.regdate + "\">" + row.regdate.substr(0, 10) + "</time> ";
-			  html += "	</div> ";
-			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.content + "\">" + row.content + "</p> ";
-			  html += "</li> ";
-			  html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
-			  html += "	<div class=\"cr-info\"> ";
-			  html += "		<h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
-			  html += "		<time class=\"cr-date\" datetime=\"" + row.regdate + "\">" + row.regdate.substr(0, 10) + "</time> ";
-			  html += "	</div> ";
-			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.content + "\">" + row.content + "</p> ";
-			  html += "</li> ";
 			  html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
 			  html += "	<div class=\"cr-info\"> ";
 			  html += "		<h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
