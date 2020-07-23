@@ -265,37 +265,6 @@ public class FileSystemController {
 		csvWriter.close();
 	}
 
-	/**
-	 * CSV 본문 생성
-	 * @param fileList
-	 * @return
-	 */
-	private String makeContent(List<Map> fileList) {
-		StringBuffer sb = new StringBuffer();
-		sb.append("Name").append(",")
-		  .append("Size").append(",")
-		  .append("MD5").append(",")
-		  .append("Category").append(",")
-		  .append("Modified Time").append(",")
-		  .append("Create Time").append(",")
-		  .append("Accessed Time")
-		  ;
-
-		for (Map rsMap : fileList) {
-			sb.append("\n")
-			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("name") + "")).append(",")
-			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("size") + "")).append(",")
-			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("md5") + "")).append(",")
-			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("dir_type") + "")).append(",")
-			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("mtime") + "")).append(",")
-			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("ctime") + "")).append(",")
-			  .append(CommonUtil.escapeCSVSpecialChars(rsMap.get("atime") + ""))
-			  ;
-		}
-
-		return sb.toString();
-	}
-
 	@RequestMapping(value = "/filename_wordcloud.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView filesystemWordCloudView(@RequestParam HashMap<String, String> map, HttpSession session,
 			HttpServletRequest requst, Model model) throws Exception {
