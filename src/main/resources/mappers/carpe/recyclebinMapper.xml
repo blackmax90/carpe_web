@@ -68,14 +68,14 @@
   <select id="selectRecyclebinList" resultType="Map" parameterType="Map">
     SELECT file_name
          , size AS size
-         , DATE_FORMAT(deleted_time, '%Y-%m-%d %H:%i:%d') AS dtime
+         , DATE_FORMAT(deleted_time, '%Y-%m-%d %H:%i:%s') AS dtime
          , i_file_name
       FROM lv1_os_win_recyclebin
      WHERE 1=1
        AND case_id = #{case_id}
-       AND DATE_FORMAT(deleted_time, '%Y-%m-%d %H:%i:%d') >= #{sdate}
+       AND DATE_FORMAT(deleted_time, '%Y-%m-%d %H:%i:%s') >= #{sdate}
        <![CDATA[
-       AND DATE_FORMAT(deleted_time, '%Y-%m-%d %H:%i:%d') < #{edate}
+       AND DATE_FORMAT(deleted_time, '%Y-%m-%d %H:%i:%s') < #{edate}
        ]]>
      ORDER BY deleted_time DESC
   </select>

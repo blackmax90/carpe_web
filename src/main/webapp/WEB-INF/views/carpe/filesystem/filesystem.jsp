@@ -150,12 +150,23 @@
         step: 10
       });
 
-      //검색
-			$("#btnSearch").click(function(e) {
+      $("#search_fname").keypress(function(e) {
+        e = e || window.event;
+        if (e.which == 13) {
+          search();
+        }
+      });
+
+      var search = function() {
         $("#searchFlag").val("1");
         $("#paging").show();
         currentPage = 1;
 				$("#jqxGrid_files").jqxGrid('updateBoundData');
+      };
+
+      //검색
+			$("#btnSearch").click(function(e) {
+        search();
 			});
 
       // Word Cloud
@@ -279,6 +290,7 @@
         datatype: "json",
         datafields: [
           { name: 'id', type: 'string' },
+          { name: 'parent_path', type: 'string' },
           { name: 'name', type: 'string' },
           { name: 'size', type: 'number' },
           { name: 'md5', type: 'string' },
@@ -295,7 +307,8 @@
       };
 
       var columnSet = [
-        {text: 'Name', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
+          {text: 'Path', dataField: 'parent_path', width: 'auto', cellsalign: 'left', align: 'center'}
+        , {text: 'Name', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
         , {text: 'Size', dataField: 'size', cellsformat : 'd', width: '120px', cellsalign: 'right', align: 'center'}
         , {text: 'MD5', dataField: 'md5', width: '120px', cellsalign: 'center', align: 'center'}
         , {text: 'Category', dataField: 'dir_type', width: '120px', cellsalign: 'center', align: 'center',

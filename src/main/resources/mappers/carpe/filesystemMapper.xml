@@ -48,7 +48,7 @@
 		  and a.par_id = b.par_id
 		order by a.dir_type, a.name
 	 -->
-		SELECT a.file_id AS id, a.name, a.dir_type, a.size, a.md5, a.extension, a.id AS seq
+		SELECT a.file_id AS id, a.name, a.dir_type, a.size, a.md5, a.extension, a.id AS seq, a.parent_path
 				 , FROM_UNIXTIME(a.ctime, '%Y-%m-%d %H:%i:%s') AS ctime
 				 , a.ctime_nano AS ctime_nano
 				 , FROM_UNIXTIME(a.atime, '%Y-%m-%d %H:%i:%s') AS atime

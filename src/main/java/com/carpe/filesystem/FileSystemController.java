@@ -233,8 +233,8 @@ public class FileSystemController {
 	  response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
 		CSVWriter csvWriter = new CSVWriter(response.getWriter());
 		
-		String[] keys = {"name", "size", "md5", "dir_type", "mtime", "ctime", "atime"};
-		String[] header = {"Name", "Size", "MD5", "Category", "Modified Time", "Create Time", "Accessed Time"};
+		String[] keys = {"parent_path", "name", "size", "md5", "dir_type", "mtime", "ctime", "atime"};
+		String[] header = {"Path", "Name", "Size", "MD5", "Category", "Modified Time", "Create Time", "Accessed Time"};
 		csvWriter.writeNext(header);
 		
 		for (Map data : fileList) {
