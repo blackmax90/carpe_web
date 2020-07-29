@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.application">
+  <select id="selectAppHistoryList" resultType="Map" parameterType="Map">
+    SELECT process_name
+         , DATE_FORMAT(execution_time, '%Y-%m-%d %H:%i:%s') AS execution_time
+         , process_path
+         , reference_file
+         , source
+      FROM lv2_os_app_history
+     WHERE 1=1
+       AND case_id = #{case_id}
+
+			 <if test="sdate != null and !sdate.equals('')">
+       AND DATE_FORMAT(execution_time, '%Y-%m-%d %H:%i:%s') >= #{sdate}
+       </if>
+			 <if test="edate != null and !edate.equals('')">
+       <![CDATA[
+       AND DATE_FORMAT(execution_time, '%Y-%m-%d %H:%i:%s') <= #{edate}
+       ]]>
+       </if>
+     ORDER BY execution_time ASC
+     <if test="offset != null and !offset.equals('') and pageSize != null and !pageSize.equals('')">
+		 LIMIT #{offset}, #{pageSize}
+     </if>
+  </select>
+
+  <select id="selectAppHistoryListCount" resultType="Map" parameterType="Map">
+    SELECT COUNT(*) AS cnt
+      FROM lv2_os_app_history
+     WHERE 1=1
+       AND case_id = #{case_id}
+
+			 <if test="sdate != null and !sdate.equals('')">
+       AND DATE_FORMAT(execution_time, '%Y-%m-%d %H:%i:%s') >= #{sdate}
+       </if>
+			 <if test="edate != null and !edate.equals('')">
+       <![CDATA[
+       AND DATE_FORMAT(execution_time, '%Y-%m-%d %H:%i:%s') <= #{edate}
+       ]]>
+       </if>
+  </select>
+
+  <select id="selectAppHistoryListGroup" resultType="Map" parameterType="Map">
+    SELECT DATE_FORMAT(execution_time, '%Y-%m-%d %H:%i:%s') AS execution_time
+         , COUNT(execution_time) AS cnt
+      FROM lv2_os_app_history
+     WHERE 1=1
+       AND case_id = #{case_id}
+
+			 <if test="sdate != null and !sdate.equals('')">
+       AND DATE_FORMAT(execution_time, '%Y-%m-%d %H:%i:%s') >= #{sdate}
+       </if>
+			 <if test="edate != null and !edate.equals('')">
+       <![CDATA[
+       AND DATE_FORMAT(execution_time, '%Y-%m-%d %H:%i:%s') <= #{edate}
+       ]]>
+       </if>
+     GROUP BY DATE_FORMAT(execution_time, '%Y-%m-%d %H:%i:%s')
+     ORDER BY execution_time ASC
+  </select>
+</mapper>

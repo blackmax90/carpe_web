@@ -37,6 +37,11 @@
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'usagehistory'}">on</c:if>"><a href="/carpe/usage.do">Usage history</a></li>
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'locationmap'}">on</c:if>"><a href="/carpe/gps/gps.do">Location map</a></li>
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'recyclebin'}">on</c:if>"><a href="/carpe/recyclebin/recyclebin.do">RecycleBin History</a></li>
+						<li class="level02 ${hideClass} <c:if test="${d2 eq 'apphistory'}">on</c:if>"><a href="/carpe/application/application.do">App History</a></li>
+						<li class="level02 ${hideClass} <c:if test="${d2 eq 'mfthistory'}">on</c:if>"><a href="#">MFT History</a></li>
+<%-- 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'mfthistory'}">on</c:if>"><a href="/carpe/mft/mfthistory.do">MFT History</a></li> --%>
+						<li class="level02 ${hideClass} <c:if test="${d2 eq 'ntfsloghistory'}">on</c:if>"><a href="#">NTFS LOG History</a></li>
+<%-- 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'ntfsloghistory'}">on</c:if>"><a href="/carpe/ntfs/ntfsloghistory.do">NTFS LOG History</a></li> --%>
 						<!--// 2Depth Menu -->
 					<li class="<c:if test="${d1 eq 'report'}">on</c:if>"><a href="#" class="icon report">Report</a></li>
 				</ul>
