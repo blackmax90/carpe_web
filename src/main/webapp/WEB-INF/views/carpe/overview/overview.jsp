@@ -150,7 +150,7 @@
             	resultArray[uniqueEvdIdList[i]] = new Array();
             	/* tmp += "<table id='"+uniqueEvdIdList[i]+"'><td>partition name</td><td>partition label</td><td>capacity</td>"
             	+"<td>filesystem</td><td>start sector</td><td>sector size</td><td>sha1</td></table>"; */
-            	tmp += "<h3>Partition information of "+uniqueEvdIdList[i]+"</h3><br><div id='"+uniqueEvdIdList[i]+"'></div><br>";
+            	tmp += "<h3 class='mt20'>Partition information of "+uniqueEvdIdList[i]+"</h3><div id='"+uniqueEvdIdList[i]+"' class='fl mt5'></div>";
             }
             
             $('#jqxGrid_EvidenceList').append(tmp);
@@ -230,7 +230,7 @@
                 });
 
                	$("#"+uniqueEvdIdList[i]).jqxGrid({
-                    width: 'calc(95% + 2rem)',
+                    width: 'calc(100% - 2rem)',
                     source: dataAdapter,
                     //selectionmode: 'checkbox', // 'none',
                     columnsresize: true,

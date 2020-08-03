@@ -21,7 +21,7 @@
 <body>
 
   <!-- wrap -->
-  <div class="wrap analysis bg-theme blue">
+  <div class="wrap filesys bg-theme blue">
 
     <!-- header -->
     <%@ include file="../common/header.jsp" %>
@@ -36,73 +36,100 @@
     
     <!-- main -->
     <main class="main">
-      <section class="tit-area">
-        <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%> </h3>
-        <h3 id="evdname">Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
-        <button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
-      </section>
-			<section class="search-area bg-unit">
-				<form action="/carpe/filesystem_csv_export.do" id="frm" name="frm" method="post">
-          <input type="hidden" name="searchFlag" id="searchFlag" value="0" />
-          <input type="hidden" name="evd_id" id="evd_id" value="" />
-          <input type="hidden" name="evd_name" id="evd_name" value="" />
-          <input type="hidden" name="id" id="id" value="" />
-          <input type="hidden" name="par_id" id="par_id" value="" />
-          <input type="hidden" name="attr" id="attr" value="" />
-					<legend class="blind">조회조건 선택</legend>
-					<ul class="search-item-area">
-						<li>
-							<div class="input-text input-text-type-1 fl">
-								<input id="search_fname" name="search_fname" type="text" placeholder="파일명" />
-							</div>
-						</li>
-						<li>
-							<div class="input-text input-text-type-1 fl">
-								<input id="search_ssize" name="search_ssize" type="text" placeholder="최소 용량" />
-							</div>
-						</li>
-						<li>
-							<div class="input-text input-text-type-1 fl">
-								<input id="search_esize" name="search_esize" type="text" placeholder="최대 용량" />
-							</div>
-						</li>
-						<li>
-              <div class="select">
-                <select name="search_timeType" id="search_timeType">
-                  <option value="MT">Modified Time</option>
-                  <option value="CT">Created Time</option>
-                  <option value="AT">Accessed Time</option>
-                </select>
-              </div>
-						</li>
-						<li>
-							<div class="input-text-type-1 calendar">
-  						  <input id="search_stime" name="search_stime" type="text" placeholder="시작일" />
-              </div>
-						</li>
-						<li>
-							<div class="input-text-type-1 calendar">
-  						  <input id="search_etime" name="search_etime" type="text" placeholder="종료일" />
-              </div>
-						  <button type="button" class="btn-case-01 btn-search" id="btnSearch"><span class="icon ico-search"></span></button>
-            </li>
-					</ul>
-          <ul class="btn-sort-area">
-            <li>
-              <button type="button" class="btn-case-02" id="btnCsvExport"><span>CSV Export</span></button>
-            </li>
-            <li>
-              <button type="button" class="btn-case-02" id="btnFileNameWordCloud"><span>Word Cloud</span></button>
-            </li>
-            <li>
-              <button type="button" class="btn-case-02" id="btnDateTreeMap"><span>Data Tree Map</span></button>
-            </li>
-            <li>
-              <button type="button" class="btn-case-02" id="btnHexView"><span>HEX VIEW</span></button>
-            </li>
-          </ul>        
-				</form>
-			</section>
+		<section class="tit-area">
+		  <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%> </h3>
+		  <h3 id="evdname">Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
+		  <button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
+		</section>
+		<section class="search-area bg-unit">
+			<h4 class="blind">조회조건 선택</h4>
+			<form action="/carpe/filesystem_csv_export.do" id="frm" name="frm" method="post">
+				<input type="hidden" name="searchFlag" id="searchFlag" value="0" />
+				<input type="hidden" name="evd_id" id="evd_id" value="" />
+				<input type="hidden" name="evd_name" id="evd_name" value="" />
+				<input type="hidden" name="id" id="id" value="" />
+				<input type="hidden" name="par_id" id="par_id" value="" />
+				<input type="hidden" name="attr" id="attr" value="" />
+				<table class="tbl-srch">
+					<colgroup>
+						<col width="70"/>
+						<col width="*" />
+						<col width="70" />
+						<col width="22%" />
+						<col width="70" />
+						<col width="22%" />
+						<col width="80" />
+					</colgroup>
+					<tbody>
+						<tr>
+							<th>파일명</th>
+							<td>
+								<div class="input-text input-text-type-1">
+									<input id="search_fname" name="search_fname" type="text" placeholder="파일명" />
+								</div>
+							</td>
+							<th>최소 용량</th>
+							<td>
+								<div class="input-text input-text-type-1">
+									<input id="search_ssize" name="search_ssize" type="text" placeholder="최소 용량" />
+								</div>
+							</td>
+							<th>최대 용량</th>
+							<td>
+								<div class="input-text input-text-type-1">
+									<input id="search_esize" name="search_esize" type="text" placeholder="최대 용량" />
+								</div>
+							</td>
+							<th rowspan="2">
+								<button type="button" class="btn-case-01 btn-search txt" id="btnSearch">
+									<span class="icon ico-search">검색</span>
+								</button>
+							</th>
+						</tr>
+						<tr>
+							<th>시간 종류</th>
+							<td>
+								<div class="select">
+								  <select name="search_timeType" id="search_timeType">
+								    <option value="MT">Modified Time</option>
+								    <option value="CT">Created Time</option>
+								    <option value="AT">Accessed Time</option>
+								  </select>
+								</div>
+							</td>
+							<th>시작일</th>
+							<td>
+								<div class="input-text-type-1 calendar">
+		  						  <input id="search_stime" name="search_stime" type="text" placeholder="시작일" />
+								</div>
+							</td>
+							<th>종료일</th>
+							<td>
+								<div class="input-text-type-1 calendar">
+		  						  <input id="search_etime" name="search_etime" type="text" placeholder="종료일" />
+		             			</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>  
+			</form>
+		</section>
+		<section class="fl btn-area">
+			<ul class="btn-sort-area">
+				<li>
+				  <button type="button" class="btn-case-02" id="btnCsvExport"><span>CSV Export</span></button>
+				</li>
+				<li>
+				  <button type="button" class="btn-case-02" id="btnFileNameWordCloud"><span>Word Cloud</span></button>
+				</li>
+				<li>
+				  <button type="button" class="btn-case-02" id="btnDateTreeMap"><span>Data Tree Map</span></button>
+				</li>
+				<li>
+				  <button type="button" class="btn-case-02" id="btnHexView"><span>HEX VIEW</span></button>
+				</li>
+			</ul>     
+		</section>
       <article class="container">
         <h4 class="blind">조회된 컨텐츠</h4>
 

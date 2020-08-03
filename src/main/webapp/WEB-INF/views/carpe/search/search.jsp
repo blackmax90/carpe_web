@@ -41,8 +41,8 @@
 				<button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
 			</section>
 			<section class="search-area bg-unit">
+				<h4 class="blind">조회조건 선택</h4>
 				<form action="" id="" name="" method="" onSubmit="return false">
-					<legend class="blind">조회조건 선택</legend>
 					<ul class="search-item-area">
 						<li>
 							<div class="checkbox checkbox-type-1">
@@ -52,7 +52,7 @@
 						</li>
 						<li>
 							<div class="checkbox checkbox-type-1">
-								<input id="checkbox_content" name="checkbox_content" type="checkbox" checked=""/>
+								<input id="checkbox_content" name="checkbox_content" type="checkbox" checked="checked"/>
 								<label for="checkbox_content"><span class="text">Content</span></label>
 							</div>
 						</li>
@@ -76,7 +76,6 @@
 			<article class="container">
 				<h4 class="blind">조회된 컨텐츠</h4>
 				<div class="content-box">
-					
 					<div class="content-area">				
 						<!--// Content 영역 //-->	
 						<div id="jqxGrid_Systemlog" role="grid" align="left" class="cont-result">

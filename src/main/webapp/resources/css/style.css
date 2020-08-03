@@ -386,6 +386,7 @@ html, body {
   position: relative;
   z-index: 1;
   width: 100%;
+  min-width: 99rem; /* 화면 밀림 방지 - add date : 2020-08-03 */
 /*  min-width: 128rem; */
   min-height: 100%; 
 }
@@ -1776,6 +1777,10 @@ h5 {
   height: calc(100% - 8rem);
 }
 
+.filesys .container {
+  height: calc(100% - 20rem);
+}
+
 .srch-page .container {
   height: calc(100% - 10rem);
 }
@@ -2031,6 +2036,10 @@ h5 {
   height: 13rem;
 }
 
+.filesys .search-area {
+  height: 11rem;
+}
+
 .pop.temp .search-area {
   color: #4D4D4D;
   border-radius: 0.5rem;
@@ -2232,6 +2241,41 @@ h5 {
   background-color: #FAE6F0;
 }
 
+
+.tbl-srch {
+	position: relative;
+	float: left;
+	width: 100%;
+	border: 0;
+	table-layout: fixed;
+}
+
+.tbl-srch th,
+.tbl-srch td {
+  position: relative;
+  line-height: 3rem;
+  text-align: left;
+}
+
+.tbl-srch th {
+	color:#FFF;
+	font-size: 1.4rem;
+	padding: 0.5rem 0;
+}
+
+.tbl-srch td {
+	padding: 0.5rem 3rem 0.5rem 1rem;
+}
+
+.tbl-srch .calendar,
+.tbl-srch .calendar > input {
+	width: 100% !important;
+}
+
+.tbl-srch button.btn-case-01.btn-search {
+	float: right;
+	margin-left: 0;
+}
 
 /*--------------------------------------------------------------
 # jqwidget Layout Custom CSS 
