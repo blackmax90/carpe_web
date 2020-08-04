@@ -1129,6 +1129,129 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	public Map selectJumplistAutomaticsCount(Map<String, Object> paramMap) throws Exception {
 	    return sqlSession.selectOne(Namespace + ".selectJumplistAutomaticsCount", paramMap);
 	}
+	
+	
+	// lv1_os_and_basic_app_accounts_ce_0
+	@Override
+	public List<Map> selectAccountsCE0(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectAccountsCE0", paramMap);
+	}
+
+	@Override
+	public Map selectAccountsCE0Count(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectAccountsCE0Count", paramMap);
+	}
+
+	// lv1_os_and_basic_app_accounts_de_0
+	@Override
+	public List<Map> selectAccountsDE0(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectAccountsDE0", paramMap);
+	}
+
+	@Override
+	public Map selectAccountsDE0Count(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectAccountsDE0Count", paramMap);
+	}
+
+	// lv1_os_and_basic_app_call_logs
+	@Override
+	public List<Map> selectCallLogs(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectCallLogs", paramMap);
+	}
+
+	@Override
+	public Map selectCallLogsCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectCallLogsCount", paramMap);
+	}
+
+	// lv1_os_and_basic_app_file_cache
+	@Override
+	public List<Map> selectFileCache(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectFileCache", paramMap);
+	}
+
+	@Override
+	public Map selectFileCacheCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectFileCacheCount", paramMap);
+	}
+
+	// lv1_os_and_basic_app_mms
+	@Override
+	public List<Map> selectMMS(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectMMS", paramMap);
+	}
+
+	@Override
+	public Map selectMMSCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectMMSCount", paramMap);
+	}
+
+	// lv1_os_and_basic_app_recent_files
+	@Override
+	public List<Map> selectRecentFiles(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectRecentFiles", paramMap);
+	}
+
+	@Override
+	public Map selectRecentFilesCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectRecentFilesCount", paramMap);
+	}
+
+	// lv1_os_and_basic_app_sim_info
+	@Override
+	public List<Map> selectSimInfo(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectSimInfo", paramMap);
+	}
+
+	@Override
+	public Map selectSimInfoCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectSimInfoCount", paramMap);
+	}
+
+	// lv1_os_and_basic_app_sim_info_dat
+	@Override
+	public List<Map> selectSimInfoDat(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectSimInfoDat", paramMap);
+	}
+
+	@Override
+	public Map selectSimInfoDatCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectSimInfoDatCount", paramMap);
+	}
+
+	// lv1_os_and_basic_app_sms
+	@Override
+	public List<Map> selectSMS(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectSMS", paramMap);
+	}
+
+	@Override
+	public Map selectSMSCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectSMSCount", paramMap);
+	}
+
+	// lv1_os_and_basic_app_usagestats_0
+	@Override
+	public List<Map> selectUsagestats0(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectUsagestats0", paramMap);
+	}
+
+	@Override
+	public Map selectUsagestats0Count(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectUsagestats0Count", paramMap);
+	}
+
+	// lv1_os_and_basic_app_wifi_info
+	@Override
+	public List<Map> selectWifiInfo(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectWifiInfo", paramMap);
+	}
+
+	@Override
+	public Map selectWifiInfoCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectWifiInfoCount", paramMap);
+	}
+
 
 
 }

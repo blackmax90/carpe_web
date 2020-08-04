@@ -420,5 +420,49 @@ public interface ArtifactService {
 	public List<Map> selectThumbnailCache(Map<String, Object> paramMap) throws Exception;
 	public Map selectThumbnailCacheCount(Map<String, Object> paramMap) throws Exception;
 
+	// lv1_os_and_basic_app_accounts_ce_0
+	public List<Map> selectAccountsCE0(Map<String, Object> paramMap) throws Exception;
+	public Map selectAccountsCE0Count(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_accounts_de_0
+	public List<Map> selectAccountsDE0(Map<String, Object> paramMap) throws Exception;
+	public Map selectAccountsDE0Count(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_call_logs
+	public List<Map> selectCallLogs(Map<String, Object> paramMap) throws Exception;
+	public Map selectCallLogsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_file_cache
+	public List<Map> selectFileCache(Map<String, Object> paramMap) throws Exception;
+	public Map selectFileCacheCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_mms
+	public List<Map> selectMMS(Map<String, Object> paramMap) throws Exception;
+	public Map selectMMSCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_recent_files
+	public List<Map> selectRecentFiles(Map<String, Object> paramMap) throws Exception;
+	public Map selectRecentFilesCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_sim_info
+	public List<Map> selectSimInfo(Map<String, Object> paramMap) throws Exception;
+	public Map selectSimInfoCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_sim_info_dat
+	public List<Map> selectSimInfoDat(Map<String, Object> paramMap) throws Exception;
+	public Map selectSimInfoDatCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_sms
+	public List<Map> selectSMS(Map<String, Object> paramMap) throws Exception;
+	public Map selectSMSCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_usagestats_0
+	public List<Map> selectUsagestats0(Map<String, Object> paramMap) throws Exception;
+	public Map selectUsagestats0Count(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_and_basic_app_wifi_info
+	public List<Map> selectWifiInfo(Map<String, Object> paramMap) throws Exception;
+	public Map selectWifiInfoCount(Map<String, Object> paramMap) throws Exception;
+
 
 }

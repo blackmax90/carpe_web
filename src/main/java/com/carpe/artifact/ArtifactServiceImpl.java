@@ -1117,5 +1117,126 @@ public class ArtifactServiceImpl implements ArtifactService {
 	    return dao.selectThumbnailCacheCount(paramMap);
 	}
 
+	// lv1_os_and_basic_app_accounts_ce_0
+	@Override
+	public List<Map> selectAccountsCE0(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectAccountsCE0(paramMap);
+	}
+
+	@Override
+	public Map selectAccountsCE0Count(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectAccountsCE0Count(paramMap);
+	}
+
+	// lv1_os_and_basic_app_accounts_de_0
+	@Override
+	public List<Map> selectAccountsDE0(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectAccountsDE0(paramMap);
+	}
+
+	@Override
+	public Map selectAccountsDE0Count(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectAccountsDE0Count(paramMap);
+	}
+
+	// lv1_os_and_basic_app_call_logs
+	@Override
+	public List<Map> selectCallLogs(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectCallLogs(paramMap);
+	}
+
+	@Override
+	public Map selectCallLogsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectCallLogsCount(paramMap);
+	}
+
+	// lv1_os_and_basic_app_file_cache
+	@Override
+	public List<Map> selectFileCache(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFileCache(paramMap);
+	}
+
+	@Override
+	public Map selectFileCacheCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFileCacheCount(paramMap);
+	}
+
+	// lv1_os_and_basic_app_mms
+	@Override
+	public List<Map> selectMMS(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectMMS(paramMap);
+	}
+
+	@Override
+	public Map selectMMSCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectMMSCount(paramMap);
+	}
+
+	// lv1_os_and_basic_app_recent_files
+	@Override
+	public List<Map> selectRecentFiles(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectRecentFiles(paramMap);
+	}
+
+	@Override
+	public Map selectRecentFilesCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectRecentFilesCount(paramMap);
+	}
+
+	// lv1_os_and_basic_app_sim_info
+	@Override
+	public List<Map> selectSimInfo(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectSimInfo(paramMap);
+	}
+
+	@Override
+	public Map selectSimInfoCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectSimInfoCount(paramMap);
+	}
+
+	// lv1_os_and_basic_app_sim_info_dat
+	@Override
+	public List<Map> selectSimInfoDat(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectSimInfoDat(paramMap);
+	}
+
+	@Override
+	public Map selectSimInfoDatCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectSimInfoDatCount(paramMap);
+	}
+
+	// lv1_os_and_basic_app_sms
+	@Override
+	public List<Map> selectSMS(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectSMS(paramMap);
+	}
+
+	@Override
+	public Map selectSMSCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectSMSCount(paramMap);
+	}
+
+	// lv1_os_and_basic_app_usagestats_0
+	@Override
+	public List<Map> selectUsagestats0(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectUsagestats0(paramMap);
+	}
+
+	@Override
+	public Map selectUsagestats0Count(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectUsagestats0Count(paramMap);
+	}
+
+	// lv1_os_and_basic_app_wifi_info
+	@Override
+	public List<Map> selectWifiInfo(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWifiInfo(paramMap);
+	}
+
+	@Override
+	public Map selectWifiInfoCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWifiInfoCount(paramMap);
+	}
+
 
 }

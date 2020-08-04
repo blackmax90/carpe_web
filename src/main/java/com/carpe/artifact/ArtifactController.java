@@ -154,8 +154,32 @@ public class ArtifactController {
 		addArtifactTreeNode(subAndroidList, "File History", true, true, null);
 		addArtifactTreeNode(subAndroidList, "Geodata", true, true, null);
 		addArtifactTreeNode(subAndroidList, "Id&password Hash", true, true, null);
-		addArtifactTreeNode(subAndroidList, "Web Browser History", true, true, null);
+		addArtifactTreeNode(subAndroidList, "Web Browser History", true, true, null);	
+		// lv1_os_and_basic_app_accounts_ce_0
+		addArtifactTreeNode(subAndroidList, "Accounts CE 0", true, true, null);
+		// lv1_os_and_basic_app_accounts_de_0
+		addArtifactTreeNode(subAndroidList, "Accounts DE 0", true, true, null);
+		// lv1_os_and_basic_app_call_logs
+		addArtifactTreeNode(subAndroidList, "Call Logs", true, true, null);
+		// lv1_os_and_basic_app_file_cache
+		addArtifactTreeNode(subAndroidList, "File Cache", true, true, null);
+		// lv1_os_and_basic_app_mms
+		addArtifactTreeNode(subAndroidList, "MMS", true, true, null);
+		// lv1_os_and_basic_app_recent_files
+		addArtifactTreeNode(subAndroidList, "Recent Files", true, true, null);
+		// lv1_os_and_basic_app_sim_info
+		addArtifactTreeNode(subAndroidList, "Sim Info", true, true, null);
+		// lv1_os_and_basic_app_sim_info_dat
+		addArtifactTreeNode(subAndroidList, "Sim Info Dat", true, true, null);
+		// lv1_os_and_basic_app_sms
+		addArtifactTreeNode(subAndroidList, "SMS", true, true, null);
+		// lv1_os_and_basic_app_usagestats_0
+		addArtifactTreeNode(subAndroidList, "Usagestats 0", true, true, null);
+		// lv1_os_and_basic_app_wifi_info
+		addArtifactTreeNode(subAndroidList, "Wifi Info", true, true, null);
 
+
+		
 		List subKakaomobileList = new ArrayList();
 		addArtifactTreeNode(subKakaomobileList, "Chatlogs", true, true, null);
 		addArtifactTreeNode(subKakaomobileList, "Chatrooms", true, true, null);
@@ -4033,7 +4057,392 @@ public class ArtifactController {
 			return mav;
 		}
 	
-	
+	// lv1_os_and_basic_app_accounts_ce_0
+	@RequestMapping(value ="/and_basic_app_accounts_ce_0.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getAccountsCE0 (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> AccountsCE0 = service.selectAccountsCE0(paramMap);
+			int totalCnt = ((Long) service.selectAccountsCE0Count(paramMap).get("cnt")).intValue();
+			mav.addObject("list", AccountsCE0);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_accounts_de_0
+	@RequestMapping(value ="/and_basic_app_accounts_de_0.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getAccountsDE0 (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> AccountsDE0 = service.selectAccountsDE0(paramMap);
+			int totalCnt = ((Long) service.selectAccountsDE0Count(paramMap).get("cnt")).intValue();
+			mav.addObject("list", AccountsDE0);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_call_logs
+	@RequestMapping(value ="/and_basic_app_call_logs.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getCallLogs (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> CallLogs = service.selectCallLogs(paramMap);
+			int totalCnt = ((Long) service.selectCallLogsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", CallLogs);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_file_cache
+	@RequestMapping(value ="/and_basic_app_file_cache.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFileCache (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FileCache = service.selectFileCache(paramMap);
+			int totalCnt = ((Long) service.selectFileCacheCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FileCache);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_mms
+	@RequestMapping(value ="/and_basic_app_mms.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getMMS (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> MMS = service.selectMMS(paramMap);
+			int totalCnt = ((Long) service.selectMMSCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", MMS);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_recent_files
+	@RequestMapping(value ="/and_basic_app_recent_files.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getRecentFiles (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> RecentFiles = service.selectRecentFiles(paramMap);
+			int totalCnt = ((Long) service.selectRecentFilesCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", RecentFiles);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_sim_info
+	@RequestMapping(value ="/and_basic_app_sim_info.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getSimInfo (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> SimInfo = service.selectSimInfo(paramMap);
+			int totalCnt = ((Long) service.selectSimInfoCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", SimInfo);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_sim_info_dat
+	@RequestMapping(value ="/and_basic_app_sim_info_dat.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getSimInfoDat (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> SimInfoDat = service.selectSimInfoDat(paramMap);
+			int totalCnt = ((Long) service.selectSimInfoDatCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", SimInfoDat);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_sms
+	@RequestMapping(value ="/and_basic_app_sms.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getSMS (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> SMS = service.selectSMS(paramMap);
+			int totalCnt = ((Long) service.selectSMSCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", SMS);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_usagestats_0
+	@RequestMapping(value ="/and_basic_app_usagestats_0.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getUsagestats0 (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> Usagestats0 = service.selectUsagestats0(paramMap);
+			int totalCnt = ((Long) service.selectUsagestats0Count(paramMap).get("cnt")).intValue();
+			mav.addObject("list", Usagestats0);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_and_basic_app_wifi_info
+	@RequestMapping(value ="/and_basic_app_wifi_info.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWifiInfo (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WifiInfo = service.selectWifiInfo(paramMap);
+			int totalCnt = ((Long) service.selectWifiInfoCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WifiInfo);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+
 
 
 

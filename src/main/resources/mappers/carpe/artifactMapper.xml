@@ -1567,6 +1567,195 @@
 	              and evd_id = #{evd_id}
 	            <!--include refid="selectArtifactCondition" /-->
 	</select>
+	
+	<!-- lv1_os_and_basic_app_accounts_ce_0 -->
+	<select id="selectAccountsCE0"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_accounts_ce_0
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectAccountsCE0Count"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_accounts_ce_0
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_accounts_de_0 -->
+	<select id="selectAccountsDE0"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_accounts_de_0
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectAccountsDE0Count"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_accounts_de_0
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_call_logs -->
+	<select id="selectCallLogs"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_call_logs
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectCallLogsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_call_logs
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_file_cache -->
+	<select id="selectFileCache"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_file_cache
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFileCacheCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_file_cache
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_mms -->
+	<select id="selectMMS"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_mms
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectMMSCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_mms
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_recent_files -->
+	<select id="selectRecentFiles"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_recent_files
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectRecentFilesCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_recent_files
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_sim_info -->
+	<select id="selectSimInfo"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_sim_info
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectSimInfoCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_sim_info
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_sim_info_dat -->
+	<select id="selectSimInfoDat"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_sim_info_dat
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectSimInfoDatCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_sim_info_dat
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_sms -->
+	<select id="selectSMS"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_sms
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectSMSCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_sms
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_usagestats_0 -->
+	<select id="selectUsagestats0"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_usagestats_0
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectUsagestats0Count"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_usagestats_0
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_os_and_basic_app_wifi_info -->
+	<select id="selectWifiInfo"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_and_basic_app_wifi_info
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWifiInfoCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_and_basic_app_wifi_info
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+
+	
 
 	
 </mapper>
