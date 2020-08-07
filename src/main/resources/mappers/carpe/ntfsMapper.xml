@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.ntfs">
+  <select id="selectNtfsHistoryYearList" resultType="Map" parameterType="Map">
+    SELECT DISTINCT DATE_FORMAT(STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s'), '%Y') AS year
+      FROM lv2_os_log_history
+     WHERE 1=1
+       AND case_id = #{case_id}
+     ORDER BY year ASC
+  </select>
+
+  <select id="selectNtfsHistoryList" resultType="Map" parameterType="Map">
+    SELECT file_name
+         , file_size
+         , file_path
+         , date_format(STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H:%i:%s') AS timestamp
+         , reason
+         , CASE WHEN (reason = 'USN_REASON_RENAME_NEW_NAME') THEN 'Rename New Name'
+                WHEN (reason = 'USN_REASON_FILE_DELETE') THEN 'File Delete'
+                WHEN (reason = 'MFT_FILE_CREATE' OR reason = 'USN_REASON_FILE_CREATE') THEN 'File Create'
+                ELSE reason
+            END AS reason_str
+      FROM lv2_os_log_history
+     WHERE 1=1
+       AND case_id = #{case_id}
+       AND date_format(STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H') = #{timestamp}
+   <if test="reason!=null">
+     <if test="reason==1">
+       AND reason = 'USN_REASON_RENAME_NEW_NAME'
+     </if>
+     <if test="reason==2">
+       AND reason = 'USN_REASON_FILE_DELETE'
+     </if>
+     <if test="reason==3">
+       AND (reason = 'MFT_FILE_CREATE' OR reason = 'USN_REASON_FILE_CREATE')
+     </if>
+   </if>
+     ORDER BY timestamp ASC
+  </select>
+
+  <select id="selectNtfsHistoryCountList" resultType="Map" parameterType="Map">
+    SELECT timestamp
+         , COUNT(timestamp) AS timestampcnt
+      FROM (
+            SELECT date_format(STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H') AS timestamp
+              FROM lv2_os_log_history
+             WHERE 1=1
+               AND case_id = #{case_id}
+               AND date_format(STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s'), '%Y-%m') = #{timestamp}
+           <if test="reason!=null">
+             <if test="reason==1">
+               AND reason = 'USN_REASON_RENAME_NEW_NAME'
+             </if>
+             <if test="reason==2">
+               AND reason = 'USN_REASON_FILE_DELETE'
+             </if>
+             <if test="reason==3">
+               AND (reason = 'MFT_FILE_CREATE' OR reason = 'USN_REASON_FILE_CREATE')
+             </if>
+           </if>
+           ) A
+     GROUP BY timestamp 
+  </select>
+</mapper>
