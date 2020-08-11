@@ -20,6 +20,7 @@
   ## Common
   ## Login
   ## search
+# Scrollbar
 # Size
 # Table
 # jqwidget Layout Custom
@@ -566,6 +567,34 @@ html, body {
 .division-line {
 	width:100%;
 	border-bottom:1px dotted #999;
+}
+
+.location-area {
+	position: relative;
+	display:inline-block;
+	float: right;
+	wdth: auto;
+	height: 2rem;
+	line-height: 2rem;
+}
+
+.location-area li {
+	color: rgba(255,255,255,0.7);
+}
+
+.location-area li:last-child {
+	color: #FFF;
+}
+
+.location-area li::after {
+	content: ">";
+	display: inline-block;
+	float: right;
+	margin: 0 0.5rem;
+}
+
+.location-area li:last-child::after {
+	display: none;
 }
 
 /*--------------------------------------------------------------
@@ -1548,8 +1577,8 @@ label {
 
 .nav li.level02 {
   height: auto;
-  min-height: 4.8rem;
-  padding : 1.2rem 2rem 1.2rem 5.4rem;
+  min-height: 3.6rem;
+  padding : 0.6rem 2rem 0.6rem 5.4rem;
   font-size: 1.4rem;
   font-weight: 400;
   line-height: 2.4rem;
@@ -2175,6 +2204,32 @@ h5 {
   margin-right: 0;
 }
 
+
+/*--------------------------------------------------------------
+# Scrollbar
+--------------------------------------------------------------*/
+::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 0.5rem;
+}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment {
+  display: none;
+  width: 1rem;
+  height: 1rem;
+  background: rgba(0,0,0,0.1);
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.1);
+  border-radius: 0;
+  /*border-top: 1px solid #54585C;
+  border-bottom: 1px solid #54585C;*/
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.4);
+  border-radius: 0.5rem;
+}
 
 
 /*--------------------------------------------------------------

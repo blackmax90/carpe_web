@@ -40,6 +40,13 @@
 		  <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%> </h3>
 		  <h3 id="evdname">Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
 		  <button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
+		  <div class="location-area">
+		  	<ul class="list-h">
+		  		<li>Home</li>
+		  		<li>Analysis</li>
+		  		<li>Filesystem</li>
+		  	</ul>
+		  </div>
 		</section>
 		<section class="search-area bg-unit">
 			<h4 class="blind">조회조건 선택</h4>

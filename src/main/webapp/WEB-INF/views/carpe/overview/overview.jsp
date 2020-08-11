@@ -48,6 +48,12 @@
 			<section class="desc-area bg-unit">
 				<h3>Current Case : ${caseName}</h3>
 				<p>${desc}</p>
+				<div class="location-area">
+					<ul class="list-h">
+						<li>Home</li>
+						<li>Overviews</li>
+					</ul>
+				</div>
 			</section>
 			<article class="container">
 				
