@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20" height="18" viewBox="0 0 20 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFF591" offset="0%"></stop>
+            <stop stop-color="#FFC800" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#BCBCBC" offset="0%"></stop>
+            <stop stop-color="#848484" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="carpe01" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-541.000000, -669.000000)" fill="url(#linearGradient-1)" id="Group-13" stroke="url(#linearGradient-2)">
+            <g transform="translate(541.000000, 631.000000)">
+                <path d="M9.46442367,38.5 L0.500232615,39.0000192 L0.999987609,55.4956055 L19.5002463,54.9956055 L19.0002463,41.5 L12.5480318,41.5 C12.0488003,41.5 11.5822853,41.2516253 11.3035672,40.8374412 L9.46442367,38.5 Z" id="folder"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.mft">
+  <select id="selectMftHistoryList" resultType="Map" parameterType="Map">
+    SELECT A.file_id
+         , A.parent_id
+         , A.name
+         , A.dir_type
+         , A.size
+         , A.mtime
+         , A.ctime
+         , A.extension
+      FROM (
+           SELECT file_id
+                , parent_id
+                , name
+                , dir_type
+                , size
+				        , DATE_FORMAT(STR_TO_DATE(mtime, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H:%i:%s') AS mtime
+				        , DATE_FORMAT(STR_TO_DATE(ctime, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H:%i:%s') AS ctime
+                , extension
+             FROM lv2_os_mft_history
+            WHERE 1=1
+              AND case_id = #{case_id}
+              AND parent_id = #{parent_id}
+		 	        <if test="dir_type != null and !dir_type.equals('')">
+              AND dir_type = #{dir_type}
+              </if>
+         ) A
+     ORDER BY A.dir_type ASC
+  </select>
+
+  <select id="selectMftHistoryCopyRate" resultType="Map" parameterType="Map">
+    SELECT A.name
+         , (A.ycnt / IF(A.totcnt = 0, 1, A.totcnt) * 100) AS copyrate
+      FROM (
+           SELECT name
+                , (SELECT COUNT(*) 
+                     FROM lv2_os_mft_history 
+                    WHERE 1=1
+                      AND parent_id = a.file_id 
+                      AND is_copied = 'Y'
+                  ) AS ycnt
+                , (SELECT COUNT(*) 
+                     FROM lv2_os_mft_history 
+                    WHERE parent_id = a.file_id
+                  ) AS totcnt
+             FROM lv2_os_mft_history a
+            WHERE 1=1
+              AND case_id = #{case_id}
+              AND file_id = #{file_id}
+              AND dir_type = #{dir_type}
+            LIMIT 1
+         ) A
+  </select>
+</mapper>
