@@ -661,6 +661,25 @@
 		<!--include refid="selectArtifactCondition" /-->
 	</select>
 	
+	<!-- lv1_os_win_reg_mru_file -->
+	<select id="selectMRUFile"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_os_win_reg_mru_file
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectMRUFileCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_os_win_reg_mru_file
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+
+	
+	
 	<!-- lv1_os_win_reg_mui_cache -->
 		<select id="selectRegMuiCache" parameterType="Map" resultType="Map">
 		SELECT *
@@ -1039,7 +1058,433 @@
 	                and evd_id = #{evd_id}
 	              <!--include refid="selectArtifactCondition" /-->
 	  </select>
+	
+	<!-- lv1_app_web_chrome_domain -->
+	<select id="selectChromeDomain"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chrome_domain
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromeDomainCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chrome_domain
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_autofill -->
+	<select id="selectChromiumEdgeAutofill"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_autofill
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeAutofillCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_autofill
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_bookmarks -->
+	<select id="selectChromiumEdgeBookmarks"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_bookmarks
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeBookmarksCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_bookmarks
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_cookies -->
+	<select id="selectChromiumEdgeCookies"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_cookies
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeCookiesCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_cookies
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_download -->
+	<select id="selectChromiumEdgeDownload"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_download
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeDownloadCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_download
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_favicons -->
+	<select id="selectChromiumEdgeFavicons"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_favicons
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeFaviconsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_favicons
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_logindata -->
+	<select id="selectChromiumEdgeLogindata"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_logindata
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeLogindataCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_logindata
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_search_terms -->
+	<select id="selectChromiumEdgeSearch"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_search_terms
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeSearchCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_search_terms
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_shortcuts -->
+	<select id="selectChromiumEdgeShortcuts"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_shortcuts
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeShortcutsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_shortcuts
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_top_sites -->
+	<select id="selectChromiumEdgeTop"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_top_sites
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeTopCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_top_sites
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_visit_urls -->
+	<select id="selectChromiumEdgeVisit"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_visit_urls
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromiumEdgeVisitCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_visit_urls
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_firefox_domain -->
+	<select id="selectFirefoxDomain"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_domain
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxDomainCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_domain
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_firefox_download -->
+	<select id="selectFirefoxDownload"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_download
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxDownloadCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_download
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_firefox_visit_history -->
+	<select id="selectFirefoxVisitHistory"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_visit_history
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxVisitHistoryCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_visit_history
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_firefox_visit_urls -->
+	<select id="selectFirefoxVisitUrls"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_visit_urls
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxVisitUrlsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_visit_urls
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_autofill -->
+	<select id="selectWhaleAutofill"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_autofill
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleAutofillCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_autofill
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_bookmarks -->
+	<select id="selectWhaleBookmarks"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_bookmarks
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleBookmarksCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_bookmarks
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_cookies -->
+	<select id="selectWhaleCookies"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_cookies
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleCookiesCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_cookies
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_download -->
+	<select id="selectWhaleDownload"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_download
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleDownloadCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_download
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_favicons -->
+	<select id="selectWhaleFavicons"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_favicons
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleFaviconsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_favicons
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_logindata -->
+	<select id="selectWhaleLogindata"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_logindata
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleLogindataCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_logindata
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_search_terms -->
+	<select id="selectWhaleSearchTerms"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_search_terms
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleSearchTermsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_search_terms
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_shortcuts -->
+	<select id="selectWhaleShortcuts"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_shortcuts
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleShortcutsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_shortcuts
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_top_sites -->
+	<select id="selectWhaleTopSites"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_top_sites
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleTopSitesCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_top_sites
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_whale_visit_urls -->
+	<select id="selectWhaleVisitUrls"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_visit_urls
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleVisitUrlsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_visit_urls
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
 
+	
 	
 	<!-- lv1_fs_ntfs_logfile -->
 	<select id="selectNtfsLogfile" parameterType="Map" resultType="Map">

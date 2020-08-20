@@ -452,6 +452,17 @@ public class ArtifactServiceImpl implements ArtifactService {
 		return dao.selectRegMruFolderCount(paramMap);
 	}
 	
+	// lv1_os_win_reg_mru_file
+	@Override
+	public List<Map> selectMRUFile(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectMRUFile(paramMap);
+	}
+
+	@Override
+	public Map selectMRUFileCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectMRUFileCount(paramMap);
+	}
+	
 	// lv1_os_win_reg_mui_cache
 	@Override
 	public List<Map> selectRegMuiCache(Map<String, Object> paramMap) throws Exception {
@@ -771,6 +782,281 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectChromeVisitUrlsCount(Map<String, Object> paramMap) throws Exception {
 	    return dao.selectChromeVisitUrlsCount(paramMap);
 		}
+	// lv1_app_web_chrome_domain
+	@Override
+	public List<Map> selectChromeDomain(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeDomain(paramMap);
+	}
+
+	@Override
+	public Map selectChromeDomainCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeDomainCount(paramMap);
+	}
+	
+
+	// lv1_app_web_chromium_edge_autofill
+	@Override
+	public List<Map> selectChromiumEdgeAutofill(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeAutofill(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeAutofillCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeAutofillCount(paramMap);
+	}
+
+	// lv1_app_web_chromium_edge_bookmarks
+	@Override
+	public List<Map> selectChromiumEdgeBookmarks(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeBookmarks(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeBookmarksCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeBookmarksCount(paramMap);
+	}
+
+	// lv1_app_web_chromium_edge_cookies
+	@Override
+	public List<Map> selectChromiumEdgeCookies(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeCookies(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeCookiesCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeCookiesCount(paramMap);
+	}
+
+	// lv1_app_web_chromium_edge_download
+	@Override
+	public List<Map> selectChromiumEdgeDownload(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeDownload(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeDownloadCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeDownloadCount(paramMap);
+	}
+
+	// lv1_app_web_chromium_edge_favicons
+	@Override
+	public List<Map> selectChromiumEdgeFavicons(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeFavicons(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeFaviconsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeFaviconsCount(paramMap);
+	}
+
+	// lv1_app_web_chromium_edge_logindata
+	@Override
+	public List<Map> selectChromiumEdgeLogindata(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeLogindata(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeLogindataCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeLogindataCount(paramMap);
+	}
+
+	// lv1_app_web_chromium_edge_search_terms
+	@Override
+	public List<Map> selectChromiumEdgeSearch(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeSearch(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeSearchCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeSearchCount(paramMap);
+	}
+
+	// lv1_app_web_chromium_edge_shortcuts
+	@Override
+	public List<Map> selectChromiumEdgeShortcuts(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeShortcuts(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeShortcutsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeShortcutsCount(paramMap);
+	}
+
+	// lv1_app_web_chromium_edge_top_sites
+	@Override
+	public List<Map> selectChromiumEdgeTop(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeTop(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeTopCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeTopCount(paramMap);
+	}
+
+	// lv1_app_web_chromium_edge_visit_urls
+	@Override
+	public List<Map> selectChromiumEdgeVisit(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeVisit(paramMap);
+	}
+
+	@Override
+	public Map selectChromiumEdgeVisitCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromiumEdgeVisitCount(paramMap);
+	}
+
+	// lv1_app_web_firefox_domain
+	@Override
+	public List<Map> selectFirefoxDomain(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFirefoxDomain(paramMap);
+	}
+
+	@Override
+	public Map selectFirefoxDomainCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFirefoxDomainCount(paramMap);
+	}
+
+	// lv1_app_web_firefox_download
+	@Override
+	public List<Map> selectFirefoxDownload(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFirefoxDownload(paramMap);
+	}
+
+	@Override
+	public Map selectFirefoxDownloadCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFirefoxDownloadCount(paramMap);
+	}
+
+	// lv1_app_web_firefox_visit_history
+	@Override
+	public List<Map> selectFirefoxVisitHistory(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFirefoxVisitHistory(paramMap);
+	}
+
+	@Override
+	public Map selectFirefoxVisitHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFirefoxVisitHistoryCount(paramMap);
+	}
+
+	// lv1_app_web_firefox_visit_urls
+	@Override
+	public List<Map> selectFirefoxVisitUrls(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFirefoxVisitUrls(paramMap);
+	}
+
+	@Override
+	public Map selectFirefoxVisitUrlsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectFirefoxVisitUrlsCount(paramMap);
+	}
+
+	// lv1_app_web_whale_autofill
+	@Override
+	public List<Map> selectWhaleAutofill(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleAutofill(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleAutofillCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleAutofillCount(paramMap);
+	}
+
+	// lv1_app_web_whale_bookmarks
+	@Override
+	public List<Map> selectWhaleBookmarks(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleBookmarks(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleBookmarksCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleBookmarksCount(paramMap);
+	}
+
+	// lv1_app_web_whale_cookies
+	@Override
+	public List<Map> selectWhaleCookies(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleCookies(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleCookiesCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleCookiesCount(paramMap);
+	}
+
+	// lv1_app_web_whale_download
+	@Override
+	public List<Map> selectWhaleDownload(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleDownload(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleDownloadCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleDownloadCount(paramMap);
+	}
+
+	// lv1_app_web_whale_favicons
+	@Override
+	public List<Map> selectWhaleFavicons(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleFavicons(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleFaviconsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleFaviconsCount(paramMap);
+	}
+
+	// lv1_app_web_whale_logindata
+	@Override
+	public List<Map> selectWhaleLogindata(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleLogindata(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleLogindataCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleLogindataCount(paramMap);
+	}
+
+	// lv1_app_web_whale_search_terms
+	@Override
+	public List<Map> selectWhaleSearchTerms(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleSearchTerms(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleSearchTermsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleSearchTermsCount(paramMap);
+	}
+
+	// lv1_app_web_whale_shortcuts
+	@Override
+	public List<Map> selectWhaleShortcuts(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleShortcuts(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleShortcutsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleShortcutsCount(paramMap);
+	}
+
+	// lv1_app_web_whale_top_sites
+	@Override
+	public List<Map> selectWhaleTopSites(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleTopSites(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleTopSitesCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleTopSitesCount(paramMap);
+	}
+
+	// lv1_app_web_whale_visit_urls
+	@Override
+	public List<Map> selectWhaleVisitUrls(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleVisitUrls(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleVisitUrlsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleVisitUrlsCount(paramMap);
+	}
 
 	/*
 	// lv1_fs_ntfs_logfile

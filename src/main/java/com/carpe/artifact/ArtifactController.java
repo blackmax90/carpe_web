@@ -35,10 +35,10 @@ public class ArtifactController {
 		return mav;
 	}
 
-	private void addArtifactTreeNode(List list, String name, boolean dataExists, boolean forceSelect, List subList) {
+	private void addArtifactTreeNode(List list, String name,boolean expanded, boolean dataExists, boolean forceSelect, List subList) {
 		Map data = new HashMap();
 		data.put("label", name);
-
+		data.put("expanded", expanded);
 		Map value = new HashMap();
 		value.put("artifact", name);
 		value.put("data_exists", dataExists);
@@ -50,7 +50,7 @@ public class ArtifactController {
 		} else {
 			value.put("sub_exists", false);
 		}
-
+		
 		data.put("value", value);
 
 		list.add(data);
@@ -63,170 +63,230 @@ public class ArtifactController {
 		// lv1
 		
 		List subRegList = new ArrayList();
-		addArtifactTreeNode(subRegList, "Installed Programs", true, true, null);
-		addArtifactTreeNode(subRegList, "USB Devices", true, true, null);
-		addArtifactTreeNode(subRegList, "OS Info", true, true, null);
-		addArtifactTreeNode(subRegList, "User Accounts", true, true, null);
-		addArtifactTreeNode(subRegList, "UserAssist", true, true, null);
-		addArtifactTreeNode(subRegList, "Amcache Program", true, true, null);
-		addArtifactTreeNode(subRegList, "Amcache File", true, true, null);
-		addArtifactTreeNode(subRegList, "File Connection", true, true, null);
-		addArtifactTreeNode(subRegList, "Known Dll", true, true, null);
-		addArtifactTreeNode(subRegList, "Mac Address", true, true, null);
-		addArtifactTreeNode(subRegList, "MRU Folder", true, true, null);
-		addArtifactTreeNode(subRegList, "Mui Cache", true, true, null);
-		addArtifactTreeNode(subRegList, "Network Drive", true, true, null);
-		addArtifactTreeNode(subRegList, "Network Interface", true, true, null);
-		addArtifactTreeNode(subRegList, "Network Profile", true, true, null);
-		addArtifactTreeNode(subRegList, "Recent Docs", true, true, null);
-		addArtifactTreeNode(subRegList, "Run Command", true, true, null);
-		addArtifactTreeNode(subRegList, "Search Keyword", true, true, null);
-		addArtifactTreeNode(subRegList, "Shellbag", true, true, null);
-		addArtifactTreeNode(subRegList, "Shim Cache", true, true, null);
-		addArtifactTreeNode(subRegList, "Start List", true, true, null);
-		addArtifactTreeNode(subRegList, "System Service", true, true, null);
+	
+		addArtifactTreeNode(subRegList, "Installed Programs", false, true, true, null);
+		addArtifactTreeNode(subRegList, "USB Devices", false, true, true, null);
+		addArtifactTreeNode(subRegList, "OS Info",false,  true, true, null);
+		addArtifactTreeNode(subRegList, "User Accounts", false, true, true, null);
+		addArtifactTreeNode(subRegList, "UserAssist", false, true, true, null);
+		addArtifactTreeNode(subRegList, "Amcache Program",false,  true, true, null);
+		addArtifactTreeNode(subRegList, "Amcache File",false,  true, true, null);
+		addArtifactTreeNode(subRegList, "File Connection",false,  true, true, null);
+		addArtifactTreeNode(subRegList, "Known Dll", false, true, true, null);
+		addArtifactTreeNode(subRegList, "Mac Address",false,  true, true, null);
+		addArtifactTreeNode(subRegList, "MRU Folder",false,  true, true, null);
+		addArtifactTreeNode(subRegList, "MRU File", false, true, true, null);
+		addArtifactTreeNode(subRegList, "Mui Cache", false, true, true, null);
+		addArtifactTreeNode(subRegList, "Network Drive", false, true, true, null);
+		addArtifactTreeNode(subRegList, "Network Interface",false,  true, true, null);
+		addArtifactTreeNode(subRegList, "Network Profile", false, true, true, null);
+		addArtifactTreeNode(subRegList, "Recent Docs", false, true, true, null);
+		addArtifactTreeNode(subRegList, "Run Command",false,  true, true, null);
+		addArtifactTreeNode(subRegList, "Search Keyword", false, true, true, null);
+		addArtifactTreeNode(subRegList, "Shellbag", false, true, true, null);
+		addArtifactTreeNode(subRegList, "Shim Cache",false,  true, true, null);
+		addArtifactTreeNode(subRegList, "Start List",false, true, true, null);
+		addArtifactTreeNode(subRegList, "System Service",false,  true, true, null);
 
 		
 		List subEvtList = new ArrayList();
-		addArtifactTreeNode(subEvtList, "All", true, true, null); // Event logs all
-		addArtifactTreeNode(subEvtList, "Antiforensics", true, true, null);
-		addArtifactTreeNode(subEvtList, "Applications", true, true, null);
-		addArtifactTreeNode(subEvtList, "DNS", true, true, null);
-		addArtifactTreeNode(subEvtList, "File Handling", true, true, null);
-		addArtifactTreeNode(subEvtList, "Log On/Off", true, true, null);
-		addArtifactTreeNode(subEvtList, "MS Alerts", true, true, null);
-		addArtifactTreeNode(subEvtList, "MSI Installer", true, true, null);
-		addArtifactTreeNode(subEvtList, "Network", true, true, null);
-		addArtifactTreeNode(subEvtList, "Others", true, true, null);
-		addArtifactTreeNode(subEvtList, "PC On/Off", true, true, null);
-		addArtifactTreeNode(subEvtList, "Printer", true, true, null);
-		addArtifactTreeNode(subEvtList, "Process", true, true, null);
-		addArtifactTreeNode(subEvtList, "Registry Handling", true, true, null);
-		addArtifactTreeNode(subEvtList, "Remote On/Off", true, true, null);
-		addArtifactTreeNode(subEvtList, "Screen Saver", true, true, null);
-		addArtifactTreeNode(subEvtList, "Shared Folder", true, true, null);
-		addArtifactTreeNode(subEvtList, "Sleep On/Off", true, true, null);
-		addArtifactTreeNode(subEvtList, "Telemetry", true, true, null);
-		addArtifactTreeNode(subEvtList, "Time Changed", true, true, null);
-		addArtifactTreeNode(subEvtList, "USB Devices", true, true, null);
+		addArtifactTreeNode(subEvtList, "All",false, true, true, null); // Event logs all
+		addArtifactTreeNode(subEvtList, "Antiforensics", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Applications", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "DNS", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "File Handling", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Log On/Off",false, true, true, null);
+		addArtifactTreeNode(subEvtList, "MS Alerts", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "MSI Installer", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Network", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Others", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "PC On/Off", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Printer", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Process", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Registry Handling", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Remote On/Off", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Screen Saver", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Shared Folder", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Sleep On/Off", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Telemetry", false,true, true, null);
+		addArtifactTreeNode(subEvtList, "Time Changed",false, true, true, null);
+		addArtifactTreeNode(subEvtList, "USB Devices", false,true, true, null);
 
 		
 		List subPreList = new ArrayList();
-		addArtifactTreeNode(subPreList, "Prefetch", true, true, null);
-		addArtifactTreeNode(subPreList, "Prefetch Run Info", true, true, null);
-		addArtifactTreeNode(subPreList, "Prefetch Volume Info", true, true, null);
+		addArtifactTreeNode(subPreList, "Prefetch", false,true, true, null);
+		addArtifactTreeNode(subPreList, "Prefetch Run Info",false, true, true, null);
+		addArtifactTreeNode(subPreList, "Prefetch Volume Info", false,true, true, null);
 		
 		List subChromeList = new ArrayList();
-		addArtifactTreeNode(subChromeList, "Chrome Autofill", true, true, null);
-		addArtifactTreeNode(subChromeList, "Chrome Bookmarks", true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Autofill",false, true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Bookmarks", false,true, true, null);
 		//addArtifactTreeNode(subChromeList, "Chrome Cache", true, true, null);
-		addArtifactTreeNode(subChromeList, "Chrome Cookies", true, true, null);
-		addArtifactTreeNode(subChromeList, "Chrome Download", true, true, null);
-		addArtifactTreeNode(subChromeList, "Chrome Favicons", true, true, null);
-		addArtifactTreeNode(subChromeList, "Chrome Login Data", true, true, null);
-		addArtifactTreeNode(subChromeList, "Chrome Search Terms", true, true, null);
-		addArtifactTreeNode(subChromeList, "Chrome Shortcuts", true, true, null);
-		addArtifactTreeNode(subChromeList, "Chrome Top Sites", true, true, null);
-		addArtifactTreeNode(subChromeList, "Chrome Visit Urls", true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Cookies",false, true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Download",false, true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Favicons", false,true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Login Data",false, true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Search Terms",false, true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Shortcuts", false,true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Top Sites",false, true, true, null);
+		addArtifactTreeNode(subChromeList, "Chrome Visit Urls", false,true, true, null);
+		// lv1_app_web_chrome_domain
+		addArtifactTreeNode(subChromeList, "Chrome Domain",false, true, true, null);
+		
+		List subChromiumEdgeList = new ArrayList();
+		// lv1_app_web_chromium_edge_autofill
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Autofill", false, true, true, null);
+		// lv1_app_web_chromium_edge_bookmarks
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Bookmarks", false, true, true, null);
+		// lv1_app_web_chromium_edge_cookies
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Cookies", false, true, true, null);
+		// lv1_app_web_chromium_edge_download
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Download", false, true, true, null);
+		// lv1_app_web_chromium_edge_favicons
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Favicons", false, true, true, null);
+		// lv1_app_web_chromium_edge_logindata
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Login Data", false, true, true, null);
+		// lv1_app_web_chromium_edge_search_terms
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Search Terms", false, true, true, null);
+		// lv1_app_web_chromium_edge_shortcuts
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Shortcuts", false, true, true, null);
+		// lv1_app_web_chromium_edge_top_sites
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Top Sites", false, true, true, null);
+		// lv1_app_web_chromium_edge_visit_urls
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Visit Urls", false, true, true, null);
+		
+		List subFirefoxList = new ArrayList();
+		// lv1_app_web_firefox_domain
+		addArtifactTreeNode(subFirefoxList, "Firefox Domain", false, true, true, null);
+		// lv1_app_web_firefox_download
+		addArtifactTreeNode(subFirefoxList, "Firefox Download", false, true, true, null);
+		// lv1_app_web_firefox_visit_history
+		addArtifactTreeNode(subFirefoxList, "Firefox Visit History", false, true, true, null);
+		// lv1_app_web_firefox_visit_urls
+		addArtifactTreeNode(subFirefoxList, "Firefox Visit Urls", false, true, true, null);
+		
+		List subWhaleList = new ArrayList();
+		// lv1_app_web_whale_autofill
+		addArtifactTreeNode(subWhaleList, "Whale Autofill", false, true, true, null);
+		// lv1_app_web_whale_bookmarks
+		addArtifactTreeNode(subWhaleList, "Whale Bookmarks", false, true, true, null);
+		// lv1_app_web_whale_cookies
+		addArtifactTreeNode(subWhaleList, "Whale Cookies", false, true, true, null);
+		// lv1_app_web_whale_download
+		addArtifactTreeNode(subWhaleList, "Whale Download", false, true, true, null);
+		// lv1_app_web_whale_favicons
+		addArtifactTreeNode(subWhaleList, "Whale Favicons", false, true, true, null);
+		// lv1_app_web_whale_logindata
+		addArtifactTreeNode(subWhaleList, "Whale Login Data", false, true, true, null);
+		// lv1_app_web_whale_search_terms
+		addArtifactTreeNode(subWhaleList, "Whale Search Terms", false, true, true, null);
+		// lv1_app_web_whale_shortcuts
+		addArtifactTreeNode(subWhaleList, "Whale Shortcuts", false, true, true, null);
+		// lv1_app_web_whale_top_sites
+		addArtifactTreeNode(subWhaleList, "Whale Top Sites", false, true, true, null);
+		// lv1_app_web_whale_visit_urls
+		addArtifactTreeNode(subWhaleList, "Whale Visit Urls", false, true, true, null);
 		
 		List subWebList = new ArrayList();
-		addArtifactTreeNode(subWebList, "Chrome", false, false, subChromeList);
+		addArtifactTreeNode(subWebList, "Chrome", false,true, true, subChromeList);
+		addArtifactTreeNode(subWebList, "Chromeium Edge", false,true, true, subChromiumEdgeList);
+		addArtifactTreeNode(subWebList, "Firefox", false,true, true, subFirefoxList);
+		addArtifactTreeNode(subWebList, "Whale", false,true, true, subWhaleList);
 		
 		List subKakaoList = new ArrayList();
-		addArtifactTreeNode(subKakaoList, "Kakaotalk New Chatlogs", true, true, null);
-		addArtifactTreeNode(subKakaoList, "Kakaotalk Chatlogs", true, true, null);
-		addArtifactTreeNode(subKakaoList, "Kakaotalk Chatlog Attachment", true, true, null);
-		addArtifactTreeNode(subKakaoList, "Kakaotalk Chatlog Drafts", true, true, null);
+		addArtifactTreeNode(subKakaoList, "Kakaotalk New Chatlogs", false,true, true, null);
+		addArtifactTreeNode(subKakaoList, "Kakaotalk Chatlogs",false, true, true, null);
+		addArtifactTreeNode(subKakaoList, "Kakaotalk Chatlog Attachment", false,true, true, null);
+		addArtifactTreeNode(subKakaoList, "Kakaotalk Chatlog Drafts", false,true, true, null);
 		
 		List subLogfileList = new ArrayList();
-		addArtifactTreeNode(subLogfileList, "Log Record", true, true, null);
-		addArtifactTreeNode(subLogfileList, "Restart Area", true, true, null);
+		addArtifactTreeNode(subLogfileList, "Log Record", false,true, true, null);
+		addArtifactTreeNode(subLogfileList, "Restart Area",false, true, true, null);
 		
 		List subFSList = new ArrayList();
-		addArtifactTreeNode(subFSList, "Logfile", true, true, subLogfileList);
-		addArtifactTreeNode(subFSList, "MFT", true, true, null);
-		addArtifactTreeNode(subFSList, "UsnJrnl", true, true, null);
+		addArtifactTreeNode(subFSList, "Logfile", false,true, true, subLogfileList);
+		addArtifactTreeNode(subFSList, "MFT",false, true, true, null);
+		addArtifactTreeNode(subFSList, "UsnJrnl",false, true, true, null);
 		
 		List subAndroidList = new ArrayList();
-		addArtifactTreeNode(subAndroidList, "App List", true, true, null);
-		addArtifactTreeNode(subAndroidList, "Call History", true, true, null);
-		addArtifactTreeNode(subAndroidList, "Emb File", true, true, null);
-		addArtifactTreeNode(subAndroidList, "File History", true, true, null);
-		addArtifactTreeNode(subAndroidList, "Geodata", true, true, null);
-		addArtifactTreeNode(subAndroidList, "Id&password Hash", true, true, null);
-		addArtifactTreeNode(subAndroidList, "Web Browser History", true, true, null);	
+		addArtifactTreeNode(subAndroidList, "App List",false, true, true, null);
+		addArtifactTreeNode(subAndroidList, "Call History",false, true, true, null);
+		addArtifactTreeNode(subAndroidList, "Emb File",false, true, true, null);
+		addArtifactTreeNode(subAndroidList, "File History",false, true, true, null);
+		addArtifactTreeNode(subAndroidList, "Geodata",false, true, true, null);
+		addArtifactTreeNode(subAndroidList, "Id&password Hash",false, true, true, null);
+		addArtifactTreeNode(subAndroidList, "Web Browser History",false, true, true, null);	
 		// lv1_os_and_basic_app_accounts_ce_0
-		addArtifactTreeNode(subAndroidList, "Accounts CE 0", true, true, null);
+		addArtifactTreeNode(subAndroidList, "Accounts CE 0", false,true, true, null);
 		// lv1_os_and_basic_app_accounts_de_0
-		addArtifactTreeNode(subAndroidList, "Accounts DE 0", true, true, null);
+		addArtifactTreeNode(subAndroidList, "Accounts DE 0", false,true, true, null);
 		// lv1_os_and_basic_app_call_logs
-		addArtifactTreeNode(subAndroidList, "Call Logs", true, true, null);
+		addArtifactTreeNode(subAndroidList, "Call Logs", false,true, true, null);
 		// lv1_os_and_basic_app_file_cache
-		addArtifactTreeNode(subAndroidList, "File Cache", true, true, null);
+		addArtifactTreeNode(subAndroidList, "File Cache", false,true, true, null);
 		// lv1_os_and_basic_app_mms
-		addArtifactTreeNode(subAndroidList, "MMS", true, true, null);
+		addArtifactTreeNode(subAndroidList, "MMS",false, true, true, null);
 		// lv1_os_and_basic_app_recent_files
-		addArtifactTreeNode(subAndroidList, "Recent Files", true, true, null);
+		addArtifactTreeNode(subAndroidList, "Recent Files",false, true, true, null);
 		// lv1_os_and_basic_app_sim_info
-		addArtifactTreeNode(subAndroidList, "Sim Info", true, true, null);
+		addArtifactTreeNode(subAndroidList, "Sim Info",false, true, true, null);
 		// lv1_os_and_basic_app_sim_info_dat
-		addArtifactTreeNode(subAndroidList, "Sim Info Dat", true, true, null);
+		addArtifactTreeNode(subAndroidList, "Sim Info Dat", false,true, true, null);
 		// lv1_os_and_basic_app_sms
-		addArtifactTreeNode(subAndroidList, "SMS", true, true, null);
+		addArtifactTreeNode(subAndroidList, "SMS", false,true, true, null);
 		// lv1_os_and_basic_app_usagestats_0
-		addArtifactTreeNode(subAndroidList, "Usagestats 0", true, true, null);
+		addArtifactTreeNode(subAndroidList, "Usagestats 0", false,true, true, null);
 		// lv1_os_and_basic_app_wifi_info
-		addArtifactTreeNode(subAndroidList, "Wifi Info", true, true, null);
+		addArtifactTreeNode(subAndroidList, "Wifi Info",false, true, true, null);
 
 
 		
 		List subKakaomobileList = new ArrayList();
-		addArtifactTreeNode(subKakaomobileList, "Chatlogs", true, true, null);
-		addArtifactTreeNode(subKakaomobileList, "Chatrooms", true, true, null);
-		addArtifactTreeNode(subKakaomobileList, "Friends", true, true, null);
-		addArtifactTreeNode(subKakaomobileList, "Block Friends", true, true, null);
-		addArtifactTreeNode(subKakaomobileList, "Channel History", true, true, null);
+		addArtifactTreeNode(subKakaomobileList, "Chatlogs", false,true, true, null);
+		addArtifactTreeNode(subKakaomobileList, "Chatrooms", false,true, true, null);
+		addArtifactTreeNode(subKakaomobileList, "Friends",false, true, true, null);
+		addArtifactTreeNode(subKakaomobileList, "Block Friends",false, true, true, null);
+		addArtifactTreeNode(subKakaomobileList, "Channel History",false, true, true, null);
 
 
 		List subMobileList = new ArrayList();
-		addArtifactTreeNode(subMobileList, "Android", true, true, subAndroidList);
-		addArtifactTreeNode(subMobileList, "Kakaotalk (Mobile)", true, true, subKakaomobileList);
+		addArtifactTreeNode(subMobileList, "Android", false,true, true, subAndroidList);
+		addArtifactTreeNode(subMobileList, "Kakaotalk (Mobile)", false,true, true, subKakaomobileList);
 		
 		List subLv1List = new ArrayList();
-		addArtifactTreeNode(subLv1List, "Registry", false, false, subRegList);
-		addArtifactTreeNode(subLv1List, "Event Logs", false, false, subEvtList);
-		addArtifactTreeNode(subLv1List, "Prefetch", true, true, subPreList);
-		addArtifactTreeNode(subLv1List, "Web Browser", true, true, subWebList);
-		addArtifactTreeNode(subLv1List, "Kakaotalk", true, true, subKakaoList);
-		addArtifactTreeNode(subLv1List, "File System", true, true, subFSList);
+		addArtifactTreeNode(subLv1List, "Registry", false, false, false, subRegList);
+		addArtifactTreeNode(subLv1List, "Event Logs", false, false, false, subEvtList);
+		addArtifactTreeNode(subLv1List, "Prefetch", false, true, true, subPreList);
+		addArtifactTreeNode(subLv1List, "Web Browser", false, true, true, subWebList);
+		addArtifactTreeNode(subLv1List, "Kakaotalk", false, true, true, subKakaoList);
+		addArtifactTreeNode(subLv1List, "File System", false, true, true, subFSList);
 
 
-		addArtifactTreeNode(subLv1List, "Notification", true, true, null);
-		addArtifactTreeNode(subLv1List, "Recycle Bin", true, true, null);
-		addArtifactTreeNode(subLv1List, "Sticky Note", true, true, null);
-		addArtifactTreeNode(subLv1List, "Windows Timeline", true, true, null);
+		addArtifactTreeNode(subLv1List, "Notification",false, true, true, null);
+		addArtifactTreeNode(subLv1List, "Recycle Bin", false,true, true, null);
+		addArtifactTreeNode(subLv1List, "Sticky Note", false,true, true, null);
+		addArtifactTreeNode(subLv1List, "Windows Timeline",false, true, true, null);
 		
 		//addArtifactTreeNode(subLv1List, "NTFS $LogFile", true, true, null);
 		//addArtifactTreeNode(subLv1List, "NTFS USN Journal", true, true, null);
 
-		addArtifactTreeNode(subLv1List, "LNK File", true, true, null);
+		addArtifactTreeNode(subLv1List, "LNK File", false,true, true, null);
 		
 		
 		List subJumpList = new ArrayList();
-		addArtifactTreeNode(subLv1List, "Jumplist", true, true, subJumpList);
+		addArtifactTreeNode(subLv1List, "Jumplist", false, true, true, subJumpList);
 		// lv1_os_win_jumplist_automatics
-		addArtifactTreeNode(subJumpList, "Jumplist Automatics", true, true, null);
+		addArtifactTreeNode(subJumpList, "Jumplist Automatics",false, true, true, null);
 		
 		// lv1_os_win_icon_cache
-		addArtifactTreeNode(subLv1List, "Icon Cache", true, true, null);
+		addArtifactTreeNode(subLv1List, "Icon Cache", false,true, true, null);
 		
 		// lv1_os_win_thumbnail_cache
-		addArtifactTreeNode(subLv1List, "Thumbnail Cache", true, true, null);
+		addArtifactTreeNode(subLv1List, "Thumbnail Cache", false,true, true, null);
 
 		
-		addArtifactTreeNode(subLv1List, "Mobile", true, true, subMobileList);
-		//addArtifactTreeNode(subLv1List, "Prefetch", true, true, null);
-
+		addArtifactTreeNode(subLv1List, "Mobile", false,true, true, subMobileList);
+		
 		/*
 		addArtifactTreeNode(subLv1List, "Chrome Visit Urls", true, true, null);
 		addArtifactTreeNode(subLv1List, "Chrome Search Terms", true, true, null);
@@ -237,9 +297,8 @@ public class ArtifactController {
 
 		
 		List subLv2List = new ArrayList();
-		addArtifactTreeNode(subLv2List, "Application History", true, true, null);
-
-
+		addArtifactTreeNode(subLv2List, "Application History", false, true, true, null);
+		
 		/*
 		List subWebList = new ArrayList();
 		addArtifactTreeNode(subWebList, "History", true, true, null);
@@ -247,20 +306,21 @@ public class ArtifactController {
 		addArtifactTreeNode(subWebList, "Cache", true, true, null);
 		addArtifactTreeNode(subWebList, "Cookie", true, true, null);
 		*/
+
 		
 		List subList = new ArrayList();
-		addArtifactTreeNode(subList, "Overview", true, true, null);
-		addArtifactTreeNode(subList, "Operating System", true, true, null);
-		addArtifactTreeNode(subList, "Storage Device", true, true, null);
-		addArtifactTreeNode(subList, "Installed Application", true, true, null);
+		addArtifactTreeNode(subList, "Overview", false, true, true, null);
+		addArtifactTreeNode(subList, "Operating System", false, true, true, null);
+		addArtifactTreeNode(subList, "Storage Device", false, true, true, null);
+		addArtifactTreeNode(subList, "Installed Application", false, true, true, null);
 		//addArtifactTreeNode(subList, "Web", false, false, subWebList);
 
 		
 		
 		List list = new ArrayList();
-		addArtifactTreeNode(list, "~2019", false, false, subList);
-		addArtifactTreeNode(list, "Lv2 Tables", false, false, subLv2List);
-		addArtifactTreeNode(list, "Lv1 Tables", false, false, subLv1List);
+		addArtifactTreeNode(list, "~2019", false, false, false,subList);
+		addArtifactTreeNode(list, "Lv2 Tables", true, false, false, subLv2List);
+		addArtifactTreeNode(list, "Lv1 Tables", true, false, false, subLv1List);
 		
 
 		// addArtifactTreeNode(list, "Mobile", false, false, subListMobile);
@@ -1883,6 +1943,43 @@ public class ArtifactController {
 			return mav;
 		}
 		
+		// lv1_os_win_reg_mru_file
+		@RequestMapping(value ="/win_reg_mru_file.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getMRUFile (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+		    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+				mav.setViewName("jsonView");
+
+				if (map.get("currentPage") == null && map.get("pageSize") == null) {
+					mav.addObject("totalcount", 0);
+					mav.addObject("list", new ArrayList());
+					return mav;
+				}
+
+				Map<String, Object> paramMap = new HashMap<String, Object>();
+
+				paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+				paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+				try {
+					long pageSize = Long.parseLong((String) map.get("pageSize"));
+					paramMap.put("pageSize", pageSize);
+					long currentPage = Long.parseLong((String) map.get("currentPage"));
+					paramMap.put("offset", (currentPage - 1) * pageSize);
+				} catch (Exception e) {
+					e.printStackTrace();
+					mav.addObject("totalcount", 0);
+					return mav;
+				}
+
+				List<Map> MRUFile = service.selectMRUFile(paramMap);
+				int totalCnt = ((Long) service.selectMRUFileCount(paramMap).get("cnt")).intValue();
+				mav.addObject("list", MRUFile);
+				mav.addObject("totalcount", totalCnt);
+
+				return mav;
+			}
+
+
+		
 		// lv1_os_win_reg_mui_cache
 		@RequestMapping(value = "/reg_mui_cache.do", method = { RequestMethod.GET, RequestMethod.POST })
 		public ModelAndView getRegMuiCache(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
@@ -2991,6 +3088,880 @@ public class ArtifactController {
 			List<Map> ChromeVisitUrls = service.selectChromeVisitUrls(paramMap);
 			int totalCnt = ((Long) service.selectChromeVisitUrlsCount(paramMap).get("cnt")).intValue();
 			mav.addObject("list", ChromeVisitUrls);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+	
+	// lv1_app_web_chrome_domain
+	@RequestMapping(value ="/web_chrome_domain.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromeDomain (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromeDomain = service.selectChromeDomain(paramMap);
+			int totalCnt = ((Long) service.selectChromeDomainCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromeDomain);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+	// lv1_app_web_chromium_edge_autofill
+	@RequestMapping(value ="/web_chromium_edge_autofill.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeAutofill (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeAutofill = service.selectChromiumEdgeAutofill(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeAutofillCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeAutofill);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_chromium_edge_bookmarks
+	@RequestMapping(value ="/web_chromium_edge_bookmarks.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeBookmarks (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeBookmarks = service.selectChromiumEdgeBookmarks(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeBookmarksCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeBookmarks);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_chromium_edge_cookies
+	@RequestMapping(value ="/web_chromium_edge_cookies.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeCookies (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeCookies = service.selectChromiumEdgeCookies(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeCookiesCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeCookies);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_chromium_edge_download
+	@RequestMapping(value ="/web_chromium_edge_download.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeDownload (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeDownload = service.selectChromiumEdgeDownload(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeDownloadCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeDownload);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_chromium_edge_favicons
+	@RequestMapping(value ="/web_chromium_edge_favicons.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeFavicons (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeFavicons = service.selectChromiumEdgeFavicons(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeFaviconsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeFavicons);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_chromium_edge_logindata
+	@RequestMapping(value ="/web_chromium_edge_logindata.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeLogindata (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeLogindata = service.selectChromiumEdgeLogindata(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeLogindataCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeLogindata);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_chromium_edge_search_terms
+	@RequestMapping(value ="/web_chromium_edge_search_terms.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeSearch (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeSearch = service.selectChromiumEdgeSearch(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeSearchCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeSearch);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_chromium_edge_shortcuts
+	@RequestMapping(value ="/web_chromium_edge_shortcuts.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeShortcuts (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeShortcuts = service.selectChromiumEdgeShortcuts(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeShortcutsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeShortcuts);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_chromium_edge_top_sites
+	@RequestMapping(value ="/web_chromium_edge_top_sites.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeTop (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeTop = service.selectChromiumEdgeTop(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeTopCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeTop);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_chromium_edge_visit_urls
+	@RequestMapping(value ="/web_chromium_edge_visit_urls.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeVisit (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromiumEdgeVisit = service.selectChromiumEdgeVisit(paramMap);
+			int totalCnt = ((Long) service.selectChromiumEdgeVisitCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromiumEdgeVisit);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_firefox_domain
+	@RequestMapping(value ="/web_firefox_domain.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxDomain (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxDomain = service.selectFirefoxDomain(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxDomainCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxDomain);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_firefox_download
+	@RequestMapping(value ="/web_firefox_download.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxDownload (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxDownload = service.selectFirefoxDownload(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxDownloadCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxDownload);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_firefox_visit_history
+	@RequestMapping(value ="/web_firefox_visit_history.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxVisitHistory (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxVisitHistory = service.selectFirefoxVisitHistory(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxVisitHistoryCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxVisitHistory);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_firefox_visit_urls
+	@RequestMapping(value ="/web_firefox_visit_urls.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxVisitUrls (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxVisitUrls = service.selectFirefoxVisitUrls(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxVisitUrlsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxVisitUrls);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_autofill
+	@RequestMapping(value ="/web_whale_autofill.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleAutofill (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleAutofill = service.selectWhaleAutofill(paramMap);
+			int totalCnt = ((Long) service.selectWhaleAutofillCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleAutofill);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_bookmarks
+	@RequestMapping(value ="/web_whale_bookmarks.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleBookmarks (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleBookmarks = service.selectWhaleBookmarks(paramMap);
+			int totalCnt = ((Long) service.selectWhaleBookmarksCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleBookmarks);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_cookies
+	@RequestMapping(value ="/web_whale_cookies.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleCookies (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleCookies = service.selectWhaleCookies(paramMap);
+			int totalCnt = ((Long) service.selectWhaleCookiesCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleCookies);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_download
+	@RequestMapping(value ="/web_whale_download.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleDownload (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleDownload = service.selectWhaleDownload(paramMap);
+			int totalCnt = ((Long) service.selectWhaleDownloadCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleDownload);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_favicons
+	@RequestMapping(value ="/web_whale_favicons.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleFavicons (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleFavicons = service.selectWhaleFavicons(paramMap);
+			int totalCnt = ((Long) service.selectWhaleFaviconsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleFavicons);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_logindata
+	@RequestMapping(value ="/web_whale_logindata.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleLogindata (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleLogindata = service.selectWhaleLogindata(paramMap);
+			int totalCnt = ((Long) service.selectWhaleLogindataCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleLogindata);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_search_terms
+	@RequestMapping(value ="/web_whale_search_terms.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleSearchTerms (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleSearchTerms = service.selectWhaleSearchTerms(paramMap);
+			int totalCnt = ((Long) service.selectWhaleSearchTermsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleSearchTerms);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_shortcuts
+	@RequestMapping(value ="/web_whale_shortcuts.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleShortcuts (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleShortcuts = service.selectWhaleShortcuts(paramMap);
+			int totalCnt = ((Long) service.selectWhaleShortcutsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleShortcuts);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_top_sites
+	@RequestMapping(value ="/web_whale_top_sites.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleTopSites (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleTopSites = service.selectWhaleTopSites(paramMap);
+			int totalCnt = ((Long) service.selectWhaleTopSitesCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleTopSites);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_whale_visit_urls
+	@RequestMapping(value ="/web_whale_visit_urls.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleVisitUrls (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleVisitUrls = service.selectWhaleVisitUrls(paramMap);
+			int totalCnt = ((Long) service.selectWhaleVisitUrlsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleVisitUrls);
 			mav.addObject("totalcount", totalCnt);
 
 			return mav;

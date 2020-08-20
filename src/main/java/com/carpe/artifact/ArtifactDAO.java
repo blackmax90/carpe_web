@@ -169,6 +169,11 @@ public interface ArtifactDAO {
 	public List<Map> selectRegMruFolder(Map<String, Object> paramMap) throws Exception;
 	public Map selectRegMruFolderCount(Map<String, Object> paramMap) throws Exception;
 	
+	// lv1_os_win_reg_mru_file
+	public List<Map> selectMRUFile(Map<String, Object> paramMap) throws Exception;
+	public Map selectMRUFileCount(Map<String, Object> paramMap) throws Exception;
+
+	
 	// lv1_os_win_reg_mui_cache
 	public List<Map> selectRegMuiCache(Map<String, Object> paramMap) throws Exception;
 	public Map selectRegMuiCacheCount(Map<String, Object> paramMap) throws Exception;
@@ -287,6 +292,107 @@ public interface ArtifactDAO {
 	// lv1_app_web_chrome_visit_urls
 	public List<Map> selectChromeVisitUrls(Map<String, Object> paramMap) throws Exception;
 	public Map selectChromeVisitUrlsCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_chrome_domain
+	public List<Map> selectChromeDomain(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeDomainCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_chromium_edge_autofill
+	public List<Map> selectChromiumEdgeAutofill(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeAutofillCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chromium_edge_bookmarks
+	public List<Map> selectChromiumEdgeBookmarks(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeBookmarksCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chromium_edge_cookies
+	public List<Map> selectChromiumEdgeCookies(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeCookiesCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chromium_edge_download
+	public List<Map> selectChromiumEdgeDownload(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeDownloadCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chromium_edge_favicons
+	public List<Map> selectChromiumEdgeFavicons(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeFaviconsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chromium_edge_logindata
+	public List<Map> selectChromiumEdgeLogindata(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeLogindataCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chromium_edge_search_terms
+	public List<Map> selectChromiumEdgeSearch(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeSearchCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chromium_edge_shortcuts
+	public List<Map> selectChromiumEdgeShortcuts(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeShortcutsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chromium_edge_top_sites
+	public List<Map> selectChromiumEdgeTop(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeTopCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_chromium_edge_visit_urls
+	public List<Map> selectChromiumEdgeVisit(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromiumEdgeVisitCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_firefox_domain
+	public List<Map> selectFirefoxDomain(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxDomainCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_firefox_download
+	public List<Map> selectFirefoxDownload(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxDownloadCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_firefox_visit_history
+	public List<Map> selectFirefoxVisitHistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxVisitHistoryCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_firefox_visit_urls
+	public List<Map> selectFirefoxVisitUrls(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxVisitUrlsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_autofill
+	public List<Map> selectWhaleAutofill(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleAutofillCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_bookmarks
+	public List<Map> selectWhaleBookmarks(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleBookmarksCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_cookies
+	public List<Map> selectWhaleCookies(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleCookiesCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_download
+	public List<Map> selectWhaleDownload(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleDownloadCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_favicons
+	public List<Map> selectWhaleFavicons(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleFaviconsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_logindata
+	public List<Map> selectWhaleLogindata(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleLogindataCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_search_terms
+	public List<Map> selectWhaleSearchTerms(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleSearchTermsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_shortcuts
+	public List<Map> selectWhaleShortcuts(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleShortcutsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_top_sites
+	public List<Map> selectWhaleTopSites(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleTopSitesCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_whale_visit_urls
+	public List<Map> selectWhaleVisitUrls(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleVisitUrlsCount(Map<String, Object> paramMap) throws Exception;
+
 
 	/*
 	// lv1_fs_ntfs_logfile
