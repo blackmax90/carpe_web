@@ -919,7 +919,75 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	public Map selectFirefoxVisitUrlsCount(Map<String, Object> paramMap) throws Exception {
 	    return sqlSession.selectOne(Namespace + ".selectFirefoxVisitUrlsCount", paramMap);
 	}
+	
+	// lv1_app_web_firefox_bookmarks
+	@Override
+	public List<Map> selectFirefoxBookmarks(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectFirefoxBookmarks", paramMap);
+	}
 
+	@Override
+	public Map selectFirefoxBookmarksCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectFirefoxBookmarksCount", paramMap);
+	}
+
+	// lv1_app_web_firefox_content_prefs
+	@Override
+	public List<Map> selectFirefoxContentPrefs(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectFirefoxContentPrefs", paramMap);
+	}
+
+	@Override
+	public Map selectFirefoxContentPrefsCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectFirefoxContentPrefsCount", paramMap);
+	}
+
+	// lv1_app_web_firefox_cookies
+	@Override
+	public List<Map> selectFirefoxCookies(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectFirefoxCookies", paramMap);
+	}
+
+	@Override
+	public Map selectFirefoxCookiesCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectFirefoxCookiesCount", paramMap);
+	}
+
+	// lv1_app_web_firefox_favicons
+	@Override
+	public List<Map> selectFirefoxFavicons(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectFirefoxFavicons", paramMap);
+	}
+
+	@Override
+	public Map selectFirefoxFaviconsCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectFirefoxFaviconsCount", paramMap);
+	}
+
+	// lv1_app_web_firefox_formhistory
+	@Override
+	public List<Map> selectFirefoxFormhistory(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectFirefoxFormhistory", paramMap);
+	}
+
+	@Override
+	public Map selectFirefoxFormhistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectFirefoxFormhistoryCount", paramMap);
+	}
+
+	// lv1_app_web_firefox_permissions
+	@Override
+	public List<Map> selectFirefoxPermissions(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectFirefoxPermissions", paramMap);
+	}
+
+	@Override
+	public Map selectFirefoxPermissionsCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectFirefoxPermissionsCount", paramMap);
+	}
+
+
+	
 	// lv1_app_web_whale_autofill
 	@Override
 	public List<Map> selectWhaleAutofill(Map<String, Object> paramMap) throws Exception {

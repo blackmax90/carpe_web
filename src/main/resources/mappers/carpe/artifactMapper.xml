@@ -1314,6 +1314,110 @@
 	            <!--include refid="selectArtifactCondition" /-->
 	</select>
 	
+	<!-- lv1_app_web_firefox_bookmarks -->
+	<select id="selectFirefoxBookmarks"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_bookmarks
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxBookmarksCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_bookmarks
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_firefox_content_prefs -->
+	<select id="selectFirefoxContentPrefs"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_content_prefs
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxContentPrefsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_content_prefs
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_firefox_cookies -->
+	<select id="selectFirefoxCookies"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_cookies
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxCookiesCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_cookies
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_firefox_favicons -->
+	<select id="selectFirefoxFavicons"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_favicons
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxFaviconsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_favicons
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_firefox_formhistory -->
+	<select id="selectFirefoxFormhistory"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_formhistory
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxFormhistoryCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_formhistory
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_firefox_permissions -->
+	<select id="selectFirefoxPermissions"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_firefox_permissions
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectFirefoxPermissionsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_firefox_permissions
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+		
+	
 	<!-- lv1_app_web_whale_autofill -->
 	<select id="selectWhaleAutofill"  parameterType="Map" resultType="Map">
 	SELECT *
