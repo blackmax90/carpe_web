@@ -37,7 +37,15 @@
     <main class="main">
       <section class="tit-area">
         <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%> </h3>
+        <h3 id="evdname"></h3>
         <button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
+        <div class="location-area">
+          <ul class="list-h">
+            <li>Home</li>
+            <li>Visualization</li>
+            <li>MFT History</li>
+          </ul>
+        </div>
       </section>
 
       <article class="container">
@@ -128,10 +136,13 @@
         contentType : 'application/json; charset=utf-8',
         formatData : function(data) {
           var node = $('#jqxTree_dirs').jqxTree('getSelectedItem');
+
           if (node) {
-            data["parentId"] = node.value["id"];
+            data["parent_id"] = node.value["id"];
+            data["evd_id"] = node.value["evd_id"];
+            data["par_id"] = node.value["par_id"];
           } else {
-            data["parentId"] = <%=Consts.TREE_ROOT_ID%>;
+            data["parent_id"] = <%=Consts.TREE_ROOT_ID%>;
           }
 
           return data;
@@ -173,14 +184,20 @@
       // tree
       function expandDirTree(node) {
         var param = {}, list;
+
         if (node && node.value) {
-          param.parentId = node.value["id"];
+          param.evd_id = node.value["evd_id"];
+          param.evd_name = node.value["evd_name"];
+          param.par_id = node.value["par_id"];
+          param.id = node.value["id"];
+          param.parent_id = node.value["id"];
+
           changeDirIcon(node);
         } else {
-          param.parentId = <%=Consts.TREE_ROOT_ID%>;
+          param.evd_id = "";
         }
 
-        param.dirType = 3;
+        param.dirType = <%=Consts.DIR_TYPE%>;
 
         $.ajax({
           type: "POST",
@@ -200,6 +217,7 @@
               $("#jqxTree_dirs").jqxTree('removeItem', nextItem.element);
               $("#jqxTree_dirs").jqxTree('addTo', data["list"], node);
               node.value.childcount = data["list"].length;
+
               if (!data["list"].length) {
                 $('#jqxTree_dirs').jqxTree('updateItem', node, node);
               }
@@ -214,11 +232,17 @@
       }
 
       var changeDirIcon = function(node) {
+        if (node.value["attr"] != "dir") {
+          return;
+        }
+
         var param = {};
+        param.evd_id = node.value["evd_id"];
+        param.par_id = node.value["par_id"];
         param.file_id = node.value["id"];
         param.filename = node.value["filename"];
         param.color = node.value["color"];
-        param.dirType = 3;
+        param.dirType = <%=Consts.DIR_TYPE%>;
         param.isExpanded = node.isExpanded;
 
         $.ajax({
@@ -227,6 +251,10 @@
           async: false,
           data: param,
           success: function (data, textStatus, jqXHR) {
+            if (data.ret != 0) {
+              return;
+            }
+
             node.label = data.label;
             node.value["filename"] = data.filename;
             node.value["color"] = data.color;
@@ -244,6 +272,8 @@
       $("#jqxTree_dirs").on("expand", function (event) {
         var node = $("#jqxTree_dirs").jqxTree('getItem', event.args.element);
 
+        $("#evdname").text("Evidence : " + node.value["evd_name"]);
+
         if (node.value["isLoaded"]) {
           changeDirIcon(node);
           return;
@@ -254,12 +284,21 @@
 
       $("#jqxTree_dirs").on("collapse", function (event) {
         var node = $('#jqxTree_dirs').jqxTree('getSelectedItem');
+
+        $("#evdname").text("Evidence : " + node.value["evd_name"]);
+
         changeDirIcon(node);
       });
 
       $("#jqxTree_dirs").on('select',function (event){
-        $("#jqxGrid_files").jqxGrid('updateBoundData');
         var node = $('#jqxTree_dirs').jqxTree('getSelectedItem');
+
+        $("#evdname").text("Evidence : " + node.value["evd_name"]);
+
+        if (node.value["attr"] == "dir") {
+          $("#jqxGrid_files").jqxGrid('updateBoundData');
+        }
+
         changeDirIcon(node);
       });
     });

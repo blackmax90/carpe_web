@@ -13,6 +13,7 @@
          , A.mtime
          , A.ctime
          , A.extension
+         , A.par_id
       FROM (
            SELECT file_id
                 , parent_id
@@ -22,9 +23,12 @@
 				        , DATE_FORMAT(STR_TO_DATE(mtime, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H:%i:%s') AS mtime
 				        , DATE_FORMAT(STR_TO_DATE(ctime, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H:%i:%s') AS ctime
                 , extension
+                , par_id
              FROM lv2_os_mft_history
             WHERE 1=1
               AND case_id = #{case_id}
+              AND evd_id = #{evd_id}
+              AND par_id = #{par_id}
               AND parent_id = #{parent_id}
 		 	        <if test="dir_type != null and !dir_type.equals('')">
               AND dir_type = #{dir_type}
@@ -51,6 +55,8 @@
              FROM lv2_os_mft_history a
             WHERE 1=1
               AND case_id = #{case_id}
+              AND evd_id = #{evd_id}
+              AND par_id = #{par_id}
               AND file_id = #{file_id}
               AND dir_type = #{dir_type}
             LIMIT 1
