@@ -352,7 +352,33 @@ public interface ArtifactDAO {
 	// lv1_app_web_firefox_visit_urls
 	public List<Map> selectFirefoxVisitUrls(Map<String, Object> paramMap) throws Exception;
 	public Map selectFirefoxVisitUrlsCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_firefox_bookmarks
+	public List<Map> selectFirefoxBookmarks(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxBookmarksCount(Map<String, Object> paramMap) throws Exception;
 
+	// lv1_app_web_firefox_content_prefs
+	public List<Map> selectFirefoxContentPrefs(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxContentPrefsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_firefox_cookies
+	public List<Map> selectFirefoxCookies(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxCookiesCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_firefox_favicons
+	public List<Map> selectFirefoxFavicons(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxFaviconsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_firefox_formhistory
+	public List<Map> selectFirefoxFormhistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxFormhistoryCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_firefox_permissions
+	public List<Map> selectFirefoxPermissions(Map<String, Object> paramMap) throws Exception;
+	public Map selectFirefoxPermissionsCount(Map<String, Object> paramMap) throws Exception;
+
+
+	
 	// lv1_app_web_whale_autofill
 	public List<Map> selectWhaleAutofill(Map<String, Object> paramMap) throws Exception;
 	public Map selectWhaleAutofillCount(Map<String, Object> paramMap) throws Exception;

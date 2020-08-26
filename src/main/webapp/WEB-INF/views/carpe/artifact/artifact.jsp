@@ -1375,6 +1375,49 @@
       artifactKind["Firefox Visit Urls"].columnSet = [
       {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'title', dataField: 'title', width: '10%', cellsalign: 'left', align: 'center'},{text: 'rev_host', dataField: 'rev_host', width: '10%', cellsalign: 'left', align: 'center'},{text: 'visit_count', dataField: 'visit_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'hidden', dataField: 'hidden', width: '10%', cellsalign: 'left', align: 'center'},{text: 'typed', dataField: 'typed', width: '10%', cellsalign: 'left', align: 'center'},{text: 'frecency', dataField: 'frecency', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_visit_date', dataField: 'last_visit_date', width: '10%', cellsalign: 'left', align: 'center'},{text: 'guid', dataField: 'guid', width: '10%', cellsalign: 'left', align: 'center'},{text: 'foreign_count', dataField: 'foreign_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'description', dataField: 'description', width: '10%', cellsalign: 'left', align: 'center'},{text: 'preview_image_url', dataField: 'preview_image_url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'firefox_profile_id', dataField: 'firefox_profile_id', width: '10%', cellsalign: 'left', align: 'center'}
       ];
+		
+   // lv1_app_web_firefox_bookmarks
+      artifactKind["Firefox Bookmarks"] = {};
+      artifactKind["Firefox Bookmarks"].url = "/carpe/web_firefox_bookmarks.do";
+      artifactKind["Firefox Bookmarks"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'title', dataField: 'title', width: '10%', cellsalign: 'left', align: 'center'},{text: 'bookmark_path', dataField: 'bookmark_path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'added_time', dataField: 'added_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_modified_time', dataField: 'last_modified_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'sync_status', dataField: 'sync_status', width: '10%', cellsalign: 'left', align: 'center'},{text: 'sync_change_count', dataField: 'sync_change_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'firefox_profile_id', dataField: 'firefox_profile_id', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_firefox_content_prefs
+      artifactKind["Firefox Content Prefs"] = {};
+      artifactKind["Firefox Content Prefs"].url = "/carpe/web_firefox_content_prefs.do";
+      artifactKind["Firefox Content Prefs"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'setting', dataField: 'setting', width: '10%', cellsalign: 'left', align: 'center'},{text: 'value', dataField: 'value', width: '10%', cellsalign: 'left', align: 'center'},{text: 'time', dataField: 'time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'firefox_profile_id', dataField: 'firefox_profile_id', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_firefox_cookies
+      artifactKind["Firefox Cookies"] = {};
+      artifactKind["Firefox Cookies"].url = "/carpe/web_firefox_cookies.do";
+      artifactKind["Firefox Cookies"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'name', dataField: 'name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'value', dataField: 'value', width: '10%', cellsalign: 'left', align: 'center'},{text: 'host', dataField: 'host', width: '10%', cellsalign: 'left', align: 'center'},{text: 'path', dataField: 'path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'expire_time', dataField: 'expire_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_accessed_time', dataField: 'last_accessed_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'created_time', dataField: 'created_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_secure', dataField: 'is_secure', width: '10%', cellsalign: 'left', align: 'center'},{text: 'is_http_only', dataField: 'is_http_only', width: '10%', cellsalign: 'left', align: 'center'},{text: 'inbrowser_element', dataField: 'inbrowser_element', width: '10%', cellsalign: 'left', align: 'center'},{text: 'same_site', dataField: 'same_site', width: '10%', cellsalign: 'left', align: 'center'},{text: 'raw_same_site', dataField: 'raw_same_site', width: '10%', cellsalign: 'left', align: 'center'},{text: 'scheme_map', dataField: 'scheme_map', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'firefox_profile_id', dataField: 'firefox_profile_id', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_firefox_favicons
+      artifactKind["Firefox Favicons"] = {};
+      artifactKind["Firefox Favicons"].url = "/carpe/web_firefox_favicons.do";
+      artifactKind["Firefox Favicons"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'icon_id', dataField: 'icon_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'icon_url', dataField: 'icon_url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'icon_url_hash', dataField: 'icon_url_hash', width: '10%', cellsalign: 'left', align: 'center'},{text: 'width', dataField: 'width', width: '10%', cellsalign: 'left', align: 'center'},{text: 'root', dataField: 'root', width: '10%', cellsalign: 'left', align: 'center'},{text: 'color', dataField: 'color', width: '10%', cellsalign: 'left', align: 'center'},{text: 'expired_time', dataField: 'expired_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'data', dataField: 'data', width: '10%', cellsalign: 'left', align: 'center'},{text: 'page_url_list', dataField: 'page_url_list', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'chrome_profile', dataField: 'chrome_profile', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_firefox_formhistory
+      artifactKind["Firefox Formhistory"] = {};
+      artifactKind["Firefox Formhistory"].url = "/carpe/web_firefox_formhistory.do";
+      artifactKind["Firefox Formhistory"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'fieldname', dataField: 'fieldname', width: '10%', cellsalign: 'left', align: 'center'},{text: 'value', dataField: 'value', width: '10%', cellsalign: 'left', align: 'center'},{text: 'times_used', dataField: 'times_used', width: '10%', cellsalign: 'left', align: 'center'},{text: 'first_used_time', dataField: 'first_used_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_used_time', dataField: 'last_used_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'guid', dataField: 'guid', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'firefox_profile_id', dataField: 'firefox_profile_id', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_app_web_firefox_permissions
+      artifactKind["Firefox Permissions"] = {};
+      artifactKind["Firefox Permissions"].url = "/carpe/web_firefox_permissions.do";
+      artifactKind["Firefox Permissions"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'url', dataField: 'url', width: '10%', cellsalign: 'left', align: 'center'},{text: 'type', dataField: 'type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'permission', dataField: 'permission', width: '10%', cellsalign: 'left', align: 'center'},{text: 'expire_type', dataField: 'expire_type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'expire_time', dataField: 'expire_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'modified_time', dataField: 'modified_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'os_account', dataField: 'os_account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'firefox_profile_id', dataField: 'firefox_profile_id', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
 
       // lv1_app_web_whale_autofill
       artifactKind["Whale Autofill"] = {};

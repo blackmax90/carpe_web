@@ -164,6 +164,19 @@ public class ArtifactController {
 		addArtifactTreeNode(subFirefoxList, "Firefox Visit History", false, true, true, null);
 		// lv1_app_web_firefox_visit_urls
 		addArtifactTreeNode(subFirefoxList, "Firefox Visit Urls", false, true, true, null);
+		// lv1_app_web_firefox_bookmarks
+		addArtifactTreeNode(subFirefoxList, "Firefox Bookmarks", false, true, true, null);
+		// lv1_app_web_firefox_content_prefs
+		addArtifactTreeNode(subFirefoxList, "Firefox Content Prefs", false, true, true, null);
+		// lv1_app_web_firefox_cookies
+		addArtifactTreeNode(subFirefoxList, "Firefox Cookies", false, true, true, null);
+		// lv1_app_web_firefox_favicons
+		addArtifactTreeNode(subFirefoxList, "Firefox Favicons", false, true, true, null);
+		// lv1_app_web_firefox_formhistory
+		addArtifactTreeNode(subFirefoxList, "Firefox Formhistory", false, true, true, null);
+		// lv1_app_web_firefox_permissions
+		addArtifactTreeNode(subFirefoxList, "Firefox Permissions", false, true, true, null);
+		
 		
 		List subWhaleList = new ArrayList();
 		// lv1_app_web_whale_autofill
@@ -3616,6 +3629,216 @@ public class ArtifactController {
 
 			return mav;
 		}
+	// lv1_app_web_firefox_bookmarks
+	@RequestMapping(value ="/web_firefox_bookmarks.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxBookmarks (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxBookmarks = service.selectFirefoxBookmarks(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxBookmarksCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxBookmarks);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_firefox_content_prefs
+	@RequestMapping(value ="/web_firefox_content_prefs.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxContentPrefs (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxContentPrefs = service.selectFirefoxContentPrefs(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxContentPrefsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxContentPrefs);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_firefox_cookies
+	@RequestMapping(value ="/web_firefox_cookies.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxCookies (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxCookies = service.selectFirefoxCookies(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxCookiesCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxCookies);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_firefox_favicons
+	@RequestMapping(value ="/web_firefox_favicons.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxFavicons (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxFavicons = service.selectFirefoxFavicons(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxFaviconsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxFavicons);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_firefox_formhistory
+	@RequestMapping(value ="/web_firefox_formhistory.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxFormhistory (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxFormhistory = service.selectFirefoxFormhistory(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxFormhistoryCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxFormhistory);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_firefox_permissions
+	@RequestMapping(value ="/web_firefox_permissions.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFirefoxPermissions (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> FirefoxPermissions = service.selectFirefoxPermissions(paramMap);
+			int totalCnt = ((Long) service.selectFirefoxPermissionsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", FirefoxPermissions);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
 
 	// lv1_app_web_whale_autofill
 	@RequestMapping(value ="/web_whale_autofill.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleAutofill (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
