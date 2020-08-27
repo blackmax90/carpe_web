@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +31,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carpe.common.CarpeConfig;
+import com.carpe.common.Consts;
 import com.carpe.common.search.SearchService;
+import com.opencsv.CSVWriter;
 
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.SearchResult.Hit;
@@ -221,5 +226,81 @@ public class SearchController {
 		mav.addObject("totalcount", totalCnt);
 
 		return mav;
+	}
+
+	@RequestMapping(value = "/stringsearch_csv_export.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public void stringsearchCsvExport(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session, 
+	    HttpServletResponse response, Model model) throws Exception {
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+		String fileName = "stringsearch_data_" + df.format(new Date()) + ".csv";
+
+		response.setContentType("text/csv; charset=MS949");
+	  response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+		CSVWriter csvWriter = new CSVWriter(response.getWriter());
+		
+		String[] keys = {"name", "original_size", "author", "lastsavedby", "createdtime", "lastsavedtime", "path_with_ext"};
+		String[] header = {"File name", "File Size", "Author", "Last saved by", "Created Time", "Last saved time", "File Path"};
+		csvWriter.writeNext(header);
+
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		long pageSize = Consts.PAGE_SZIE * 10;
+		long currentPage = 1;
+		long totalCnt = 0;
+		long offset = 0;
+
+		try {
+		  paramMap.put("pageSize", pageSize);
+		  paramMap.put("inFileName", Boolean.parseBoolean((String) map.get("inFileName")));
+		  paramMap.put("inContent", Boolean.parseBoolean((String) map.get("inContent")));
+
+		  String searchWord = (String) map.get("searchWord");
+
+		  if (searchWord != null) {
+		    searchWord = URLDecoder.decode(searchWord, "UTF-8");
+		    searchWord = new String(Base64.decodeBase64(searchWord), "UTF-8");
+		    searchWord = searchWord.trim();
+		  }
+
+		  paramMap.put("searchWord", searchWord);
+
+		  while (true) {
+		    offset = (currentPage - 1) * pageSize;
+		    paramMap.put("offset", offset);
+
+		    SearchResult searchResult = service.search(paramMap);
+
+		    if (searchResult == null || !searchResult.isSucceeded()) {
+		      break;
+		    }
+
+		    totalCnt = searchResult.getTotal();
+		    
+		    if (totalCnt - offset < 0) {
+		      break;
+		    }
+
+		    List<Hit<Map<String, Object>, Void>> thehits = (List) searchResult.getHits(Map.class);
+
+		    for (Hit<Map<String, Object>, Void> hit : thehits) {
+		      String[] buff = new String[keys.length];
+		      int idx = 0;
+
+		      for (String key : keys) {
+		        String val = (hit.source.get(key) == null) ? "" : hit.source.get(key).toString();
+		        buff[idx++] = val;
+          }
+			
+		      csvWriter.writeNext(buff);
+		    }
+		    
+		    currentPage++;
+		  }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		  if (csvWriter != null) {
+		    csvWriter.close();
+		  }
+    }
 	}
 }

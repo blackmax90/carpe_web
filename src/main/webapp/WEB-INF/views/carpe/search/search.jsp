@@ -49,7 +49,10 @@
 			</section>
 			<section class="search-area bg-unit">
 				<h4 class="blind">조회조건 선택</h4>
-				<form action="" id="" name="" method="" onSubmit="return false">
+				<form action="/carpe/stringsearch_csv_export.do" id="frm" name="frm" method="post">
+          <input type="hidden" id="searchWord" />
+          <input type="hidden" id="inFileName" />
+          <input type="hidden" id="inContent" />
 					<ul class="search-item-area">
 						<li>
 							<div class="checkbox checkbox-type-1">
@@ -71,6 +74,9 @@
 						</li>
 					</ul>
 					<ul class="btn-sort-area">
+						<li>
+				      <button type="button" class="btn-case-02" id="btnCsvExport"><span>CSV Export</span></button>
+						</li>
 						<li>
 							<button type="button" class="btn-case-01" id="btnViewList"><span class="icon ico-view-list">List View</span></button>
 						</li>
@@ -376,8 +382,20 @@
 			$("#search_word").keypress(function(e) { 
 			    if (e.keyCode == 13){
 			    	$("#jqxGrid_Systemlog").jqxGrid('updateBoundData');
+            return false;
 			    }    
 			});
+
+      //CSV Export
+      $("#btnCsvExport").click(function() {
+				var searchWord = $("#search_word").val();
+				searchWord = base64EncodingUTF8(searchWord);
+				$("#searchWord").val(encodeURIComponent(searchWord));
+				$("#inFileName").val($('#checkbox_filename').jqxCheckBox('checked'));
+				$("#inContent").val($('#checkbox_content').jqxCheckBox('checked'));
+
+				$("#frm").submit();
+      });
 		});
 	})(jQuery);
 	</script>

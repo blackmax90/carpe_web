@@ -8,9 +8,10 @@
 	<entry key="evdnc.code">e1</entry>
 	<entry key="evdnc.base.path">/home/carpe/storage</entry>
 	<entry key="evdnc.base.tmp.path">/home/carpe/tmp</entry>
-	<entry key="evdnc.image.path">/home/carpe/image</entry>
+  <entry key="evdnc.image.path">/home/carpe/image</entry>
 
-	<entry key="elasticsearch.endpoint">http://220.73.134.142:9200</entry>
+<!-- 	<entry key="elasticsearch.endpoint">http://220.73.134.142:9200</entry> -->
+	<entry key="elasticsearch.endpoint">http://211.192.109.193:9200</entry>
 	<entry key="elasticsearch.max_connection">10</entry>
 	<entry key="elasticsearch.conn_timeout">10000</entry>
 	<entry key="elasticsearch.read_timeout">30000</entry>
@@ -22,8 +23,10 @@
 	<entry key="mq.pw">dfrc4738</entry>
 	<entry key="mq.vhost">Request</entry>
 
-	<entry key="ncp.clientid">79nj7ifdx2</entry>
-	<entry key="ncp.clientsecret">Yn0UlgJzbNYyIJIhR6jQuADcMZW0410RU8MRLln1</entry>
+<!-- 	<entry key="ncp.clientid">79nj7ifdx2</entry> -->
+<!-- 	<entry key="ncp.clientsecret">Yn0UlgJzbNYyIJIhR6jQuADcMZW0410RU8MRLln1</entry> -->
+	<entry key="ncp.clientid">k0ku4u2svj</entry>
+	<entry key="ncp.clientsecret">P2wpVfb01Y448mQJYPhejLq5rzfLo09bt9zgKibs</entry>
 	
 	<entry key="data.go.kr.spcdeinfoservicekey">B%2BXsPQp06eU%2BF61T1KrXx3X5kW%2BR%2FC3NtUqtFhCtxled%2Fzy0VyzVCtfxCGJdlKfE2qOYpAeDSiH%2Fxz0M8AJstw%3D%3D</entry>
 	
