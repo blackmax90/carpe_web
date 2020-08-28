@@ -75,7 +75,7 @@
 					</ul>
 					<ul class="btn-sort-area">
 						<li>
-				      <button type="button" class="btn-case-02" id="btnCsvExport"><span>CSV Export</span></button>
+				      		<button type="button" class="btn-case-01 excel" id="btnCsvExport"><span class="icon ico-export">CSV Export</span></button>
 						</li>
 						<li>
 							<button type="button" class="btn-case-01" id="btnViewList"><span class="icon ico-view-list">List View</span></button>

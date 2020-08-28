@@ -20,7 +20,7 @@
 <body>
 
   <!-- wrap -->
-  <div class="wrap analysis bg-theme blue">
+  <div class="wrap bg-theme blue">
 
     <!-- header -->
     <%@ include file="../common/header.jsp" %>
@@ -54,8 +54,9 @@
         <!--// Content 영역 //-->
         <div id="jqxSplitter" class="content-box">
 
-          <div class="aside">
+          <div class="aside mft">
             <div id="jqxTree_dirs" role="tree" data-role="treeview" class="aside-result"><!--// Tree 영역 //--></div>
+            <div class="aside-legend" title="대량 복사 가능성 폴더 범례"></div>
           </div>
 
           <div class="content-area">
@@ -267,7 +268,7 @@
       };
 
       var treeRootDir = expandDirTree();
-      $("#jqxTree_dirs").jqxTree({ source: treeRootDir, allowDrag:false, width:'calc(100%)', height:'calc(100%)'});
+      $("#jqxTree_dirs").jqxTree({ source: treeRootDir, allowDrag:false, width:'calc(100%)', height:'calc(100% - 10rem)'});
 
       $("#jqxTree_dirs").on("expand", function (event) {
         var node = $("#jqxTree_dirs").jqxTree('getItem', event.args.element);
