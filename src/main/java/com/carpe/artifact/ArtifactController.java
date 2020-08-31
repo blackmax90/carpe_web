@@ -225,7 +225,7 @@ public class ArtifactController {
 		addArtifactTreeNode(subAndroidList, "App List",false, true, true, null);
 		addArtifactTreeNode(subAndroidList, "Call History",false, true, true, null);
 		addArtifactTreeNode(subAndroidList, "Emb File",false, true, true, null);
-		addArtifactTreeNode(subAndroidList, "File History",false, true, true, null);
+		addArtifactTreeNode(subAndroidList, "Android File History",false, true, true, null);
 		addArtifactTreeNode(subAndroidList, "Geodata",false, true, true, null);
 		addArtifactTreeNode(subAndroidList, "Id&password Hash",false, true, true, null);
 		addArtifactTreeNode(subAndroidList, "Web Browser History",false, true, true, null);	
@@ -285,11 +285,16 @@ public class ArtifactController {
 
 		addArtifactTreeNode(subLv1List, "LNK File", false,true, true, null);
 		
+		// lv1_os_win_superfetch
+		addArtifactTreeNode(subLv1List, "Superfetch", false, true, true, null);	
 		
 		List subJumpList = new ArrayList();
 		addArtifactTreeNode(subLv1List, "Jumplist", false, true, true, subJumpList);
 		// lv1_os_win_jumplist_automatics
-		addArtifactTreeNode(subJumpList, "Jumplist Automatics",false, true, true, null);
+		addArtifactTreeNode(subJumpList, "Jumplist Automatic",false, true, true, null);
+		// lv1_os_win_jumplist_custom
+		addArtifactTreeNode(subJumpList, "Jumplist Custom", false, true, true, null);
+
 		
 		// lv1_os_win_icon_cache
 		addArtifactTreeNode(subLv1List, "Icon Cache", false,true, true, null);
@@ -297,6 +302,22 @@ public class ArtifactController {
 		// lv1_os_win_thumbnail_cache
 		addArtifactTreeNode(subLv1List, "Thumbnail Cache", false,true, true, null);
 
+		List subFileHistoryList = new ArrayList();
+		addArtifactTreeNode(subLv1List, "File Historty", false, true, true, subFileHistoryList);
+		// lv1_os_win_filehistory_file
+		addArtifactTreeNode(subFileHistoryList, "File", false, true, true, null);
+		// lv1_os_win_filehistory_namespace
+		addArtifactTreeNode(subFileHistoryList, "Namespace", false, true, true, null);
+		// lv1_os_win_filehistory_string
+		addArtifactTreeNode(subFileHistoryList, "String", false, true, true, null);
+		
+		List subSearchDBList = new ArrayList();
+		addArtifactTreeNode(subLv1List, "Windows Search DB", false, true, true, subSearchDBList);
+
+		// lv1_os_win_searchdb_gthr
+		addArtifactTreeNode(subSearchDBList, "Search DB Gthr", false, true, true, null);
+		// lv1_os_win_searchdb_gthrpth
+		addArtifactTreeNode(subSearchDBList, "Search DB GthrPth", false, true, true, null);
 		
 		addArtifactTreeNode(subLv1List, "Mobile", false,true, true, subMobileList);
 		
@@ -2488,7 +2509,7 @@ public class ArtifactController {
 
 		return mav;
 	}
-	
+	/*
 	// lv1_os_win_lnk_files
 	@RequestMapping(value = "/lnk_file.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView getLnkFiles(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
@@ -2526,6 +2547,8 @@ public class ArtifactController {
 
 		return mav;
 	}
+	
+	*/
 	/*
 	// lv1_os_win_prefetch
 	@RequestMapping(value = "/prefetch.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -4900,6 +4923,286 @@ public class ArtifactController {
 
 			return mav;
 		}
+	// lv1_os_win_filehistory_file
+	@RequestMapping(value ="/win_filehistory_file.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getFile (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> File = service.selectFile(paramMap);
+			int totalCnt = ((Long) service.selectFileCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", File);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_win_filehistory_namespace
+	@RequestMapping(value ="/win_filehistory_namespace.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getNamespace (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> Namespace = service.selectNamespace(paramMap);
+			int totalCnt = ((Long) service.selectNamespaceCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", Namespace);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_win_filehistory_string
+	@RequestMapping(value ="/win_filehistory_string.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getString (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> String = service.selectString(paramMap);
+			int totalCnt = ((Long) service.selectStringCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", String);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_win_jumplist_custom
+	@RequestMapping(value ="/win_jumplist_custom.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getJumplistCustom (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> JumplistCustom = service.selectJumplistCustom(paramMap);
+			int totalCnt = ((Long) service.selectJumplistCustomCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", JumplistCustom);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_win_link
+	@RequestMapping(value ="/win_link.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getLNKFile (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> LNKFile = service.selectLNKFile(paramMap);
+			int totalCnt = ((Long) service.selectLNKFileCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", LNKFile);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_win_searchdb_gthr
+	@RequestMapping(value ="/win_searchdb_gthr.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getSearchDBGthr (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> SearchDBGthr = service.selectSearchDBGthr(paramMap);
+			int totalCnt = ((Long) service.selectSearchDBGthrCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", SearchDBGthr);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_win_searchdb_gthrpth
+	@RequestMapping(value ="/win_searchdb_gthrpth.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getSearchDBGthrPth (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> SearchDBGthrPth = service.selectSearchDBGthrPth(paramMap);
+			int totalCnt = ((Long) service.selectSearchDBGthrPthCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", SearchDBGthrPth);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_os_win_superfetch
+	@RequestMapping(value ="/win_superfetch.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getSuperfetch (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> Superfetch = service.selectSuperfetch(paramMap);
+			int totalCnt = ((Long) service.selectSuperfetchCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", Superfetch);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
 
 	// lv1_app_kakaotalk_mobile_chatlogs
 	@RequestMapping(value ="/app_kakaotalk_mobile_chatlogs.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getKakaotalkMobileChatlogs (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,

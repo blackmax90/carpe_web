@@ -1,94 +1,116 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="com.carpe.common.Consts"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html lang="ko"><!-- 사용자 언어에 따라 lang 속성 변경. 예) 한국어: ko, 일본어: ja, 영어: en -->
+<html lang="ko">
+<!-- 사용자 언어에 따라 lang 속성 변경. 예) 한국어: ko, 일본어: ja, 영어: en -->
 <head>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="Content-Script-Type" content="text/javascript" />
-    <meta http-equiv="Content-Style-Type" content="text/css" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>CARPE</title>
-    <link href="/carpe/resources/css/common.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/carpe/resources/css/style.css" />
-  <link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
-  <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
-  <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>CARPE</title>
+<link href="/carpe/resources/css/common.css" rel="stylesheet"
+	type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="/carpe/resources/css/style.css" />
+<link href="/carpe/resources/jqwidgets/styles/jqx.base.css"
+	rel="stylesheet" type="text/css">
+<link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css"
+	rel="stylesheet" type="text/css">
+<link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css"
+	rel="stylesheet" type="text/css">
 
 </head>
 <body>
 
-  <!-- wrap -->
-  <div class="wrap bg-theme blue">
+	<!-- wrap -->
+	<div class="wrap bg-theme blue">
 
-    <!-- header -->
-    <%@ include file="../common/header.jsp" %>
-    <!-- // header -->
+		<!-- header -->
+		<%@ include file="../common/header.jsp"%>
+		<!-- // header -->
 
-    <!-- nav -->
-    <c:import url="../common/left_nav.jsp">
-      <c:param name="d1" value="analysis"></c:param>
-      <c:param name="d2" value="artifact"></c:param>
-    </c:import>
-    <!-- // nav -->
-    
-    <!-- main -->
-    <main class="main">
-      <section class="tit-area">
-        <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%> </h3>
-        <h3>Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
-        <button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
-        <div class="location-area">
-			<ul class="list-h">
-				<li>Home</li>
-				<li>Analysis</li>
-				<li>Artifact</li>
-			</ul>
-		</div>
-      </section>
-     <!--  <section class="btn-area">
+		<!-- nav -->
+		<c:import url="../common/left_nav.jsp">
+			<c:param name="d1" value="analysis"></c:param>
+			<c:param name="d2" value="artifact"></c:param>
+		</c:import>
+		<!-- // nav -->
+
+		<!-- main -->
+		<main class="main">
+			<section class="tit-area">
+				<h3>
+					Current Case :
+					<%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%>
+				</h3>
+				<h3>
+					Evidence :
+					<%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%>
+				</h3>
+				<button type="button" class="btn-transparent icon ico-case-out">
+					<span>case out</span>
+				</button>
+				<div class="location-area">
+					<ul class="list-h">
+						<li>Home</li>
+						<li>Analysis</li>
+						<li>Artifact</li>
+					</ul>
+				</div>
+			</section>
+			<!--  <section class="btn-area">
         <ul>
           <li>
             
           </li>
         </ul>        
       </section> -->
-      <article class="container">
-        <h4 class="blind">조회된 컨텐츠</h4>
-        <!--// Content 영역 //-->
-        <div id="jqxSplitter" class="content-box">
+			<article class="container">
+				<h4 class="blind">조회된 컨텐츠</h4>
+				<!--// Content 영역 //-->
+				<div id="jqxSplitter" class="content-box">
 
-          <div class="aside">
-            <div id="jqxTree_artifacts" role="tree" data-role="treeview" class="aside-result"><!--// Tree 영역 //--></div>
-          </div>
+					<div class="aside">
+						<div id="jqxTree_artifacts" role="tree" data-role="treeview"
+							class="aside-result">
+							<!--// Tree 영역 //-->
+						</div>
+					</div>
 
-          <div class="content-area">
-            <div id="jqxGrid_Systemlog" role="grid" class="cont-result"><!--// Table 영역 //--></div>
-            <div id="paing" class="paging-area">
-              <!--// Table Paging 영역 - 위치고정 //-->
-              <div class="paginate">
-              </div>
-            </div>
-          </div>
-        </div>
-      </article>
-    </main>
-    <!-- // main -->
+					<div class="content-area">
+						<div id="jqxGrid_Systemlog" role="grid" class="cont-result">
+							<!--// Table 영역 //-->
+						</div>
+						<div id="paing" class="paging-area">
+							<!--// Table Paging 영역 - 위치고정 //-->
+							<div class="paginate"></div>
+						</div>
+					</div>
+				</div>
+			</article>
+		</main>
+		<!-- // main -->
 
-  </div>
-  <!-- // wrap -->
+	</div>
+	<!-- // wrap -->
 
-  <!-- 공통 javascript 영역 -->
-  <script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
-  <script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
-  <script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
-  <script type="text/javascript" src="/carpe/resources/js/common.js"></script>
-  <script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
-  <!-- // 공통 javascript 영역 -->
+	<!-- 공통 javascript 영역 -->
+	<script type="text/javascript"
+		src="/carpe/resources/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript"
+		src="/carpe/resources/jqwidgets/jqx-all.js"></script>
+	<script type="text/javascript"
+		src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
+	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
+	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
+	<!-- // 공통 javascript 영역 -->
 
-  <!-- 현재 페이지에 필요한 js -->
-  <script>
+	<!-- 현재 페이지에 필요한 js -->
+	<script>
   (function($) {
   $(document).ready(function() {
     $('#btnTimeLine').click(function(e) {
@@ -1076,7 +1098,7 @@
         ,{text: 'visit_count', dataField: 'visit_count', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'typed_count', dataField: 'typed_count', width: '10%', cellsalign: 'left', align: 'center'}
       ];
-
+		/*
       // lv1_os_win_lnk_file
       artifactKind["LNK File"] = {};
       artifactKind["LNK File"].url = "/carpe/lnk_file.do";
@@ -1110,7 +1132,7 @@
         ,{text: 'file_droid', dataField: 'file_droid', width: '10%', cellsalign: 'left', align: 'center'}
         ,{text: 'volume_droid', dataField: 'volume_droid', width: '10%', cellsalign: 'left', align: 'center'}
       ];
-      
+      */
       /*
       // lv1_os_win_prefetch
       artifactKind["Prefetch"] = {};
@@ -1711,6 +1733,64 @@
       artifactKind["UsnJrnl"].columnSet = [
       {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'usn_value', dataField: 'usn_value', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'},{text: 'reason', dataField: 'reason', width: '10%', cellsalign: 'left', align: 'center'},{text: 'mft_reference_number', dataField: 'mft_reference_number', width: '10%', cellsalign: 'left', align: 'center'},{text: 'parent_mft_reference_number', dataField: 'parent_mft_reference_number', width: '10%', cellsalign: 'left', align: 'center'},{text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_path_from_mft', dataField: 'file_path_from_mft', width: '10%', cellsalign: 'left', align: 'center'}
       ];
+		
+      
+   // lv1_os_win_filehistory_file
+      artifactKind["File"] = {};
+      artifactKind["File"].url = "/carpe/win_filehistory_file.do";
+      artifactKind["File"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'id', dataField: 'id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'parent_id', dataField: 'parent_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'child_id', dataField: 'child_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'state', dataField: 'state', width: '10%', cellsalign: 'left', align: 'center'},{text: 'status', dataField: 'status', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_size', dataField: 'file_size', width: '10%', cellsalign: 'left', align: 'center'},{text: 't_queued', dataField: 't_queued', width: '10%', cellsalign: 'left', align: 'center'},{text: 't_captured', dataField: 't_captured', width: '10%', cellsalign: 'left', align: 'center'},{text: 't_updated', dataField: 't_updated', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_filehistory_namespace
+      artifactKind["Namespace"] = {};
+      artifactKind["Namespace"].url = "/carpe/win_filehistory_namespace.do";
+      artifactKind["Namespace"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'id', dataField: 'id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'parent_id', dataField: 'parent_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'child_id', dataField: 'child_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'status', dataField: 'status', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_attribute', dataField: 'file_attribute', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_created', dataField: 'file_created', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_modified', dataField: 'file_modified', width: '10%', cellsalign: 'left', align: 'center'},{text: 'usn', dataField: 'usn', width: '10%', cellsalign: 'left', align: 'center'},{text: 't_created', dataField: 't_created', width: '10%', cellsalign: 'left', align: 'center'},{text: 't_visible', dataField: 't_visible', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_record_id', dataField: 'file_record_id', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_filehistory_string
+      artifactKind["String"] = {};
+      artifactKind["String"].url = "/carpe/win_filehistory_string.do";
+      artifactKind["String"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'id', dataField: 'id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'string', dataField: 'string', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_jumplist_custom
+      artifactKind["Jumplist Custom"] = {};
+      artifactKind["Jumplist Custom"].url = "/carpe/win_jumplist_custom.do";
+      artifactKind["Jumplist Custom"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'sid', dataField: 'sid', width: '10%', cellsalign: 'left', align: 'center'},{text: 'entry_id', dataField: 'entry_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'parent_idx', dataField: 'parent_idx', width: '10%', cellsalign: 'left', align: 'center'},{text: 'item', dataField: 'item', width: '10%', cellsalign: 'left', align: 'center'},{text: 'item_info', dataField: 'item_info', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_link
+      artifactKind["LNK File"] = {};
+      artifactKind["LNK File"].url = "/carpe/win_link.do";
+      artifactKind["LNK File"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'machine_id', dataField: 'machine_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_path', dataField: 'file_path', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_size', dataField: 'file_size', width: '10%', cellsalign: 'left', align: 'center'},{text: 'target_creation_time', dataField: 'target_creation_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'target_access_time', dataField: 'target_access_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'target_write_time', dataField: 'target_write_time', width: '10%', cellsalign: 'left', align: 'center'},{text: 'drive_type', dataField: 'drive_type', width: '10%', cellsalign: 'left', align: 'center'},{text: 'volume_label', dataField: 'volume_label', width: '10%', cellsalign: 'left', align: 'center'},{text: 'drive_serial_number', dataField: 'drive_serial_number', width: '10%', cellsalign: 'left', align: 'center'},{text: 'mac_address', dataField: 'mac_address', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_searchdb_gthr
+      artifactKind["Search DB Gthr"] = {};
+      artifactKind["Search DB Gthr"].url = "/carpe/win_searchdb_gthr.do";
+      artifactKind["Search DB Gthr"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'scope_id', dataField: 'scope_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'document_id', dataField: 'document_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'sdid', dataField: 'sdid', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_modified', dataField: 'last_modified', width: '10%', cellsalign: 'left', align: 'center'},{text: 'transaction_flags', dataField: 'transaction_flags', width: '10%', cellsalign: 'left', align: 'center'},{text: 'transaction_extended_flags', dataField: 'transaction_extended_flags', width: '10%', cellsalign: 'left', align: 'center'},{text: 'crawl_number_crawled', dataField: 'crawl_number_crawled', width: '10%', cellsalign: 'left', align: 'center'},{text: 'start_address_identifier', dataField: 'start_address_identifier', width: '10%', cellsalign: 'left', align: 'center'},{text: 'priority', dataField: 'priority', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file_name', dataField: 'file_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'user_data', dataField: 'user_data', width: '10%', cellsalign: 'left', align: 'center'},{text: 'app_owner_id', dataField: 'app_owner_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'required_sids', dataField: 'required_sids', width: '10%', cellsalign: 'left', align: 'center'},{text: 'deleted_count', dataField: 'deleted_count', width: '10%', cellsalign: 'left', align: 'center'},{text: 'runtime', dataField: 'runtime', width: '10%', cellsalign: 'left', align: 'center'},{text: 'failure_update_attempts', dataField: 'failure_update_attempts', width: '10%', cellsalign: 'left', align: 'center'},{text: 'client_id', dataField: 'client_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'last_requested_runtime', dataField: 'last_requested_runtime', width: '10%', cellsalign: 'left', align: 'center'},{text: 'storage_provider_id', dataField: 'storage_provider_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'calculated_property_flags', dataField: 'calculated_property_flags', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_searchdb_gthrpth
+      artifactKind["Search DB GthrPth"] = {};
+      artifactKind["Search DB GthrPth"].url = "/carpe/win_searchdb_gthrpth.do";
+      artifactKind["Search DB GthrPth"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'scope', dataField: 'scope', width: '10%', cellsalign: 'left', align: 'center'},{text: 'parent', dataField: 'parent', width: '10%', cellsalign: 'left', align: 'center'},{text: 'name', dataField: 'name', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
+      // lv1_os_win_superfetch
+      artifactKind["Superfetch"] = {};
+      artifactKind["Superfetch"].url = "/carpe/win_superfetch.do";
+      artifactKind["Superfetch"].columnSet = [
+      {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'superfetch_name', dataField: 'superfetch_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'volume_name', dataField: 'volume_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'volume_id', dataField: 'volume_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'reference_point', dataField: 'reference_point', width: '10%', cellsalign: 'left', align: 'center'}
+      ];
+
 
    // lv1_app_kakaotalk_mobile_chatlogs
       artifactKind["Chatlogs"] = {};
@@ -1755,9 +1835,9 @@
       ];
 
       // lv1_os_and_file_history
-      artifactKind["File History"] = {};
-      artifactKind["File History"].url = "/carpe/and_file_history.do";
-      artifactKind["File History"].columnSet = [
+      artifactKind["Android File History"] = {};
+      artifactKind["Android File History"].url = "/carpe/and_file_history.do";
+      artifactKind["Android File History"].columnSet = [
       {text: 'par_id', dataField: 'par_id', width: '10%', cellsalign: 'left', align: 'center'},{text: 'package_name', dataField: 'package_name', width: '10%', cellsalign: 'left', align: 'center'},{text: 'timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'left', align: 'center'},{text: 'file', dataField: 'file', width: '10%', cellsalign: 'left', align: 'center'},{text: 'phonenumber', dataField: 'phonenumber', width: '10%', cellsalign: 'left', align: 'center'},{text: 'account', dataField: 'account', width: '10%', cellsalign: 'left', align: 'center'},{text: 'contents', dataField: 'contents', width: '10%', cellsalign: 'left', align: 'center'},{text: 'source', dataField: 'source', width: '10%', cellsalign: 'left', align: 'center'}
       ];
 
@@ -2048,7 +2128,7 @@
     });
   })(jQuery);
   </script>
-  <!-- // 현재 페이지에 필요한 js -->
+	<!-- // 현재 페이지에 필요한 js -->
 
 </body>
 </html>

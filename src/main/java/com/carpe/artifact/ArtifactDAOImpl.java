@@ -622,7 +622,7 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	public Map selectRegUserAssistCount(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectRegUserAssistCount", paramMap);
 	}
-	
+	/*
 	// lv1_os_win_lnk_files
 	@Override
 	public List<Map> selectLnkFiles(Map<String, Object> paramMap) throws Exception {
@@ -633,6 +633,7 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	public Map selectLnkFilesCount(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectOne(Namespace + ".selectLnkFilesCount", paramMap);
 	}
+	*/
 	/*
 	// lv1_os_win_prefetch
 	@Override
@@ -1165,6 +1166,96 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 		return sqlSession.selectOne(Namespace + ".selectNtfsUsnjrnlCount", paramMap);
 	}
 	*/
+	// lv1_os_win_filehistory_file
+	@Override
+	public List<Map> selectFile(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectFile", paramMap);
+	}
+
+	@Override
+	public Map selectFileCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectFileCount", paramMap);
+	}
+
+	// lv1_os_win_filehistory_namespace
+	@Override
+	public List<Map> selectNamespace(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectNamespace", paramMap);
+	}
+
+	@Override
+	public Map selectNamespaceCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectNamespaceCount", paramMap);
+	}
+
+	// lv1_os_win_filehistory_string
+	@Override
+	public List<Map> selectString(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectString", paramMap);
+	}
+
+	@Override
+	public Map selectStringCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectStringCount", paramMap);
+	}
+
+	// lv1_os_win_jumplist_custom
+	@Override
+	public List<Map> selectJumplistCustom(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectJumplistCustom", paramMap);
+	}
+
+	@Override
+	public Map selectJumplistCustomCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectJumplistCustomCount", paramMap);
+	}
+
+	// lv1_os_win_link
+	@Override
+	public List<Map> selectLNKFile(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectLNKFile", paramMap);
+	}
+
+	@Override
+	public Map selectLNKFileCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectLNKFileCount", paramMap);
+	}
+
+	// lv1_os_win_searchdb_gthr
+	@Override
+	public List<Map> selectSearchDBGthr(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectSearchDBGthr", paramMap);
+	}
+
+	@Override
+	public Map selectSearchDBGthrCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectSearchDBGthrCount", paramMap);
+	}
+
+	// lv1_os_win_searchdb_gthrpth
+	@Override
+	public List<Map> selectSearchDBGthrPth(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectSearchDBGthrPth", paramMap);
+	}
+
+	@Override
+	public Map selectSearchDBGthrPthCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectSearchDBGthrPthCount", paramMap);
+	}
+
+	// lv1_os_win_superfetch
+	@Override
+	public List<Map> selectSuperfetch(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectSuperfetch", paramMap);
+	}
+
+	@Override
+	public Map selectSuperfetchCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectSuperfetchCount", paramMap);
+	}
+
+
+	
 	// lv2_os_app_history
 	@Override
 	public List<Map> selectAppHistory(Map<String, Object> paramMap) throws Exception {

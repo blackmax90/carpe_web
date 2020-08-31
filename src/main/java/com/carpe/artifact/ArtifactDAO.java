@@ -226,10 +226,11 @@ public interface ArtifactDAO {
 	public List<Map> selectRegUserAssist(Map<String, Object> paramMap) throws Exception;
 	public Map selectRegUserAssistCount(Map<String, Object> paramMap) throws Exception;
 	
+	/*
 	// lv1_os_win_lnk_files
 	public List<Map> selectLnkFiles(Map<String, Object> paramMap) throws Exception;
 	public Map selectLnkFilesCount(Map<String, Object> paramMap) throws Exception;
-	
+	*/
 	/*
 	// lv1_os_win_prefetch
 	public List<Map> selectPrefetch(Map<String, Object> paramMap) throws Exception;
@@ -492,7 +493,41 @@ public interface ArtifactDAO {
 	// lv1_fs_ntfs_usnjrnl
 	public List<Map> selectUsnJrnl(Map<String, Object> paramMap) throws Exception;
 	public Map selectUsnJrnlCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_os_win_filehistory_file
+	public List<Map> selectFile(Map<String, Object> paramMap) throws Exception;
+	public Map selectFileCount(Map<String, Object> paramMap) throws Exception;
 
+	// lv1_os_win_filehistory_namespace
+	public List<Map> selectNamespace(Map<String, Object> paramMap) throws Exception;
+	public Map selectNamespaceCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_filehistory_string
+	public List<Map> selectString(Map<String, Object> paramMap) throws Exception;
+	public Map selectStringCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_jumplist_custom
+	public List<Map> selectJumplistCustom(Map<String, Object> paramMap) throws Exception;
+	public Map selectJumplistCustomCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_link
+	public List<Map> selectLNKFile(Map<String, Object> paramMap) throws Exception;
+	public Map selectLNKFileCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_searchdb_gthr
+	public List<Map> selectSearchDBGthr(Map<String, Object> paramMap) throws Exception;
+	public Map selectSearchDBGthrCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_searchdb_gthrpth
+	public List<Map> selectSearchDBGthrPth(Map<String, Object> paramMap) throws Exception;
+	public Map selectSearchDBGthrPthCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_os_win_superfetch
+	public List<Map> selectSuperfetch(Map<String, Object> paramMap) throws Exception;
+	public Map selectSuperfetchCount(Map<String, Object> paramMap) throws Exception;
+
+
+	
 	// lv1_app_kakaotalk_mobile_chatlogs
 	public List<Map> selectKakaotalkMobileChatlogs(Map<String, Object> paramMap) throws Exception;
 	public Map selectKakaotalkMobileChatlogsCount(Map<String, Object> paramMap) throws Exception;
