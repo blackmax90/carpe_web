@@ -233,10 +233,6 @@
       }
 
       var changeDirIcon = function(node) {
-        if (node.value["attr"] != "dir") {
-          return;
-        }
-
         var param = {};
         param.evd_id = node.value["evd_id"];
         param.par_id = node.value["par_id"];
@@ -245,6 +241,7 @@
         param.color = node.value["color"];
         param.dirType = <%=Consts.DIR_TYPE%>;
         param.isExpanded = node.isExpanded;
+        param.attr = node.value["attr"];
 
         $.ajax({
           type: "POST",
@@ -284,7 +281,8 @@
       });
 
       $("#jqxTree_dirs").on("collapse", function (event) {
-        var node = $('#jqxTree_dirs').jqxTree('getSelectedItem');
+        var args = event.args;
+        var node = $('#jqxTree_dirs').jqxTree('getItem', args.element);
 
         $("#evdname").text("Evidence : " + node.value["evd_name"]);
 
