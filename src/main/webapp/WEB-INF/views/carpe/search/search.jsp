@@ -311,13 +311,13 @@
 						}
 						strHtml += "<span style='font-size:1.3rem;'>&nbsp;<a href=\"/carpe/download_search.do?path=" + dataRecord.download_path + "\" target=\"_blank\">" + viewname + "</a></span></div></li>";
 
-						var last_written_time = "시간정보가 없습니다.";
-						if(dataRecord.last_written_time){
-							last_written_time = dataRecord.last_written_time;
+						var lastsavedtime = "시간정보가 없습니다.";
+						if(dataRecord.lastsavedtime){
+							lastsavedtime = dataRecord.lastsavedtime;
 						}
 
 						strHtml += "<li class='dates'>";
-						strHtml += "<span><strong>수정</strong> : " + last_written_time + "</span>";
+						strHtml += "<span><strong>수정</strong> : " + lastsavedtime + "</span>";
 						strHtml += "<span><strong>크기</strong> : " + fileSizeSI(dataRecord.size) + "</span>";
 						strHtml += "<span><strong>경로</strong> : " + dataRecord.path + "</span>";
 						strHtml += "</li>";
