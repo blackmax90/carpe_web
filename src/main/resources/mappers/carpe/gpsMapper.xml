@@ -4,77 +4,86 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.carpe.mapper.gps">
-	<select id="selectGpsList" parameterType="Map" resultType="Map">
-		SELECT  @a:=@a+1 serial_number
-		       ,substr(a.regdate,1,19) regd
-		       ,a.regdate
-		       ,a.gps_type
-		       ,a.source
-		       ,a.location
-		       ,a.latitude
-		       ,a.longitude
-		       ,a.gps_id
-		  FROM  gps a, (SELECT @a:= 0) AS sn
-		 WHERE  a.case_id = #{case_id}
- 	  ORDER BY  regdate desc
-	</select>
+  <select id="selectGpsList" parameterType="Map" resultType="Map">
+    SELECT @a:=@a+1 serial_number
+         , DATE_FORMAT(STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H:%i:%s') AS timestamp
+         , STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s') AS regdate 
+         , a.package_name
+         , a.contents
+         , a.latitude
+         , a.longitude
+         , a.source
+         , a.is_visited
+      FROM lv1_os_and_geodata a, (SELECT @a:= 0) AS sn
+     WHERE a.case_id = #{case_id}
+     ORDER BY regdate desc
+  </select>
 
-	<select id="selectGpsLinkList" parameterType="Map" resultType="Map">
-		SELECT substr(regdate,1,19) regd
-         , regdate
-         , source
-         , location
-         , latitude
-		     , longitude 
-		  FROM gps
-		 WHERE 1=1
-		   AND case_id = #{case_id}
-       AND regdate >= #{sdate}
+  <select id="selectGpsLinkList" parameterType="Map" resultType="Map">
+    SELECT A.timestamp
+         , A.regdate
+         , A.package_name
+         , A.contents
+         , A.latitude
+         , A.longitude
+     FROM (
+           SELECT DATE_FORMAT(STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H:%i:%s') AS timestamp
+                , STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s') AS regdate 
+                , package_name
+                , contents
+                , latitude
+                , longitude 
+             FROM lv1_os_and_geodata
+            WHERE 1=1
+              AND case_id = #{case_id}
+          ) A
+     WHERE 1=1
+       AND A.regdate >= #{sdate}
        <![CDATA[
-       AND regdate <= #{edate}
+       AND A.regdate <= #{edate}
        ]]>
      <if test="timeType!=null and timeType==1 and stime!=null and !stime.equals('') and etime!=null and !etime.equals('')">
-       AND TIME(regdate) >= #{stime}
+       AND TIME(A.regdate) >= #{stime}
        <![CDATA[
-       AND TIME(regdate) <= #{etime}
+       AND TIME(A.regdate) <= #{etime}
        ]]>
      </if>
      <if test="timeType!=null and timeType==2 and stime!=null and !stime.equals('') and etime!=null and !etime.equals('')">
        <![CDATA[
-       AND (TIME(regdate) >= #{stime}
-        OR TIME(regdate) <= #{etime})
+       AND (TIME(A.regdate) >= #{stime}
+        OR TIME(A.regdate) <= #{etime})
        ]]>
      </if>
      <if test="weekend!=null and weekend==1">
-       AND (DAYOFWEEK(regdate) = 1 OR DAYOFWEEK(regdate) = 7)
+       AND (DAYOFWEEK(A.regdate) = 1 OR DAYOFWEEK(A.regdate) = 7)
      </if>
      <if test="neweekend!=null and neweekend==1">
-       AND (DAYOFWEEK(regdate) != 1 AND DAYOFWEEK(regdate) != 7)
+       AND (DAYOFWEEK(A.regdate) != 1 AND DAYOFWEEK(A.regdate) != 7)
      </if>
-     ORDER BY regdate ASC
-	</select>
+     ORDER BY A.regdate ASC
+  </select>
 
-	<select id="selectGpsDateCount" parameterType="Map" resultType="Map">
-    SELECT regd, COUNT(regd) AS cnt
+  <select id="selectGpsDateCount" parameterType="Map" resultType="Map">
+    SELECT timestamp, COUNT(timestamp) AS cnt
       FROM (
-            SELECT SUBSTR(regdate, 1, 10) AS regd 
-              FROM gps 
+            SELECT DATE_FORMAT(STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s'), '%Y-%m-%d %H:%i:%s') AS timestamp
+              FROM lv1_os_and_geodata
              WHERE 1=1
-		           AND case_id = #{case_id}
-               AND regdate >= #{sdate} 
+               AND case_id = #{case_id}
+               AND STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s') >= #{sdate} 
                <![CDATA[
-               AND regdate <= #{edate}
+               AND STR_TO_DATE(timestamp, '%Y-%m-%dT%H:%i:%s') <= #{edate}
                ]]>
            ) A 
-     GROUP BY A.regd;
-	</select>
+     GROUP BY A.timestamp;
+  </select>
 
-	<select id="selectGpsFileList" parameterType="Map" resultType="Map">
-		SELECT DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') AS regdate
-		     , type
+  <select id="selectGpsFileList" parameterType="Map" resultType="Map">
+    SELECT DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') AS regdate
+         , type
          , name 
-		  FROM gps_file
-		 WHERE 1=1
+      FROM gps_file
+     WHERE 1=1
        AND case_id = #{case_id}
        AND regdate >= #{sdate}
        <![CDATA[
@@ -84,7 +93,7 @@
   </select>
 
   <select id="selectCommunicationRoomList" parameterType="Map" resultType="Map">      
-    SELECT roomno, GROUP_CONCAT(DISTINCT name) AS name, content, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate
+    SELECT roomno, GROUP_CONCAT(DISTINCT name) AS name, content, DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') AS regdate
      FROM (
            SELECT roomno, name, content, regdate
              FROM (

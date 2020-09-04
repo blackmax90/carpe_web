@@ -7,7 +7,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -151,15 +150,15 @@ public class GpsServiceImpl implements GpsService {
 
 				for (Map map : gpsList) {
 					boolean flag = false;
-					String regd = (String)map.get("regd");
-					regd = regd.replaceAll("-", "").substring(0, 8);
+					String timestamp = (String)map.get("timestamp");
+					timestamp = timestamp.replaceAll("-", "").substring(0, 8);
 
 					for (Map spcdeMap : spcdeList) {
 						if (spcdeMap.get("isHoliday").equals("Y") == false) {
 							continue;
 						}
 
-						if (spcdeMap.get("locdate").equals(regd)) {
+						if (spcdeMap.get("locdate").equals(timestamp)) {
 							flag = true;
 							break;
 						}
@@ -184,19 +183,19 @@ public class GpsServiceImpl implements GpsService {
 			//첫 데이터만
 			if (firstData != null && firstData.equals("1") && gpsList.size() > 0) {
 				List<Map> tmpList = new ArrayList<>();
-				String prevRegd = "";
+				String prevTimestamp = "";
 
 				for (Map map : gpsList) {
-					String regd = (String) map.get("regd");
+					String timestamp = (String) map.get("timestamp");
 					
-					if (CommonUtil.empty(regd)) {
+					if (CommonUtil.empty(timestamp)) {
 						continue;
 					}
 					
-					regd = regd.substring(0, 10);
+					timestamp = timestamp.substring(0, 10);
 					
-					if (prevRegd.equals(regd) == false) {
-						prevRegd = regd;
+					if (prevTimestamp.equals(timestamp) == false) {
+						prevTimestamp = timestamp;
 						tmpList.add(map);
 					}
 				}
@@ -207,20 +206,20 @@ public class GpsServiceImpl implements GpsService {
 			//마지막 데이터만
 			if (lastData != null && lastData.equals("1") && gpsList.size() > 0) {
 				List<Map> tmpList = new ArrayList<>();
-				String prevRegd = "";
+				String prevTimestamp = "";
 
 				for (int i = gpsList.size() - 1; i >= 0; i--) {
 					Map map = gpsList.get(i);
-					String regd = (String) map.get("regd");
+					String timestamp = (String) map.get("timestamp");
 					
-					if (CommonUtil.empty(regd)) {
+					if (CommonUtil.empty(timestamp)) {
 						continue;
 					}
 
-					regd = regd.substring(0, 10);
+					timestamp = timestamp.substring(0, 10);
 					
-					if (prevRegd.equals(regd) == false) {
-						prevRegd = regd;
+					if (prevTimestamp.equals(timestamp) == false) {
+						prevTimestamp = timestamp;
 						tmpList.add(0, map);
 					}
 				}

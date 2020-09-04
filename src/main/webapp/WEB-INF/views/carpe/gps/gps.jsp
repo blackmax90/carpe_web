@@ -11,305 +11,305 @@
   <title>CARPE</title>    
   <link rel="stylesheet" type="text/css" href="/carpe/resources/css/style.css" />
   <link rel="stylesheet" type="text/css" href="/carpe/resources/css/jquery.datetimepicker.min.css" />
-	<link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
-	<link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
-	<link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
-	
-	<script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
-	<script type="text/javascript" src="/carpe/resources/js/jquery.datetimepicker.full.min.js"></script>
-	<script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
-	<script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
-	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
-	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
+  <link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
+  <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
+  <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
+  
+  <script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="/carpe/resources/js/jquery.datetimepicker.full.min.js"></script>
+  <script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
+  <script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
+  <script type="text/javascript" src="/carpe/resources/js/common.js"></script>
+  <script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ncpClientId}"></script>
-	<script type="text/javascript" src="/carpe/resources/naverapi/marker-clustering/src/MarkerClustering.js"></script>
+  <script type="text/javascript" src="/carpe/resources/naverapi/marker-clustering/src/MarkerClustering.js"></script>
   
 </head>
 <body>
 
-	<!-- wrap -->
-	<div class="wrap vsa-page bg-theme blue">
+  <!-- wrap -->
+  <div class="wrap vsa-page bg-theme blue">
 
-		<!-- header -->
-		<%@ include file="../common/header.jsp" %>
-		<!-- // header -->
+    <!-- header -->
+    <%@ include file="../common/header.jsp" %>
+    <!-- // header -->
 
-		<!-- nav -->
-		<c:import url="../common/left_nav.jsp">
-		  <c:param name="d1" value="visualization"></c:param>
-		  <c:param name="d2" value="locationmap"></c:param>
-		</c:import>
-		<!-- // nav -->
+    <!-- nav -->
+    <c:import url="../common/left_nav.jsp">
+      <c:param name="d1" value="visualization"></c:param>
+      <c:param name="d2" value="locationmap"></c:param>
+    </c:import>
+    <!-- // nav -->
 
-		<!-- main -->
-		<main class="main">
-			<section class="tit-area">
-				<h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%></h3>
-				<a href="/carpe/case.do"><button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button></a>
-				<div class="location-area">
-					<ul class="list-h">
-						<li>Home</li>
-						<li>Visualization</li>
-						<li>Location Map</li>
-					</ul>
-				</div>
-			</section>
+    <!-- main -->
+    <main class="main">
+      <section class="tit-area">
+        <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%></h3>
+        <a href="/carpe/case.do"><button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button></a>
+        <div class="location-area">
+          <ul class="list-h">
+            <li>Home</li>
+            <li>Visualization</li>
+            <li>Location Map</li>
+          </ul>
+        </div>
+      </section>
 
-			<article class="container">
-				<h4 class="blind">행위 갯수</h4>
-				<!--// Content 영역 //-->
-				<!--// Side 메뉴가 우측에 있는 형태의 jqx-widget //-->
-				<div class="content-box">
-					<div class="content-area">
-						<div class="map-area" id="map"><!-- 지도 영역 //-->
-							<!-- <a href="#" class="btn map-pin ir">위치1</a>
-							<div class="map-func-btns">
-								<button type="button" class="btn plus ir">지도 확대</button>
-								<button type="button" class="btn minus ir">지도 축소</button>
-							</div> -->
-						</div>
+      <article class="container">
+        <h4 class="blind">행위 갯수</h4>
+        <!--// Content 영역 //-->
+        <!--// Side 메뉴가 우측에 있는 형태의 jqx-widget //-->
+        <div class="content-box">
+          <div class="content-area">
+            <div class="map-area" id="map"><!-- 지도 영역 //-->
+              <!-- <a href="#" class="btn map-pin ir">위치1</a>
+              <div class="map-func-btns">
+                <button type="button" class="btn plus ir">지도 확대</button>
+                <button type="button" class="btn minus ir">지도 축소</button>
+              </div> -->
+            </div>
 
-						
-						<!--// Table Sample - Size Check //-->
-						<div id="jqxGrid_Systemlog" class="data-tbl-area">
+            
+            <!--// Table Sample - Size Check //-->
+            <div id="jqxGrid_Systemlog" class="data-tbl-area">
 
-						</div><!-- // pop-content end -->
-					</div>
-					<!--// Chart 영역 -->
-					
-				</div><!--// content-box -->
+            </div><!-- // pop-content end -->
+          </div>
+          <!--// Chart 영역 -->
+          
+        </div><!--// content-box -->
 
-			</article>
-		</main>
-		<!-- // main -->
+      </article>
+    </main>
+    <!-- // main -->
 
-	</div>
-	<!-- // wrap -->
+  </div>
+  <!-- // wrap -->
 
-	<!-- pop-up //-->
-	<div id="mapInfo" class="pop wrap-pop">
-		<div class="pop-header">
-			<h1>지도 정보</h1>
-		</div>
-		<div class="pop-content">
-			<div class="data-type-1">
-				<dl>
-					<dt>시간</dt>
-					<dd id="infoTime"></dd>
-				</dl>
-				<dl>
-					<dt>소스</dt>
-					<dd id="infoSource"></dd>
-				</dl>
-				<dl>
-					<dt>장소</dt>
-					<dd id="infoLocation"></dd>
-				</dl>
-				<dl>
-					<dt>커뮤니케이션</dt>
-					<dd>
-				    <div>
-				   	  <button type="button" class="btn-case-01 txt" id="btnComm">커뮤니케이션</button>
-				    </div>
+  <!-- pop-up //-->
+  <div id="mapInfo" class="pop wrap-pop">
+    <div class="pop-header">
+      <h1>지도 정보</h1>
+    </div>
+    <div class="pop-content">
+      <div class="data-type-1">
+        <dl>
+          <dt>시간</dt>
+          <dd id="infoTime"></dd>
+        </dl>
+        <dl>
+          <dt>소스</dt>
+          <dd id="infoSource"></dd>
+        </dl>
+        <dl>
+          <dt>장소</dt>
+          <dd id="infoLocation"></dd>
+        </dl>
+        <dl>
+          <dt>커뮤니케이션</dt>
+          <dd>
+            <div>
+               <button type="button" class="btn-case-01 txt" id="btnComm">커뮤니케이션</button>
+            </div>
           </dd>
-				</dl>
-				<dl>
-					<dt>파일</dt>
-					<dd>
-				    <div>
-				   	  <button type="button" class="btn-case-01 txt" id="btnFile">파일</button>
-				    </div>
+        </dl>
+        <dl>
+          <dt>파일</dt>
+          <dd>
+            <div>
+               <button type="button" class="btn-case-01 txt" id="btnFile">파일</button>
+            </div>
           </dd>
-				</dl>
-			</div>
-		</div><!-- // pop-content end -->
-	</div><!-- // pop-up end -->
-	
-	
-	<!-- pop-up // 대화목록 팝업  // -->
-	<div id="roomLayer" class="pop chatroom wrap-pop">
-		<div class="pop-header">
-			<h1>Communication Data</h1>
-		</div>
-		<div class="pop-content">		
-			<h4 class="blind">대화 목록</h4>
-			<!--// Content 영역 //-->
-			<section class="search-date">
-				<div class="combo">
-					<span class="input-text-type-1 calendar" id="sdateSpan"><input type="text" id="sdate" placeholder="시작일" /></span>
-					<span class="hyp">-</span>
-					<span class="input-text-type-1 calendar" id="edateSpan"><input type="text" id="edate" placeholder="종료일" /></span>
-				</div>
-				<div class="btn-area">
-					<button type="button" class="btn-case-01 btn-search txt" id="btnSearch"><span class="icon ico-search">검색</span></button>
-				</div>
-			</section>
-			<section class="chat-list mt20">
-				<ul class="list_v list_cont_wrap" id="roomList">
+        </dl>
+      </div>
+    </div><!-- // pop-content end -->
+  </div><!-- // pop-up end -->
+  
+  
+  <!-- pop-up // 대화목록 팝업  // -->
+  <div id="roomLayer" class="pop chatroom wrap-pop">
+    <div class="pop-header">
+      <h1>Communication Data</h1>
+    </div>
+    <div class="pop-content">    
+      <h4 class="blind">대화 목록</h4>
+      <!--// Content 영역 //-->
+      <section class="search-date">
+        <div class="combo">
+          <span class="input-text-type-1 calendar" id="sdateSpan"><input type="text" id="sdate" placeholder="시작일" /></span>
+          <span class="hyp">-</span>
+          <span class="input-text-type-1 calendar" id="edateSpan"><input type="text" id="edate" placeholder="종료일" /></span>
+        </div>
+        <div class="btn-area">
+          <button type="button" class="btn-case-01 btn-search txt" id="btnSearch"><span class="icon ico-search">검색</span></button>
+        </div>
+      </section>
+      <section class="chat-list mt20">
+        <ul class="list_v list_cont_wrap" id="roomList">
         </ul>
-			</section>
-			<!--// content-box -->			
-		</div><!-- // pop-content end -->
-	</div><!-- // pop-up end -->
-	
-	<!-- pop-up // 데이터 선택 시, 대화내용 팝업  // -->
-	<div id="dataLayer" class="pop msg wrap-pop">
-		<div class="pop-header">
-			<h1>Communication Data</h1>
-			<div class="btn-area">
-				<button type="button" class="btn-case-01" id="btnExport"><span class="icon ico-export">Export</span></button>
-			</div>
-		</div>
-		<div class="pop-content" id="dataLayerContent">		
-		  <form id="frm" method="post" action="/carpe/communication_export.do">
-		    <input type="hidden" id="roomno" name="roomno" value="" >
-		  </form>
-			<h4 class="blind">조회된 컨텐츠</h4>
-			<!--// Content 영역 //-->
-			<div class="chatLog" id="dataList">
-			</div><!--// content-box -->			
-		</div><!-- // pop-content end -->
-	</div><!-- // pop-up end -->
+      </section>
+      <!--// content-box -->      
+    </div><!-- // pop-content end -->
+  </div><!-- // pop-up end -->
+  
+  <!-- pop-up // 데이터 선택 시, 대화내용 팝업  // -->
+  <div id="dataLayer" class="pop msg wrap-pop">
+    <div class="pop-header">
+      <h1>Communication Data</h1>
+      <div class="btn-area">
+        <button type="button" class="btn-case-01" id="btnExport"><span class="icon ico-export">Export</span></button>
+      </div>
+    </div>
+    <div class="pop-content" id="dataLayerContent">    
+      <form id="frm" method="post" action="/carpe/communication_export.do">
+        <input type="hidden" id="roomno" name="roomno" value="" >
+      </form>
+      <h4 class="blind">조회된 컨텐츠</h4>
+      <!--// Content 영역 //-->
+      <div class="chatLog" id="dataList">
+      </div><!--// content-box -->      
+    </div><!-- // pop-content end -->
+  </div><!-- // pop-up end -->
 
-	<!-- pop-up //파일목록-->
-	<div id="fileInfo" class="pop wrap-pop">
-		<div class="pop-header jqx-window-header">
-			<h1>파일 정보</h1>
-		</div>
-		<div class="pop-content">
-			<div id="jqxGrid_fileInfo" class="data-tbl-area">
-			</div><!--// content-box -->			
-		</div><!-- // pop-content end -->
-	</div><!-- // pop-up end -->
+  <!-- pop-up //파일목록-->
+  <div id="fileInfo" class="pop wrap-pop">
+    <div class="pop-header jqx-window-header">
+      <h1>파일 정보</h1>
+    </div>
+    <div class="pop-content">
+      <div id="jqxGrid_fileInfo" class="data-tbl-area">
+      </div><!--// content-box -->      
+    </div><!-- // pop-content end -->
+  </div><!-- // pop-up end -->
 
-	<!-- pop-up //이동 경로 설정-->
-	<div id="moveConfigPop" class="pop wrap-pop">
-		<div class="pop-header">
-			<h1>이동 경로 설정</h1>
-		</div>
-		<div class="pop-content">
-			<section class="search-date">
-				<div class="array combo">
-			        <span class="input-text-type-1 calendar" id="mcSdateSpan"><input type="text" id="mcSdate" placeholder="시작일" /></span>
-			        <span class="hyp">-</span>
-			        <span class="input-text-type-1 calendar" id="mcEdateSpan"><input type="text" id="mcEdate" placeholder="종료일" /></span>
-	            </div>
-			</section>
-			<section class="btn-area">
-			  <ul>
-			    <li><button type="button" class="btn-case-01" id="btnMcOK">확인</button></li>
-			    <li><button type="button" class="btn-case-01" id="btnMcCancel">취소</button></li>
-			  </ul>
-			</section>
-		</div><!-- // pop-content end -->
-	</div><!-- // pop-up end -->
+  <!-- pop-up //이동 경로 설정-->
+  <div id="moveConfigPop" class="pop wrap-pop">
+    <div class="pop-header">
+      <h1>이동 경로 설정</h1>
+    </div>
+    <div class="pop-content">
+      <section class="search-date">
+        <div class="array combo">
+              <span class="input-text-type-1 calendar" id="mcSdateSpan"><input type="text" id="mcSdate" placeholder="시작일" /></span>
+              <span class="hyp">-</span>
+              <span class="input-text-type-1 calendar" id="mcEdateSpan"><input type="text" id="mcEdate" placeholder="종료일" /></span>
+              </div>
+      </section>
+      <section class="btn-area">
+        <ul>
+          <li><button type="button" class="btn-case-01" id="btnMcOK">확인</button></li>
+          <li><button type="button" class="btn-case-01" id="btnMcCancel">취소</button></li>
+        </ul>
+      </section>
+    </div><!-- // pop-content end -->
+  </div><!-- // pop-up end -->
 
-	<!-- pop-up //이동 경로 설정-->
-	<div id="timeLinePop" class="pop wrap-pop">
-		<div class="pop-header">
-			<h1>분석 시점 설정</h1>
-		</div>
-		<div class="pop-content">
-			<section>
-				<div class="tit-area"><h3 class="unit">분석 시점 검색</h3></div>
-				<div class="array mt10">
-					<ul class="list-v">
-						<li>
-							<div class="array combo">
-								<span class="input-text-type-1 calendar" id="tlSdateSpan"><input type="text" id="tlSdate" placeholder="시작일" /></span>
-								<span class="hyp">-</span>
-								<span class="input-text-type-1 calendar" id="tlEdateSpan"><input type="text" id="tlEdate" placeholder="종료일" /></span>
-							</div>
-						</li>
-						<li class="mt5">
-							<div class="array combo">
-								<span class="input-text-type-1 calendar" id="tlStimeSpan"><input type="text" id="tlStime" placeholder="시작시간" /></span>
-								<span class="hyp">-</span>
-								<span class="input-text-type-1 calendar" id="tlEtimeSpan"><input type="text" id="tlEtime" placeholder="종료시간" /></span>
-							</div>
-						</li>
-					</ul>
-				</div>
-				<div class="array mt10">
-					<ul class="list-h w3ea">
-						<li>
-							<div class="checkbox checkbox-type-3">
-								<input id="chk1" name="chk1" type="checkbox" />
-								<label for="chk1"><span class="text">공휴일만</span></label>
-							</div>
-						</li>
-						<li>
-							<div class="checkbox checkbox-type-3">
-								<input id="chk2" name="chk2" type="checkbox" />
-								<label for="chk2"><span class="text">공휴일만 제외</span></label>
-							</div>
-						</li>
-						<li>
-							<div class="checkbox checkbox-type-3">
-								<input id="chk3" name="chk3" type="checkbox" />
-								<label for="chk3"><span class="text">주말만</span></label>
-							</div>
-						</li>
-						<li>
-							<div class="checkbox checkbox-type-3">
-								<input id="chk4" name="chk4" type="checkbox" />
-								<label for="chk4"><span class="text">주말만 제외</span></label>
-							</div>
-						</li>
-						<li>
-							<div class="checkbox checkbox-type-3">
-								<input id="chk5" name="chk5" type="checkbox" />
-								<label for="chk5"><span class="text">첫 데이터만</span></label>
-							</div>
-						</li>
-						<li>
-							<div class="checkbox checkbox-type-3">
-								<input id="chk6" name="chk6" type="checkbox" />
-								<label for="chk6"><span class="text">마지막 데이터만</span></label>
-							</div>
-						</li>
-					</ul>
-				</div>     
-				<div class="array btn-area mt10">
-					<ul class="fl w100p">
-						<li>
-							<button type="button" class="btn-case-01 bk" id="btnWork"><span class="icon">업무시간</span></button>
-						</li>
-						<li>
-							<button type="button" class="btn-case-01 bk" id="btnNotWork"><span class="icon">비업무시간</span></button>
-						</li>
-						<li class="fr">
-							<button type="button" class="btn-case-01 btn-search txt" id="btnTlSearch"><span class="icon ico-search">검색</span></button>
-						</li>
-					</ul>
-				</div>
-			</section>
-      		<section class="mt20">
-				<div class="tit-area"><h3 class="unit">타임라인</h3></div>
-	      		<div id="chartDiv" style="height:10rem;"></div>
-	      		<div class="route" id="pathList">
-	      		</div>
-      		</section>
-    	</div>
-	</div><!-- // pop-up end -->
+  <!-- pop-up //이동 경로 설정-->
+  <div id="timeLinePop" class="pop wrap-pop">
+    <div class="pop-header">
+      <h1>분석 시점 설정</h1>
+    </div>
+    <div class="pop-content">
+      <section>
+        <div class="tit-area"><h3 class="unit">분석 시점 검색</h3></div>
+        <div class="array mt10">
+          <ul class="list-v">
+            <li>
+              <div class="array combo">
+                <span class="input-text-type-1 calendar" id="tlSdateSpan"><input type="text" id="tlSdate" placeholder="시작일" /></span>
+                <span class="hyp">-</span>
+                <span class="input-text-type-1 calendar" id="tlEdateSpan"><input type="text" id="tlEdate" placeholder="종료일" /></span>
+              </div>
+            </li>
+            <li class="mt5">
+              <div class="array combo">
+                <span class="input-text-type-1 calendar" id="tlStimeSpan"><input type="text" id="tlStime" placeholder="시작시간" /></span>
+                <span class="hyp">-</span>
+                <span class="input-text-type-1 calendar" id="tlEtimeSpan"><input type="text" id="tlEtime" placeholder="종료시간" /></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="array mt10">
+          <ul class="list-h w3ea">
+            <li>
+              <div class="checkbox checkbox-type-3">
+                <input id="chk1" name="chk1" type="checkbox" />
+                <label for="chk1"><span class="text">공휴일만</span></label>
+              </div>
+            </li>
+            <li>
+              <div class="checkbox checkbox-type-3">
+                <input id="chk2" name="chk2" type="checkbox" />
+                <label for="chk2"><span class="text">공휴일만 제외</span></label>
+              </div>
+            </li>
+            <li>
+              <div class="checkbox checkbox-type-3">
+                <input id="chk3" name="chk3" type="checkbox" />
+                <label for="chk3"><span class="text">주말만</span></label>
+              </div>
+            </li>
+            <li>
+              <div class="checkbox checkbox-type-3">
+                <input id="chk4" name="chk4" type="checkbox" />
+                <label for="chk4"><span class="text">주말만 제외</span></label>
+              </div>
+            </li>
+            <li>
+              <div class="checkbox checkbox-type-3">
+                <input id="chk5" name="chk5" type="checkbox" />
+                <label for="chk5"><span class="text">첫 데이터만</span></label>
+              </div>
+            </li>
+            <li>
+              <div class="checkbox checkbox-type-3">
+                <input id="chk6" name="chk6" type="checkbox" />
+                <label for="chk6"><span class="text">마지막 데이터만</span></label>
+              </div>
+            </li>
+          </ul>
+        </div>     
+        <div class="array btn-area mt10">
+          <ul class="fl w100p">
+            <li>
+              <button type="button" class="btn-case-01 bk" id="btnWork"><span class="icon">업무시간</span></button>
+            </li>
+            <li>
+              <button type="button" class="btn-case-01 bk" id="btnNotWork"><span class="icon">비업무시간</span></button>
+            </li>
+            <li class="fr">
+              <button type="button" class="btn-case-01 btn-search txt" id="btnTlSearch"><span class="icon ico-search">검색</span></button>
+            </li>
+          </ul>
+        </div>
+      </section>
+          <section class="mt20">
+        <div class="tit-area"><h3 class="unit">타임라인</h3></div>
+            <div id="chartDiv" style="height:10rem;"></div>
+            <div class="route" id="pathList">
+            </div>
+          </section>
+      </div>
+  </div><!-- // pop-up end -->
 
   <script src="/carpe/resources/amcharts_4.5.3/amcharts4/core.js"></script>
   <script src="/carpe/resources/amcharts_4.5.3/amcharts4/charts.js"></script>
   <script src="/carpe/resources/amcharts_4.5.3/amcharts4/themes/animated.js"></script>
-	
-	<!-- 현재 페이지에 필요한 js -->
-	<script>
-	(function($) {
-		var map = null;
-		var polyLine = null;
+  
+  <!-- 현재 페이지에 필요한 js -->
+  <script>
+  (function($) {
+    var map = null;
+    var polyLine = null;
     var chart = null;
     var xAxis = null;
 
-		$(document).ready(function() {
-			initMap();
+    $(document).ready(function() {
+      initMap();
       initMapGrid();
       initFileGrid();
-			initPopup();
+      initPopup();
       initChart();
 
       $("#btnComm").click(openRoomListLayer);
@@ -348,35 +348,35 @@
       $("#edate").val("");
       
       $("#sdateSpan").click(function() {
-      	$("#sdate").datetimepicker("show"); 
+        $("#sdate").datetimepicker("show"); 
       });
       
       $("#edateSpan").click(function() {
-      	$("#edate").datetimepicker("show"); 
+        $("#edate").datetimepicker("show"); 
       });
 
       $("#mcSdateSpan").click(function() {
-      	$("#mcSdate").datetimepicker("show"); 
+        $("#mcSdate").datetimepicker("show"); 
       });
       
       $("#mcEdateSpan").click(function() {
-      	$("#mcEdate").datetimepicker("show"); 
+        $("#mcEdate").datetimepicker("show"); 
       });
 
       $("#tlSdateSpan").click(function() {
-      	$("#tlSdate").datetimepicker("show"); 
+        $("#tlSdate").datetimepicker("show"); 
       });
       
       $("#tlEdateSpan").click(function() {
-      	$("#tlEdate").datetimepicker("show"); 
+        $("#tlEdate").datetimepicker("show"); 
       });
 
       $("#tlStimeSpan").click(function() {
-      	$("#tlStime").datetimepicker("show"); 
+        $("#tlStime").datetimepicker("show"); 
       });
       
       $("#tlEtimeSpan").click(function() {
-      	$("#tlEtime").datetimepicker("show"); 
+        $("#tlEtime").datetimepicker("show"); 
       });
 
       $("#btnExport").click(function() {
@@ -434,9 +434,13 @@
             mode: 0
         };
 
-	   	  var data = getLinkList(sendData);
-	   	  drawPolyLine(data.list);
-        $("#moveConfigPop").jqxWindow('close');
+        var data = getLinkList(sendData);
+        drawPolyLine(data.list);
+        moveMap(data.list);
+
+        if (data.length > 0) {
+          $("#moveConfigPop").jqxWindow('close');
+        }
       });
 
       //업무시간
@@ -491,97 +495,97 @@
           $("#moveConfigPop").jqxWindow('open');
         });
       });
-		});
+    });
 
-		var initMap = function() {
-			//지도 api 객체 생성
-			map = new naver.maps.Map('map', {
-			  center: new naver.maps.LatLng(37.5642135, 127.0016985),
-			  zoom: 11
-			});
+    var initMap = function() {
+      //지도 api 객체 생성
+      map = new naver.maps.Map('map', {
+        center: new naver.maps.LatLng(37.5642135, 127.0016985),
+        zoom: 11
+      });
 
-			//PolyLine 객체
-			polyLine = new naver.maps.Polyline({
-				map: map,
-		    strokeWeight: 3, //두께
-		    strokeColor: '#db4040', //색
-		    strokeOpacity: 0.7, //불투명도
-		    strokeStyle: "solid",
-		    startIcon: naver.maps.PointingIcon.CIRCLE,
-		    endIcon: naver.maps.PointingIcon.BLOCK_ARROW
-			});
+      //PolyLine 객체
+      polyLine = new naver.maps.Polyline({
+        map: map,
+        strokeWeight: 3, //두께
+        strokeColor: '#db4040', //색
+        strokeOpacity: 0.7, //불투명도
+        strokeStyle: "solid",
+        startIcon: naver.maps.PointingIcon.CIRCLE,
+        endIcon: naver.maps.PointingIcon.BLOCK_ARROW
+      });
 
-			//마커 생성
-		  $.get("/carpe/gps/gps_list.do", function(data) {
-		    // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-		    // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-		    var markers = $(data.list).map(function(i, position) {
-		      var marker = new naver.maps.Marker({
-		        position : new naver.maps.LatLng(position.latitude, position.longitude),
-		        title : position.source,
-		        clickable: true 
-		      });
+      //마커 생성
+      $.get("/carpe/gps/gps_list.do", function(data) {
+        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
+        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+        var markers = $(data.list).map(function(i, position) {
+          var marker = new naver.maps.Marker({
+            position : new naver.maps.LatLng(position.latitude, position.longitude),
+            title : position.contents,
+            clickable: true 
+          });
 
-		      naver.maps.Event.addListener(marker, 'click', function() {
-		    		viewMapInfo(position.location, position.regd, position.source);
-		      });
+          naver.maps.Event.addListener(marker, 'click', function() {
+            viewMapInfo(position.contents, position.timestamp, position.package_name);
+          });
 
-				  return marker;
-		    });
+          return marker;
+        });
 
-		    var htmlMarker1 = {
-		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-1.png);background-size:contain;"></div>',
-		      size: N.Size(40, 40),
-		      anchor: N.Point(20, 20)
-		    },
-		    htmlMarker2 = {
-		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-2.png);background-size:contain;"></div>',
-		      size: N.Size(40, 40),
-		      anchor: N.Point(20, 20)
-		    },
-		    htmlMarker3 = {
-		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-3.png);background-size:contain;"></div>',
-		      size: N.Size(40, 40),
-		      anchor: N.Point(20, 20)
-		    },
-		    htmlMarker4 = {
-		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-4.png);background-size:contain;"></div>',
-		      size: N.Size(40, 40),
-		      anchor: N.Point(20, 20)
-		    },
-		    htmlMarker5 = {
-		      content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-5.png);background-size:contain;"></div>',
-		      size: N.Size(40, 40),
-		      anchor: N.Point(20, 20)
-		    };
-		    
-		    // 클러스터러에 마커들을 추가
-	      var clusterer = new MarkerClustering({
-	        minClusterSize: 2,
-	        maxZoom: 15,
-	        map: map,
-	        markers: markers,
-	        disableClickZoom: false,
-	        gridSize: 120,
-	        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
-	        indexGenerator: [5, 10, 15, 20, 25],
-	        stylingFunction: function(clusterMarker, count) {
-	          $(clusterMarker.getElement()).find('div:first-child').text(count);
-	        }
-	      });
-		  });
-		};
+        var htmlMarker1 = {
+          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-1.png);background-size:contain;"></div>',
+          size: N.Size(40, 40),
+          anchor: N.Point(20, 20)
+        },
+        htmlMarker2 = {
+          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-2.png);background-size:contain;"></div>',
+          size: N.Size(40, 40),
+          anchor: N.Point(20, 20)
+        },
+        htmlMarker3 = {
+          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-3.png);background-size:contain;"></div>',
+          size: N.Size(40, 40),
+          anchor: N.Point(20, 20)
+        },
+        htmlMarker4 = {
+          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-4.png);background-size:contain;"></div>',
+          size: N.Size(40, 40),
+          anchor: N.Point(20, 20)
+        },
+        htmlMarker5 = {
+          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-5.png);background-size:contain;"></div>',
+          size: N.Size(40, 40),
+          anchor: N.Point(20, 20)
+        };
+        
+        // 클러스터러에 마커들을 추가
+        var clusterer = new MarkerClustering({
+          minClusterSize: 2,
+          maxZoom: 15,
+          map: map,
+          markers: markers,
+          disableClickZoom: false,
+          gridSize: 120,
+          icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+          indexGenerator: [5, 10, 15, 20, 25],
+          stylingFunction: function(clusterMarker, count) {
+            $(clusterMarker.getElement()).find('div:first-child').text(count);
+          }
+        });
+      });
+    };
 
-		var initPopup = function() {
+    var initPopup = function() {
       //지도정보 Window
       $("#mapInfo").jqxWindow({
-          width: '40rem'
+          width: '60rem'
         , height: '29rem'
         , position: {x: 'calc(50% - 10rem)', y: '16rem'}
         , resizable: false
         , autoOpen: false
         , resizable: false
-        , isModal: true
+        , isModal: false
         , modalOpacity: 0.3
       });
 
@@ -647,7 +651,7 @@
         , position: [left, top]
         , modalOpacity: 0.3
       });
-		};
+    };
 
     // TimeLine Chart 초기화
     var initChart = function() {
@@ -678,13 +682,13 @@
       // Value
       var series = chart.series.push(new am4charts.ColumnSeries());
       series.dataFields.valueY = "cnt";
-      series.dataFields.dateX = "regd";
+      series.dataFields.dateX = "timestamp";
       series.columns.template.tooltipText = "[bold]{valueY}[/]";
       series.columns.template.fillOpacity = .8;
 
       series.columns.template.events.on("hit", function(ev) {
-        var sdate = ev.target.dataItem.dataContext.regd;
-        var edate = ev.target.dataItem.dataContext.regd;
+        var sdate = ev.target.dataItem.dataContext.timestamp;
+        var edate = ev.target.dataItem.dataContext.timestamp;
 
         $("input:checkbox[id^='chk']").prop("checked", false);
 
@@ -754,40 +758,40 @@
         }
       });
 
-	    var data = getLinkList(sendData);
+      var data = getLinkList(sendData);
       makeDateCountChart(sdate, edate);
-	    drawPolyLine(data.list);
+      drawPolyLine(data.list);
       makePathList(data.list);
     };
 
     // map marker click event
-		var viewMapInfo = function(location, regd, source) {
-      var sdate = regd.substr(0, 10) + " 00:00:00";
-      var edate = regd.substr(0, 10) + " 23:59:59";
+    var viewMapInfo = function(contents, timestamp, package_name) {
+      var sdate = timestamp.substr(0, 10) + " 00:00:00";
+      var edate = timestamp.substr(0, 10) + " 23:59:59";
       var sendData = {
           sdate: sdate,
           edate: edate,
           mode: 0
       };
 
-	   	var data = getLinkList(sendData);
+      var data = getLinkList(sendData);
       drawPolyLine(data.list);
-	   	$("#infoTime").html(regd);
-	   	$("#infoLocation").html(location);
-	   	$("#infoSource").html(source);
+      $("#infoTime").html(timestamp);
+      $("#infoLocation").html(contents);
+      $("#infoSource").html(package_name);
       $("#mapInfo").jqxWindow('open');
-		};
+    };
 
-		var getLinkList = function(sendData) {
+    var getLinkList = function(sendData) {
       var retData = null;
 
-		  $.ajax({
-			  url: "/carpe/gps/gps_link_list.do",
-		    dataType:'json',
-		    data: sendData,
-		    async: false,
-		    contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-		    success: function(data) {
+      $.ajax({
+        url: "/carpe/gps/gps_link_list.do",
+        dataType:'json',
+        data: sendData,
+        async: false,
+        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function(data) {
           var ret = data.ret;
           var msg = data.msg;
 
@@ -796,114 +800,124 @@
           }
 
           retData = data;
-		    }
-		  });
+        }
+      });
 
       return retData;
-		};
+    };
+
+    var moveMap = function(data) {
+      $(data).each(function(i, list) {
+        map.setCenter(new naver.maps.LatLng(list.latitude, list.longitude));
+        map.setZoom(13, true);
+        return false;
+      });
+    };
 
     //차트 데이터 변경
-		var makeDateCountChart = function(sdate, edate) {
-		  $.ajax({
-			  url: "/carpe/gps/gps_date_count.do",
-		    dataType:'json',
-		    data: {
+    var makeDateCountChart = function(sdate, edate) {
+      $.ajax({
+        url: "/carpe/gps/gps_date_count.do",
+        dataType:'json',
+        data: {
           sdate : sdate,
           edate : edate
         },
-		    contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-		    success: function(data) {
+        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+        success: function(data) {
           xAxis.min = new Date(sdate.substr(0, 10)).getTime();
           xAxis.max = new Date(edate.substr(0, 10)).getTime();
           chart.data = data.list;
         }
-		  });
-		};
+      });
+    };
 
     //라인 생성
     var drawPolyLine = function(data) {
-		  var linePath = [];
+      var linePath = [];
 
-		  $(data).each(function(i, list) {
-		    linePath[i] = new naver.maps.LatLng(list.latitude, list.longitude);
-		  });
+      $(data).each(function(i, list) {
+        linePath[i] = new naver.maps.LatLng(list.latitude, list.longitude);
+      });
 
-			polyLine.setPath(linePath);
-	    console.log(linePath.length);
+      polyLine.setPath(linePath);
+      console.log(linePath.length);
     };
 
-		//Map Grid
+    //Map Grid
     var initMapGrid = function() {
-		  var source = {
+      var source = {
         datatype: "json",
         datafields: [
           { name: 'serial_number', type: 'number' },
-          { name: 'regd', type: 'string' },
-          //{ name: 'gps_type', type: 'string' },
-          { name: 'source', type: 'string' },
-          { name: 'location', type: 'string' },
+          { name: 'timestamp', type: 'string' },
+          { name: 'package_name', type: 'string' },
+          { name: 'contents', type: 'string' },
           { name: 'latitude', type: 'string' },
-          { name: 'longitude', type: 'string' }
+          { name: 'longitude', type: 'string' },
+          { name: 'source', type: 'string' },
+          { name: 'is_visited', type: 'string' }
         ],
         type : "POST",
         contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
         url: "/carpe/gps/gps_list.do"
       };
-		  
-		  var dataAdapter = new $.jqx.dataAdapter(source, {
-		  	contentType : 'application/json; charset=utf-8',
-		  	formatData : function(data) {
-		      return data;
-		  	},
-		  	beforeSend : function(xhr) {
-		  	},
-		  	downloadComplete : function(data, status, xhr) {
-		  	},
-		  	loadComplete : function(data) {
-		  	},
-		  	loadError : function(xhr, status, error) {
-		  	}
-		  });
       
-		  var columnSet = [
-		  	{text: 'No.', dataField: 'serial_number', width: '6%', cellsalign: 'right', align: 'center'},
-		  	{text: 'Timestamp', dataField: 'regd', width: '10%', cellsalign: 'right', align: 'center'},
-		  	//{text: 'Type', dataField: 'gps_type', width: '18%', cellsalign: 'center', align: 'center'},
-		  	{text: 'Application', dataField: 'source', width: '10%', cellsalign: 'center', align: 'center'},
-		  	{text: 'Keyword', dataField: 'location', width: 'auto', cellsalign: 'center', align: 'center'},
-		  	{text: 'Latitude', dataField: 'latitude', width: '10%', cellsalign: 'center', align: 'center'},
-		  	{text: 'Longitude', dataField: 'longitude', width: '10%', cellsalign: 'center', align: 'center'}
-		  ];
-	    
-		  $('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
-		  	var localizationobj = {};
-		  	localizationobj.emptydatastring = " ";
-	    
-		  	$("#jqxGrid_Systemlog").jqxGrid('localizestrings', localizationobj);
-		  });
-	    
-		  $("#jqxGrid_Systemlog").jqxGrid({
-		  	width: '100%',		
-		  	height: '40%',
-		  	source: dataAdapter,
-		  	pagerheight: 0,
-		  	altrows: true,
-		  	scrollbarsize: 12,
-		  	autoshowloadelement: true,
-		  	ready: function() {},
-		  	enablebrowserselection: true,
-		  	columnsresize: true,
-		  	filterable: true,
-		  	sortable: true,
-		  	sortMode: 'many',
-		  	columnsheight: 40,
-		  	columns: columnSet
-		  });
+      var dataAdapter = new $.jqx.dataAdapter(source, {
+        contentType : 'application/json; charset=utf-8',
+        formatData : function(data) {
+          return data;
+        },
+        beforeSend : function(xhr) {
+        },
+        downloadComplete : function(data, status, xhr) {
+        },
+        loadComplete : function(data) {
+        },
+        loadError : function(xhr, status, error) {
+        }
+      });
+      
+      var columnSet = [
+        {text: 'No.', dataField: 'serial_number', width: '6%', cellsalign: 'right', align: 'center'},
+        {text: 'Timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'right', align: 'center'},
+        {text: 'Application', dataField: 'package_name', width: '15%', cellsalign: 'left', align: 'center'},
+        {text: 'Contents', dataField: 'contents', width: 'auto', cellsalign: 'left', align: 'center'},
+        {text: 'Latitude', dataField: 'latitude', width: '10%', cellsalign: 'left', align: 'center'},
+        {text: 'Longitude', dataField: 'longitude', width: '10%', cellsalign: 'left', align: 'center'},
+        {text: 'Source', dataField: 'source', width: '15%', cellsalign: 'left', align: 'center'},
+        {text: 'Is visited', dataField: 'is_visited', width: '10%', cellsalign: 'center', align: 'center'}
+      ];
+      
+      $('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
+        var localizationobj = {};
+        localizationobj.emptydatastring = " ";
+      
+        $("#jqxGrid_Systemlog").jqxGrid('localizestrings', localizationobj);
+      });
+      
+      $("#jqxGrid_Systemlog").jqxGrid({
+        width: '100%',    
+        height: '40%',
+        source: dataAdapter,
+        pagerheight: 0,
+        altrows: true,
+        scrollbarsize: 12,
+        autoshowloadelement: true,
+        ready: function() {},
+        enablebrowserselection: true,
+        columnsresize: true,
+        filterable: true,
+        sortable: true,
+        sortMode: 'many',
+        columnsheight: 40,
+        columns: columnSet
+      });
     };
 
-		//File Grid
+    //File Grid
     var initFileGrid = function() {
-		  var source = {
+      var source = {
         datatype: "json",
         datafields: [
           { name: 'type', type: 'string' },
@@ -914,60 +928,61 @@
         contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
         url: "/carpe/gps/file_list.do"
       };
-		  
-		  var dataAdapter = new $.jqx.dataAdapter(source, {
-		  	contentType : 'application/json; charset=utf-8',
-		  	formatData : function(data) {
-          data.regdate = $("#infoTime").text();
-		      return data;
-		  	},
-		  	beforeSend : function(xhr) {
-		  	},
-		  	downloadComplete : function(data, status, xhr) {
-		  	},
-		  	loadComplete : function(data) {
-		  	},
-		  	loadError : function(xhr, status, error) {
-		  	}
-		  });
       
-		  var columnSet = [
-		  	{text: 'Type', dataField: 'type', width: '20%', cellsalign: 'center', align: 'center'},
-		  	{text: 'Timestamp', dataField: 'regdate', width: '30%', cellsalign: 'left', align: 'center'},
-		  	{text: 'File Name', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
-		  ];
-	    
-		  $('#jqxGrid_fileInfo').on('bindingcomplete', function(event) {
-		  	var localizationobj = {};
-		  	localizationobj.emptydatastring = " ";
-	    
-		  	$("#jqxGrid_fileInfo").jqxGrid('localizestrings', localizationobj);
-		  });
-	    
-		  $("#jqxGrid_fileInfo").jqxGrid({
-		  	width: '100%',		
-		  	height: '100%',
-		  	source: dataAdapter,
-		  	pagerheight: 0,
-		  	altrows: true,
-		  	scrollbarsize: 12,
-		  	autoshowloadelement: true,
-		  	ready: function() {},
-		  	enablebrowserselection: true,
-		  	columnsresize: true,
-		  	filterable: true,
-		  	sortable: true,
-		  	sortMode: 'many',
-		  	columnsheight: 40,
-		  	columns: columnSet
-		  });
+      var dataAdapter = new $.jqx.dataAdapter(source, {
+        contentType : 'application/json; charset=utf-8',
+        formatData : function(data) {
+          data.regdate = $("#infoTime").text();
+          return data;
+        },
+        beforeSend : function(xhr) {
+        },
+        downloadComplete : function(data, status, xhr) {
+        },
+        loadComplete : function(data) {
+        },
+        loadError : function(xhr, status, error) {
+        }
+      });
+      
+      var columnSet = [
+        {text: 'Type', dataField: 'type', width: '20%', cellsalign: 'center', align: 'center'},
+        {text: 'Timestamp', dataField: 'regdate', width: '30%', cellsalign: 'left', align: 'center'},
+        {text: 'File Name', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
+      ];
+      
+      $('#jqxGrid_fileInfo').on('bindingcomplete', function(event) {
+        var localizationobj = {};
+        localizationobj.emptydatastring = " ";
+      
+        $("#jqxGrid_fileInfo").jqxGrid('localizestrings', localizationobj);
+      });
+      
+      $("#jqxGrid_fileInfo").jqxGrid({
+        width: '100%',    
+        height: '100%',
+        source: dataAdapter,
+        pagerheight: 0,
+        altrows: true,
+        scrollbarsize: 12,
+        autoshowloadelement: true,
+        ready: function() {},
+        enablebrowserselection: true,
+        columnsresize: true,
+        filterable: true,
+        sortable: true,
+        sortMode: 'many',
+        columnsheight: 40,
+        columns: columnSet
+      });
     };
 
     //TimeLine 경로 리스트 생성
     var makePathList = function(list) {
       var html = "";
+      console.log(list);
 
-		  $(list).each(function(i, data) {
+      $(list).each(function(i, data) {
         if (html != "") {
           var prevData = list[i - 1];
           var diff = data.regdate.time - prevData.regdate.time;
@@ -992,22 +1007,24 @@
 
           moveStr = distStr;
 
-			if (h > 0) {
-			moveStr += h + "시간 ";
-			}
-			moveStr += m + "분";
-			
-	        html += "<dl><dd>" + moveStr + "</dd></dl>";
-			}
-			html += "<dl><dt><span>" + data.location + "</span><p>" + data.regd + "</p></dt></dl>";
-		  });
+          if (h > 0) {
+            moveStr += h + "시간 ";
+          }
+          
+          moveStr += m + "분";
+          
+          html += "<dl><dd>" + moveStr + "</dd></dl>";
+        }
+
+        html += "<dl><dt><span>" + data.contents + "</span><p>" + data.timestamp + "</p></dt></dl>";
+      });
 
       $("#pathList").html(html);
     };
 
-	})(jQuery);
+  })(jQuery);
 
-	//////// 대화방 목록 ////////
+  //////// 대화방 목록 ////////
   var openRoomListLayer = function() {
     $("#sdate").datetimepicker("setOptions", {value: $("#infoTime").text()});
     $("#edate").datetimepicker("setOptions", {value: $("#infoTime").text()});
@@ -1023,163 +1040,163 @@
     $("#roomLayer").jqxWindow('open');
   }
 
-	var getRoomList = function() {
-		var data = {
-		  sdate: $("#sdate").val(),
-		  edate: $("#edate").val()
-		};
+  var getRoomList = function() {
+    var data = {
+      sdate: $("#sdate").val(),
+      edate: $("#edate").val()
+    };
   
-	  $.ajax({
-	    url: "/carpe/gps/communication_room_list.do",
-	    dataType: 'json',
-	    data: data,
-	    async: false,
-	    contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-	    success: function(data) {
-		    if (data && data.list) {
-		      setRoomLayer(data.list);
-			  }
-	    }
-	  });
-	};
+    $.ajax({
+      url: "/carpe/gps/communication_room_list.do",
+      dataType: 'json',
+      data: data,
+      async: false,
+      contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+      success: function(data) {
+        if (data && data.list) {
+          setRoomLayer(data.list);
+        }
+      }
+    });
+  };
 
-	var setRoomLayer = function(list) {
-		var html = "";
+  var setRoomLayer = function(list) {
+    var html = "";
   
-		if (list.length == 0) {
-			html += "<li class=\"empty-data\"> ";
-			html += "  <p>해당 기간 조회된 내용이 없습니다.</p> ";
-			html += "</li> ";
-		} else {
-			$.each(list, function(idx, row) {
-			  html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
-			  html += "	<div class=\"cr-info\"> ";
-			  html += "		<h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
-			  html += "		<time class=\"cr-date\" datetime=\"" + row.regdate + "\">" + row.regdate.substr(0, 10) + "</time> ";
-			  html += "	</div> ";
-			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.content + "\">" + row.content + "</p> ";
-			  html += "</li> ";
-			});
-		}
+    if (list.length == 0) {
+      html += "<li class=\"empty-data\"> ";
+      html += "  <p>해당 기간 조회된 내용이 없습니다.</p> ";
+      html += "</li> ";
+    } else {
+      $.each(list, function(idx, row) {
+        html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
+        html += "  <div class=\"cr-info\"> ";
+        html += "    <h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
+        html += "    <time class=\"cr-date\" datetime=\"" + row.regdate + "\">" + row.regdate.substr(0, 10) + "</time> ";
+        html += "  </div> ";
+        html += "  <p class=\"chat-data text-ellipsis\" title=\"" + row.content + "\">" + row.content + "</p> ";
+        html += "</li> ";
+      });
+    }
   
-		$("#roomList").html(html);
-	};
-	//////// 대화방 목록 End ////////
+    $("#roomList").html(html);
+  };
+  //////// 대화방 목록 End ////////
 
-	//////// 대화창 ////////
-	var regdateStr = "";
-	var commDataLoading = false;
-	var sdata = 0;
-	var pageCnt = 50;
+  //////// 대화창 ////////
+  var regdateStr = "";
+  var commDataLoading = false;
+  var sdata = 0;
+  var pageCnt = 50;
   
-	var openCommDataLayer = function(tmpRoomno) {
-		commDataLoading = true;
-		regdateStr = "";
-		sdata = 0;
-		$("#roomno").val(tmpRoomno);
-		$("#dataList").html("");
-		getCommData();
+  var openCommDataLayer = function(tmpRoomno) {
+    commDataLoading = true;
+    regdateStr = "";
+    sdata = 0;
+    $("#roomno").val(tmpRoomno);
+    $("#dataList").html("");
+    getCommData();
     $("#dataLayer").jqxWindow('open');
-		$("#dataLayerContent").scrollTop(0);
-	};
+    $("#dataLayerContent").scrollTop(0);
+  };
   
-	var getCommData = function() {
-		var data = {
-			roomno: $("#roomno").val(),
-			sdata: sdata,
-			pageCnt: pageCnt 
-		};
+  var getCommData = function() {
+    var data = {
+      roomno: $("#roomno").val(),
+      sdata: sdata,
+      pageCnt: pageCnt 
+    };
   
-	  $.ajax({
-	    url: "/carpe/gps/communication_data_list.do",
-	    dataType: 'json',
-	    data: data,
-	    async: false,
-	    contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-	    success: function(data) {
-		    if (data && data.list) {
-		      setDataLayer(data.list);
-			  }
-	    },
-	    error : function(xhr, status, error) {
-		    console.log(xhr.responseText)
-	    },
-	    complete: function(xhr, status) {
-	    	commDataLoading = false;
-		  }
-	  });
-	};
+    $.ajax({
+      url: "/carpe/gps/communication_data_list.do",
+      dataType: 'json',
+      data: data,
+      async: false,
+      contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+      success: function(data) {
+        if (data && data.list) {
+          setDataLayer(data.list);
+        }
+      },
+      error : function(xhr, status, error) {
+        console.log(xhr.responseText)
+      },
+      complete: function(xhr, status) {
+        commDataLoading = false;
+      }
+    });
+  };
   
-	var setDataLayer = function(list) {
-		var html = "";
+  var setDataLayer = function(list) {
+    var html = "";
   
-		$.each(list, function(idx, row) {
-			var otherClass = "";
-			var timeStr = "";
-			var name = row.sender_name;
-			var regdate = row.regdate;
+    $.each(list, function(idx, row) {
+      var otherClass = "";
+      var timeStr = "";
+      var name = row.sender_name;
+      var regdate = row.regdate;
   
-			if (regdate == null) {
-				regdate = "";
-			}
+      if (regdate == null) {
+        regdate = "";
+      }
   
-			if (regdateStr != regdate.substr(0, 10)) {
-				regdateStr = regdate.substr(0, 10);
+      if (regdateStr != regdate.substr(0, 10)) {
+        regdateStr = regdate.substr(0, 10);
   
-				if (html != "") {
-			    html += "</section> ";
-				}
+        if (html != "") {
+          html += "</section> ";
+        }
   
-				html += "<section class=\"day-wrap\"> ";
-				html += "  <h5>- " + regdate.substr(0, 4) + "년 " + regdate.substr(5, 2) + "월 " + regdate.substr(8, 2) + "일 -</h5> ";
-			}
+        html += "<section class=\"day-wrap\"> ";
+        html += "  <h5>- " + regdate.substr(0, 4) + "년 " + regdate.substr(5, 2) + "월 " + regdate.substr(8, 2) + "일 -</h5> ";
+      }
   
-			if (row.msg_type != "발신") {
-				otherClass = "other";
-			}
+      if (row.msg_type != "발신") {
+        otherClass = "other";
+      }
   
-			if (regdate != "") {
-				timeStr = regdate.substr(11, 2) + ":" + regdate.substr(14, 2);
-			}
+      if (regdate != "") {
+        timeStr = regdate.substr(11, 2) + ":" + regdate.substr(14, 2);
+      }
   
-			if (name == "") {
-				name = "(이름없음)";
-			}
+      if (name == "") {
+        name = "(이름없음)";
+      }
   
-			html += "	 <div class=\"data_log " + otherClass + "\"> ";
-			if (row.msg_type != "발신") {
-			  html += "		 <div class=\"name\">" + name + "</div> ";
-			  html += "		 <div class=\"log\"> ";
-			  html += "			 <span>" + row.content + "</span> ";
-			  html += "			 <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
-			} else {
-			  html += "		 <div class=\"log\"> ";
-			  html += "			 <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
-			  html += "			 <span>" + row.content + "</span> ";
-			}
+      html += "   <div class=\"data_log " + otherClass + "\"> ";
+      if (row.msg_type != "발신") {
+        html += "     <div class=\"name\">" + name + "</div> ";
+        html += "     <div class=\"log\"> ";
+        html += "       <span>" + row.content + "</span> ";
+        html += "       <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
+      } else {
+        html += "     <div class=\"log\"> ";
+        html += "       <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
+        html += "       <span>" + row.content + "</span> ";
+      }
   
-			html += "		 </div> ";
-			html += "	 </div> ";
-		});
+      html += "     </div> ";
+      html += "   </div> ";
+    });
   
-		if (html != "") {
-	    html += "</section> ";
-		}
+    if (html != "") {
+      html += "</section> ";
+    }
   
-		$("#dataList").append(html);
-	};
+    $("#dataList").append(html);
+  };
 
-	//////// 대화창 End ////////
+  //////// 대화창 End ////////
 
-	var exportCommData = function() {
-		if (!$("#roomno").val()) {
-			return;
-		}
+  var exportCommData = function() {
+    if (!$("#roomno").val()) {
+      return;
+    }
 
-		$("#frm").submit();
-	};
-	
-	</script>
+    $("#frm").submit();
+  };
+  
+  </script>
 
 </body>
 </html>
