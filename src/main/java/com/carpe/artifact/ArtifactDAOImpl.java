@@ -767,6 +767,17 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	    return sqlSession.selectOne(Namespace + ".selectChromeDomainCount", paramMap);
 	}
 	
+	// lv1_app_web_chrome_visit_history
+	@Override
+	public List<Map> selectChromeVisitHistory(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectChromeVisitHistory", paramMap);
+	}
+
+	@Override
+	public Map selectChromeVisitHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectChromeVisitHistoryCount", paramMap);
+	}
+	
 	// lv1_app_web_chromium_edge_autofill
 	@Override
 	public List<Map> selectChromiumEdgeAutofill(Map<String, Object> paramMap) throws Exception {
@@ -876,7 +887,18 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	public Map selectChromiumEdgeVisitCount(Map<String, Object> paramMap) throws Exception {
 	    return sqlSession.selectOne(Namespace + ".selectChromiumEdgeVisitCount", paramMap);
 	}
+	
+	// lv1_app_web_chromium_edge_visit_history
+	@Override
+	public List<Map> selectC_EdgeVisitHistory(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectC_EdgeVisitHistory", paramMap);
+	}
 
+	@Override
+	public Map selectC_EdgeVisitHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectC_EdgeVisitHistoryCount", paramMap);
+	}
+	
 	// lv1_app_web_firefox_domain
 	@Override
 	public List<Map> selectFirefoxDomain(Map<String, Object> paramMap) throws Exception {
@@ -986,8 +1008,116 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	public Map selectFirefoxPermissionsCount(Map<String, Object> paramMap) throws Exception {
 	    return sqlSession.selectOne(Namespace + ".selectFirefoxPermissionsCount", paramMap);
 	}
+	// lv1_app_web_opera_autofill
+	@Override
+	public List<Map> selectOperaAutofill(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaAutofill", paramMap);
+	}
+
+	@Override
+	public Map selectOperaAutofillCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaAutofillCount", paramMap);
+	}
+
+	// lv1_app_web_opera_bookmarks
+	@Override
+	public List<Map> selectOperaBookmarks(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaBookmarks", paramMap);
+	}
+
+	@Override
+	public Map selectOperaBookmarksCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaBookmarksCount", paramMap);
+	}
+
+	// lv1_app_web_opera_cookies
+	@Override
+	public List<Map> selectOperaCookies(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaCookies", paramMap);
+	}
+
+	@Override
+	public Map selectOperaCookiesCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaCookiesCount", paramMap);
+	}
+
+	// lv1_app_web_opera_favicons
+	@Override
+	public List<Map> selectOperaFavicons(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaFavicons", paramMap);
+	}
+
+	@Override
+	public Map selectOperaFaviconsCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaFaviconsCount", paramMap);
+	}
+
+	// lv1_app_web_opera_logindata
+	@Override
+	public List<Map> selectOperaLoginData(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaLoginData", paramMap);
+	}
+
+	@Override
+	public Map selectOperaLoginDataCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaLoginDataCount", paramMap);
+	}
+
+	// lv1_app_web_opera_search_terms
+	@Override
+	public List<Map> selectOperaSearchTerms(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaSearchTerms", paramMap);
+	}
+
+	@Override
+	public Map selectOperaSearchTermsCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaSearchTermsCount", paramMap);
+	}
+
+	// lv1_app_web_opera_shortcuts
+	@Override
+	public List<Map> selectOperaShortcuts(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaShortcuts", paramMap);
+	}
+
+	@Override
+	public Map selectOperaShortcutsCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaShortcutsCount", paramMap);
+	}
+
+	// lv1_app_web_opera_visit_urls
+	@Override
+	public List<Map> selectOperaVisitUrls(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaVisitUrls", paramMap);
+	}
+
+	@Override
+	public Map selectOperaVisitUrlsCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaVisitUrlsCount", paramMap);
+	}
 
 
+	// lv1_app_web_opera_download
+	@Override
+	public List<Map> selectOperaDownload(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaDownload", paramMap);
+	}
+
+	@Override
+	public Map selectOperaDownloadCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaDownloadCount", paramMap);
+	}
+
+	// lv1_app_web_opera_visit_history
+	@Override
+	public List<Map> selectOperaVisitHistory(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectOperaVisitHistory", paramMap);
+	}
+
+	@Override
+	public Map selectOperaVisitHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectOperaVisitHistoryCount", paramMap);
+	}
 	
 	// lv1_app_web_whale_autofill
 	@Override
@@ -1097,6 +1227,17 @@ public class ArtifactDAOImpl implements ArtifactDAO {
 	@Override
 	public Map selectWhaleVisitUrlsCount(Map<String, Object> paramMap) throws Exception {
 	    return sqlSession.selectOne(Namespace + ".selectWhaleVisitUrlsCount", paramMap);
+	}
+
+	// lv1_app_web_whale_visit_history
+	@Override
+	public List<Map> selectWhaleVisitHistory(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectList(Namespace + ".selectWhaleVisitHistory", paramMap);
+	}
+
+	@Override
+	public Map selectWhaleVisitHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return sqlSession.selectOne(Namespace + ".selectWhaleVisitHistoryCount", paramMap);
 	}
 
 	// lv1_app_web_chrome_search_terms

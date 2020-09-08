@@ -780,7 +780,18 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectChromeDomainCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectChromeDomainCount(paramMap);
 	}
+	
+	// lv1_app_web_chrome_visit_history
+	@Override
+	public List<Map> selectChromeVisitHistory(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeVisitHistory(paramMap);
+	}
 
+	@Override
+	public Map selectChromeVisitHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectChromeVisitHistoryCount(paramMap);
+	}
+	
 	// lv1_app_web_chromium_edge_autofill
 	@Override
 	public List<Map> selectChromiumEdgeAutofill(Map<String, Object> paramMap) throws Exception {
@@ -889,6 +900,17 @@ public class ArtifactServiceImpl implements ArtifactService {
 	@Override
 	public Map selectChromiumEdgeVisitCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectChromiumEdgeVisitCount(paramMap);
+	}
+	
+	// lv1_app_web_chromium_edge_visit_history
+	@Override
+	public List<Map> selectC_EdgeVisitHistory(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectC_EdgeVisitHistory(paramMap);
+	}
+
+	@Override
+	public Map selectC_EdgeVisitHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectC_EdgeVisitHistoryCount(paramMap);
 	}
 
 	// lv1_app_web_firefox_domain
@@ -1000,7 +1022,120 @@ public class ArtifactServiceImpl implements ArtifactService {
 	public Map selectFirefoxPermissionsCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectFirefoxPermissionsCount(paramMap);
 	}
+	
+	// lv1_app_web_opera_autofill
+	@Override
+	public List<Map> selectOperaAutofill(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaAutofill(paramMap);
+	}
 
+	@Override
+	public Map selectOperaAutofillCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaAutofillCount(paramMap);
+	}
+
+	// lv1_app_web_opera_bookmarks
+	@Override
+	public List<Map> selectOperaBookmarks(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaBookmarks(paramMap);
+	}
+
+	@Override
+	public Map selectOperaBookmarksCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaBookmarksCount(paramMap);
+	}
+
+	// lv1_app_web_opera_cookies
+	@Override
+	public List<Map> selectOperaCookies(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaCookies(paramMap);
+	}
+
+	@Override
+	public Map selectOperaCookiesCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaCookiesCount(paramMap);
+	}
+
+	// lv1_app_web_opera_favicons
+	@Override
+	public List<Map> selectOperaFavicons(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaFavicons(paramMap);
+	}
+
+	@Override
+	public Map selectOperaFaviconsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaFaviconsCount(paramMap);
+	}
+
+	// lv1_app_web_opera_logindata
+	@Override
+	public List<Map> selectOperaLoginData(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaLoginData(paramMap);
+	}
+
+	@Override
+	public Map selectOperaLoginDataCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaLoginDataCount(paramMap);
+	}
+
+	// lv1_app_web_opera_search_terms
+	@Override
+	public List<Map> selectOperaSearchTerms(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaSearchTerms(paramMap);
+	}
+
+	@Override
+	public Map selectOperaSearchTermsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaSearchTermsCount(paramMap);
+	}
+
+	// lv1_app_web_opera_shortcuts
+	@Override
+	public List<Map> selectOperaShortcuts(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaShortcuts(paramMap);
+	}
+
+	@Override
+	public Map selectOperaShortcutsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaShortcutsCount(paramMap);
+	}
+
+	// lv1_app_web_opera_visit_urls
+	@Override
+	public List<Map> selectOperaVisitUrls(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaVisitUrls(paramMap);
+	}
+
+	@Override
+	public Map selectOperaVisitUrlsCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaVisitUrlsCount(paramMap);
+	}
+
+
+	
+	// lv1_app_web_opera_download
+	@Override
+	public List<Map> selectOperaDownload(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaDownload(paramMap);
+	}
+
+	@Override
+	public Map selectOperaDownloadCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaDownloadCount(paramMap);
+	}
+
+	// lv1_app_web_opera_visit_history
+	@Override
+	public List<Map> selectOperaVisitHistory(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaVisitHistory(paramMap);
+	}
+	
+
+	@Override
+	public Map selectOperaVisitHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectOperaVisitHistoryCount(paramMap);
+	}
+	
 	// lv1_app_web_whale_autofill
 	@Override
 	public List<Map> selectWhaleAutofill(Map<String, Object> paramMap) throws Exception {
@@ -1109,6 +1244,18 @@ public class ArtifactServiceImpl implements ArtifactService {
 	@Override
 	public Map selectWhaleVisitUrlsCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectWhaleVisitUrlsCount(paramMap);
+	}
+	
+	
+	// lv1_app_web_whale_visit_history
+	@Override
+	public List<Map> selectWhaleVisitHistory(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleVisitHistory(paramMap);
+	}
+
+	@Override
+	public Map selectWhaleVisitHistoryCount(Map<String, Object> paramMap) throws Exception {
+	    return dao.selectWhaleVisitHistoryCount(paramMap);
 	}
 
 	/*

@@ -132,6 +132,9 @@ public class ArtifactController {
 		addArtifactTreeNode(subChromeList, "Chrome Visit Urls", false,true, true, null);
 		// lv1_app_web_chrome_domain
 		addArtifactTreeNode(subChromeList, "Chrome Domain",false, true, true, null);
+		// lv1_app_web_chrome_visit_history
+		addArtifactTreeNode(subChromeList, "Chrome Visit History", false, true, true, null);
+		
 		
 		List subChromiumEdgeList = new ArrayList();
 		// lv1_app_web_chromium_edge_autofill
@@ -154,6 +157,8 @@ public class ArtifactController {
 		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Top Sites", false, true, true, null);
 		// lv1_app_web_chromium_edge_visit_urls
 		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Visit Urls", false, true, true, null);
+		// lv1_app_web_chromium_edge_visit_history
+		addArtifactTreeNode(subChromiumEdgeList, "C_Edge Visit History", false, true, true, null);
 		
 		List subFirefoxList = new ArrayList();
 		// lv1_app_web_firefox_domain
@@ -199,12 +204,39 @@ public class ArtifactController {
 		addArtifactTreeNode(subWhaleList, "Whale Top Sites", false, true, true, null);
 		// lv1_app_web_whale_visit_urls
 		addArtifactTreeNode(subWhaleList, "Whale Visit Urls", false, true, true, null);
+		// lv1_app_web_whale_visit_history
+		addArtifactTreeNode(subWhaleList, "Whale Visit History", false, true, true, null);
+		
+		List subOperaList = new ArrayList();
+		// lv1_app_web_opera_autofill
+		addArtifactTreeNode(subOperaList, "Opera Autofill", false, true, true, null);
+		// lv1_app_web_opera_bookmarks
+		addArtifactTreeNode(subOperaList, "Opera Bookmarks", false, true, true, null);
+		// lv1_app_web_opera_cookies
+		addArtifactTreeNode(subOperaList, "Opera Cookies", false, true, true, null);
+		// lv1_app_web_opera_download
+		addArtifactTreeNode(subOperaList, "Opera Download", false, true, true, null);
+		// lv1_app_web_opera_favicons
+		addArtifactTreeNode(subOperaList, "Opera Favicons", false, true, true, null);
+		// lv1_app_web_opera_logindata
+		addArtifactTreeNode(subOperaList, "Opera Login Data", false, true, true, null);
+		// lv1_app_web_opera_search_terms
+		addArtifactTreeNode(subOperaList, "Opera Search Terms", false, true, true, null);
+		// lv1_app_web_opera_shortcuts
+		addArtifactTreeNode(subOperaList, "Opera Shortcuts", false, true, true, null);
+		// lv1_app_web_opera_visit_history
+		addArtifactTreeNode(subOperaList, "Opera Visit History", false, true, true, null);
+		// lv1_app_web_opera_visit_urls
+		addArtifactTreeNode(subOperaList, "Opera Visit Urls", false, true, true, null);
+
 		
 		List subWebList = new ArrayList();
 		addArtifactTreeNode(subWebList, "Chrome", false,true, true, subChromeList);
 		addArtifactTreeNode(subWebList, "Chromeium Edge", false,true, true, subChromiumEdgeList);
 		addArtifactTreeNode(subWebList, "Firefox", false,true, true, subFirefoxList);
 		addArtifactTreeNode(subWebList, "Whale", false,true, true, subWhaleList);
+		addArtifactTreeNode(subWebList, "Opera", false,true, true, subOperaList);
+
 		
 		List subKakaoList = new ArrayList();
 		addArtifactTreeNode(subKakaoList, "Kakaotalk New Chatlogs", false,true, true, null);
@@ -3163,6 +3195,41 @@ public class ArtifactController {
 
 			return mav;
 		}
+	
+	// lv1_app_web_chrome_visit_history
+	@RequestMapping(value ="/web_chrome_visit_history.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromeVisitHistory (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> ChromeVisitHistory = service.selectChromeVisitHistory(paramMap);
+			int totalCnt = ((Long) service.selectChromeVisitHistoryCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", ChromeVisitHistory);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
 	// lv1_app_web_chromium_edge_autofill
 	@RequestMapping(value ="/web_chromium_edge_autofill.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getChromiumEdgeAutofill (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
 	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
@@ -3508,6 +3575,40 @@ public class ArtifactController {
 			List<Map> ChromiumEdgeVisit = service.selectChromiumEdgeVisit(paramMap);
 			int totalCnt = ((Long) service.selectChromiumEdgeVisitCount(paramMap).get("cnt")).intValue();
 			mav.addObject("list", ChromiumEdgeVisit);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+	// lv1_app_web_chromium_edge_visit_history
+	@RequestMapping(value ="/web_chromium_edge_visit_history.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getC_EdgeVisitHistory (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> C_EdgeVisitHistory = service.selectC_EdgeVisitHistory(paramMap);
+			int totalCnt = ((Long) service.selectC_EdgeVisitHistoryCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", C_EdgeVisitHistory);
 			mav.addObject("totalcount", totalCnt);
 
 			return mav;
@@ -3861,7 +3962,357 @@ public class ArtifactController {
 
 			return mav;
 		}
+	
+	// lv1_app_web_opera_autofill
+	@RequestMapping(value ="/web_opera_autofill.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaAutofill (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
 
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaAutofill = service.selectOperaAutofill(paramMap);
+			int totalCnt = ((Long) service.selectOperaAutofillCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaAutofill);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_opera_bookmarks
+	@RequestMapping(value ="/web_opera_bookmarks.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaBookmarks (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaBookmarks = service.selectOperaBookmarks(paramMap);
+			int totalCnt = ((Long) service.selectOperaBookmarksCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaBookmarks);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_opera_cookies
+	@RequestMapping(value ="/web_opera_cookies.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaCookies (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaCookies = service.selectOperaCookies(paramMap);
+			int totalCnt = ((Long) service.selectOperaCookiesCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaCookies);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_opera_favicons
+	@RequestMapping(value ="/web_opera_favicons.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaFavicons (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaFavicons = service.selectOperaFavicons(paramMap);
+			int totalCnt = ((Long) service.selectOperaFaviconsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaFavicons);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_opera_logindata
+	@RequestMapping(value ="/web_opera_logindata.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaLoginData (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaLoginData = service.selectOperaLoginData(paramMap);
+			int totalCnt = ((Long) service.selectOperaLoginDataCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaLoginData);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_opera_search_terms
+	@RequestMapping(value ="/web_opera_search_terms.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaSearchTerms (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaSearchTerms = service.selectOperaSearchTerms(paramMap);
+			int totalCnt = ((Long) service.selectOperaSearchTermsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaSearchTerms);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_opera_shortcuts
+	@RequestMapping(value ="/web_opera_shortcuts.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaShortcuts (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaShortcuts = service.selectOperaShortcuts(paramMap);
+			int totalCnt = ((Long) service.selectOperaShortcutsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaShortcuts);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_opera_visit_urls
+	@RequestMapping(value ="/web_opera_visit_urls.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaVisitUrls (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaVisitUrls = service.selectOperaVisitUrls(paramMap);
+			int totalCnt = ((Long) service.selectOperaVisitUrlsCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaVisitUrls);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+
+	// lv1_app_web_opera_download
+	@RequestMapping(value ="/web_opera_download.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaDownload (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaDownload = service.selectOperaDownload(paramMap);
+			int totalCnt = ((Long) service.selectOperaDownloadCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaDownload);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
+
+	// lv1_app_web_opera_visit_history
+	@RequestMapping(value ="/web_opera_visit_history.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getOperaVisitHistory (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
+
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> OperaVisitHistory = service.selectOperaVisitHistory(paramMap);
+			int totalCnt = ((Long) service.selectOperaVisitHistoryCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", OperaVisitHistory);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
 
 	// lv1_app_web_whale_autofill
 	@RequestMapping(value ="/web_whale_autofill.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleAutofill (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
@@ -4212,7 +4663,40 @@ public class ArtifactController {
 
 			return mav;
 		}
+	// lv1_app_web_whale_visit_history
+	@RequestMapping(value ="/web_whale_visit_history.do", method = { RequestMethod.GET, RequestMethod.POST })public ModelAndView getWhaleVisitHistory (Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+	    Model model) throws Exception { ModelAndView mav = new ModelAndView();
+			mav.setViewName("jsonView");
 
+			if (map.get("currentPage") == null && map.get("pageSize") == null) {
+				mav.addObject("totalcount", 0);
+				mav.addObject("list", new ArrayList());
+				return mav;
+			}
+
+			Map<String, Object> paramMap = new HashMap<String, Object>();
+
+			paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+			paramMap.put("evd_id", session.getAttribute(Consts.SESSION_EVDNC_ID));
+
+			try {
+				long pageSize = Long.parseLong((String) map.get("pageSize"));
+				paramMap.put("pageSize", pageSize);
+				long currentPage = Long.parseLong((String) map.get("currentPage"));
+				paramMap.put("offset", (currentPage - 1) * pageSize);
+			} catch (Exception e) {
+				e.printStackTrace();
+				mav.addObject("totalcount", 0);
+				return mav;
+			}
+
+			List<Map> WhaleVisitHistory = service.selectWhaleVisitHistory(paramMap);
+			int totalCnt = ((Long) service.selectWhaleVisitHistoryCount(paramMap).get("cnt")).intValue();
+			mav.addObject("list", WhaleVisitHistory);
+			mav.addObject("totalcount", totalCnt);
+
+			return mav;
+		}
 	/*
 	// lv1_fs_ntfs_usnjrnl
 	@RequestMapping(value = "/ntfs_usnjrnl.do", method = { RequestMethod.GET, RequestMethod.POST })

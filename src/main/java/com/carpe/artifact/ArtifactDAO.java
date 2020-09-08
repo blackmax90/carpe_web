@@ -298,6 +298,10 @@ public interface ArtifactDAO {
 	public List<Map> selectChromeDomain(Map<String, Object> paramMap) throws Exception;
 	public Map selectChromeDomainCount(Map<String, Object> paramMap) throws Exception;
 	
+	// lv1_app_web_chrome_visit_history
+	public List<Map> selectChromeVisitHistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectChromeVisitHistoryCount(Map<String, Object> paramMap) throws Exception;
+	
 	// lv1_app_web_chromium_edge_autofill
 	public List<Map> selectChromiumEdgeAutofill(Map<String, Object> paramMap) throws Exception;
 	public Map selectChromiumEdgeAutofillCount(Map<String, Object> paramMap) throws Exception;
@@ -337,6 +341,10 @@ public interface ArtifactDAO {
 	// lv1_app_web_chromium_edge_visit_urls
 	public List<Map> selectChromiumEdgeVisit(Map<String, Object> paramMap) throws Exception;
 	public Map selectChromiumEdgeVisitCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_chromium_edge_visit_history
+	public List<Map> selectC_EdgeVisitHistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectC_EdgeVisitHistoryCount(Map<String, Object> paramMap) throws Exception;
 
 	// lv1_app_web_firefox_domain
 	public List<Map> selectFirefoxDomain(Map<String, Object> paramMap) throws Exception;
@@ -377,8 +385,47 @@ public interface ArtifactDAO {
 	// lv1_app_web_firefox_permissions
 	public List<Map> selectFirefoxPermissions(Map<String, Object> paramMap) throws Exception;
 	public Map selectFirefoxPermissionsCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_opera_autofill
+	public List<Map> selectOperaAutofill(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaAutofillCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_opera_bookmarks
+	public List<Map> selectOperaBookmarks(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaBookmarksCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_opera_cookies
+	public List<Map> selectOperaCookies(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaCookiesCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_opera_favicons
+	public List<Map> selectOperaFavicons(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaFaviconsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_opera_logindata
+	public List<Map> selectOperaLoginData(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaLoginDataCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_opera_search_terms
+	public List<Map> selectOperaSearchTerms(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaSearchTermsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_opera_shortcuts
+	public List<Map> selectOperaShortcuts(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaShortcutsCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_opera_visit_urls
+	public List<Map> selectOperaVisitUrls(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaVisitUrlsCount(Map<String, Object> paramMap) throws Exception;
 
 
+	// lv1_app_web_opera_download
+	public List<Map> selectOperaDownload(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaDownloadCount(Map<String, Object> paramMap) throws Exception;
+
+	// lv1_app_web_opera_visit_history
+	public List<Map> selectOperaVisitHistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectOperaVisitHistoryCount(Map<String, Object> paramMap) throws Exception;
 	
 	// lv1_app_web_whale_autofill
 	public List<Map> selectWhaleAutofill(Map<String, Object> paramMap) throws Exception;
@@ -419,6 +466,11 @@ public interface ArtifactDAO {
 	// lv1_app_web_whale_visit_urls
 	public List<Map> selectWhaleVisitUrls(Map<String, Object> paramMap) throws Exception;
 	public Map selectWhaleVisitUrlsCount(Map<String, Object> paramMap) throws Exception;
+	
+	// lv1_app_web_whale_visit_history
+	public List<Map> selectWhaleVisitHistory(Map<String, Object> paramMap) throws Exception;
+	public Map selectWhaleVisitHistoryCount(Map<String, Object> paramMap) throws Exception;
+
 
 
 	/*

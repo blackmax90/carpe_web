@@ -1271,6 +1271,23 @@
 		and evd_id = #{evd_id}
 		<!--include refid="selectArtifactCondition" / -->
 	</select>
+	
+	<!-- lv1_app_web_chrome_visit_history -->
+	<select id="selectChromeVisitHistory"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chrome_visit_history
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectChromeVisitHistoryCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chrome_visit_history
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
 
 	<!-- lv1_app_web_chromium_edge_autofill -->
 	<select id="selectChromiumEdgeAutofill" parameterType="Map"
@@ -1308,6 +1325,23 @@
 		where case_id = #{case_id}
 		and evd_id = #{evd_id}
 		<!--include refid="selectArtifactCondition" / -->
+	</select>
+	
+	<!-- lv1_app_web_chromium_edge_visit_history -->
+	<select id="selectC_EdgeVisitHistory"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_chromium_edge_visit_history
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectC_EdgeVisitHistoryCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_chromium_edge_visit_history
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
 	</select>
 
 	<!-- lv1_os_win_filehistory_file -->
@@ -1802,7 +1836,179 @@
 		and evd_id = #{evd_id}
 		<!--include refid="selectArtifactCondition" / -->
 	</select>
-
+	
+	<!-- lv1_app_web_opera_autofill -->
+	<select id="selectOperaAutofill"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_autofill
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaAutofillCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_autofill
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_opera_bookmarks -->
+	<select id="selectOperaBookmarks"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_bookmarks
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaBookmarksCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_bookmarks
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_opera_cookies -->
+	<select id="selectOperaCookies"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_cookies
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaCookiesCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_cookies
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_opera_favicons -->
+	<select id="selectOperaFavicons"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_favicons
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaFaviconsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_favicons
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_opera_logindata -->
+	<select id="selectOperaLoginData"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_logindata
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaLoginDataCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_logindata
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_opera_search_terms -->
+	<select id="selectOperaSearchTerms"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_search_terms
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaSearchTermsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_search_terms
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_opera_shortcuts -->
+	<select id="selectOperaShortcuts"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_shortcuts
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaShortcutsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_shortcuts
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_opera_visit_urls -->
+	<select id="selectOperaVisitUrls"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_visit_urls
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaVisitUrlsCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_visit_urls
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+		
+	
+	
+	<!-- lv1_app_web_opera_download -->
+	<select id="selectOperaDownload"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_download
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaDownloadCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_download
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
+	
+	<!-- lv1_app_web_opera_visit_history -->
+	<select id="selectOperaVisitHistory"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_opera_visit_history
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectOperaVisitHistoryCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_opera_visit_history
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
 
 
 	<!-- lv1_app_web_whale_autofill -->
@@ -1995,7 +2201,22 @@
 		<!--include refid="selectArtifactCondition" / -->
 	</select>
 
-
+	<!-- lv1_app_web_whale_visit_history -->
+	<select id="selectWhaleVisitHistory"  parameterType="Map" resultType="Map">
+	SELECT *
+	FROM lv1_app_web_whale_visit_history
+	where case_id = #{case_id}
+	    and evd_id = #{evd_id}
+	<!--include refid="selectArtifactCondition" /-->
+	limit #{offset}, #{pageSize}
+	</select>
+	<select id="selectWhaleVisitHistoryCount"  parameterType="Map" resultType="Map">
+	SELECT count(*) as cnt
+	FROM lv1_app_web_whale_visit_history
+	where case_id = #{case_id}
+	              and evd_id = #{evd_id}
+	            <!--include refid="selectArtifactCondition" /-->
+	</select>
 
 	<!-- lv1_fs_ntfs_logfile -->
 	<select id="selectNtfsLogfile" parameterType="Map"
