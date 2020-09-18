@@ -227,7 +227,16 @@
 
       // Hex View
       $('#btnHexView').click(function(e) {
-        var popUrl = "/carpe/hexview.do";
+        var selIdx = $("#jqxGrid_files").jqxGrid("selectedrowindex");
+        var rowData = $("#jqxGrid_files").jqxGrid("getrowdata", selIdx);
+
+        if (!rowData || rowData.dir_type == 3) {
+          return;
+        }
+
+        var seq = rowData.seq;
+        var id = rowData.id;
+        var popUrl = "/carpe/hexview.do?seq=" + seq + "&id=" + id;
         var popOption = "width=1050, height=750, resizable=no, scrollbars=no, status=no;";
         window.open(popUrl,"",popOption);
       });

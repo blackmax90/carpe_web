@@ -579,7 +579,7 @@
     var initPopup = function() {
       //지도정보 Window
       $("#mapInfo").jqxWindow({
-          width: '60rem'
+          width: '65rem'
         , height: '29rem'
         , position: {x: 'calc(50% - 10rem)', y: '16rem'}
         , resizable: false

@@ -176,7 +176,7 @@
 	</select>
 
 	<select id="selectFileInfo" parameterType="Map" resultType="Map">
-    SELECT name, parent_path, extension
+    SELECT name, parent_path, extension, par_id
       FROM file_info
      WHERE 1=1
        AND id = #{id}

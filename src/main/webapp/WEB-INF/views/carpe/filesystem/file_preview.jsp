@@ -14,10 +14,16 @@
   <script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
   <script>
   $(document).ready(function() {
-    if ($("#fileType").val() == "1") {
-      $("#image").attr("src", "/carpe/get_image_preview.do?id=${id}&seq=${seq}")
-    } else if ($("#fileType").val() == "2") {
-      $("#video").attr("src", "/carpe/get_video_preview.do?id=${id}&seq=${seq}");
+    var fileExists = "${fileExists}";
+
+    if (fileExists == "0") {
+      if ($("#fileType").val() == "1") {
+        $("#image").attr("src", "/carpe/get_image_preview.do?id=${id}&seq=${seq}")
+      } else if ($("#fileType").val() == "2") {
+        $("#video").attr("src", "/carpe/get_video_preview.do?id=${id}&seq=${seq}");
+      }
+    } else {
+      alert("${filePath} 파일을 찾을 수 없습니다.");
     }
   });
   </script>

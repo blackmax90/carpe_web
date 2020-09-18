@@ -1,9 +1,11 @@
 package com.carpe.filesystem;
 
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.RandomAccessFile;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import com.carpe.common.CarpeConfig;
 import com.carpe.common.CommonUtil;
 import com.carpe.common.Consts;
 import com.opencsv.CSVWriter;
@@ -36,6 +40,8 @@ public class FileSystemController {
 
 	@Inject
 	private FileSystemService service;
+
+	private final int BUFF_SIZE = 16;
 
 	@RequestMapping(value = "/filesystem.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView filesystemView(@RequestParam HashMap<String, String> map, HttpSession session,
@@ -320,9 +326,65 @@ public class FileSystemController {
 	public ModelAndView hewview(@RequestParam HashMap<String, String> map, HttpSession session,
 			HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		String caseid = (String) session.getAttribute(Consts.SESSION_CASE_ID);
+		String evdid = (String) session.getAttribute(Consts.SESSION_EVDNC_ID);
 
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("id", map.get("seq"));
+		paramMap.put("file_id", map.get("id"));
+
+		Map rsMap = service.selectFileInfo(paramMap);
+		String filePath = "";
+		String fileName = "";
+		long fileLen = -1;
+
+		if (rsMap != null) {
+		  fileName = (String) rsMap.get("name");
+		  filePath = CarpeConfig.getEvdncBaseTmpPath() + "/" + caseid + "/" + evdid + "/" 
+		      + rsMap.get("par_id") + "/" + rsMap.get("parent_path") + "/" + rsMap.get("name");
+		  File file = new File(filePath);
+		  
+		  if (file.exists()) {
+		    fileLen = file.length() / BUFF_SIZE;
+		  }
+		}
+
+    mav.addObject("fileLen", fileLen);
+	  mav.addObject("fileName", fileName);
+	  mav.addObject("filePath", filePath);
+		mav.addObject("id", map.get("id"));
+		mav.addObject("seq", map.get("seq"));
 		mav.setViewName("carpe/filesystem/hexview/hexviewer");
 
+		return mav;
+	}
+
+	@RequestMapping(value = "/get_hex.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView getHex(@RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletRequest requst, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("jsonView");
+		
+		String caseid = (String) session.getAttribute(Consts.SESSION_CASE_ID);
+		String evdid = (String) session.getAttribute(Consts.SESSION_EVDNC_ID);
+		long offset = Long.parseLong(map.get("offset"));
+		int getLine = Integer.parseInt(map.get("getLine"));
+		int updownFlag = Integer.parseInt(map.get("updownFlag"));
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+
+		paramMap.put("id", map.get("seq"));
+		paramMap.put("file_id", map.get("id"));
+
+		Map rsMap = service.selectFileInfo(paramMap);
+
+		if (rsMap != null) {
+		  String filePath = CarpeConfig.getEvdncBaseTmpPath() + "/" + caseid + "/" + evdid + "/" 
+		      + rsMap.get("par_id") + "/" + rsMap.get("parent_path") + "/" + rsMap.get("name");
+
+		  getHexData(filePath, offset, getLine, updownFlag, mav);
+		}
+		
 		return mav;
 	}
 
@@ -330,7 +392,29 @@ public class FileSystemController {
 	public ModelAndView filePreview(@RequestParam HashMap<String, String> map, HttpSession session,
 			HttpServletRequest requst, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		String caseid = (String) session.getAttribute(Consts.SESSION_CASE_ID);
+		String evdid = (String) session.getAttribute(Consts.SESSION_EVDNC_ID);
+		Map<String, Object> paramMap = new HashMap<String, Object>();
 
+		paramMap.put("id", map.get("seq"));
+		paramMap.put("file_id", map.get("id"));
+
+		Map rsMap = service.selectFileInfo(paramMap);
+		String filePath = "";
+		int ret = -1;
+
+		if (rsMap != null) {
+		  filePath = CarpeConfig.getEvdncBaseTmpPath() + "/" + caseid + "/" + evdid + "/" 
+		      + rsMap.get("par_id") + "/" + rsMap.get("parent_path") + "/" + rsMap.get("name");
+		  File file = new File(filePath);
+		  
+		  if (file.exists()) {
+		    ret = 0;
+		  }
+		}
+
+		mav.addObject("filePath", filePath);
+		mav.addObject("fileExists", ret);
 		mav.addAllObjects(map);
 		mav.setViewName("carpe/filesystem/file_preview");
 
@@ -341,6 +425,8 @@ public class FileSystemController {
 	public void getImagePreview(@RequestParam HashMap<String, String> map, HttpSession session,
 			HttpServletRequest requst, HttpServletResponse response, Model model) throws Exception {
 		ServletOutputStream out = response.getOutputStream();
+		String caseid = (String) session.getAttribute(Consts.SESSION_CASE_ID);
+		String evdid = (String) session.getAttribute(Consts.SESSION_EVDNC_ID);
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
 		paramMap.put("id", map.get("seq"));
@@ -349,7 +435,9 @@ public class FileSystemController {
 		Map rsMap = service.selectFileInfo(paramMap);
 
 		if (rsMap != null) {
-			File file = new File(rsMap.get("parent_path") + "/" + rsMap.get("name"));
+		  String filePath = CarpeConfig.getEvdncBaseTmpPath() + "/" + caseid + "/" + evdid + "/" 
+		      + rsMap.get("par_id") + "/" + rsMap.get("parent_path") + "/" + rsMap.get("name");
+			File file = new File(filePath);
 			response.setContentType("image/" + rsMap.get("extension"));
 
 			if (file != null && file.isFile() == true) {
@@ -373,6 +461,8 @@ public class FileSystemController {
 	@RequestMapping(value = "/get_video_preview.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public StreamingResponseBody getVideoPreview(@RequestParam HashMap<String, String> map, HttpSession session,
 			HttpServletRequest requst, Model model) throws Exception {
+		String caseid = (String) session.getAttribute(Consts.SESSION_CASE_ID);
+		String evdid = (String) session.getAttribute(Consts.SESSION_EVDNC_ID);
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
 		paramMap.put("id", map.get("seq"));
@@ -381,7 +471,9 @@ public class FileSystemController {
 		Map rsMap = service.selectFileInfo(paramMap);
 
 		if (rsMap != null) {
-			File file = new File(rsMap.get("parent_path") + "/" + rsMap.get("name"));
+		  String filePath = CarpeConfig.getEvdncBaseTmpPath() + "/" + caseid + "/" + evdid + "/" 
+		      + rsMap.get("par_id") + "/" + rsMap.get("parent_path") + "/" + rsMap.get("name");
+			File file = new File(filePath);
 
 			final InputStream is = new FileInputStream(file);
 
@@ -397,5 +489,116 @@ public class FileSystemController {
 		}
 
 		return null;
+	}
+	
+	private void getHexData(String filePath, long offsetLine, int getLine, int updownFlag, ModelAndView mav) {
+	  RandomAccessFile raf = null;
+	  byte[] buf16 = new byte[BUFF_SIZE];
+	  int readLen = 0;
+	  long maxLen = 0;
+	  long offset = 0;
+	  List<String> offsetList = new ArrayList<>();
+	  List<String> hexList = new ArrayList<>();
+	  List<String> decList = new ArrayList<>();
+	  
+	  if (updownFlag == 0) { //다음 페이지
+	    offsetLine += getLine * 2;
+	    offset = offsetLine * BUFF_SIZE;
+	    maxLen = (offsetLine + getLine) * BUFF_SIZE;
+	  } else if (updownFlag == 1) {  //이전 페이지
+	    offset = offsetLine * BUFF_SIZE;
+	    maxLen = (offsetLine + getLine) * BUFF_SIZE;
+	  } else if (updownFlag == 2) {  //페이지 이동
+	    offset = offsetLine * BUFF_SIZE;
+	    maxLen = (offsetLine + getLine * 3) * BUFF_SIZE;
+	  }
+	  
+	  if (offset < 0) {
+	    offset = 0;
+	  }
+
+	  try {
+	    raf = new RandomAccessFile(filePath, "r");
+	    long fileSize = raf.length();
+	    raf.seek(offset);
+	    
+	    if (maxLen > fileSize) {
+	      maxLen = fileSize;
+	    }
+	    
+	    while ((readLen = raf.read(buf16)) > 0 && offset < maxLen) {
+        // Offset (번지) 출력
+        offsetList.add(String.format("%08X  ", offset));
+        
+        String hexBuff = "";
+
+        // 헥사 구역의 헥사 값 16개 출력 (8개씩 2부분으로)
+        for (int i = 0; i < readLen; i++) {
+          // 8개씩 분리
+	        if (i == 8) {
+            hexBuff += " ";
+	        }
+
+          //Hex
+          hexBuff += String.format("%02X ", buf16[i]);
+        }
+        
+        // 한 줄이 16 바이트가 되지 않을 때, 헥사 부분과 문자 부분 사이에 공백들 삽입
+        for (int i = 0; i <= (BUFF_SIZE - readLen) * 3; i++) {
+          hexBuff += " ";
+        }
+
+        // 한줄이 9바이트보다 적을 때는 한칸 더 삽입
+        if (readLen < 9) {
+          hexBuff += " ";
+        }
+
+        hexList.add(hexBuff);
+
+        // 문자 구역 출력
+        String decBuff = "";
+        
+        for (int i = 0; i < readLen; i++) {
+          if (buf16[i] >= 0x20 && buf16[i] <= 0x7E) { // 특수 문자 아니면 출력
+            decBuff += String.format("%c", buf16[i]);
+          } else {
+            decBuff += "."; // 특수문자, 그래픽문자 등은 마침표로 출력
+          }
+        }
+
+        // 한 줄이 16 바이트가 되지 않을 때, 문자 끝에 공백들 삽입
+        for (int i = 0; i <= 16 - readLen; i++) {
+          decBuff += " ";
+        }
+
+        decBuff = StringEscapeUtils.escapeHtml(decBuff);
+        decList.add(decBuff);
+        offset += 16; // 번지 값을 16 증가
+	      raf.seek(offset);
+      }
+
+      //0 byte
+      if (offset == 0) {
+//        offsetList.add(String.format("%08X  ", offset));
+//        hexList.add("");
+//        decList.add("");
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
+      mav.addObject("offsetList", offsetList);
+      mav.addObject("hexList", hexList);
+      mav.addObject("decList", decList);
+      mav.addObject("updownFlag", updownFlag);
+
+      if (raf != null) {
+        try {
+          raf.close();
+        } catch (Exception e2) {
+          e2.printStackTrace();
+        }
+      }
+    }
+
 	}
 }
