@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.timeline">
+  <select id="selectTimelineList" resultType="Map" parameterType="Map">
+    SELECT event_type
+         , DATE_FORMAT(event_time, '%Y-%m-%d %H:%i') AS event_time
+         , DATE_FORMAT(event_time, '%Y-%m-%d %H:%i') AS start
+         , ADDTIME(DATE_FORMAT(event_time, '%Y-%m-%d %H:%i'), duration) AS end
+         , duration
+         , description
+      FROM lv2_timeline
+     WHERE 1=1
+       AND case_id = #{case_id}
+
+			 <if test="sdate != null and !sdate.equals('')">
+       AND DATE_FORMAT(event_time, '%Y-%m-%d %H:%i') >= #{sdate}
+       </if>
+			 <if test="edate != null and !edate.equals('')">
+       <![CDATA[
+       AND DATE_FORMAT(event_time, '%Y-%m-%d %H:%i') <= #{edate}
+       ]]>
+       </if>
+     ORDER BY event_time ASC
+  </select>
+</mapper>
