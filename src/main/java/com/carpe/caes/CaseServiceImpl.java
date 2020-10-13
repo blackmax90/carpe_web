@@ -30,6 +30,11 @@ public class CaseServiceImpl implements CaseService {
 	}
 
 	@Override
+	public int updateCaseDeleteFlag(Map<String, Object> paramMap) throws Exception {
+		return dao.updateCaseDeleteFlag(paramMap);
+	}
+
+	@Override
 	public int deleteCaseList(Map<String, Object> paramMap) throws Exception {
 		return dao.deleteCaseList(paramMap);
 	}

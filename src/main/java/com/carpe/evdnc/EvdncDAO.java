@@ -8,5 +8,6 @@ public interface EvdncDAO {
 	public Map selectEvdncListCount(Map<String, Object> paramMap) throws Exception;
 	public int insertEvdnc(Map<String, Object> paramMap) throws Exception;
 	public Map selectEvdnc(Map<String, Object> paramMap) throws Exception;
+	public int updateEvdncDeleteFlag(Map<String, Object> paramMap) throws Exception;
 	public int deleteEvdncList(Map<String, Object> paramMap) throws Exception;
 }

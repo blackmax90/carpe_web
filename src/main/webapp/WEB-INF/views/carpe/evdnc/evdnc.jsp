@@ -13,14 +13,18 @@
   <link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/carpe/resources/dhtmlx_grid/codebase/grid.css">
+  <link rel="stylesheet" href="/carpe/resources/dhtmlx_grid/codebase/suite.min.css">
   
   <script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
   <script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
   <script type="text/javascript" src="/carpe/resources/js/common.js"></script>
   <script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
-  <script type="text/javascript" src="/carpe/resources/dhtmlx_grid/codebase/grid.js"></script>
+  <script type="text/javascript" src="/carpe/resources/dhtmlx_grid/codebase/suite.min.js"></script>
+  <style>
+  .gridLink {color: #ff0000 !important;}
+  .gridLink:hover {text-decoration: underline;}
+  </style>
 </head>
 <body>
 
@@ -43,12 +47,10 @@
       <section class="tit-area">
         <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%></h3>
         <a href="/carpe/case.do"><button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button></a>
-		<div class="location-area">
-			<ul class="list-h">
-				<li>Home</li>
-				<li>Evidence</li>
-			</ul>
-		</div>
+        <c:import url="../common/location_area.jsp">
+		      <c:param name="d1" value="evidence"></c:param>
+		      <c:param name="d2" value=""></c:param>
+        </c:import>
       </section>
       <article class="container">
         <h4 class="blind">조회된 컨텐츠</h4>
@@ -302,7 +304,7 @@
             evdncInfo.name = value;
             var param = encodeQueryData(evdncInfo);
   
-            return '<span style="padding: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a href="/carpe/select_evdnc.do?' + param + '">' + value + '</a></span>';
+            return '<a href="/carpe/select_evdnc.do?' + param + '" class="gridLink"><div class="jqx-grid-cell-left-align" style="margin-top: 8px;">' + value + '</div></a>';
           }
         },
         {text: 'Main Type', dataField: 'main_type', width: '90px', cellsalign: 'center', align: 'center',
@@ -327,7 +329,7 @@
             evdncInfo.id = dataRecord.evd_id;
             var param = encodeQueryData(evdncInfo);
   
-            return '<span style="width: 100%; display: block; overflow: hidden; text-overflow: ellipsis;  white-space: nowrap; padding: 0.7rem 0.5rem; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a title="' + value + '" target="_blank" href="/carpe/download_evdnc.do?' + param + '">' + value + '</a></span>';
+            return '<a title="' + value + '" href="/carpe/download_evdnc.do?' + param + '" class="gridLink" target="_blank"><div class="jqx-grid-cell-left-align" style="margin-top: 8px;">' + value + '</div></a>';
           }
         }
       ];
@@ -409,11 +411,16 @@
         }
       };
 
-      /*
       // evdnc Delete
       $("#btnDeleteEvdncs").click(function(e) {
+        var selectedrowindexes = $("#jqxGrid_Systemlog").jqxGrid('getselectedrowindexes');
+
+        if (selectedrowindexes.length == 0) {
+          alert("삭제할 데이터를 선택해주세요.");
+          return;
+        }
+
         if (confirm('삭제 하시겠습니까')) {
-          var selectedrowindexes = $("#jqxGrid_Systemlog").jqxGrid('getselectedrowindexes');
           var rowscount = $("#jqxGrid_Systemlog").jqxGrid('getdatainformation').rowscount;
           
           $("#jqxGrid_Systemlog").jqxGrid('beginupdate');
@@ -426,8 +433,9 @@
               var selectedRowData = $('#jqxGrid_Systemlog').jqxGrid('getrowdata', selectedrowindex);
               idList += "," + selectedRowData["evd_id"];
           }
+
           idList = idList.substring(1);
-              deleteEvd.evdId = idList;
+          deleteEvd.evdId = idList;
 
           $.ajax({
             type : "POST",
@@ -448,7 +456,6 @@
           });
         }
       });
-      */
       
       $('#ok').click(function(e) {
         e.preventDefault();

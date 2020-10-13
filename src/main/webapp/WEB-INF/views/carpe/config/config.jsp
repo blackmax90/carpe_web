@@ -11,7 +11,11 @@
    <link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">  
   <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
-    <link href="/carpe/resources/css/style.css" rel="stylesheet" type="text/css">
+  <link href="/carpe/resources/css/style.css" rel="stylesheet" type="text/css">
+  <style>
+  .gridLink { cursor: pointer; }
+  .gridLink:hover {text-decoration: underline;}
+  </style>
 </head>
 <body>
 
@@ -84,7 +88,13 @@
         var selCnt = idxes.length;
         var caseidList = "";
 
-        if (selCnt == 0 || selid == "") {
+        if (selid == "") {
+          alert("권한을 부여할 계정을 선택해주세요.");
+          return;
+        }
+
+        if (selCnt == 0) {
+          alert("권한을 추가할 Case를 선택해주세요.");
           return;
         }
 
@@ -136,13 +146,20 @@
 
       $("#btnDel").click(function() {
         var idxes = $("#jqxGrid_usercase").jqxGrid("getselectedrowindexes");
+        var selCnt = idxes.length;
         var caseidList = "";
 
-        if (idxes.length == 0 || selid == "") {
+        if (selid == "") {
+          alert("권한을 부여할 계정을 선택해주세요.");
           return;
         }
 
-        for (var i = 0; i < idxes.length; i++) {
+        if (selCnt == 0) {
+          alert("권한을 제거할 Case를 선택해주세요.");
+          return;
+        }
+
+        for (var i = 0; i < selCnt; i++) {
           var rowData = $("#jqxGrid_usercase").jqxGrid("getrowdata", idxes[i]);
 
           if (caseidList != "") {
@@ -199,9 +216,13 @@
         contentType : 'application/json; charset=utf-8'
       });
 
+      var cellsrenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
+        return "<a class=\"gridLink\"><div class=\"jqx-grid-cell-right-align\" style=\"margin-top: 8px;\">" + value + "</div></a>";
+      };
+
       var userColumnSet = [
-        {text: 'ID', dataField: 'id', width: '120px', cellsalign: 'left', align: 'center'},
-        {text: 'Name', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
+        {text: 'ID', dataField: 'id', width: '120px', cellsalign: 'left', align: 'center', cellsrenderer: cellsrenderer},
+        {text: 'Name', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center', cellsrenderer: cellsrenderer}
       ];
 
       $("#jqxGrid_userlist").jqxGrid({

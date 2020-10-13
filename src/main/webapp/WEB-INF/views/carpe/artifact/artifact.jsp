@@ -51,16 +51,15 @@
 					Evidence :
 					<%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%>
 				</h3>
-				<button type="button" class="btn-transparent icon ico-case-out">
-					<span>case out</span>
-				</button>
-				<div class="location-area">
-					<ul class="list-h">
-						<li>Home</li>
-						<li>Analysis</li>
-						<li>Artifact</li>
-					</ul>
-				</div>
+        <a href="/carpe/case.do">
+				  <button type="button" class="btn-transparent icon ico-case-out">
+					  <span>case out</span>
+				  </button>
+        </a>
+        <c:import url="../common/location_area.jsp">
+			    <c:param name="d1" value="analysis"></c:param>
+			    <c:param name="d2" value="artifact"></c:param>
+        </c:import>
 			</section>
 			<!--  <section class="btn-area">
         <ul>

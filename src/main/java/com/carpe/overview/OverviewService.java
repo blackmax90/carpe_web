@@ -10,4 +10,6 @@ public interface OverviewService {
 	public List<Map> selectCaseUserList(Map<String, Object> paramMap) throws Exception;
 	
 	public List<Map> selectEvidenceList(Map<String, Object> paramMap) throws Exception;
+
+	public List<Map> selectEvidenceFileCount(Map<String, Object> paramMap) throws Exception;
 }

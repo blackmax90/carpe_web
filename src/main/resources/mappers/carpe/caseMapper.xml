@@ -8,11 +8,12 @@
     SELECT @a:=@a+1 serial_number, A.*
       FROM (
            SELECT a.case_id, a.case_name, a.administrator, DATE_FORMAT(a.create_date, '%Y-%m-%d') AS create_date, a.description
-                , (select count(*) from evidence_info where case_id = a.case_id) AS evd_cnt
+                , (select count(*) from evidence_info where isdelete = 'N' and case_id = a.case_id) AS evd_cnt
              FROM case_info a
              LEFT JOIN case_user_auth b
                ON a.case_id = b.case_id
             WHERE 1=1
+              AND a.isdelete = 'N'
             <if test="id!=null and !id.equals('')">
               AND b.id = #{id}
             </if>
@@ -31,6 +32,7 @@
              LEFT JOIN case_user_auth b
                ON a.case_id = b.case_id
             WHERE 1=1
+              AND a.isdelete = 'N'
             <if test="id!=null and !id.equals('')">
               AND b.id = #{id}
             </if>
@@ -50,6 +52,15 @@
     INSERT INTO case_info(case_id, case_name, administrator, create_date, description) 
       VALUES(#{id}, #{name}, #{admin}, now(), #{desc})
   </insert>
+
+  <delete id="updateCaseDeleteFlag" parameterType="Map">
+    UPDATE case_info
+       SET isdelete = #{isdelete}
+     WHERE case_id in
+      <foreach item="item" index="index" collection="caseList" open="(" close=")" separator=",">
+           #{item}
+      </foreach>
+  </delete>
   
   <delete id="deleteCaseList" parameterType="Map">
     DELETE 

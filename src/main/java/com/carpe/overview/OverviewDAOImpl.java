@@ -30,4 +30,9 @@ public class OverviewDAOImpl implements OverviewDAO {
 	public List<Map> selectEvidenceList(Map<String, Object> paramMap) throws Exception {		
 		return sqlSession.selectList(Namespace + ".selectEvidenceList", paramMap);
 	}
+
+	@Override
+	public List<Map> selectEvidenceFileCount(Map<String, Object> paramMap) throws Exception {		
+		return sqlSession.selectList(Namespace + ".selectEvidenceFileCount", paramMap);
+	}
 }

@@ -40,6 +40,12 @@ public class RecyclebinController {
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
 		
 		List<Map> yearList = service.selectYearList(paramMap);
+		
+		if (yearList.size() == 0) {
+		  HashMap<String, String> tmpHm = new HashMap<>();
+		  tmpHm.put("year", selYear);
+		  yearList.add(tmpHm);
+		}
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("selYear", selYear);

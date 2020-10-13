@@ -55,4 +55,18 @@ public class OverviewController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/overview/evdnc_file_count.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView evdncFileCount(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, Model model) throws Exception {
+    ModelAndView mav = new ModelAndView();
+    mav.setViewName("jsonView");
+    
+    Map<String, Object> paramMap = new HashMap<String, Object>();
+    paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+
+    List<Map> list = service.selectEvidenceFileCount(paramMap);
+    
+    mav.addObject("list", list);
+    
+    return mav;
+	}
 }

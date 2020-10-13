@@ -32,6 +32,11 @@ public class CaseDAOImpl implements CaseDAO {
 	}
 
 	@Override
+	public int updateCaseDeleteFlag(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.update(Namespace + ".updateCaseDeleteFlag", paramMap);
+	}
+
+	@Override
 	public int deleteCaseList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.insert(Namespace + ".deleteCaseList", paramMap);
 	}

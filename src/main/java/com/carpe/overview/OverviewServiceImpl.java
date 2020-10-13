@@ -27,4 +27,9 @@ public class OverviewServiceImpl implements OverviewService {
 	public List<Map> selectEvidenceList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectEvidenceList(paramMap);
 	}
+
+	@Override
+	public List<Map> selectEvidenceFileCount(Map<String, Object> paramMap) throws Exception {
+		return dao.selectEvidenceFileCount(paramMap);
+	}
 }

@@ -32,4 +32,22 @@
           WHERE  case_id = #{case_id}		   
 	</select>
 		
+	<select id="selectEvidenceFileCount" parameterType="Map" resultType="Map">
+    SELECT a.evd_name
+         , SUM(b.cnt) AS cnt
+      FROM evidence_info a
+         , (SELECT c.evd_id
+                 , COUNT(d.id) AS cnt
+              FROM partition_info c
+                 , file_info d
+             WHERE 1=1
+               AND c.par_id = d.par_id
+             GROUP BY c.evd_id
+           ) b
+     WHERE 1=1
+       AND a.isdelete = 'N'
+       AND a.evd_id = b.evd_id
+       AND a.case_id = #{case_id}
+     GROUP BY a.evd_name
+	</select>
 </mapper>

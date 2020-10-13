@@ -37,6 +37,11 @@ public class EvdncDAOImpl implements EvdncDAO {
 	}
 	
 	@Override
+	public int updateEvdncDeleteFlag(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.update(Namespace + ".updateEvdncDeleteFlag", paramMap);
+	}
+
+	@Override
 	public int deleteEvdncList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.insert(Namespace + ".deleteEvdncList", paramMap);
 	}

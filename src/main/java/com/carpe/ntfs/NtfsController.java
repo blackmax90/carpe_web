@@ -1,6 +1,7 @@
 package com.carpe.ntfs;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,12 @@ public class NtfsController {
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
 
 		List<Map> yearList = service.selectNtfsHistoryYearList(paramMap);
+
+		if (yearList.size() == 0) {
+		  HashMap<String, String> tmpHm = new HashMap<>();
+		  tmpHm.put("year", Calendar.getInstance().get(Calendar.YEAR) + "");
+		  yearList.add(tmpHm);
+		}
 
 		mav.addObject("yearList", yearList);
 		mav.setViewName("carpe/ntfs/ntfsloghistory");
