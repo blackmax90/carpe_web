@@ -13,14 +13,14 @@
   <link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/carpe/resources/dhtmlx_grid/codebase/grid.css">
+  <link rel="stylesheet" href="/carpe/resources/dhtmlx_grid/codebase/suite.min.css">
   
   <script type="text/javascript" src="/carpe/resources/js/jquery-3.3.1.js"></script>
   <script type="text/javascript" src="/carpe/resources/jqwidgets/jqx-all.js"></script>
   <script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
   <script type="text/javascript" src="/carpe/resources/js/common.js"></script>
   <script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
-  <script type="text/javascript" src="/carpe/resources/dhtmlx_grid/codebase/grid.js"></script>
+  <script type="text/javascript" src="/carpe/resources/dhtmlx_grid/codebase/suite.min.js"></script>
 </head>
 <body>
 

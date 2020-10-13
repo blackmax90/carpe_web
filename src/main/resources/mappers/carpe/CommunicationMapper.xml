@@ -4,6 +4,14 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="com.carpe.mapper.communication">
+  <select id="selectCommunicationYearList" parameterType="Map" resultType="Map">
+    SELECT DISTINCT(DATE_FORMAT(created_at, '%Y')) AS year
+      FROM lv2_communication
+     WHERE 1=1
+       AND case_id = #{case_id}
+     ORDER BY year DESC
+  </select>
+
   <select id="selectCommunicationList" parameterType="Map" resultType="Map">
   <!-- 
     SELECT  @a:=@a+1 serial_number               
@@ -16,84 +24,85 @@
       ORDER BY  cnt desc
       -->
          SELECT  @a:=@a+1 serial_number  
-               , number as call_number                 
+               , phone_number
                , count(*) cnt
-           FROM  calls_timeline, (SELECT @a:= 0) AS sn    
-          WHERE  year(regdate) = #{year} 
+           FROM  lv2_communication, (SELECT @a:= 0) AS sn    
+          WHERE  year(created_at) = #{year} 
             AND  case_id = #{case_id}
-       GROUP BY  number
+       GROUP BY  phone_number
        ORDER BY  cnt desc LIMIT 40
   </select>
 
   <select id="selectCallStatCount" parameterType="Map" resultType="Map">
          SELECT  count(*) cnt
-                , month(regdate) as m
-           FROM  calls_timeline
-          WHERE  year(regdate) = #{year} 
+                , month(created_at) as m
+           FROM  lv2_communication
+          WHERE  year(created_at) = #{year} 
             AND  case_id = #{case_id}
-       GROUP BY  number, m
+       GROUP BY  phone_number, m
        ORDER BY  cnt desc LIMIT 1
   </select>
   
   <select id="selectCallStat" parameterType="Map" resultType="Map">      
-          SELECT  number
-                , MAX(CASE WHEN m = '1' THEN `cnt` ELSE 0 END ) AS m1
-                , MAX(CASE WHEN m = '2' THEN `cnt` ELSE 0 END ) AS m2
-                , MAX(CASE WHEN m = '3' THEN `cnt` ELSE 0 END ) AS m3
-                , MAX(CASE WHEN m = '4' THEN `cnt` ELSE 0 END ) AS m4
-                , MAX(CASE WHEN m = '5' THEN `cnt` ELSE 0 END ) AS m5
-                , MAX(CASE WHEN m = '6' THEN `cnt` ELSE 0 END ) AS m6
-                , MAX(CASE WHEN m = '7' THEN `cnt` ELSE 0 END ) AS m7
-                , MAX(CASE WHEN m = '8' THEN `cnt` ELSE 0 END ) AS m8
-                , MAX(CASE WHEN m = '9' THEN `cnt` ELSE 0 END ) AS m9
-                , MAX(CASE WHEN m = '10' THEN `cnt` ELSE 0 END ) AS m10
-                , MAX(CASE WHEN m = '11' THEN `cnt` ELSE 0 END ) AS m11
-                , MAX(CASE WHEN m = '12' THEN `cnt` ELSE 0 END ) AS m12
-            FROM (
-                  SELECT  number
-                        , month(regdate) as m
-                        , count(*) cnt
-                    FROM  calls_timeline
-                   WHERE  year(regdate) = #{year} 
-                     AND  case_id = #{case_id}
-                     AND  is_sent = 0
-                GROUP BY  number, m
-                ORDER BY  cnt desc
-                 ) a
-        GROUP BY  number                 
-           LIMIT 40
+    SELECT *
+      FROM (
+            SELECT phone_number
+                 , MAX(CASE WHEN m = '1' THEN `cnt` ELSE 0 END ) AS m1
+                 , MAX(CASE WHEN m = '2' THEN `cnt` ELSE 0 END ) AS m2
+                 , MAX(CASE WHEN m = '3' THEN `cnt` ELSE 0 END ) AS m3
+                 , MAX(CASE WHEN m = '4' THEN `cnt` ELSE 0 END ) AS m4
+                 , MAX(CASE WHEN m = '5' THEN `cnt` ELSE 0 END ) AS m5
+                 , MAX(CASE WHEN m = '6' THEN `cnt` ELSE 0 END ) AS m6
+                 , MAX(CASE WHEN m = '7' THEN `cnt` ELSE 0 END ) AS m7
+                 , MAX(CASE WHEN m = '8' THEN `cnt` ELSE 0 END ) AS m8
+                 , MAX(CASE WHEN m = '9' THEN `cnt` ELSE 0 END ) AS m9
+                 , MAX(CASE WHEN m = '10' THEN `cnt` ELSE 0 END ) AS m10
+                 , MAX(CASE WHEN m = '11' THEN `cnt` ELSE 0 END ) AS m11
+                 , MAX(CASE WHEN m = '12' THEN `cnt` ELSE 0 END ) AS m12
+                 , SUM(cnt) AS totcnt
+              FROM (
+                    SELECT phone_number
+                         , month(created_at) AS m
+                         , count(*) AS cnt
+                      FROM lv2_communication
+                     WHERE year(created_at) = #{year} 
+                       AND case_id = #{case_id}
+                       AND in_out = #{in_out}
+                     GROUP BY phone_number, m
+                   ) a
+             GROUP BY phone_number                 
+           ) A
+     ORDER BY totcnt DESC
+     LIMIT 40
   </select>
   
-  <select id="selectSmsStat" parameterType="Map" resultType="Map">
-         SELECT  number
-               , MAX(CASE WHEN m = '1' THEN `cnt` ELSE 0 END ) AS m1
-               , MAX(CASE WHEN m = '2' THEN `cnt` ELSE 0 END ) AS m2
-               , MAX(CASE WHEN m = '3' THEN `cnt` ELSE 0 END ) AS m3
-               , MAX(CASE WHEN m = '4' THEN `cnt` ELSE 0 END ) AS m4
-               , MAX(CASE WHEN m = '5' THEN `cnt` ELSE 0 END ) AS m5
-               , MAX(CASE WHEN m = '6' THEN `cnt` ELSE 0 END ) AS m6
-               , MAX(CASE WHEN m = '7' THEN `cnt` ELSE 0 END ) AS m7
-               , MAX(CASE WHEN m = '8' THEN `cnt` ELSE 0 END ) AS m8
-               , MAX(CASE WHEN m = '9' THEN `cnt` ELSE 0 END ) AS m9
-               , MAX(CASE WHEN m = '10' THEN `cnt` ELSE 0 END ) AS m10
-               , MAX(CASE WHEN m = '11' THEN `cnt` ELSE 0 END ) AS m11
-               , MAX(CASE WHEN m = '12' THEN `cnt` ELSE 0 END ) AS m12
-           FROM (
-                SELECT  number
-                      , month(regdate) as m
-                      , count(*) cnt
-                  FROM  calls_timeline
-                 WHERE  year(regdate) = #{year} 
-                   AND  case_id = #{case_id}
-                   AND  is_sent = 1
-              GROUP BY  number, m
-              ORDER BY  cnt desc
-                ) a
-       GROUP BY  number       
-          LIMIT 40
-  </select>
-
   <select id="selectCommunicationRoomList" parameterType="Map" resultType="Map">      
+    SELECT type
+         , phone_number
+         , message
+         , created_at
+      FROM (
+            SELECT type
+                 , phone_number
+                 , message
+                 , DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS created_at
+              FROM lv2_communication
+             WHERE 1=1 
+               AND case_id = #{case_id}
+               AND phone_number = #{number}
+               <if test="sdate!=null and !sdate.equals('')">
+               AND DATE_FORMAT(created_at, '%Y-%m-%d') >= #{sdate}
+               </if>
+               <if test="edate!=null and !edate.equals('')">
+               <![CDATA[
+               AND DATE_FORMAT(created_at, '%Y-%m-%d') <= #{edate}
+               ]]>
+               </if>
+             ORDER BY type, created_at DESC
+             LIMIT 18446744073709551615
+           ) A
+     GROUP BY type, phone_number
+  <!-- 
     SELECT roomno, GROUP_CONCAT(DISTINCT name) AS name, content, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate
      FROM (
            SELECT roomno, name, content, regdate
@@ -146,17 +155,21 @@
     WHERE 1=1
       AND name != ''
     GROUP BY roomno
+   -->
   </select>
 
   <select id="selectCommunicationDataList" parameterType="Map" resultType="Map">      
-    SELECT seqno, roomno, app, content, sender, sender_name, receiver
-         , receiver_name, msg_type, isdelete, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate
-         , case_id
-      FROM communication_data 
-     WHERE 1=1
+    SELECT phone_number
+         , message
+         , in_out 
+         , DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS created_at
+         , type
+      FROM lv2_communication
+     WHERE 1=1 
        AND case_id = #{case_id}
-       AND roomno = #{roomno}
-     ORDER BY regdate DESC
+       AND phone_number = #{number}
+       AND type = #{type}
+     ORDER BY created_at DESC
      <if test="sdata!=null and !sdata.equals('') and pageCnt!=null and !pageCnt.equals('')">
      LIMIT ${sdata}, ${pageCnt}
      </if>

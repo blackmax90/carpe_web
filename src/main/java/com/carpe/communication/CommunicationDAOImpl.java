@@ -17,6 +17,11 @@ public class CommunicationDAOImpl implements CommunicationDAO {
 	private static final String Namespace = "com.carpe.mapper.communication";
 
 	@Override
+	public List<Map> selectCommunicationYearList(Map<String, Object> paramMap) throws Exception {
+		return sqlSession.selectList(Namespace + ".selectCommunicationYearList", paramMap);
+	}
+
+	@Override
 	public List<Map> selectCommunicationList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectCommunicationList", paramMap);
 	}
@@ -31,11 +36,6 @@ public class CommunicationDAOImpl implements CommunicationDAO {
 		return sqlSession.selectList(Namespace + ".selectCallStat", paramMap);
 	}
 	
-	@Override
-	public List<Map> selectSmsStat(Map<String, Object> paramMap) throws Exception {
-		return sqlSession.selectList(Namespace + ".selectSmsStat", paramMap);
-	}
-
 	@Override
 	public List<Map> selectCommunicationRoomList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectCommunicationRoomList", paramMap);

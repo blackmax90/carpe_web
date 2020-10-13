@@ -12,7 +12,11 @@
    <link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">  
   <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
-    <link href="/carpe/resources/css/style.css" rel="stylesheet" type="text/css">
+  <link href="/carpe/resources/css/style.css" rel="stylesheet" type="text/css">
+  <style>
+  .gridLink {color: #ff0000 !important;}
+  .gridLink:hover {text-decoration: underline;}
+  </style>
 </head>
 <body>
   <c:set var="ADMIN_GRADE" value="<%=Consts.ADMIN_GRADE%>"/>
@@ -230,7 +234,7 @@
 
       var columnSet = [
         {text: 'Index', dataField: 'serial_number', width: '50px', cellsalign: 'right', align: 'center'},
-        {text: 'Case Name', dataField: 'case_name', width: '150px', cellsalign: 'left', align: 'center',
+        {text: 'Case Name', dataField: 'case_name', width: '250px', cellsalign: 'left', align: 'center',
           cellsrenderer : function(row, columnfield, value, defaulthtml, columnproperties) {
             var dataRecord = $("#jqxGrid_Systemlog").jqxGrid('getrowdata', row);
             var caseInfo = {};
@@ -238,7 +242,7 @@
             caseInfo.name = value;
             var param = encodeQueryData(caseInfo);
             
-            return '<span style="padding: 7px; float: ' + columnproperties.cellsalign + '; color: #ff0000;"><a href="/carpe/select_case.do?' + param + '">' + value + '</a></span>';
+            return '<a href="/carpe/select_case.do?' + param + '" class="gridLink"><div class="jqx-grid-cell-left-align" style="margin-top: 8px;">' + value + '</div></a>';
           }
         },
         {text: 'Description', dataField: 'description', width: 'auto', cellsalign: 'left', align: 'center'},
@@ -342,8 +346,14 @@
 
       // Case Delete
       $("#btnDeleteCases").click(function(e) {
+        var selectedrowindexes = $("#jqxGrid_Systemlog").jqxGrid('getselectedrowindexes');
+
+        if (selectedrowindexes.length == 0) {
+          alert("삭제할 Case를 선택해주세요.");
+          return;
+        }
+
         if (confirm('삭제 하시겠습니까')) {
-          var selectedrowindexes = $("#jqxGrid_Systemlog").jqxGrid('getselectedrowindexes');
           var rowscount = $("#jqxGrid_Systemlog").jqxGrid('getdatainformation').rowscount;
           
           $("#jqxGrid_Systemlog").jqxGrid('beginupdate');

@@ -14,6 +14,11 @@ public class CommunicationServiceImpl implements CommunicationService {
 	private CommunicationDAO dao;
 
 	@Override
+	public List<Map> selectCommunicationYearList(Map<String, Object> paramMap) throws Exception {
+		return dao.selectCommunicationYearList(paramMap);
+	}
+
+	@Override
 	public List<Map> selectCommunicationList(Map<String, Object> paramMap) throws Exception {
 		return dao.selectCommunicationList(paramMap);
 	}
@@ -23,11 +28,6 @@ public class CommunicationServiceImpl implements CommunicationService {
 		return dao.selectCallStat(paramMap);
 	}
 	
-	@Override
-	public List<Map> selectSmsStat(Map<String, Object> paramMap) throws Exception {
-		return dao.selectSmsStat(paramMap);
-	}
-
 	@Override
 	public Map selectCallStatCount(Map<String, Object> paramMap) throws Exception {
 		return dao.selectCallStatCount(paramMap);

@@ -19,6 +19,13 @@
 	<script type="text/javascript" src="/carpe/resources/jqwidgets/globalization/globalize.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
+  <style>
+  .jqx-grid-content
+  {
+    cursor: pointer;
+  }
+  .gridLink:hover {text-decoration: underline;}
+  </style>
 </head>
 <body>
 
@@ -69,9 +76,9 @@
 								<dd>
 									<div class="select">
 										<select name="" id="setYear" onChange="setYear(this);">
-											<option value="2019">2019</option>
-											<option value="2018">2018</option>
-											<option value="2017">2017</option>
+                      <c:forEach var="list" items="${yearList}">
+                        <option value="${list.year}" <c:if test="${list.year eq year}">selected</c:if> >${list.year}</option>
+                      </c:forEach>
 										</select>
 									</div>
 								</dd>
@@ -134,7 +141,8 @@
 		</div>
 		<div id="dataLayerContent" class="pop-content">		
 		  <form id="frm" method="post" action="/carpe/communication_export.do">
-		    <input type="hidden" id="roomno" name="roomno" value="" >
+		    <input type="hidden" id="phoneNumber" name="phoneNumber" value="" >
+		    <input type="hidden" id="type" name="type" value="" >
 		  </form>
 			<h4 class="blind">조회된 컨텐츠</h4>
 			<!--// Content 영역 //-->
@@ -218,7 +226,7 @@
 	});
 
 	var exportCommData = function() {
-		if (!$("#roomno").val()) {
+		if (!$("#phoneNumber").val()) {
 			return;
 		}
 
@@ -267,12 +275,12 @@
 			html += "</li> ";
 		} else {
 			$.each(list, function(idx, row) {
-			  html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
+			  html += "<li onclick=\"openCommDataLayer('" + row.type + "', '" + row.phone_number + "')\" style=\"cursor:pointer;\"> ";
 			  html += "	<div class=\"cr-info\"> ";
-			  html += "		<h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
-			  html += "		<time class=\"cr-date\" datetime=\"" + row.regdate + "\">" + row.regdate.substr(0, 10) + "</time> ";
+			  html += "		<h6 class=\"cr-name text-ellipsis\">[" + row.type + "] " + row.phone_number + "</h6> ";
+			  html += "		<time class=\"cr-date\" datetime=\"" + row.created_at + "\">" + row.created_at.substr(0, 10) + "</time> ";
 			  html += "	</div> ";
-			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.content + "\">" + row.content + "</p> ";
+			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.message + "\">" + removeTags(row.message) + "</p> ";
 			  html += "</li> ";
 			});
 		}
@@ -287,11 +295,12 @@
 	var sdata = 0;
 	var pageCnt = 50;
 
-	var openCommDataLayer = function(tmpRoomno) {
+	var openCommDataLayer = function(type, phoneNumber) {
 		commDataLoading = true;
 		regdateStr = "";
 		sdata = 0;
-		$("#roomno").val(tmpRoomno);
+		$("#phoneNumber").val(phoneNumber);
+		$("#type").val(type);
 		$("#dataList").html("");
 		getCommData();
     $("#dataLayer").jqxWindow('open');
@@ -300,7 +309,8 @@
 
 	var getCommData = function() {
 		var data = {
-			roomno: $("#roomno").val(),
+			phoneNumber: $("#phoneNumber").val(),
+			type: $("#type").val(),
 			sdata: sdata,
 			pageCnt: pageCnt 
 		};
@@ -331,8 +341,10 @@
 		$.each(list, function(idx, row) {
 			var otherClass = "";
 			var timeStr = "";
-			var name = row.sender_name;
-			var regdate = row.regdate;
+			var name = row.phone_number;
+			var in_out = row.in_out;
+			var regdate = row.created_at;
+      var message = row.message;
 
 			if (regdate == null) {
 				regdate = "";
@@ -349,7 +361,7 @@
 				html += "  <h5>- " + regdate.substr(0, 4) + "년 " + regdate.substr(5, 2) + "월 " + regdate.substr(8, 2) + "일 -</h5> ";
 			}
 
-			if (row.msg_type != "발신") {
+			if (in_out != "Outgoing") {
 				otherClass = "other";
 			}
 
@@ -362,15 +374,15 @@
 			}
 
 			html += "	 <div class=\"data_log " + otherClass + "\"> ";
-			if (row.msg_type != "발신") {
+			if (in_out != "Outgoing") {
 			  html += "		 <div class=\"name\">" + name + "</div> ";
 			  html += "		 <div class=\"log\"> ";
-			  html += "			 <span>" + row.content + "</span> ";
+			  html += "			 <span>" + removeTags(message) + "</span> ";
 			  html += "			 <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
 			} else {
 			  html += "		 <div class=\"log\"> ";
 			  html += "			 <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
-			  html += "			 <span>" + row.content + "</span> ";
+			  html += "			 <span>" + removeTags(message) + "</span> ";
 			}
 
 			html += "		 </div> ";
@@ -383,6 +395,15 @@
 
 		$("#dataList").append(html);
 	};
+
+  var removeTags = function(str) {
+    str = str.replace(/</g,"&lt;");
+    str = str.replace(/>/g,"&gt;");
+    str = str.replace(/\"/g,"&quot;");
+    str = str.replace(/\'/g,"&#39;");
+    str = str.replace(/\n/g,"<br />");
+    return str;
+  }
 
 	//////// 대화창 End ////////
 
@@ -399,7 +420,7 @@
 	  var source = {
 	    datatype: "json",
 	    datafields: [
-	      { name: 'call_number', type: 'string' },
+	      { name: 'phone_number', type: 'string' },
 	      { name: 'cnt', type: 'number' }         
 	    ],
 	    type : "POST",
@@ -422,9 +443,13 @@
 	    }
 	  });
 
+    var cellsrenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
+      return "<div class=\"jqx-grid-cell-right-align\" style=\"margin-top: 8px;\"><a class=\"gridLink\">" + value + "</a></div>";
+    };
+
 	  var columnSet = [
-	    {text: 'Number', dataField: 'call_number', width: 'auto', cellsalign: 'right', align: 'center'},
-	    {text: 'Count', dataField: 'cnt', width: '48px', cellsalign: 'center', align: 'center'},
+	    {text: 'Number', dataField: 'phone_number', width: 'auto', cellsalign: 'right', align: 'center', cellsrenderer: cellsrenderer},
+	    {text: 'Count', dataField: 'cnt', width: '48px', cellsalign: 'center', align: 'center', cellsrenderer: cellsrenderer}
 	  ];
 
 	  $('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
@@ -438,12 +463,10 @@
 		  var args = event.args;
 	    var rowIdx = args.rowindex;
 	    var rightClick = args.rightclick; 
-	    var number = args.row.bounddata.call_number;
+	    var number = args.row.bounddata.phone_number;
 
 	    if (rightClick == false) {
-		    //openRoomListLayer(number);
-		   //test
-		    openRoomListLayer('010**454402');
+		    openRoomListLayer(number);
 	    }
 	  });
 
@@ -519,7 +542,7 @@
 	    contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
 	    success: function(data) {
 	      $(data["list"]).each(function(i, list) {
-	        var tmpArr = [list["number"], list["m1"], list["m2"], list["m3"], list["m4"] 
+	        var tmpArr = [list["phone_number"], list["m1"], list["m2"], list["m3"], list["m4"] 
 	               , list["m5"], list["m6"], list["m7"], list["m8"], list["m9"]
 	               , list["m10"], list["m11"], list["m12"]];
 
@@ -582,9 +605,7 @@
 	  categoryAxisLabel.events.on("hit", function(ev) {
 	     //console.log("clicked on ", ev.target.currentText);
 
-	     //openRoomListLayer(ev.target.currentText);
-		   //test
-		   openRoomListLayer('010**623669');
+	     openRoomListLayer(ev.target.currentText);
 	  }, this);
 
 	  categoryAxisLabel.location = 0.5;
@@ -607,30 +628,38 @@
 	  // value axis
 	  var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 	  valueAxis.min = 0;
-	  valueAxis.max = 40;
+	  valueAxis.maxPrecision = 0;
+//	  valueAxis.max = 40;
 	  valueAxis.strictMinMax = true;
 	  valueAxis.tooltip.defaultState.properties.opacity = 0;
 	  valueAxis.tooltip.animationDuration = 0;
 	  valueAxis.cursorTooltipEnabled = true;
 	  valueAxis.zIndex = 10;
-	
+
 	  var valueAxisRenderer = valueAxis.renderer;
 	  valueAxisRenderer.axisFills.template.disabled = true;
 	  valueAxisRenderer.ticks.template.disabled = true;
 	  valueAxisRenderer.minGridDistance = 30;
 	  valueAxisRenderer.grid.template.strokeOpacity = 0.05;
 	
-	
 	  // series
 	  var series = chart.series.push(new am4charts.RadarColumnSeries());
 	  series.columns.template.width = am4core.percent(90);
 	  series.columns.template.strokeOpacity = 0;
+	  series.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
 	  series.dataFields.valueY = "value" + monthInfo.currentMonth;
 	  series.dataFields.categoryX = "country";
 	  series.tooltipText = "{categoryX}:{valueY.value}";
+
+	  series.columns.template.events.on("hit", function(ev) {
+//	     console.log("clicked on ", ev.target.dataItem.categories.categoryX);
+
+	     openRoomListLayer(ev.target.dataItem.categories.categoryX);
+	  }, this);
+	
 	
 	  // this makes columns to be of a different color, depending on value
-	  series.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 40, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
+	  series.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, min: am4core.color("#673AB7"), max: am4core.color("#F44336"), dataField: "valueY" });
 	
 	  // cursor
 	  var cursor = new am4charts.RadarCursor();

@@ -1,8 +1,8 @@
 /*
 @license
 
-dhtmlxGrid v.6.4.2 Professional
-This software is covered by Evaluation License. Usage without proper license is prohibited.
+dhtmlxSuite v.6.5.6 Professional
+This software is covered by Enterprise License. Usage without proper license is prohibited.
 
 (c) XB Software.
 */
