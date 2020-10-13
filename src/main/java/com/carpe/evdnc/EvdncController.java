@@ -218,12 +218,13 @@ public class EvdncController {
 		ArrayList<String> evdncList = new ArrayList<String>();
 		evdncList.addAll(split);
 		paramMap.put("evdList", evdncList);
+		paramMap.put("isdelete", "Y");
 
 
 		int affected = 0;
 		try {
 			// evdncList list delete
-			affected = service.deleteEvdncList(paramMap);
+			affected = service.updateEvdncDeleteFlag(paramMap);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

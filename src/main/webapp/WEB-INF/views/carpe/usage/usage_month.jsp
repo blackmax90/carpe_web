@@ -47,13 +47,10 @@
       <section class="tit-area">
         <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%></h3>
         <a href="/carpe/case.do"><button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button></a>
-      	<div class="location-area">
-			<ul class="list-h">
-				<li>Home</li>
-				<li>Visualization</li>
-				<li>Usage History</li>
-			</ul>
-		</div>
+        <c:import url="../common/location_area.jsp">
+		      <c:param name="d1" value="visualization"></c:param>
+		      <c:param name="d2" value="usagehistory"></c:param>
+        </c:import>
       </section>
       <article class="container">
         <h4 class="blind">Usage History Month</h4>

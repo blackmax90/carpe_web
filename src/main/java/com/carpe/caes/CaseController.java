@@ -197,12 +197,13 @@ public class CaseController {
     ArrayList<String> caseList = new ArrayList<String>();
     caseList.addAll(split);
     paramMap.put("caseList", caseList);
+    paramMap.put("isdelete", "Y");
 
 
     int affected = 0;
     try {
       // case list delete
-      affected = service.deleteCaseList(paramMap);
+      affected = service.updateCaseDeleteFlag(paramMap);
 
       if (affected > 0) {
       	service.deleteCaseUserAuth(paramMap);

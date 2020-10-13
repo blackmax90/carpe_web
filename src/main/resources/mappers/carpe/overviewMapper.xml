@@ -45,6 +45,7 @@
              GROUP BY c.evd_id
            ) b
      WHERE 1=1
+       AND a.isdelete = 'N'
        AND a.evd_id = b.evd_id
        AND a.case_id = #{case_id}
      GROUP BY a.evd_name

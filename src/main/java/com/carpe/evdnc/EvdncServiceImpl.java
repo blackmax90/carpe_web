@@ -32,6 +32,11 @@ public class EvdncServiceImpl implements EvdncService {
 	public Map selectEvdnc(Map<String, Object> paramMap) throws Exception {
 		return dao.selectEvdnc(paramMap);
 	}
+
+	@Override
+	public int updateEvdncDeleteFlag(Map<String, Object> paramMap) throws Exception {
+		return dao.updateEvdncDeleteFlag(paramMap);
+	}
 	
 	@Override
 	public int deleteEvdncList(Map<String, Object> paramMap) throws Exception {

@@ -48,12 +48,10 @@
       <section class="desc-area bg-unit">
         <h3>Current Case : ${caseName}</h3>
         <p>${desc}</p>
-        <div class="location-area">
-          <ul class="list-h">
-            <li>Home</li>
-            <li>Overviews</li>
-          </ul>
-        </div>
+        <c:import url="../common/location_area.jsp">
+          <c:param name="d1" value="overview"></c:param>
+          <c:param name="d2" value=""></c:param>
+        </c:import>
       </section>
       <article class="container">
         

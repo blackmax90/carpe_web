@@ -43,6 +43,12 @@ public class CommunicationController {
     paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
     List<Map> yearList = service.selectCommunicationYearList(paramMap);
 
+		if (yearList.size() == 0) {
+		  HashMap<String, String> tmpHm = new HashMap<>();
+		  tmpHm.put("year", year);
+		  yearList.add(tmpHm);
+		}
+
     mav.addObject("year", year);
     mav.addObject("yearList", yearList);
     mav.setViewName("carpe/communication/communication");

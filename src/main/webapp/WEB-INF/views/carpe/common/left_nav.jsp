@@ -14,7 +14,7 @@
 				<ul>
 					<li class="<c:if test="${d1 eq 'overview'}">on</c:if>"><a href="/carpe/overview.do" class="icon overview">Overview</a></li>
 					<li class="<c:if test="${d1 eq 'evidence'}">on</c:if>"><a href="/carpe/evdnc.do" class="icon evidence">Evidence</a></li>
-					<li class="<c:if test="${d1 eq 'analysis'}">on</c:if>"><a href="#" class="icon analysis">Analysis</a></li>
+					<li class="<c:if test="${d1 eq 'analysis'}">on</c:if>"><a href="/carpe/filesystem.do" class="icon analysis">Analysis</a></li>
             <c:set var="hideClass" value="" />
             <c:if test="${d1 ne 'analysis'}"><c:set var="hideClass" value="hide" /></c:if>
 						<!-- 2Depth Menu //-->
@@ -25,9 +25,9 @@
 					<li class="<c:if test="${d1 eq 'recovery'}">on</c:if>"><a href="/carpe/carving.do" class="icon recovery">Recovery</a></li>						
             <c:set var="hideClass" value="" />
             <c:if test="${d1 ne 'recovery'}"><c:set var="hideClass" value="hide" /></c:if>
-						<li class="level02 ${hideClass} <c:if test="${d2 eq 'deletedfiles'}">on</c:if>"><a href="/carpe/carving.do">Deleted Files</a></li>
+<%-- 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'deletedfiles'}">on</c:if>"><a href="/carpe/carving.do">Deleted Files</a></li> --%>
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'filecarving'}">on</c:if>"><a href="/carpe/carving.do">File Carving</a></li>
-						<li class="level02 ${hideClass} <c:if test="${d2 eq 'recordcarving'}">on</c:if>"><a href="/carpe/carving.do">Record Carving</a></li>
+<%-- 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'recordcarving'}">on</c:if>"><a href="/carpe/carving.do">Record Carving</a></li> --%>
 					<li class="<c:if test="${d1 eq 'visualization'}">on</c:if>"><a href="/carpe/communication.do" class="icon visualization">Visualization</a></li>						
             <c:set var="hideClass" value="" />
             <c:if test="${d1 ne 'visualization'}"><c:set var="hideClass" value="hide" /></c:if>
@@ -41,7 +41,7 @@
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'mfthistory'}">on</c:if>"><a href="/carpe/mft/mfthistory.do">MFT History</a></li>
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'ntfsloghistory'}">on</c:if>"><a href="/carpe/ntfs/ntfsloghistory.do">NTFS Log History</a></li>
 						<!--// 2Depth Menu -->
-					<li class="<c:if test="${d1 eq 'report'}">on</c:if>"><a href="#" class="icon report">Report</a></li>
+<%-- 					<li class="<c:if test="${d1 eq 'report'}">on</c:if>"><a href="#" class="icon report">Report</a></li> --%>
 				</ul>
 			</div>
 		</nav>

@@ -14,17 +14,21 @@
 				THEN 'Processing'
 				WHEN process_state = '2'
 				THEN 'Ready'
-			END as process_state 
-		FROM evidence_info a, (SELECT @a:= 0) AS sn
-		WHERE a.case_id = #{case_id}
-		ORDER BY acquired_date
+			   END as process_state 
+		  FROM evidence_info a, (SELECT @a:= 0) AS sn
+		 WHERE a.case_id = #{case_id}
+       AND a.isdelete = 'N'
+		 ORDER BY acquired_date
     <if test="offset!=null and !offset.equals('') and pageSize!=null and !pageSize.equals('')">
-		limit #{offset}, #{pageSize}
+		 LIMIT #{offset}, #{pageSize}
     </if>
 	</select>
 
 	<select id="selectEvdncListCount" parameterType="Map" resultType="Map">
-		SELECT count(*) cnt FROM evidence_info
+		SELECT count(*) cnt 
+      FROM evidence_info
+     WHERE 1=1
+       AND isdelete = 'N'
 	</select>
 	
 	<select id="selectEvdnc" parameterType="Map" resultType="Map">
@@ -35,6 +39,15 @@
 		INSERT INTO evidence_info(evd_id, evd_name, evd_path, tmp_path, case_id, main_type, sub_type, timezone, acquired_date) 
 			VALUES(#{id}, #{name}, #{path}, #{tmp_path}, #{case_id}, #{main_type}, #{sub_type}, #{timezone}, now())
 	</insert>
+
+	<delete id="updateEvdncDeleteFlag" parameterType="Map">
+		UPDATE evidence_info
+       SET isdelete = #{isdelete}
+		 WHERE evd_id in
+		  <foreach item="item" index="index" collection="evdList" open="(" close=")" separator=",">
+            #{item}
+   		  </foreach>
+	</delete>
 	
 	<delete id="deleteEvdncList" parameterType="Map">
 		DELETE 

@@ -39,14 +39,11 @@
 		<section class="tit-area">
 		  <h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%> </h3>
 		  <h3 id="evdname">Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
-		  <button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button>
-		  <div class="location-area">
-		  	<ul class="list-h">
-		  		<li>Home</li>
-		  		<li>Analysis</li>
-		  		<li>Filesystem</li>
-		  	</ul>
-		  </div>
+		  <a href="/carpe/case.do"><button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button></a>
+      <c:import url="../common/location_area.jsp">
+        <c:param name="d1" value="analysis"></c:param>
+        <c:param name="d2" value="filesystem"></c:param>
+      </c:import>
 		</section>
 		<section class="search-area bg-unit">
 			<h4 class="blind">조회조건 선택</h4>
@@ -129,9 +126,9 @@
 				<li>
 				  <button type="button" class="btn-case-02" id="btnFileNameWordCloud"><span>Word Cloud</span></button>
 				</li>
-				<li>
-				  <button type="button" class="btn-case-02" id="btnDateTreeMap"><span>Data Tree Map</span></button>
-				</li>
+<!-- 				<li> -->
+<!-- 				  <button type="button" class="btn-case-02" id="btnDateTreeMap"><span>Data Tree Map</span></button> -->
+<!-- 				</li> -->
 				<li>
 				  <button type="button" class="btn-case-02" id="btnHexView"><span>HEX VIEW</span></button>
 				</li>
