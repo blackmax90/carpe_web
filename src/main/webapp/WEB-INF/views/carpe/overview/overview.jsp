@@ -44,11 +44,11 @@
     <main class="main">
       <section class="desc-area bg-unit">
         <h3>Current Case : ${caseName}</h3>
-        <p>${desc}</p>
         <c:import url="../common/location_area.jsp">
           <c:param name="d1" value="overview"></c:param>
           <c:param name="d2" value=""></c:param>
         </c:import>
+        <p>${desc}</p>
       </section>
       <article class="container">
         
@@ -240,7 +240,8 @@
       }
              
       $("#jqxpanel").jqxPanel({
-        width: 'calc(50% - 1rem)'
+        width: 'calc(50% - 1rem)',
+        height: 'calc(100%)'
       });
 
       $(".jqx-widget-content").css("background", "transparent");

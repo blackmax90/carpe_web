@@ -1833,7 +1833,7 @@ h5 {
 }
 
 .overview .container {
-  height: calc(100% - 12rem);
+  height: calc(100% - 10rem);
   margin-top: 2rem;
   background-color: transparent;
 }
@@ -2159,7 +2159,7 @@ h5 {
   position: relative;
   display: block;
   float: left;
-  height: 10rem;
+  max-height: 10rem;
   padding: 1.4rem 2rem;
   cursor: default;
 }
@@ -2175,7 +2175,7 @@ h5 {
 
 .desc-area h3 {
   float: left;
-  width:100%;
+/*   width:100%; */
   line-height: 2rem;
 }
 
