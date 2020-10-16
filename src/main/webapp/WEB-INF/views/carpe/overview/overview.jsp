@@ -244,36 +244,6 @@
 
       $(".jqx-widget-content").css("background", "transparent");
 
-<<<<<<< HEAD
-               	$("#"+uniqueEvdIdList[i]).jqxGrid({
-                    width: 'calc(100% - 2rem)',
-                    source: dataAdapter,
-                    //selectionmode: 'checkbox', // 'none',
-                    columnsresize: true,
-                    autoheight: true,
-                    //pagerheight: 0,
-                    //pageable: true,
-                    pagerrenderer: function() { return  ''; },
-                    altrows: true,
-                    //scrollbarsize: 12,
-                    autoshowloadelement: true,
-                    ready: function() {},
-                    enablebrowserselection: true,
-                    columnsresize: true,
-                    columns: columnSet
-                  });
-           	}
-           	
-            $("#jqxpanel").jqxPanel({
-                width: 'calc(50% - 1rem)',
-            });
-            $(".jqx-widget-content").css("background", "transparent");
-	    });
-	})(jQuery);
- 	
-	<!-- Chart code -->
-	am4core.ready(function() {
-=======
       initChart();
       setChartData();
     });
@@ -281,7 +251,6 @@
 
   var chart = null;
   var indicator = null;
->>>>>>> 5754dfbfa4de1245d4f931ed936fb5ccf1bad81b
 
   var setChartData = function () {
 	  $.ajax({
