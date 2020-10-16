@@ -240,6 +240,7 @@
       }
              
       $("#jqxpanel").jqxPanel({
+        width: 'calc(50% - 1rem)'
       });
 
       $(".jqx-widget-content").css("background", "transparent");
