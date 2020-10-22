@@ -108,9 +108,9 @@
 			<!--// Content 영역 //-->
 			<section class="search-date">
 				<div class="combo">
-					<span class="input-text-type-1 calendar" id="sdateSpan"><input type="text" id="sdate" /></span>
+					<span class="input-text-type-1 calendar" id="sdateSpan" style="cursor:pointer;"><input type="text" id="sdate" /></span>
 					<span class="hyp">-</span>
-					<span class="input-text-type-1 calendar" id="edateSpan"><input type="text" id="edate" /></span>
+					<span class="input-text-type-1 calendar" id="edateSpan" style="cursor:pointer;"><input type="text" id="edate" /></span>
 				</div>
 				<div class="btn-area">
 					<button type="button" class="btn-case-01 btn-search txt" id="btnSearch"><span class="icon ico-search">검색</span></button>

@@ -136,9 +136,9 @@
       <!--// Content 영역 //-->
       <section class="search-date">
         <div class="combo">
-          <span class="input-text-type-1 calendar" id="sdateSpan"><input type="text" id="sdate" placeholder="시작일" /></span>
+          <span class="input-text-type-1 calendar" id="sdateSpan" style="cursor:pointer;"><input type="text" id="sdate" placeholder="시작일" /></span>
           <span class="hyp">-</span>
-          <span class="input-text-type-1 calendar" id="edateSpan"><input type="text" id="edate" placeholder="종료일" /></span>
+          <span class="input-text-type-1 calendar" id="edateSpan" style="cursor:pointer;"><input type="text" id="edate" placeholder="종료일" /></span>
         </div>
         <div class="btn-area">
           <button type="button" class="btn-case-01 btn-search txt" id="btnSearch"><span class="icon ico-search">검색</span></button>
@@ -191,9 +191,9 @@
     <div class="pop-content">
       <section class="search-date">
         <div class="array combo">
-              <span class="input-text-type-1 calendar" id="mcSdateSpan"><input type="text" id="mcSdate" placeholder="시작일" /></span>
+              <span class="input-text-type-1 calendar" id="mcSdateSpan" style="cursor:pointer;"><input type="text" id="mcSdate" placeholder="시작일" /></span>
               <span class="hyp">-</span>
-              <span class="input-text-type-1 calendar" id="mcEdateSpan"><input type="text" id="mcEdate" placeholder="종료일" /></span>
+              <span class="input-text-type-1 calendar" id="mcEdateSpan" style="cursor:pointer;"><input type="text" id="mcEdate" placeholder="종료일" /></span>
               </div>
       </section>
       <section class="btn-area">
@@ -217,16 +217,16 @@
           <ul class="list-v">
             <li>
               <div class="array combo">
-                <span class="input-text-type-1 calendar" id="tlSdateSpan"><input type="text" id="tlSdate" placeholder="시작일" /></span>
+                <span class="input-text-type-1 calendar" id="tlSdateSpan" style="cursor:pointer;"><input type="text" id="tlSdate" placeholder="시작일" /></span>
                 <span class="hyp">-</span>
-                <span class="input-text-type-1 calendar" id="tlEdateSpan"><input type="text" id="tlEdate" placeholder="종료일" /></span>
+                <span class="input-text-type-1 calendar" id="tlEdateSpan" style="cursor:pointer;"><input type="text" id="tlEdate" placeholder="종료일" /></span>
               </div>
             </li>
             <li class="mt5">
               <div class="array combo">
-                <span class="input-text-type-1 calendar" id="tlStimeSpan"><input type="text" id="tlStime" placeholder="시작시간" /></span>
+                <span class="input-text-type-1 calendar" id="tlStimeSpan" style="cursor:pointer;"><input type="text" id="tlStime" placeholder="시작시간" /></span>
                 <span class="hyp">-</span>
-                <span class="input-text-type-1 calendar" id="tlEtimeSpan"><input type="text" id="tlEtime" placeholder="종료시간" /></span>
+                <span class="input-text-type-1 calendar" id="tlEtimeSpan" style="cursor:pointer;"><input type="text" id="tlEtime" placeholder="종료시간" /></span>
               </div>
             </li>
           </ul>
@@ -236,37 +236,37 @@
             <li>
               <div class="checkbox checkbox-type-3">
                 <input id="chk1" name="chk1" type="checkbox" />
-                <label for="chk1"><span class="text">공휴일만</span></label>
+                <label for="chk1" style="cursor: pointer;"><span class="text">공휴일만</span></label>
               </div>
             </li>
             <li>
               <div class="checkbox checkbox-type-3">
                 <input id="chk2" name="chk2" type="checkbox" />
-                <label for="chk2"><span class="text">공휴일만 제외</span></label>
+                <label for="chk2" style="cursor: pointer;"><span class="text">공휴일만 제외</span></label>
               </div>
             </li>
             <li>
               <div class="checkbox checkbox-type-3">
                 <input id="chk3" name="chk3" type="checkbox" />
-                <label for="chk3"><span class="text">주말만</span></label>
+                <label for="chk3" style="cursor: pointer;"><span class="text">주말만</span></label>
               </div>
             </li>
             <li>
               <div class="checkbox checkbox-type-3">
                 <input id="chk4" name="chk4" type="checkbox" />
-                <label for="chk4"><span class="text">주말만 제외</span></label>
+                <label for="chk4" style="cursor: pointer;"><span class="text">주말만 제외</span></label>
               </div>
             </li>
             <li>
               <div class="checkbox checkbox-type-3">
                 <input id="chk5" name="chk5" type="checkbox" />
-                <label for="chk5"><span class="text">첫 데이터만</span></label>
+                <label for="chk5" style="cursor: pointer;"><span class="text">첫 데이터만</span></label>
               </div>
             </li>
             <li>
               <div class="checkbox checkbox-type-3">
                 <input id="chk6" name="chk6" type="checkbox" />
-                <label for="chk6"><span class="text">마지막 데이터만</span></label>
+                <label for="chk6" style="cursor: pointer;"><span class="text">마지막 데이터만</span></label>
               </div>
             </li>
           </ul>

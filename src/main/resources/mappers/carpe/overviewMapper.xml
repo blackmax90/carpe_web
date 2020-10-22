@@ -10,11 +10,11 @@
 		     , a.administrator
          , DATE_FORMAT(a.create_date, '%Y-%m-%d') AS create_date
 			   , a.description		 
-			   , (SELECT  CASE WHEN process_state =  '0' THEN 'Ready'
+			   , IFNULL((SELECT  CASE WHEN process_state =  '0' THEN 'Ready'
                                WHEN process_state =  '1' THEN 'Processing'
                                WHEN process_state =  '2' THEN 'Complete'
                            END 
-			        FROM  evidence_info where case_id = a.case_id and isdelete='N' order by process_state desc limit 1) process_state			   
+			        FROM  evidence_info where case_id = a.case_id and isdelete='N' order by process_state desc limit 1), '') process_state			   
 			   , (select count(1) from case_user_auth where case_id = a.case_id) case_user_cnt
 			   , (select count(1) from evidence_info where case_id = a.case_id and isdelete='N') evidence_cnt
 			   , (select count(1) from log2timeline where case_id = a.case_id) logtimeline_cnt

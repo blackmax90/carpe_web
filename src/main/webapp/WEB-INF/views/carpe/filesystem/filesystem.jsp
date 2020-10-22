@@ -105,15 +105,15 @@
 							</td>
 							<th>시작일</th>
 							<td>
-								<div class="input-text-type-1 calendar">
+								<div class="input-text-type-1 calendar" id="search_stime_div" style="cursor:pointer;">
 		  						  <input id="search_stime" name="search_stime" type="text" placeholder="시작일" />
 								</div>
 							</td>
 							<th>종료일</th>
 							<td>
-								<div class="input-text-type-1 calendar">
+								<div class="input-text-type-1 calendar" id="search_etime_div" style="cursor:pointer;">
 		  						  <input id="search_etime" name="search_etime" type="text" placeholder="종료일" />
-		             			</div>
+           			</div>
 							</td>
 						</tr>
 					</tbody>
@@ -181,6 +181,14 @@
       $("#search_stime, #search_etime").datetimepicker({
         format: "Y-m-d H:i:00",
         step: 10
+      });
+
+      $("#search_stime_div").click(function() {
+      	$("#search_stime").datetimepicker('show'); 
+      });
+      
+      $("#search_etime_div").click(function() {
+      	$("#search_etime").datetimepicker('show'); 
       });
 
       $("#search_fname").keypress(function(e) {

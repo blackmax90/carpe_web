@@ -59,9 +59,9 @@
           <div class="content-area">
             <div style="width:500px;">
 							<div class="combo" style="width:400px;">
-								<span class="input-text-type-1 calendar" id="sdateSpan"><input type="text" id="sdate" placeholder="시작일" /></span>
+								<span class="input-text-type-1 calendar" id="sdateSpan" style="cursor:pointer;"><input type="text" id="sdate" placeholder="시작일" /></span>
 								<span class="hyp">-</span>
-								<span class="input-text-type-1 calendar" id="edateSpan"><input type="text" id="edate" placeholder="종료일" /></span>
+								<span class="input-text-type-1 calendar" id="edateSpan" style="cursor:pointer;"><input type="text" id="edate" placeholder="종료일" /></span>
 							</div>
 				      <div class="btn-area">
 					      <button type="button" class="btn-case-01 btn-search txt" id="btnSearch"><span class="icon ico-search">조회</span></button>
@@ -125,15 +125,13 @@
     $("#sdate").val("");
     $("#edate").val("");
 
-    /*
     $("#sdateSpan").click(function() {
-    	$("#sdate").jqxDateTimeInput('open'); 
+      $("#sdate").datetimepicker("show"); 
     });
 
     $("#edateSpan").click(function() {
-    	$("#edate").jqxDateTimeInput('open'); 
+      $("#edate").datetimepicker("show"); 
     });
-    */
 
     $("#btnSearch").click(function() {
       search();
