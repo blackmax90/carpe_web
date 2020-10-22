@@ -244,6 +244,11 @@
       $("#btnCsvExport").click(function() {
         $("#frm").submit();
       });
+
+      //nav 열린 상태로 grid 호출시 사이즈 이상 조치용
+      $(".nav").hover(function() {
+        window.dispatchEvent(new Event('resize'));
+      });
 		});
 	})(jQuery);
 	

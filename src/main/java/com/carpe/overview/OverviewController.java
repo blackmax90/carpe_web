@@ -1,9 +1,7 @@
 package com.carpe.overview;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -34,6 +32,8 @@ public class OverviewController {
 		paramMap.put("case_id", caseId);
 		
 		Map<String, Object> overviewMap = service.selectCaseInfo(paramMap);
+		String administrator = (String) overviewMap.get("administrator");
+		String createDate = (String) overviewMap.get("create_date");
 		String description = (String) overviewMap.get("description");
 		String procStat = String.valueOf(overviewMap.get("process_state"));
 		String logtimelineCnt = String.valueOf(overviewMap.get("logtimeline_cnt"));
@@ -44,6 +44,8 @@ public class OverviewController {
 		List<Map> evidenceList = service.selectEvidenceList(paramMap);
 		
 		model.addAttribute("caseName", caseName);
+		model.addAttribute("administrator", administrator);
+		model.addAttribute("createDate", createDate);
 		model.addAttribute("desc", description);
 		model.addAttribute("procStat", procStat);
 		model.addAttribute("logtimelineCnt", logtimelineCnt);

@@ -20,10 +20,7 @@
 	<script type="text/javascript" src="/carpe/resources/js/common.js"></script>
 	<script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
   <style>
-  .jqx-grid-content
-  {
-    cursor: pointer;
-  }
+  .jqx-grid-cell:not(.jqx-grid-cleared-cell) { cursor: pointer; }
   .gridLink:hover {text-decoration: underline;}
   </style>
 </head>

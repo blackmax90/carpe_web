@@ -68,8 +68,12 @@
         </div>
         <div class="content-area bg-unit">
           <h3>Current Info</h3>
+          <p>Case Name : ${caseName}</p>
+          <p>Administrator : ${administrator}</p>
+          <p>Create Date : ${createDate}</p>
+          <p>Description : ${desc}</p>
           <p>Case State : ${procStat}</p>
-          <p>Last analysis Time : - </p>
+<!--           <p>Last analysis Time : - </p> -->
           <p># of Evidence : ${evidenceCnt}</p>
           <p># of members : ${caseUserCnt}</p>
 <!--           <h3>Case User</h3> -->
@@ -245,6 +249,11 @@
       });
 
       $(".jqx-widget-content").css("background", "transparent");
+
+      //nav 열린 상태로 grid 호출시 사이즈 이상 조치용
+      $(".nav").hover(function() {
+        window.dispatchEvent(new Event('resize'));
+      });
 
       initChart();
       setChartData();

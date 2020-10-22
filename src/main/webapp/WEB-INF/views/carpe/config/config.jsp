@@ -13,7 +13,7 @@
   <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/css/style.css" rel="stylesheet" type="text/css">
   <style>
-  .gridLink { cursor: pointer; }
+  .jqx-grid-cell:not(.jqx-grid-cleared-cell) { cursor: pointer; }
   .gridLink:hover {text-decoration: underline;}
   </style>
 </head>
@@ -37,23 +37,23 @@
           </div>
           <div class="content-area config">        
             <!--// Content 영역 -->    
-			<div class="case-result">
+      <div class="case-result">
               <div class="tit-area">
-              	<h3 class="unit">User Case</h3>
+                <h3 class="unit">User Case</h3>
               </div>
               <div id="jqxGrid_usercase" role="grid" align="left" class="cont-result">
                 <!--// Table 영역 //-->
               </div>
             </div>
-			<div class="case-control">
+      <div class="case-control">
               <ul class="list-v">
                 <li><button type="button" id="btnAdd" class="btn-get-arr" value="&lt;&lt;"><span class="icon ico-get-left"></span></button></li>
                 <li><button type="button" id="btnDel" class="btn-get-arr" value="&gt;&gt;"><span class="icon ico-get-right"></span></button></li>
               </ul>
             </div>
-			<div class="case-result">
+      <div class="case-result">
               <div class="tit-area">
-              	<h3 class="unit">Case List</h3>
+                <h3 class="unit">Case List</h3>
               </div>
               <div id="jqxGrid_caselist" role="grid" align="left" class="cont-result">
                 <!--// Table 영역 //-->
@@ -217,7 +217,7 @@
       });
 
       var cellsrenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
-        return "<a class=\"gridLink\"><div class=\"jqx-grid-cell-right-align\" style=\"margin-top: 8px;\">" + value + "</div></a>";
+        return "<div class=\"jqx-grid-cell-right-align gridLink\" style=\"margin-top: 8px;\">" + value + "</div>";
       };
 
       var userColumnSet = [
@@ -243,17 +243,17 @@
         columns: userColumnSet
       });
 
-	    $("#jqxGrid_userlist").on("rowclick", function (event) {
-		    var args = event.args;
-	      var rowIdx = args.rowindex;
-	      var rightClick = args.rightclick; 
+      $("#jqxGrid_userlist").on("rowclick", function (event) {
+        var args = event.args;
+        var rowIdx = args.rowindex;
+        var rightClick = args.rightclick; 
 
-	      if (rightClick == false) {
-	        selid = args.row.bounddata.id;
-	        currentPage = 1;
+        if (rightClick == false) {
+          selid = args.row.bounddata.id;
+          currentPage = 1;
           reloadGrid();
-	      }
-	    });
+        }
+      });
 
       ////////// User Case List Grid //////////
       var userCaseSource = {
@@ -276,10 +276,14 @@
         },
       });
 
+      var cellsrenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
+        return "<div class=\"jqx-grid-cell-left-align gridLink\" style=\"margin-top: 8px;\">" + value + "</div>";
+      };
+
       var userCaseColumnSet = [
-        {text: 'Case ID', dataField: 'case_id', width: '30%', cellsalign: 'left', align: 'center'},
-        {text: 'Case Name', dataField: 'case_name', width: '20%', cellsalign: 'left', align: 'center'},
-        {text: 'Description', dataField: 'description', width: 'auto', cellsalign: 'left', align: 'center'}
+        {text: 'Case ID', dataField: 'case_id', width: '30%', cellsalign: 'left', align: 'center', cellsrenderer: cellsrenderer},
+        {text: 'Case Name', dataField: 'case_name', width: '20%', cellsalign: 'left', align: 'center', cellsrenderer: cellsrenderer},
+        {text: 'Description', dataField: 'description', width: 'auto', cellsalign: 'left', align: 'center', cellsrenderer: cellsrenderer}
       ];
 
       $("#jqxGrid_usercase").jqxGrid({
@@ -299,6 +303,21 @@
         sortMode: 'many',
         columnsheight: 40,
         columns: userCaseColumnSet
+      });
+
+      $("#jqxGrid_usercase").on("rowclick", function (event) {
+        var args = event.args;
+        var rowIdx = args.rowindex;
+        var rightClick = args.rightclick; 
+        var arrSel = $('#jqxGrid_usercase').jqxGrid('getselectedrowindexes');
+      
+        if (rightClick == false) {
+          if (arrSel.indexOf(rowIdx) > -1) {
+            $("#jqxGrid_usercase").jqxGrid('unselectrow', rowIdx);
+          } else {
+            $("#jqxGrid_usercase").jqxGrid('selectrow', rowIdx);
+          }
+        }
       });
 
       ////////// Case List Grid //////////
@@ -424,10 +443,14 @@
         }
       });
 
+      var cellsrenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
+        return "<div class=\"jqx-grid-cell-left-align gridLink\" style=\"margin-top: 8px;\">" + value + "</div>";
+      };
+
       var columnSet = [
-        {text: 'Case ID', dataField: 'case_id', width: '30%', cellsalign: 'left', align: 'center'},
-        {text: 'Case Name', dataField: 'case_name', width: '20%', cellsalign: 'left', align: 'center'},
-        {text: 'Description', dataField: 'description', width: 'auto', cellsalign: 'left', align: 'center'}
+        {text: 'Case ID', dataField: 'case_id', width: '30%', cellsalign: 'left', align: 'center', cellsrenderer: cellsrenderer},
+        {text: 'Case Name', dataField: 'case_name', width: '20%', cellsalign: 'left', align: 'center', cellsrenderer: cellsrenderer},
+        {text: 'Description', dataField: 'description', width: 'auto', cellsalign: 'left', align: 'center', cellsrenderer: cellsrenderer}
       ];
 
       $('#jqxGrid_caselist').on('bindingcomplete', function(event) {
@@ -456,12 +479,27 @@
         columns: columnSet
       });
 
+      $("#jqxGrid_caselist").on("rowclick", function (event) {
+        var args = event.args;
+        var rowIdx = args.rowindex;
+        var rightClick = args.rightclick; 
+        var arrSel = $('#jqxGrid_caselist').jqxGrid('getselectedrowindexes');
+      
+        if (rightClick == false) {
+          if (arrSel.indexOf(rowIdx) > -1) {
+            $("#jqxGrid_caselist").jqxGrid('unselectrow', rowIdx);
+          } else {
+            $("#jqxGrid_caselist").jqxGrid('selectrow', rowIdx);
+          }
+        }
+      });
+
       ////////// Etc //////////
       var reloadGrid = function() {
-          $("#jqxGrid_usercase").jqxGrid("clearselection");
-          $("#jqxGrid_caselist").jqxGrid("clearselection");
-          $("#jqxGrid_usercase").jqxGrid('updateBoundData');
-          $("#jqxGrid_caselist").jqxGrid('updateBoundData');
+        $("#jqxGrid_usercase").jqxGrid("clearselection");
+        $("#jqxGrid_caselist").jqxGrid("clearselection");
+        $("#jqxGrid_usercase").jqxGrid('updateBoundData');
+        $("#jqxGrid_caselist").jqxGrid('updateBoundData');
       };
 
       ////////// Splitter //////////

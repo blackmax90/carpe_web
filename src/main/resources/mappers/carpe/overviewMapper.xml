@@ -7,6 +7,8 @@
 	<select id="selectCaseInfo" parameterType="Map" resultType="Map">
 		SELECT a.case_id
 		     , a.case_name
+		     , a.administrator
+         , DATE_FORMAT(a.create_date, '%Y-%m-%d') AS create_date
 			   , a.description		 
 			   , (SELECT  CASE WHEN process_state =  '0' THEN 'Ready'
                                WHEN process_state =  '1' THEN 'Processing'

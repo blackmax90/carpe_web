@@ -17,10 +17,7 @@
   <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
   <style>
-  .jqx-grid-content
-  {
-    cursor: pointer;
-  }
+  .jqx-grid-cell:not(.jqx-grid-cleared-cell) { cursor: pointer; }
   </style>
 </head>
 <body>
@@ -586,6 +583,11 @@
       }
 
       $("#frm").submit();
+    });
+
+    //nav 열린 상태로 grid 호출시 사이즈 이상 조치용
+    $(".nav").hover(function() {
+      window.dispatchEvent(new Event('resize'));
     });
   })(jQuery);
   </script>

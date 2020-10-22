@@ -205,7 +205,7 @@
 
             <div class="module-text-link">
               <a class="fl" href="#" id="btnSignup">Sign Up</a>
-              <a class="fr" href="#">Forgot ID/PW</a>
+<!--               <a class="fr" href="#">Forgot ID/PW</a> -->
             </div>
           </form>
         </section>
