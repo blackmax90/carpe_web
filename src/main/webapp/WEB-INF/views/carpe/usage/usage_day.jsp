@@ -280,7 +280,24 @@
       async:false,
       contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
       success:function(data) {
-        console.log(data);
+        //console.log(data);
+        if (data.list.length == 0) {
+          data.list = new Array();
+
+          for (var i = 0; i < 60; i++) {
+            var minStr = i;
+
+            if (i < 10) {
+              minStr = "0" + i;
+            }
+            
+            data.list.push({
+              min: minStr,
+              act: 0
+            });
+          }
+        }
+
         chart.data = data.list;
         $("#jqxGrid_Systemlog").jqxGrid("clear");
       }
@@ -305,6 +322,7 @@
     valueAxis.renderer.line.opacity = 0;
     valueAxis.renderer.ticks.template.disabled = true;
     valueAxis.min = 0;
+    valueAxis.maxPrecision = 0;
     
     var lineSeries = chart.series.push(new am4charts.LineSeries());
     lineSeries.dataFields.categoryX = "min";

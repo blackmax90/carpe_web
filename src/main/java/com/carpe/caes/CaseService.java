@@ -11,4 +11,5 @@ public interface CaseService {
 	public int deleteCaseList(Map<String, Object> paramMap) throws Exception;
 	public Map selectCaseUserAuthCount(Map<String, Object> paramMap) throws Exception;
 	public int deleteCaseUserAuth(Map<String, Object> paramMap) throws Exception;
+	public List<Map> getEvidenceList(Map<String, Object> paramMap) throws Exception;
 }

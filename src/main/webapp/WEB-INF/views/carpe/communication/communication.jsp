@@ -67,7 +67,7 @@
 					<!-- Chart 영역 //-->
 					<div class="jqx-widget-content jqx-splitter-panel jqx-reset content-area">
 						
-						<div class="btn-area division-line" style="display:">
+						<div class="btn-area division-line" style="margin-bottom: 0rem;">
 							<dl>
 								<dt>연도선택 :</dt>
 								<dd>
@@ -599,7 +599,7 @@
 	
 	  // vertical orientation for zoom out button and scrollbar to be positioned properly
 	  chart.rightAxesContainer.layout = "vertical";
-	  chart.rightAxesContainer.padding(120, 20, 120, 20);
+	  chart.rightAxesContainer.padding(20, 20, 40, 20);
 	
 	  // category axis
 	  var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
@@ -693,7 +693,7 @@
 	      updateRadarData(chart, monthLabel, series, monthInfo, monthInfo.startMonth + Math.round(monthSlider.start * (monthInfo.endMonth - monthInfo.startMonth)));
 	  });
 	  monthSlider.orientation = "horizontal";
-	  monthSlider.start = 0.5;
+	  monthSlider.start = 0.0;
 	
 	  var slider = monthSliderContainer.createChild(am4core.Slider);
 	  slider.start = 1;

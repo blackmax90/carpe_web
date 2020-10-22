@@ -177,6 +177,7 @@
 		series.dataFields.value = "value";
 		series.sequencedInterpolation = true;
 		series.defaultState.transitionDuration = 3000;
+	  series.columns.template.cursorOverStyle = am4core.MouseCursorStyle.pointer;
 
 		var bgColor = new am4core.InterfaceColorSet().getFor("background");
 

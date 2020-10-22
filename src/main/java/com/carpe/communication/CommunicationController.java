@@ -81,7 +81,7 @@ public class CommunicationController {
     paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
     String year = map.get("year");
     paramMap.put("year", year);
-    paramMap.put("in_out", "Outgoing");
+    paramMap.put("in_out", "Incoming");
 
     List<Map> list = service.selectCallStat(paramMap);
     
@@ -101,7 +101,7 @@ public class CommunicationController {
     
     String year = map.get("year");
     paramMap.put("year", year);
-    paramMap.put("in_out", "Incoming");
+    paramMap.put("in_out", "Outgoing");
     
     List<Map> list = service.selectCallStat(paramMap);
     
@@ -167,14 +167,14 @@ public class CommunicationController {
     for (Map data : dataList) {
       String[] buff = new String[keys.length];
       int idx = 0;
-      int inOutFlag = 0;  //0 발신, 1 수신
+      int inOutFlag = 0;  //0 수신, 1 발신
 
       for (String key : keys) {
         if (key.equals("in_out") == true) {
           if ("Outgoing".equals(data.get(key))) {
-            inOutFlag = 0;
-          } else {
             inOutFlag = 1;
+          } else {
+            inOutFlag = 0;
           }
         } else if (key.equals("phone_number") == true) {
           buff[idx + inOutFlag] = String.valueOf(data.get(key));

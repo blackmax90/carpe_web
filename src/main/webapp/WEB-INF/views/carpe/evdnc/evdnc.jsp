@@ -60,6 +60,11 @@
             <div class="btn-area">
               <ul>
                 <li>
+                  <button type="button" class="btn-case-01 excel" id="btnCsvExport"><span class="icon ico-export">CSV Export</span></button>
+			            <form action="/carpe/evdnc_csv_export.do" id="frm" name="frm" method="post">
+                  </form>
+                </li>
+                <li>
                   <button type="button" class="btn-case-01" id="btnNewEvdnc"><span class="icon ico-plus">Add Evidence</span></button>
                 </li>
                 <li>
@@ -86,7 +91,7 @@
       <h1>Create Evidence</h1>
     </div>
     <div id="addEvdncWindowContent" class="pop-content">
-        <form action="/carpe/add_evdnc.do" method="post" enctype="multipart/form-data">
+        <form action="/carpe/add_evdnc.do" id="addForm" method="post" enctype="multipart/form-data">
         <div class="data-type-1">
           <dl>
             <dt>Evidence Type :</dt>
@@ -396,7 +401,7 @@
 
         if (sel == "local") {
           $("#serverArea").hide();
-          $('#addEvdncWindow').jqxWindow({height:300});
+          $('#addEvdncWindow').jqxWindow({height:330});
           $("#localArea").show();
         } else {
           if (upFlag == false) {
@@ -483,7 +488,7 @@
   
         that.prop('disabled',true);
   
-        var form = document.forms[0];
+        var form = document.getElementById("addForm");
         var formData = new FormData(form);
   
         var ajaxReq = $.ajax({
@@ -521,7 +526,8 @@
         ajaxReq.fail(function(jqXHR) {
           $("#colorRanges").val(0);
           that.prop('disabled',false);
-          alert(jqXHR.responseJSON.msg + '('+ jqXHR.status + ' - ' + jqXHR.statusText + ')');
+          alert("Evidence 등록에 실패하였습니다.");
+          console.log(jqXHR.responseJSON + '('+ jqXHR.status + ' - ' + jqXHR.statusText + ')');
         });
   
         $("#colorRanges").jqxProgressBar({
@@ -712,6 +718,11 @@
         console.log("Connection is closed");
         //alert("Connection is closed");
       }
+
+      //CSV Export
+      $("#btnCsvExport").click(function() {
+        $("#frm").submit();
+      });
     });
 
   })(jQuery);

@@ -89,7 +89,9 @@
               FROM lv2_communication
              WHERE 1=1 
                AND case_id = #{case_id}
+               <if test="number!=null and !number.equals('')">
                AND phone_number = #{number}
+               </if>
                <if test="sdate!=null and !sdate.equals('')">
                AND DATE_FORMAT(created_at, '%Y-%m-%d') >= #{sdate}
                </if>

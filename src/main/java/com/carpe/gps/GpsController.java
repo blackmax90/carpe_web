@@ -153,9 +153,10 @@ public class GpsController {
 
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
-		paramMap.put("roomno", map.get("roomno"));
-		paramMap.put("sdata", map.get("sdata"));
-		paramMap.put("pageCnt", map.get("pageCnt"));
+    paramMap.put("number", map.get("phoneNumber"));
+    paramMap.put("type", map.get("type"));
+    paramMap.put("sdata", map.get("sdata"));
+    paramMap.put("pageCnt", map.get("pageCnt"));
 		List<Map> dataList = service.selectCommunicationDataList(paramMap);
 
 		mav.addObject("list", dataList);

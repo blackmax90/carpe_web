@@ -20,9 +20,14 @@
   (function($) {
     $(document).ready(function() {
       var errmsg='${errmsg}';
+      init();
       
       if(errmsg!='') {
         alert(errmsg);
+      }
+
+      function init() {
+        $('#userId').focus();
       }
         
       function checkValid() {

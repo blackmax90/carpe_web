@@ -10,7 +10,9 @@
 		FROM carving_result a, (SELECT @a:= 0) AS sn
 		WHERE a.extension != 'MFT'
 		ORDER BY a.filename desc
+    <if test="offset!=null and !offset.equals('') and pageSize!=null and !pageSize.equals('')">
 		limit #{offset}, #{pageSize}
+    </if>
 	</select>
 
 	<select id="selectCarvingListCount" parameterType="Map" resultType="Map">

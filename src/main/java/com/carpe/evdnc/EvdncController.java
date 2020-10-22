@@ -4,9 +4,12 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -19,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.carpe.common.CarpeConfig;
 import com.carpe.common.CommonUtil;
 import com.carpe.common.Consts;
+import com.opencsv.CSVWriter;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -177,12 +182,29 @@ public class EvdncController {
 		Map<String, Object> evdncMap = service.selectEvdnc(paramMap);
 		String evdncPath = (String) evdncMap.get("evd_path");
 		File physicalFile = new File(String.format("%s/%s", CarpeConfig.getEvdncBasePath(), evdncPath));
+		
+		if (physicalFile.exists() == false) {
+		  PrintWriter out = null;
+
+		  try {
+		    response.setContentType("text/html; charset=UTF-8");
+		    out = response.getWriter();
+		    out.println("<script>alert('" + String.format("%s/%s", CarpeConfig.getEvdncBasePath(), evdncPath) + " 파일을 찾을 수 없습니다.'); window.close();</script>");
+		    out.flush();
+		    return;
+		  } finally {
+		    out.close();
+		  }
+		}
+		
+		long fileSize = physicalFile.length();
 
 		BufferedInputStream in = null;
 		BufferedOutputStream out = null;
 
 		try {
 			response.setContentType("application/x-msdownload");
+			response.setContentLength((int)fileSize);
 			response.setHeader("Content-Disposition", "attachment; filename*=UTF-8''" + URLEncoder.encode(physicalFile.getName(), "UTF-8").replaceAll("\\+", "%20") + "; ");
 
 			in = new BufferedInputStream(new FileInputStream(physicalFile));
@@ -295,5 +317,48 @@ public class EvdncController {
 		}
 		
 		return mav;
+	}
+
+	/**
+	 * Evidence CSV Export
+	 * @param locale
+	 * @param map
+	 * @param session
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/evdnc_csv_export.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public void evdncCsvExport(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletResponse response, Model model) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		
+		List<Map> list = service.selectEvdncList(paramMap);
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+		String fileName = "evidence_" + df.format(new Date()) + ".csv";
+
+		response.setContentType("text/csv; charset=MS949");
+	  response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+		CSVWriter csvWriter = new CSVWriter(response.getWriter());
+		
+		String[] keys = {"serial_number", "case_id", "evd_id", "evd_name", "main_type", "sub_type", "acquired_date", "md5", "sha1", "sha3", "process_state", "evd_path"};
+		String[] header = {"Index", "Case ID", "Evidence ID", "Evidence Name", "Main Type", "Sub Type", "Acquired Date", "MD5", "SHA1", "SHA256", "Process State", "Evidence Path"};
+		csvWriter.writeNext(header);
+		
+		for (Map data : list) {
+			String[] buff = new String[keys.length];
+			int idx = 0;
+
+			for (String key : keys) {
+				String val = String.valueOf(data.get(key));
+				buff[idx++] = val;
+			}
+
+		  csvWriter.writeNext(buff);
+		}
+		
+		csvWriter.close();
 	}
 }

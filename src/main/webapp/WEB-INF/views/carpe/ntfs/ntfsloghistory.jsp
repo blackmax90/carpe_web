@@ -77,7 +77,7 @@
                 </select>
               </div>
             </div>
-            <div id="jqxGrid_Systemlog" role="grid" class="cont-result" style="width: calc(100% - 4rem); height:calc(100% - 8rem);margin-left:calc(0% + 2rem);margin-right:calc(0% + 2rem);"><!-- // Table 영역 // -->
+            <div id="jqxGrid_Systemlog" role="grid" class="cont-result" style="width: calc(100% - 4rem); height:calc(100% - 8rem);margin-left:calc(0% + 2rem);margin-right:calc(0% + 2rem); overflow:auto;"><!-- // Table 영역 // -->
               <!--// Table Sample - Size Check //-->
               <table class="tbl-grid tbl-data-check ">
                 <colgroup>
@@ -88,7 +88,7 @@
                     <th></th>
                     <c:forEach var="i" begin="1" end="31">
                       <fmt:formatNumber var="monthStr" minIntegerDigits="2" value="${i}" type="number"/>
-                      <th style="cursor:pointer" id="tr_${monthStr}">${i}</th>
+                      <th id="tr_${monthStr}">${i}</th>
                     </c:forEach>
                   </tr>
                 </thead>
@@ -207,18 +207,20 @@
         var key = year + "-" + month + "-" + dayStr + " " + hour;
         var val = data.list[key];
         var onClick = "";
+        var style = "";
         var alpha = 0;
   
         if (val) {
           alpha = val / 10000;
           onClick = "onClick=\"showFileInfo('" + key + "');\"";
+          style = "cursor: pointer; border: 2px solid rgba(255, 0, 0, 0.2);";
         }
 
         if (alpha > 1) {
           alpha = 1;
         }
 
-        list += "\n                    <td style=\"background-color: rgba(255, 0, 0, " + alpha + ");\" " + onClick + "></td> ";
+        list += "\n                    <td style=\"background-color: rgba(255, 0, 0, " + alpha + "); " + style + "\" " + onClick + "></td> ";
       }
   
       list += "\n                  </tr> ";

@@ -35,14 +35,4 @@ public class GpsDAOImpl implements GpsDAO {
 	public List<Map> selectGpsFileList(Map<String, Object> paramMap) throws Exception {
 		return sqlSession.selectList(Namespace + ".selectGpsFileList", paramMap);
 	}
-
-	@Override
-	public List<Map> selectCommunicationRoomList(Map<String, Object> paramMap) throws Exception {
-		return sqlSession.selectList(Namespace + ".selectCommunicationRoomList", paramMap);
-	}
-
-	@Override
-	public List<Map> selectCommunicationDataList(Map<String, Object> paramMap) throws Exception {
-		return sqlSession.selectList(Namespace + ".selectCommunicationDataList", paramMap);
-	}
 }

@@ -23,7 +23,10 @@
   <script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>
   <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${ncpClientId}"></script>
   <script type="text/javascript" src="/carpe/resources/naverapi/marker-clustering/src/MarkerClustering.js"></script>
-  
+  <style>
+  .mapLink {cursor: pointer;}
+  .mapLink:hover {text-decoration: underline;}
+  </style>
 </head>
 <body>
 
@@ -159,7 +162,8 @@
     </div>
     <div class="pop-content" id="dataLayerContent">    
       <form id="frm" method="post" action="/carpe/communication_export.do">
-        <input type="hidden" id="roomno" name="roomno" value="" >
+        <input type="hidden" id="phoneNumber" name="phoneNumber" value="" >
+		    <input type="hidden" id="type" name="type" value="" >
       </form>
       <h4 class="blind">조회된 컨텐츠</h4>
       <!--// Content 영역 //-->
@@ -296,475 +300,134 @@
   
   <!-- 현재 페이지에 필요한 js -->
   <script>
-  (function($) {
-    var map = null;
-    var polyLine = null;
-    var chart = null;
-    var xAxis = null;
+  var map = null;
+  var polyLine = null;
+  var chart = null;
+  var xAxis = null;
 
-    $(document).ready(function() {
-      initMap();
-      initMapGrid();
-      initFileGrid();
-      initPopup();
-      initChart();
+  $(document).ready(function() {
+    initMap();
+    initMapGrid();
+    initFileGrid();
+    initPopup();
+    initChart();
 
-      $("#btnComm").click(openRoomListLayer);
+    $("#btnComm").click(openRoomListLayer);
 
-      $("#btnSearch").click(getRoomList);
+    $("#btnSearch").click(getRoomList);
 
-      $("#btnFile").click(function() {
-        $("#jqxGrid_fileInfo").jqxGrid('updateBoundData');
-        $("#fileInfo").jqxWindow('open');
-      });
-
-      $.datetimepicker.setLocale("ko");
-      
-      $("#sdate, #edate").datetimepicker({
-        format: "Y-m-d H:i:00",
-        step: 10
-      });
-
-      $("#mcSdate, #mcEdate").datetimepicker({
-        format: "Y-m-d H:i:00",
-        step: 10
-      });
-
-      $("#tlSdate, #tlEdate").datetimepicker({
-        format: "Y-m-d",
-        timepicker: false
-      });
-
-      $("#tlStime, #tlEtime").datetimepicker({
-        format: "H:i:00",
-        datepicker: false,
-        step: 10
-      });
-
-      $("#sdate").val("");
-      $("#edate").val("");
-      
-      $("#sdateSpan").click(function() {
-        $("#sdate").datetimepicker("show"); 
-      });
-      
-      $("#edateSpan").click(function() {
-        $("#edate").datetimepicker("show"); 
-      });
-
-      $("#mcSdateSpan").click(function() {
-        $("#mcSdate").datetimepicker("show"); 
-      });
-      
-      $("#mcEdateSpan").click(function() {
-        $("#mcEdate").datetimepicker("show"); 
-      });
-
-      $("#tlSdateSpan").click(function() {
-        $("#tlSdate").datetimepicker("show"); 
-      });
-      
-      $("#tlEdateSpan").click(function() {
-        $("#tlEdate").datetimepicker("show"); 
-      });
-
-      $("#tlStimeSpan").click(function() {
-        $("#tlStime").datetimepicker("show"); 
-      });
-      
-      $("#tlEtimeSpan").click(function() {
-        $("#tlEtime").datetimepicker("show"); 
-      });
-
-      $("#btnExport").click(function() {
-        exportCommData();
-      });
-
-      $("#chk1").change(function() {
-        if ($(this).prop("checked") == true) {
-          $("#chk2").prop("checked", false);
-        }
-      });
-
-      $("#chk2").change(function() {
-        if ($(this).prop("checked") == true) {
-          $("#chk1").prop("checked", false);
-        }
-      });
-
-      $("#chk3").change(function() {
-        if ($(this).prop("checked") == true) {
-          $("#chk4").prop("checked", false);
-        }
-      });
-
-      $("#chk4").change(function() {
-        if ($(this).prop("checked") == true) {
-          $("#chk3").prop("checked", false);
-        }
-      });
-
-      $("#chk5").change(function() {
-        if ($(this).prop("checked") == true) {
-          $("#chk6").prop("checked", false);
-        }
-      });
-
-      $("#chk6").change(function() {
-        if ($(this).prop("checked") == true) {
-          $("#chk5").prop("checked", false);
-        }
-      });
-
-      $("#btnMcOK").click(function() {
-        var sdate = $("#mcSdate").val();
-        var edate = $("#mcEdate").val();
-
-        if (!sdate || !edate) {
-          alert("시간을 입력해주세요");
-          return;
-        }
-
-        var sendData = {
-            sdate: sdate,
-            edate: edate,
-            mode: 0
-        };
-
-        var data = getLinkList(sendData);
-        drawPolyLine(data.list);
-        moveMap(data.list);
-
-        if (data.length > 0) {
-          $("#moveConfigPop").jqxWindow('close');
-        }
-      });
-
-      //업무시간
-      $("#btnWork").click(function() {
-        $("#tlStime").val("09:00:00");
-        $("#tlEtime").val("17:59:59");
-      });
-
-      //비업무시간
-      $("#btnNotWork").click(function() {
-        $("#tlStime").val("18:00:00");
-        $("#tlEtime").val("08:59:59");
-      });
-
-      $("#btnTlSearch").click(function() {
-        makeTimeLine();
-      });
-
-      $("#dataLayerContent").scroll(function() {
-        if ($("#dataLayerContent").scrollTop() == ($("#dataList").height() - $("#dataLayerContent").height())) {
-          if (commDataLoading == true) {
-            return;
-          }
-      
-          commDataLoading = true;
-          sdata += pageCnt;
-          getCommData();
-        }
-      });
-
-      //맵 커스텀 버튼 생성
-      naver.maps.Event.once(map, 'init_stylemap', function() {
-        var btnAnaly = "<button type=\"button\" class=\"btn-case-01 txt mt10 mr20\">분석 시점 설정</button>";
-        var btnMove = "<button type=\"button\" class=\"btn-case-01 txt mt10 mr20\">이동 경로 설정</button>";
-        
-        var analyControl = new naver.maps.CustomControl(btnAnaly, {
-          position: naver.maps.Position.RIGHT_TOP
-        });
-
-        var moveControl = new naver.maps.CustomControl(btnMove, {
-          position: naver.maps.Position.RIGHT_TOP
-        });
-        
-        analyControl.setMap(map);
-        moveControl.setMap(map);
-
-        naver.maps.Event.addDOMListener(analyControl.getElement(), 'click', function() {
-          $("#timeLinePop").jqxWindow('open');
-        });
-
-        naver.maps.Event.addDOMListener(moveControl.getElement(), 'click', function() {
-          $("#moveConfigPop").jqxWindow('open');
-        });
-      });
+    $("#btnFile").click(function() {
+      $("#jqxGrid_fileInfo").jqxGrid('updateBoundData');
+      $("#fileInfo").jqxWindow('open');
     });
 
-    var initMap = function() {
-      //지도 api 객체 생성
-      map = new naver.maps.Map('map', {
-        center: new naver.maps.LatLng(37.5642135, 127.0016985),
-        zoom: 11
-      });
+    $.datetimepicker.setLocale("ko");
+    
+    $("#sdate, #edate").datetimepicker({
+      format: "Y-m-d H:i:00",
+      step: 10
+    });
 
-      //PolyLine 객체
-      polyLine = new naver.maps.Polyline({
-        map: map,
-        strokeWeight: 3, //두께
-        strokeColor: '#db4040', //색
-        strokeOpacity: 0.7, //불투명도
-        strokeStyle: "solid",
-        startIcon: naver.maps.PointingIcon.CIRCLE,
-        endIcon: naver.maps.PointingIcon.BLOCK_ARROW
-      });
+    $("#mcSdate, #mcEdate").datetimepicker({
+      format: "Y-m-d H:i:00",
+      step: 10
+    });
 
-      //마커 생성
-      $.get("/carpe/gps/gps_list.do", function(data) {
-        // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-        // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
-        var markers = $(data.list).map(function(i, position) {
-          var marker = new naver.maps.Marker({
-            position : new naver.maps.LatLng(position.latitude, position.longitude),
-            title : position.contents,
-            clickable: true 
-          });
+    $("#tlSdate, #tlEdate").datetimepicker({
+      format: "Y-m-d",
+      timepicker: false
+    });
 
-          naver.maps.Event.addListener(marker, 'click', function() {
-            viewMapInfo(position.contents, position.timestamp, position.package_name);
-          });
+    $("#tlStime, #tlEtime").datetimepicker({
+      format: "H:i:00",
+      datepicker: false,
+      step: 10
+    });
 
-          return marker;
-        });
+    $("#sdate").val("");
+    $("#edate").val("");
+    
+    $("#sdateSpan").click(function() {
+      $("#sdate").datetimepicker("show"); 
+    });
+    
+    $("#edateSpan").click(function() {
+      $("#edate").datetimepicker("show"); 
+    });
 
-        var htmlMarker1 = {
-          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-1.png);background-size:contain;"></div>',
-          size: N.Size(40, 40),
-          anchor: N.Point(20, 20)
-        },
-        htmlMarker2 = {
-          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-2.png);background-size:contain;"></div>',
-          size: N.Size(40, 40),
-          anchor: N.Point(20, 20)
-        },
-        htmlMarker3 = {
-          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-3.png);background-size:contain;"></div>',
-          size: N.Size(40, 40),
-          anchor: N.Point(20, 20)
-        },
-        htmlMarker4 = {
-          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-4.png);background-size:contain;"></div>',
-          size: N.Size(40, 40),
-          anchor: N.Point(20, 20)
-        },
-        htmlMarker5 = {
-          content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-5.png);background-size:contain;"></div>',
-          size: N.Size(40, 40),
-          anchor: N.Point(20, 20)
-        };
-        
-        // 클러스터러에 마커들을 추가
-        var clusterer = new MarkerClustering({
-          minClusterSize: 2,
-          maxZoom: 15,
-          map: map,
-          markers: markers,
-          disableClickZoom: false,
-          gridSize: 120,
-          icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
-          indexGenerator: [5, 10, 15, 20, 25],
-          stylingFunction: function(clusterMarker, count) {
-            $(clusterMarker.getElement()).find('div:first-child').text(count);
-          }
-        });
-      });
-    };
+    $("#mcSdateSpan").click(function() {
+      $("#mcSdate").datetimepicker("show"); 
+    });
+    
+    $("#mcEdateSpan").click(function() {
+      $("#mcEdate").datetimepicker("show"); 
+    });
 
-    var initPopup = function() {
-      //지도정보 Window
-      $("#mapInfo").jqxWindow({
-          width: '65rem'
-        , height: '29rem'
-        , position: {x: 'calc(50% - 10rem)', y: '16rem'}
-        , resizable: false
-        , autoOpen: false
-        , resizable: false
-        , isModal: false
-        , modalOpacity: 0.3
-      });
+    $("#tlSdateSpan").click(function() {
+      $("#tlSdate").datetimepicker("show"); 
+    });
+    
+    $("#tlEdateSpan").click(function() {
+      $("#tlEdate").datetimepicker("show"); 
+    });
 
-      //대화리스트 Window
-      $("#roomLayer").jqxWindow({
-          width: '52rem'
-        , height: '60rem'
-        , resizable: false
-        , autoOpen: false
-        , resizable: false
-        , isModal: true
-        , modalOpacity: 0.3
-      });
+    $("#tlStimeSpan").click(function() {
+      $("#tlStime").datetimepicker("show"); 
+    });
+    
+    $("#tlEtimeSpan").click(function() {
+      $("#tlEtime").datetimepicker("show"); 
+    });
 
-      //대화상세 Window
-      $("#dataLayer").jqxWindow({
-          width: '40rem'
-        , height: '60rem'
-        , resizable: false
-        , autoOpen: false
-        , resizable: false
-        , isModal: true
-        , modalOpacity: 0.3
-      });
+    $("#btnExport").click(function() {
+      exportCommData();
+    });
 
-      //파일 Window
-      $("#fileInfo").jqxWindow({
-          width: '80rem'
-        , height: '60rem'
-        , resizable: false
-        , autoOpen: false
-        , resizable: false
-        , isModal: true
-        , modalOpacity: 0.3
-      });
+    $("#chk1").change(function() {
+      if ($(this).prop("checked") == true) {
+        $("#chk2").prop("checked", false);
+      }
+    });
 
-      //설정 Window
-      var mapObj = $("#map");
-      var left = mapObj.offset().left;
-      var right = mapObj.offset().left + mapObj.width();
-      var top = mapObj.offset().top;
+    $("#chk2").change(function() {
+      if ($(this).prop("checked") == true) {
+        $("#chk1").prop("checked", false);
+      }
+    });
 
-      //이동경로설정 Window
-      $("#moveConfigPop").jqxWindow({
-          width: '42rem'
-        , height: '17rem'
-        , resizable: false
-        , cancelButton: $("#btnMcCancel")
-        , autoOpen: false
-        , resizable: false
-        , isModal: true
-        , modalOpacity: 0.3
-      });
+    $("#chk3").change(function() {
+      if ($(this).prop("checked") == true) {
+        $("#chk4").prop("checked", false);
+      }
+    });
 
-      //분석시점설정 Window
-      $("#timeLinePop").jqxWindow({
-          width: '42rem'
-        , height: '75rem'
-        , resizable: false
-        , autoOpen: false 
-        , resizable: false
-        , isModal: false 
-        , position: [left, top]
-        , modalOpacity: 0.3
-      });
-    };
+    $("#chk4").change(function() {
+      if ($(this).prop("checked") == true) {
+        $("#chk3").prop("checked", false);
+      }
+    });
 
-    // TimeLine Chart 초기화
-    var initChart = function() {
-      // Themes begin
-      am4core.useTheme(am4themes_animated);
-      am4core.options.commercialLicense = true;
-      // Themes end
-          
-      chart = am4core.create("chartDiv", am4charts.XYChart);
+    $("#chk5").change(function() {
+      if ($(this).prop("checked") == true) {
+        $("#chk6").prop("checked", false);
+      }
+    });
 
-      // X축
-      xAxis = chart.xAxes.push(new am4charts.DateAxis());
-      xAxis.renderer.grid.template.location = 0;
-      xAxis.renderer.inside = true;
-      xAxis.renderer.visible = false;
-      xAxis.snapTooltip = false;
-      xAxis.tooltipPosition = "fixed";
-      xAxis.tooltipDateFormat = "yyyy-MM-dd eee";
-      xAxis.tooltip.dy = 33;
-      xAxis.tooltip.background.pointerLength = 0;
+    $("#chk6").change(function() {
+      if ($(this).prop("checked") == true) {
+        $("#chk5").prop("checked", false);
+      }
+    });
 
-      // Y축
-      var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
-      yAxis.renderer.inside = true;
-      yAxis.renderer.visible = false;
-      yAxis.cursorTooltipEnabled = false;
-
-      // Value
-      var series = chart.series.push(new am4charts.ColumnSeries());
-      series.dataFields.valueY = "cnt";
-      series.dataFields.dateX = "timestamp";
-      series.columns.template.tooltipText = "[bold]{valueY}[/]";
-      series.columns.template.fillOpacity = .8;
-
-      series.columns.template.events.on("hit", function(ev) {
-        var sdate = ev.target.dataItem.dataContext.timestamp;
-        var edate = ev.target.dataItem.dataContext.timestamp;
-
-        $("input:checkbox[id^='chk']").prop("checked", false);
-
-        $("#tlSdate").val(sdate);
-        $("#tlEdate").val(edate);
-        $("#tlStime").val("");
-        $("#tlEtime").val("");
-
-        makeTimeLine();
-      });
-
-      var columnTemplate = series.columns.template;
-      columnTemplate.strokeWidth = 2;
-      columnTemplate.strokeOpacity = 1;
-
-      //Cursor
-      chart.cursor = new am4charts.XYCursor();
-      chart.cursor.xAxis = xAxis;
-      chart.cursor.lineY.disabled = true;
-      chart.cursor.lineX.strokeWidth = 0;
-      chart.cursor.lineX.fill = am4core.color("#8F3985");
-      chart.cursor.lineX.fillOpacity = 0.1;
-      chart.cursor.fullWidthLineX = true;
-
-      //Scroll
-      chart.scrollbarX = new am4core.Scrollbar();
-      chart.scrollbarX.parent = chart.bottomAxesContainer;
-      chart.scrollbarX.minHeight = 10;
-      chart.scrollbarX.marginBottom = 0;
-      chart.scrollbarX.startGrip.icon.disabled = true;
-      chart.scrollbarX.endGrip.icon.disabled = true;
-    };
-
-    //TimeLine 생성
-    var makeTimeLine = function() {
-      var sdate = $("#tlSdate").val();
-      var edate = $("#tlEdate").val();
-      var stime = $("#tlStime").val();
-      var etime = $("#tlEtime").val();
+    $("#btnMcOK").click(function() {
+      var sdate = $("#mcSdate").val();
+      var edate = $("#mcEdate").val();
 
       if (!sdate || !edate) {
         alert("시간을 입력해주세요");
         return;
       }
 
-      if (stime == "" || etime == "") {
-        $("#tlStime").val("");
-        $("#tlEtime").val("");
-        stime = "";
-        etime = "";
-      }
-
-      sdate += " 00:00:00";
-      edate += " 23:59:59";
-
-      var sendData = {
-          sdate: sdate,
-          edate: edate,
-          stime: stime,
-          etime: etime,
-          mode: 1
-      };
-
-      $("input:checkbox[id^='chk']").each(function() {
-        if ($(this).is(":checked")) {
-          sendData[$(this).attr("id")] = 1;
-        }
-      });
-
-      var data = getLinkList(sendData);
-      makeDateCountChart(sdate, edate);
-      drawPolyLine(data.list);
-      makePathList(data.list);
-    };
-
-    // map marker click event
-    var viewMapInfo = function(contents, timestamp, package_name) {
-      var sdate = timestamp.substr(0, 10) + " 00:00:00";
-      var edate = timestamp.substr(0, 10) + " 23:59:59";
       var sendData = {
           sdate: sdate,
           edate: edate,
@@ -773,253 +436,601 @@
 
       var data = getLinkList(sendData);
       drawPolyLine(data.list);
-      $("#infoTime").html(timestamp);
-      $("#infoLocation").html(contents);
-      $("#infoSource").html(package_name);
-      $("#mapInfo").jqxWindow('open');
-    };
+      moveMap(data.list);
 
-    var getLinkList = function(sendData) {
-      var retData = null;
+      if (data.list.length > 0) {
+        $("#moveConfigPop").jqxWindow('close');
+      }
+    });
 
-      $.ajax({
-        url: "/carpe/gps/gps_link_list.do",
-        dataType:'json',
-        data: sendData,
-        async: false,
-        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-        success: function(data) {
-          var ret = data.ret;
-          var msg = data.msg;
+    //업무시간
+    $("#btnWork").click(function() {
+      $("#tlStime").val("09:00:00");
+      $("#tlEtime").val("17:59:59");
+    });
 
-          if (ret != "0") {
-            alert(msg);
-          }
+    //비업무시간
+    $("#btnNotWork").click(function() {
+      $("#tlStime").val("18:00:00");
+      $("#tlEtime").val("08:59:59");
+    });
 
-          retData = data;
+    $("#btnTlSearch").click(function() {
+      makeTimeLine();
+    });
+
+    $("#dataLayerContent").scroll(function() {
+      if ($("#dataLayerContent").scrollTop() == ($("#dataList").height() - $("#dataLayerContent").height())) {
+        if (commDataLoading == true) {
+          return;
         }
+    
+        commDataLoading = true;
+        sdata += pageCnt;
+        getCommData();
+      }
+    });
+
+    //맵 커스텀 버튼 생성
+    naver.maps.Event.once(map, 'init_stylemap', function() {
+      var btnAnaly = "<button type=\"button\" class=\"btn-case-01 txt mt10 mr20\">분석 시점 설정</button>";
+      var btnMove = "<button type=\"button\" class=\"btn-case-01 txt mt10 mr20\">이동 경로 설정</button>";
+      
+      var analyControl = new naver.maps.CustomControl(btnAnaly, {
+        position: naver.maps.Position.RIGHT_TOP
       });
 
-      return retData;
-    };
-
-    var moveMap = function(data) {
-      $(data).each(function(i, list) {
-        map.setCenter(new naver.maps.LatLng(list.latitude, list.longitude));
-        map.setZoom(13, true);
-        return false;
+      var moveControl = new naver.maps.CustomControl(btnMove, {
+        position: naver.maps.Position.RIGHT_TOP
       });
-    };
+      
+      analyControl.setMap(map);
+      moveControl.setMap(map);
 
-    //차트 데이터 변경
-    var makeDateCountChart = function(sdate, edate) {
-      $.ajax({
-        url: "/carpe/gps/gps_date_count.do",
-        dataType:'json',
-        data: {
-          sdate : sdate,
-          edate : edate
-        },
-        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-        success: function(data) {
-          xAxis.min = new Date(sdate.substr(0, 10)).getTime();
-          xAxis.max = new Date(edate.substr(0, 10)).getTime();
-          chart.data = data.list;
-        }
-      });
-    };
-
-    //라인 생성
-    var drawPolyLine = function(data) {
-      var linePath = [];
-
-      $(data).each(function(i, list) {
-        linePath[i] = new naver.maps.LatLng(list.latitude, list.longitude);
+      naver.maps.Event.addDOMListener(analyControl.getElement(), 'click', function() {
+        $("#moveConfigPop").jqxWindow('close');
+        $("#timeLinePop").jqxWindow('open');
       });
 
-      polyLine.setPath(linePath);
-      console.log(linePath.length);
-    };
+      naver.maps.Event.addDOMListener(moveControl.getElement(), 'click', function() {
+        $("#mapInfo").jqxWindow('close');
+        $("#timeLinePop").jqxWindow('close');
+        $("#moveConfigPop").jqxWindow('open');
+      });
+    });
+  });
 
-    //Map Grid
-    var initMapGrid = function() {
-      var source = {
-        datatype: "json",
-        datafields: [
-          { name: 'serial_number', type: 'number' },
-          { name: 'timestamp', type: 'string' },
-          { name: 'package_name', type: 'string' },
-          { name: 'contents', type: 'string' },
-          { name: 'latitude', type: 'string' },
-          { name: 'longitude', type: 'string' },
-          { name: 'source', type: 'string' },
-          { name: 'is_visited', type: 'string' }
-        ],
-        type : "POST",
-        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-        url: "/carpe/gps/gps_list.do"
+  var initMap = function() {
+    //지도 api 객체 생성
+    map = new naver.maps.Map('map', {
+      center: new naver.maps.LatLng(37.5642135, 127.0016985),
+      zoom: 11
+    });
+
+    //PolyLine 객체
+    polyLine = new naver.maps.Polyline({
+      map: map,
+      strokeWeight: 3, //두께
+      strokeColor: '#db4040', //색
+      strokeOpacity: 0.7, //불투명도
+      strokeStyle: "solid",
+      startIcon: naver.maps.PointingIcon.CIRCLE,
+      endIcon: naver.maps.PointingIcon.BLOCK_ARROW
+    });
+
+    //마커 생성
+    $.get("/carpe/gps/gps_list.do", function(data) {
+      // 데이터에서 좌표 값을 가지고 마커를 표시합니다
+      // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
+      var markers = $(data.list).map(function(i, position) {
+        var marker = new naver.maps.Marker({
+          position : new naver.maps.LatLng(position.latitude, position.longitude),
+          title : position.contents,
+          clickable: true 
+        });
+
+        naver.maps.Event.addListener(marker, 'click', function() {
+          viewMapInfo(position.contents, position.timestamp, position.package_name);
+        });
+
+        return marker;
+      });
+
+      var htmlMarker1 = {
+        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-1.png);background-size:contain;"></div>',
+        size: N.Size(40, 40),
+        anchor: N.Point(20, 20)
+      },
+      htmlMarker2 = {
+        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-2.png);background-size:contain;"></div>',
+        size: N.Size(40, 40),
+        anchor: N.Point(20, 20)
+      },
+      htmlMarker3 = {
+        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-3.png);background-size:contain;"></div>',
+        size: N.Size(40, 40),
+        anchor: N.Point(20, 20)
+      },
+      htmlMarker4 = {
+        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-4.png);background-size:contain;"></div>',
+        size: N.Size(40, 40),
+        anchor: N.Point(20, 20)
+      },
+      htmlMarker5 = {
+        content: '<div style="cursor:pointer;width:40px;height:40px;line-height:42px;font-size:10px;color:white;text-align:center;font-weight:bold;background:url(/carpe/resources/naverapi/marker-clustering/images/cluster-marker-5.png);background-size:contain;"></div>',
+        size: N.Size(40, 40),
+        anchor: N.Point(20, 20)
       };
       
-      var dataAdapter = new $.jqx.dataAdapter(source, {
-        contentType : 'application/json; charset=utf-8',
-        formatData : function(data) {
-          return data;
-        },
-        beforeSend : function(xhr) {
-        },
-        downloadComplete : function(data, status, xhr) {
-        },
-        loadComplete : function(data) {
-        },
-        loadError : function(xhr, status, error) {
+      // 클러스터러에 마커들을 추가
+      var clusterer = new MarkerClustering({
+        minClusterSize: 2,
+        maxZoom: 15,
+        map: map,
+        markers: markers,
+        disableClickZoom: false,
+        gridSize: 120,
+        icons: [htmlMarker1, htmlMarker2, htmlMarker3, htmlMarker4, htmlMarker5],
+        indexGenerator: [5, 10, 15, 20, 25],
+        stylingFunction: function(clusterMarker, count) {
+          $(clusterMarker.getElement()).find('div:first-child').text(count);
         }
       });
-      
-      var columnSet = [
-        {text: 'No.', dataField: 'serial_number', width: '6%', cellsalign: 'right', align: 'center'},
-        {text: 'Timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'right', align: 'center'},
-        {text: 'Application', dataField: 'package_name', width: '15%', cellsalign: 'left', align: 'center'},
-        {text: 'Contents', dataField: 'contents', width: 'auto', cellsalign: 'left', align: 'center'},
-        {text: 'Latitude', dataField: 'latitude', width: '10%', cellsalign: 'left', align: 'center'},
-        {text: 'Longitude', dataField: 'longitude', width: '10%', cellsalign: 'left', align: 'center'},
-        {text: 'Source', dataField: 'source', width: '15%', cellsalign: 'left', align: 'center'},
-        {text: 'Is visited', dataField: 'is_visited', width: '10%', cellsalign: 'center', align: 'center'}
-      ];
-      
-      $('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
-        var localizationobj = {};
-        localizationobj.emptydatastring = " ";
-      
-        $("#jqxGrid_Systemlog").jqxGrid('localizestrings', localizationobj);
-      });
-      
-      $("#jqxGrid_Systemlog").jqxGrid({
-        width: '100%',    
-        height: '40%',
-        source: dataAdapter,
-        pagerheight: 0,
-        altrows: true,
-        scrollbarsize: 12,
-        autoshowloadelement: true,
-        ready: function() {},
-        enablebrowserselection: true,
-        columnsresize: true,
-        filterable: true,
-        sortable: true,
-        sortMode: 'many',
-        columnsheight: 40,
-        columns: columnSet
-      });
+    });
+  };
+
+  var initPopup = function() {
+    //지도정보 Window
+    $("#mapInfo").jqxWindow({
+        width: '65rem'
+      , height: '29rem'
+      , position: {x: 'calc(50% - 10rem)', y: '16rem'}
+      , resizable: false
+      , autoOpen: false
+      , resizable: false
+      , isModal: false
+      , modalOpacity: 0.3
+    });
+
+    //대화리스트 Window
+    $("#roomLayer").jqxWindow({
+        width: '52rem'
+      , height: '60rem'
+      , resizable: false
+      , autoOpen: false
+      , resizable: false
+      , isModal: true
+      , modalOpacity: 0.3
+    });
+
+    //대화상세 Window
+    $("#dataLayer").jqxWindow({
+        width: '40rem'
+      , height: '60rem'
+      , resizable: false
+      , autoOpen: false
+      , resizable: false
+      , isModal: true
+      , modalOpacity: 0.3
+    });
+
+    //파일 Window
+    $("#fileInfo").jqxWindow({
+        width: '80rem'
+      , height: '60rem'
+      , resizable: false
+      , autoOpen: false
+      , resizable: false
+      , isModal: true
+      , modalOpacity: 0.3
+    });
+
+    //설정 Window
+    var mapObj = $("#map");
+    var left = mapObj.offset().left;
+    var right = mapObj.offset().left + mapObj.width();
+    var top = mapObj.offset().top;
+
+    //이동경로설정 Window
+    $("#moveConfigPop").jqxWindow({
+        width: '42rem'
+      , height: '17rem'
+      , resizable: false
+      , cancelButton: $("#btnMcCancel")
+      , autoOpen: false
+      , resizable: false
+      , isModal: true
+      , modalOpacity: 0.3
+    });
+
+    //분석시점설정 Window
+    $("#timeLinePop").jqxWindow({
+        width: '42rem'
+      , height: '75rem'
+      , resizable: false
+      , autoOpen: false 
+      , resizable: false
+      , isModal: false 
+      , position: [left, top]
+      , modalOpacity: 0.3
+    });
+  };
+
+  // TimeLine Chart 초기화
+  var initChart = function() {
+    // Themes begin
+    am4core.useTheme(am4themes_animated);
+    am4core.options.commercialLicense = true;
+    // Themes end
+        
+    chart = am4core.create("chartDiv", am4charts.XYChart);
+
+    // X축
+    xAxis = chart.xAxes.push(new am4charts.DateAxis());
+    xAxis.renderer.grid.template.location = 0;
+    xAxis.renderer.inside = true;
+    xAxis.renderer.visible = false;
+    xAxis.snapTooltip = false;
+    xAxis.tooltipPosition = "fixed";
+    xAxis.tooltipDateFormat = "yyyy-MM-dd eee";
+    xAxis.tooltip.dy = 33;
+    xAxis.tooltip.background.pointerLength = 0;
+
+    // Y축
+    var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+    yAxis.renderer.inside = true;
+    yAxis.renderer.visible = false;
+    yAxis.cursorTooltipEnabled = false;
+
+    // Value
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = "cnt";
+    series.dataFields.dateX = "timestamp";
+    series.columns.template.tooltipText = "[bold]{valueY}[/]";
+    series.columns.template.fillOpacity = .8;
+
+    series.columns.template.events.on("hit", function(ev) {
+      var sdate = ev.target.dataItem.dataContext.timestamp;
+      var edate = ev.target.dataItem.dataContext.timestamp;
+
+      $("input:checkbox[id^='chk']").prop("checked", false);
+
+      $("#tlSdate").val(sdate);
+      $("#tlEdate").val(edate);
+      $("#tlStime").val("");
+      $("#tlEtime").val("");
+
+      makeTimeLine();
+    });
+
+    var columnTemplate = series.columns.template;
+    columnTemplate.strokeWidth = 2;
+    columnTemplate.strokeOpacity = 1;
+
+    //Cursor
+    chart.cursor = new am4charts.XYCursor();
+    chart.cursor.xAxis = xAxis;
+    chart.cursor.lineY.disabled = true;
+    chart.cursor.lineX.strokeWidth = 0;
+    chart.cursor.lineX.fill = am4core.color("#8F3985");
+    chart.cursor.lineX.fillOpacity = 0.1;
+    chart.cursor.fullWidthLineX = true;
+
+    //Scroll
+    chart.scrollbarX = new am4core.Scrollbar();
+    chart.scrollbarX.parent = chart.bottomAxesContainer;
+    chart.scrollbarX.minHeight = 10;
+    chart.scrollbarX.marginBottom = 0;
+    chart.scrollbarX.startGrip.icon.disabled = true;
+    chart.scrollbarX.endGrip.icon.disabled = true;
+  };
+
+  //TimeLine 생성
+  var makeTimeLine = function() {
+    var sdate = $("#tlSdate").val();
+    var edate = $("#tlEdate").val();
+    var stime = $("#tlStime").val();
+    var etime = $("#tlEtime").val();
+
+    if (!sdate || !edate) {
+      alert("시간을 입력해주세요");
+      return;
+    }
+
+    if (stime == "" || etime == "") {
+      $("#tlStime").val("");
+      $("#tlEtime").val("");
+      stime = "";
+      etime = "";
+    }
+
+    sdate += " 00:00:00";
+    edate += " 23:59:59";
+
+    var sendData = {
+        sdate: sdate,
+        edate: edate,
+        stime: stime,
+        etime: etime,
+        mode: 1
     };
 
-    //File Grid
-    var initFileGrid = function() {
-      var source = {
-        datatype: "json",
-        datafields: [
-          { name: 'type', type: 'string' },
-          { name: 'regdate', type: 'string' },
-          { name: 'name', type: 'string' }
-        ],
-        type : "POST",
-        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-        url: "/carpe/gps/file_list.do"
-      };
-      
-      var dataAdapter = new $.jqx.dataAdapter(source, {
-        contentType : 'application/json; charset=utf-8',
-        formatData : function(data) {
-          data.regdate = $("#infoTime").text();
-          return data;
-        },
-        beforeSend : function(xhr) {
-        },
-        downloadComplete : function(data, status, xhr) {
-        },
-        loadComplete : function(data) {
-        },
-        loadError : function(xhr, status, error) {
+    $("input:checkbox[id^='chk']").each(function() {
+      if ($(this).is(":checked")) {
+        sendData[$(this).attr("id")] = 1;
+      }
+    });
+
+    var data = getLinkList(sendData);
+    makeDateCountChart(sdate, edate);
+    moveMap(data.list);
+    drawPolyLine(data.list);
+    makePathList(data.list);
+  };
+
+  // map marker click event
+  var viewMapInfo = function(contents, timestamp, package_name) {
+    var sdate = timestamp.substr(0, 10) + " 00:00:00";
+    var edate = timestamp.substr(0, 10) + " 23:59:59";
+    var sendData = {
+        sdate: sdate,
+        edate: edate,
+        mode: 0
+    };
+
+    var data = getLinkList(sendData);
+    drawPolyLine(data.list);
+    $("#infoTime").html(timestamp);
+    $("#infoLocation").html(contents);
+    $("#infoSource").html(package_name);
+    $("#mapInfo").jqxWindow('open');
+  };
+
+  var getLinkList = function(sendData) {
+    var retData = null;
+
+    $.ajax({
+      url: "/carpe/gps/gps_link_list.do",
+      dataType:'json',
+      data: sendData,
+      async: false,
+      contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+      success: function(data) {
+        var ret = data.ret;
+        var msg = data.msg;
+
+        if (ret != "0") {
+          alert(msg);
         }
-      });
-      
-      var columnSet = [
-        {text: 'Type', dataField: 'type', width: '20%', cellsalign: 'center', align: 'center'},
-        {text: 'Timestamp', dataField: 'regdate', width: '30%', cellsalign: 'left', align: 'center'},
-        {text: 'File Name', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
-      ];
-      
-      $('#jqxGrid_fileInfo').on('bindingcomplete', function(event) {
-        var localizationobj = {};
-        localizationobj.emptydatastring = " ";
-      
-        $("#jqxGrid_fileInfo").jqxGrid('localizestrings', localizationobj);
-      });
-      
-      $("#jqxGrid_fileInfo").jqxGrid({
-        width: '100%',    
-        height: '100%',
-        source: dataAdapter,
-        pagerheight: 0,
-        altrows: true,
-        scrollbarsize: 12,
-        autoshowloadelement: true,
-        ready: function() {},
-        enablebrowserselection: true,
-        columnsresize: true,
-        filterable: true,
-        sortable: true,
-        sortMode: 'many',
-        columnsheight: 40,
-        columns: columnSet
-      });
+
+        retData = data;
+      }
+    });
+
+    return retData;
+  };
+
+  var moveMap = function(data) {
+    $(data).each(function(i, list) {
+      map.setCenter(new naver.maps.LatLng(list.latitude, list.longitude));
+      map.setZoom(13, true);
+      return false;
+    });
+  };
+
+  //차트 데이터 변경
+  var makeDateCountChart = function(sdate, edate) {
+    $.ajax({
+      url: "/carpe/gps/gps_date_count.do",
+      dataType:'json',
+      data: {
+        sdate : sdate,
+        edate : edate
+      },
+      contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+      success: function(data) {
+        xAxis.min = new Date(sdate.substr(0, 10)).getTime();
+        xAxis.max = new Date(edate.substr(0, 10)).getTime();
+        chart.data = data.list;
+      }
+    });
+  };
+
+  //라인 생성
+  var drawPolyLine = function(data) {
+    var linePath = [];
+
+    $(data).each(function(i, list) {
+      linePath[i] = new naver.maps.LatLng(list.latitude, list.longitude);
+    });
+
+    polyLine.setPath(linePath);
+    console.log(linePath.length);
+  };
+
+  //Map Grid
+  var initMapGrid = function() {
+    var source = {
+      datatype: "json",
+      datafields: [
+        { name: 'serial_number', type: 'number' },
+        { name: 'timestamp', type: 'string' },
+        { name: 'package_name', type: 'string' },
+        { name: 'contents', type: 'string' },
+        { name: 'latitude', type: 'string' },
+        { name: 'longitude', type: 'string' },
+        { name: 'source', type: 'string' },
+        { name: 'is_visited', type: 'string' }
+      ],
+      type : "POST",
+      contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+      url: "/carpe/gps/gps_list.do"
     };
+    
+    var dataAdapter = new $.jqx.dataAdapter(source, {
+      contentType : 'application/json; charset=utf-8',
+      formatData : function(data) {
+        return data;
+      },
+      beforeSend : function(xhr) {
+      },
+      downloadComplete : function(data, status, xhr) {
+      },
+      loadComplete : function(data) {
+      },
+      loadError : function(xhr, status, error) {
+      }
+    });
+    
+    var columnSet = [
+      {text: 'No.', dataField: 'serial_number', width: '6%', cellsalign: 'right', align: 'center'},
+      {text: 'Timestamp', dataField: 'timestamp', width: '10%', cellsalign: 'right', align: 'center'},
+      {text: 'Application', dataField: 'package_name', width: '15%', cellsalign: 'left', align: 'center'},
+      {text: 'Contents', dataField: 'contents', width: 'auto', cellsalign: 'left', align: 'center'},
+      {text: 'Latitude', dataField: 'latitude', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'Longitude', dataField: 'longitude', width: '10%', cellsalign: 'left', align: 'center'},
+      {text: 'Source', dataField: 'source', width: '15%', cellsalign: 'left', align: 'center'},
+      {text: 'Is visited', dataField: 'is_visited', width: '10%', cellsalign: 'center', align: 'center'}
+    ];
+    
+    $('#jqxGrid_Systemlog').on('bindingcomplete', function(event) {
+      var localizationobj = {};
+      localizationobj.emptydatastring = " ";
+    
+      $("#jqxGrid_Systemlog").jqxGrid('localizestrings', localizationobj);
+    });
+    
+    $("#jqxGrid_Systemlog").jqxGrid({
+      width: '100%',    
+      height: '40%',
+      source: dataAdapter,
+      pagerheight: 0,
+      altrows: true,
+      scrollbarsize: 12,
+      autoshowloadelement: true,
+      ready: function() {},
+      enablebrowserselection: true,
+      columnsresize: true,
+      filterable: true,
+      sortable: true,
+      sortMode: 'many',
+      columnsheight: 40,
+      columns: columnSet
+    });
+  };
 
-    //TimeLine 경로 리스트 생성
-    var makePathList = function(list) {
-      var html = "";
-      console.log(list);
+  //File Grid
+  var initFileGrid = function() {
+    var source = {
+      datatype: "json",
+      datafields: [
+        { name: 'type', type: 'string' },
+        { name: 'regdate', type: 'string' },
+        { name: 'name', type: 'string' }
+      ],
+      type : "POST",
+      contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+      url: "/carpe/gps/file_list.do"
+    };
+    
+    var dataAdapter = new $.jqx.dataAdapter(source, {
+      contentType : 'application/json; charset=utf-8',
+      formatData : function(data) {
+        data.regdate = $("#infoTime").text();
+        return data;
+      },
+      beforeSend : function(xhr) {
+      },
+      downloadComplete : function(data, status, xhr) {
+      },
+      loadComplete : function(data) {
+      },
+      loadError : function(xhr, status, error) {
+      }
+    });
+    
+    var columnSet = [
+      {text: 'Type', dataField: 'type', width: '20%', cellsalign: 'center', align: 'center'},
+      {text: 'Timestamp', dataField: 'regdate', width: '30%', cellsalign: 'left', align: 'center'},
+      {text: 'File Name', dataField: 'name', width: 'auto', cellsalign: 'left', align: 'center'}
+    ];
+    
+    $('#jqxGrid_fileInfo').on('bindingcomplete', function(event) {
+      var localizationobj = {};
+      localizationobj.emptydatastring = " ";
+    
+      $("#jqxGrid_fileInfo").jqxGrid('localizestrings', localizationobj);
+    });
+    
+    $("#jqxGrid_fileInfo").jqxGrid({
+      width: '100%',    
+      height: '100%',
+      source: dataAdapter,
+      pagerheight: 0,
+      altrows: true,
+      scrollbarsize: 12,
+      autoshowloadelement: true,
+      ready: function() {},
+      enablebrowserselection: true,
+      columnsresize: true,
+      filterable: true,
+      sortable: true,
+      sortMode: 'many',
+      columnsheight: 40,
+      columns: columnSet
+    });
+  };
 
-      $(list).each(function(i, data) {
-        if (html != "") {
-          var prevData = list[i - 1];
-          var diff = data.regdate.time - prevData.regdate.time;
-          var h = Math.ceil(diff / (1000 * 60 * 60));
-          diff = diff % (1000 * 60 * 60);
-          var m = Math.ceil(diff / (1000 * 60));
+  //TimeLine 경로 리스트 생성
+  var makePathList = function(list) {
+    var html = "";
+    console.log(list);
 
-          var latLng1 = new naver.maps.LatLng(data.latitude, data.longitude);
-          var latLng2 = new naver.maps.LatLng(prevData.latitude, prevData.longitude);
-          var distance = map.getProjection().getDistance(latLng1, latLng2);
+    $(list).each(function(i, data) {
+      if (html != "") {
+        var prevData = list[i - 1];
+        var diff = data.regdate.time - prevData.regdate.time;
+        var h = Math.ceil(diff / (1000 * 60 * 60));
+        diff = diff % (1000 * 60 * 60);
+        var m = Math.ceil(diff / (1000 * 60));
 
-          var distStr = "";
-          var moveStr = "";
+        var latLng1 = new naver.maps.LatLng(data.latitude, data.longitude);
+        var latLng2 = new naver.maps.LatLng(prevData.latitude, prevData.longitude);
+        var distance = map.getProjection().getDistance(latLng1, latLng2);
 
-          if (distance < 1000) {
-            distance = Math.round(distance);
-            distStr = "이동 - " + distance + "미터 ";
-          } else {
-            distance = Math.round(distance / 100) / 10;
-            distStr = "이동 - " + distance + "km ";
-          }
+        var distStr = "";
+        var moveStr = "";
 
-          moveStr = distStr;
-
-          if (h > 0) {
-            moveStr += h + "시간 ";
-          }
-          
-          moveStr += m + "분";
-          
-          html += "<dl><dd>" + moveStr + "</dd></dl>";
+        if (distance < 1000) {
+          distance = Math.round(distance);
+          distStr = "이동 - " + distance + "미터 ";
+        } else {
+          distance = Math.round(distance / 100) / 10;
+          distStr = "이동 - " + distance + "km ";
         }
 
-        html += "<dl><dt><span>" + data.contents + "</span><p>" + data.timestamp + "</p></dt></dl>";
-      });
+        moveStr = distStr;
 
-      $("#pathList").html(html);
-    };
+        if (h > 0) {
+          moveStr += h + "시간 ";
+        }
+        
+        moveStr += m + "분";
+        
+        html += "<dl><dd>" + moveStr + "</dd></dl>";
+      }
 
-  })(jQuery);
+      html += "<dl><dt><span><a class=\"mapLink\" onClick=\"movePosition('" + data.latitude + "', '" + data.longitude + "');\">" + data.contents + "</a></span><p>" + data.timestamp + "</p></dt></dl>";
+    });
+
+    $("#pathList").html(html);
+  };
+
+  var movePosition = function(lat, lng) {
+    var tmp = new Array({latitude: lat, longitude: lng});
+    moveMap(tmp);
+  };
+
 
   //////// 대화방 목록 ////////
   var openRoomListLayer = function() {
@@ -1065,19 +1076,28 @@
       html += "  <p>해당 기간 조회된 내용이 없습니다.</p> ";
       html += "</li> ";
     } else {
-      $.each(list, function(idx, row) {
-        html += "<li onclick=\"openCommDataLayer('" + row.roomno + "')\"> ";
-        html += "  <div class=\"cr-info\"> ";
-        html += "    <h6 title=\"" + row.name + "\" class=\"cr-name text-ellipsis\">" + row.name + "</h6> ";
-        html += "    <time class=\"cr-date\" datetime=\"" + row.regdate + "\">" + row.regdate.substr(0, 10) + "</time> ";
-        html += "  </div> ";
-        html += "  <p class=\"chat-data text-ellipsis\" title=\"" + row.content + "\">" + row.content + "</p> ";
-        html += "</li> ";
-      });
+			$.each(list, function(idx, row) {
+			  html += "<li onclick=\"openCommDataLayer('" + row.type + "', '" + row.phone_number + "')\" style=\"cursor:pointer;\"> ";
+			  html += "	<div class=\"cr-info\"> ";
+			  html += "		<h6 class=\"cr-name text-ellipsis\">[" + row.type + "] " + row.phone_number + "</h6> ";
+			  html += "		<time class=\"cr-date\" datetime=\"" + row.created_at + "\">" + row.created_at.substr(0, 10) + "</time> ";
+			  html += "	</div> ";
+			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.message + "\">" + removeTags(row.message) + "</p> ";
+			  html += "</li> ";
+			});
     }
   
     $("#roomList").html(html);
   };
+
+  var removeTags = function(str) {
+    str = str.replace(/</g,"&lt;");
+    str = str.replace(/>/g,"&gt;");
+    str = str.replace(/\"/g,"&quot;");
+    str = str.replace(/\'/g,"&#39;");
+    str = str.replace(/\n/g,"<br />");
+    return str;
+  }
   //////// 대화방 목록 End ////////
 
   //////// 대화창 ////////
@@ -1086,22 +1106,24 @@
   var sdata = 0;
   var pageCnt = 50;
   
-  var openCommDataLayer = function(tmpRoomno) {
-    commDataLoading = true;
-    regdateStr = "";
-    sdata = 0;
-    $("#roomno").val(tmpRoomno);
-    $("#dataList").html("");
-    getCommData();
+	var openCommDataLayer = function(type, phoneNumber) {
+		commDataLoading = true;
+		regdateStr = "";
+		sdata = 0;
+		$("#phoneNumber").val(phoneNumber);
+		$("#type").val(type);
+		$("#dataList").html("");
+		getCommData();
     $("#dataLayer").jqxWindow('open');
-    $("#dataLayerContent").scrollTop(0);
-  };
+		$("#dataLayerContent").scrollTop(0);
+	};
   
   var getCommData = function() {
     var data = {
-      roomno: $("#roomno").val(),
-      sdata: sdata,
-      pageCnt: pageCnt 
+			phoneNumber: $("#phoneNumber").val(),
+			type: $("#type").val(),
+			sdata: sdata,
+			pageCnt: pageCnt 
     };
   
     $.ajax({
@@ -1128,10 +1150,12 @@
     var html = "";
   
     $.each(list, function(idx, row) {
-      var otherClass = "";
-      var timeStr = "";
-      var name = row.sender_name;
-      var regdate = row.regdate;
+			var otherClass = "";
+			var timeStr = "";
+			var name = row.phone_number;
+			var in_out = row.in_out;
+			var regdate = row.created_at;
+      var message = row.message;
   
       if (regdate == null) {
         regdate = "";
@@ -1148,29 +1172,29 @@
         html += "  <h5>- " + regdate.substr(0, 4) + "년 " + regdate.substr(5, 2) + "월 " + regdate.substr(8, 2) + "일 -</h5> ";
       }
   
-      if (row.msg_type != "발신") {
-        otherClass = "other";
-      }
+			if (in_out != "Outgoing") {
+				otherClass = "other";
+			}
+
+			if (regdate != "") {
+				timeStr = regdate.substr(11, 2) + ":" + regdate.substr(14, 2);
+			}
+
+			if (name == "") {
+				name = "(이름없음)";
+			}
   
-      if (regdate != "") {
-        timeStr = regdate.substr(11, 2) + ":" + regdate.substr(14, 2);
-      }
-  
-      if (name == "") {
-        name = "(이름없음)";
-      }
-  
-      html += "   <div class=\"data_log " + otherClass + "\"> ";
-      if (row.msg_type != "발신") {
-        html += "     <div class=\"name\">" + name + "</div> ";
-        html += "     <div class=\"log\"> ";
-        html += "       <span>" + row.content + "</span> ";
-        html += "       <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
-      } else {
-        html += "     <div class=\"log\"> ";
-        html += "       <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
-        html += "       <span>" + row.content + "</span> ";
-      }
+			html += "	 <div class=\"data_log " + otherClass + "\"> ";
+			if (in_out != "Outgoing") {
+			  html += "		 <div class=\"name\">" + name + "</div> ";
+			  html += "		 <div class=\"log\"> ";
+			  html += "			 <span>" + removeTags(message) + "</span> ";
+			  html += "			 <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
+			} else {
+			  html += "		 <div class=\"log\"> ";
+			  html += "			 <time datetime=\"" + regdate + "\">" + timeStr + "</time> ";
+			  html += "			 <span>" + removeTags(message) + "</span> ";
+			}
   
       html += "     </div> ";
       html += "   </div> ";
@@ -1186,7 +1210,7 @@
   //////// 대화창 End ////////
 
   var exportCommData = function() {
-    if (!$("#roomno").val()) {
+    if (!$("#phoneNumber").val()) {
       return;
     }
 

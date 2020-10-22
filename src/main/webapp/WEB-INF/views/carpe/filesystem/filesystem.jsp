@@ -16,7 +16,12 @@
   <link href="/carpe/resources/jqwidgets/styles/jqx.base.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.metrodark.css" rel="stylesheet" type="text/css">
   <link href="/carpe/resources/jqwidgets/styles/jqx.energyblue.css" rel="stylesheet" type="text/css">
-
+  <style>
+  .jqx-grid-content
+  {
+    cursor: pointer;
+  }
+  </style>
 </head>
 <body>
 
@@ -228,6 +233,7 @@
         var rowData = $("#jqxGrid_files").jqxGrid("getrowdata", selIdx);
 
         if (!rowData || rowData.dir_type == 3) {
+          alert("파일을 선택해주세요.");
           return;
         }
 
@@ -568,12 +574,15 @@
     $("#btnCsvExport").click(function() {
       var node = $('#jqxTree_dirs').jqxTree('getSelectedItem');
 
-      if (node) {
+      if (node && node.value["attr"] == "dir") {
         $("#evd_id").val(node.value["evd_id"]);
         $("#evd_name").val(node.value["evd_name"]);
         $("#id").val(node.value["id"]);
         $("#par_id").val(node.value["par_id"]);
         $("#attr").val(node.value["attr"]);
+      } else {
+        alert("CSV Export할 폴더를 선택해주세요.");
+        return;
       }
 
       $("#frm").submit();

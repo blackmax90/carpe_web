@@ -69,7 +69,7 @@
 	 		 </if>
 			 AND a.par_id = b.par_id
 			 <if test="search_fname != null and !search_fname.equals('')">
-			 AND a.name LIKE CONCAT(#{search_fname}, '%')
+			 AND a.name LIKE CONCAT('%', #{search_fname}, '%')
        </if>
 			 <if test="search_ssize != null and !search_ssize.equals('')">
 			 AND a.size >= #{search_ssize}
@@ -131,7 +131,7 @@
 	 		 </if>
 			 AND a.par_id = b.par_id
 			 <if test="search_fname != null and !search_fname.equals('')">
-			 AND a.name LIKE CONCAT(#{search_fname}, '%')
+			 AND a.name LIKE CONCAT('%', #{search_fname}, '%')
        </if>
 			 <if test="search_ssize != null and !search_ssize.equals('')">
 			 AND a.size >= #{search_ssize}

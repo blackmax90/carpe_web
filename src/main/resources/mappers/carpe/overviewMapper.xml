@@ -5,17 +5,17 @@
 
 <mapper namespace="com.carpe.mapper.overview">
 	<select id="selectCaseInfo" parameterType="Map" resultType="Map">
-		SELECT  a.case_id
-		       ,a.case_name
-			   ,a.description		 
+		SELECT a.case_id
+		     , a.case_name
+			   , a.description		 
 			   , (SELECT  CASE WHEN process_state =  '0' THEN 'Ready'
                                WHEN process_state =  '1' THEN 'Processing'
                                WHEN process_state =  '2' THEN 'Complete'
                            END 
-			        FROM  evidence_info where case_id = a.case_id order by process_state desc limit 1) process_state			   
-			   ,(select count(1) from case_user where case_id = a.case_id) case_user_cnt
-			   ,(select count(1) from evidence_info where case_id = a.case_id) evidence_cnt
-			   ,(select count(1) from log2timeline where case_id = a.case_id) logtimeline_cnt
+			        FROM  evidence_info where case_id = a.case_id and isdelete='N' order by process_state desc limit 1) process_state			   
+			   , (select count(1) from case_user_auth where case_id = a.case_id) case_user_cnt
+			   , (select count(1) from evidence_info where case_id = a.case_id and isdelete='N') evidence_cnt
+			   , (select count(1) from log2timeline where case_id = a.case_id) logtimeline_cnt
 		  FROM  case_info a
 		 WHERE  a.case_id = #{case_id}
 	</select>
@@ -26,10 +26,9 @@
 		 WHERE a.evd_id = b.evd_id and a.case_id = #{case_id} 
 	</select>
 	<select id="selectCaseUserList" parameterType="Map" resultType="Map">
-		 SELECT  user_id
-                ,acl
-		   FROM  case_user
-          WHERE  case_id = #{case_id}		   
+		 SELECT id
+		   FROM case_user_auth
+      WHERE case_id = #{case_id}		   
 	</select>
 		
 	<select id="selectEvidenceFileCount" parameterType="Map" resultType="Map">

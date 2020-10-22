@@ -6,7 +6,7 @@
 <mapper namespace="com.carpe.mapper.evdnc">
 	<select id="selectEvdncList" parameterType="Map" resultType="Map">
 		SELECT @a:=@a+1 serial_number
-		  , evd_id, evd_name, evd_path, tmp_path, case_id, main_type, sub_type, timezone, DATE_FORMAT(acquired_date, '%Y-%m-%d %H:%i:%s') AS acquired_date, md5, sha1
+		  , evd_id, evd_name, evd_path, tmp_path, case_id, main_type, sub_type, timezone, DATE_FORMAT(acquired_date, '%Y-%m-%d %H:%i:%s') AS acquired_date, md5, sha1, sha3
 		  , CASE 
 				WHEN process_state = '0'
 				THEN 'Complete'

@@ -5,8 +5,10 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.carpe.common.CarpeConfig;
 import com.carpe.common.Consts;
+import com.opencsv.CSVWriter;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -85,4 +89,46 @@ public class CarvingController {
 		return mav;
 	}
 
+	/**
+	 * File Carving CSV Export
+	 * @param locale
+	 * @param map
+	 * @param session
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/carving_csv_export.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public void carvingCsvExport(Locale locale, @RequestParam HashMap<String, String> map, HttpSession session,
+			HttpServletResponse response, Model model) throws Exception {
+		Map<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
+		
+		List<Map> list = service.selectCarvingList(paramMap);
+		
+		SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
+		String fileName = "carving_" + df.format(new Date()) + ".csv";
+
+		response.setContentType("text/csv; charset=MS949");
+	  response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
+		CSVWriter csvWriter = new CSVWriter(response.getWriter());
+		
+		String[] keys = {"serial_number", "category", "owner", "filename", "extension", "start", "last", "size"};
+		String[] header = {"Index", "Category", "Owner", "Filename", "Extension", "Start", "Last", "Size"};
+		csvWriter.writeNext(header);
+		
+		for (Map data : list) {
+			String[] buff = new String[keys.length];
+			int idx = 0;
+
+			for (String key : keys) {
+				String val = String.valueOf(data.get(key));
+				buff[idx++] = val;
+			}
+
+		  csvWriter.writeNext(buff);
+		}
+		
+		csvWriter.close();
+	}
 }

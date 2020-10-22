@@ -53,11 +53,6 @@
       <article class="container">
         
         <aside id="jqxpanel" class="content-area bg-unit">
-          <h3>Current Info</h3>
-          <p>Case State : ${procStat}</p>
-          <p>Last analysis Time : - </p>
-          <p># of Evidence : ${evidenceCnt}</p>
-          <p># of members : ${caseUserCnt}</p>
           <div id="jqxGrid_EvidenceList"></div>
 <%--           <c:forEach items="${evidenceList }" var="evidenceList">
             
@@ -72,10 +67,15 @@
           </div>
         </div>
         <div class="content-area bg-unit">
-          <h3>Case Log</h3>
-          <c:forEach items="${caseUserList }" var="userList">
-            <p>${userList.user_id }</p>
-          </c:forEach>
+          <h3>Current Info</h3>
+          <p>Case State : ${procStat}</p>
+          <p>Last analysis Time : - </p>
+          <p># of Evidence : ${evidenceCnt}</p>
+          <p># of members : ${caseUserCnt}</p>
+<!--           <h3>Case User</h3> -->
+<%--           <c:forEach items="${caseUserList }" var="userList"> --%>
+<%--             <p>${userList.id }</p> --%>
+<%--           </c:forEach> --%>
         </div>
       </article>
     </main>

@@ -277,8 +277,8 @@
       });
 
       var userCaseColumnSet = [
-        {text: 'Case ID', dataField: 'case_id', width: '150px', cellsalign: 'left', align: 'center'},
-        {text: 'Case Name', dataField: 'case_name', width: '150px', cellsalign: 'left', align: 'center'},
+        {text: 'Case ID', dataField: 'case_id', width: '30%', cellsalign: 'left', align: 'center'},
+        {text: 'Case Name', dataField: 'case_name', width: '20%', cellsalign: 'left', align: 'center'},
         {text: 'Description', dataField: 'description', width: 'auto', cellsalign: 'left', align: 'center'}
       ];
 
@@ -425,8 +425,8 @@
       });
 
       var columnSet = [
-        {text: 'Case ID', dataField: 'case_id', width: '150px', cellsalign: 'left', align: 'center'},
-        {text: 'Case Name', dataField: 'case_name', width: '150px', cellsalign: 'left', align: 'center'},
+        {text: 'Case ID', dataField: 'case_id', width: '30%', cellsalign: 'left', align: 'center'},
+        {text: 'Case Name', dataField: 'case_name', width: '20%', cellsalign: 'left', align: 'center'},
         {text: 'Description', dataField: 'description', width: 'auto', cellsalign: 'left', align: 'center'}
       ];
 

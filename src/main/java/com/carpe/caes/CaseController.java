@@ -119,8 +119,22 @@ public class CaseController {
     	}
     }
     
+    //초기 Evidence 셋팅
+    Map<String, Object> paramMap = new HashMap<>();
+    paramMap.put("case_id", caseId);
+    List<Map> evdncList = service.getEvidenceList(paramMap);
+    String evdncId = "";
+    String evdncName = "";
+    
+    if (evdncList != null && evdncList.size() > 0) {
+      evdncId = evdncList.get(0).get("evd_id") + "";
+      evdncName = evdncList.get(0).get("evd_name") + "";
+    }
+    
     session.setAttribute(Consts.SESSION_CASE_ID, caseId);
     session.setAttribute(Consts.SESSION_CASE_NAME, caseName);
+    session.setAttribute(Consts.SESSION_EVDNC_ID, evdncId);
+    session.setAttribute(Consts.SESSION_EVDNC_NAME, evdncName);
 
     mav.setViewName("forward:/overview.do");
 

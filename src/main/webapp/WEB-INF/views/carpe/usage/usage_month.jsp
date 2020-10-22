@@ -24,6 +24,8 @@
   th.holiday, td.holiday {
     background-color: rgba(255, 0, 0, 0.08)
   }
+  .gridLink {cursor: pointer;}
+  .gridLink:hover {text-decoration: underline;}
   </style>
 </head>
 <body>
@@ -115,7 +117,7 @@
                   </div><!-- // pop-content end -->
                 </div><!-- // pop-up end -->
             </div>
-            <div id="jqxGrid_Systemlog" role="grid" class="cont-result" style="width: calc(100% - 4rem); height:calc(100% - 8rem);"><!-- // Table 영역 // -->
+            <div id="jqxGrid_Systemlog" role="grid" class="cont-result" style="width: calc(100% - 4rem); height:calc(100% - 8rem); overflow:auto;"><!-- // Table 영역 // -->
               <!--// Table Sample - Size Check //-->
               <table class="tbl-grid tbl-data-check ">
                 <colgroup>
@@ -126,7 +128,7 @@
                     <th></th>
                     <c:forEach var="i" begin="1" end="31">
                       <fmt:formatNumber var="monthStr" minIntegerDigits="2" value="${i}" type="number"/>
-                      <th style="cursor:pointer" onClick="dayMove('${i}');" id="tr_${monthStr}">${i}</th>
+                      <th style="cursor:pointer" onClick="dayMove('${i}');" id="tr_${monthStr}" class="gridLink">${i}</th>
                     </c:forEach>
                   </tr>
                 </thead>
@@ -324,7 +326,7 @@
         height: '100%', 
         panels: [{ 
           min: 300, 
-          size: '70%' 
+          size: '75%' 
         }, 
         {
           min: 200

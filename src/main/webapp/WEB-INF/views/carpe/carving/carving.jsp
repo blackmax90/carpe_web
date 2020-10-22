@@ -51,6 +51,15 @@
 				<div id="jqxSplitter" class="content-box">
 					<div class="content-area">				
 						<!--// Content 영역 //-->	
+            <div class="btn-area">
+              <ul>
+                <li>
+                  <button type="button" class="btn-case-01 excel" id="btnCsvExport"><span class="icon ico-export">CSV Export</span></button>
+			            <form action="/carpe/carving_csv_export.do" id="frm" name="frm" method="post">
+                  </form>
+                </li>
+              </ul>
+            </div>        
 						<div id="jqxGrid_Systemlog" role="grid" align="left" class="cont-result">						
 							<!--// Grid Table 영역 //-->
 						</div>
@@ -215,7 +224,7 @@
 	
 			$("#jqxGrid_Systemlog").jqxGrid({
 				width: '100%',	
-				height: 'calc(100% - 3rem)',
+				height: 'calc(100% - 7rem)',
 				source: dataAdapter,
 				pagerheight: 0,
 				altrows: true,
@@ -230,6 +239,11 @@
 				columnsheight: 40,
 				columns: columnSet
 			});
+
+      //CSV Export
+      $("#btnCsvExport").click(function() {
+        $("#frm").submit();
+      });
 		});
 	})(jQuery);
 	

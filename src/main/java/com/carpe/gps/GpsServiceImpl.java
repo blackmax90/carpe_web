@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import com.carpe.common.CarpeConfig;
 import com.carpe.common.CommonUtil;
 import com.carpe.common.Consts;
+import com.carpe.communication.CommunicationDAO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -29,6 +30,9 @@ public class GpsServiceImpl implements GpsService {
 
 	@Inject
 	private GpsDAO dao;
+
+	@Inject
+	private CommunicationDAO commDao;
 
 	@Override
 	public List<Map> selectGpsList(Map<String, Object> paramMap) throws Exception {
@@ -52,12 +56,12 @@ public class GpsServiceImpl implements GpsService {
 
 	@Override
 	public List<Map> selectCommunicationRoomList(Map<String, Object> paramMap) throws Exception {
-		return dao.selectCommunicationRoomList(paramMap);
+		return commDao.selectCommunicationRoomList(paramMap);
 	}
 
 	@Override
 	public List<Map> selectCommunicationDataList(Map<String, Object> paramMap) throws Exception {
-		return dao.selectCommunicationDataList(paramMap);
+		return commDao.selectCommunicationDataList(paramMap);
 	}
 	
 	/**
