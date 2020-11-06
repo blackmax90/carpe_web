@@ -21,6 +21,7 @@
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'filesystem'}">on</c:if>"><a href="/carpe/filesystem.do"><span class="text">Filesystem</span></a></li> 
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'artifact'}">on</c:if>"><a href="/carpe/artifact.do"><span class="text">Artifact</span></a></li>
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'stringsearch'}">on</c:if>"><a href="/carpe/search.do"><span class="text">String Search</span></a></li>
+						<li class="level02 ${hideClass} <c:if test="${d2 eq 'similarity'}">on</c:if>"><a href="/carpe/similarity.do"><span class="text">Similarity</span></a></li>
 						<!--// 2Depth Menu -->
 					<li class="<c:if test="${d1 eq 'recovery'}">on</c:if>"><a href="/carpe/carving.do" class="icon recovery"><span class="text">Recovery</span></a></li>						
             <c:set var="hideClass" value="" />

@@ -29,5 +29,6 @@
       <c:if test="${d2 eq 'apphistory'}"><li><a href="/carpe/application/application.do">App History</a></li></c:if>
       <c:if test="${d2 eq 'mfthistory'}"><li><a href="/carpe/mft/mfthistory.do">MFT History</a></li></c:if>
       <c:if test="${d2 eq 'ntfsloghistory'}"><li><a href="/carpe/ntfs/ntfsloghistory.do">NTFS Log History</a></li></c:if>
+      <c:if test="${d2 eq 'similarity'}"><li><a href="/carpe/similarity.do">Similarity</a></li></c:if>
     </ul>
   </div>
