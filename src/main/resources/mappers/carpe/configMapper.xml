@@ -29,6 +29,7 @@
 		SELECT case_id, case_name, description
 		  FROM case_info
      WHERE 1=1
+       AND isdelete = 'N'
        AND case_id NOT IN (
            SELECT case_id
              FROM case_user_auth
@@ -43,6 +44,7 @@
 		SELECT COUNT(*) cnt 
       FROM case_info
      WHERE 1=1
+       AND isdelete = 'N'
        AND case_id NOT IN (
            SELECT case_id
              FROM case_user_auth

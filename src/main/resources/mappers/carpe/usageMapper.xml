@@ -5,55 +5,74 @@
  
 <mapper namespace="com.carpe.mapper.usage">
   <select id="selectUsageYearList" parameterType="Map" resultType="Map">
-    SELECT year
-         , month
-         , cnt
-      FROM usage_year
-     WHERE case_id = #{case_id}
-     <if test="yearList != null">
-       AND year in
-       <foreach item="item" index="index" collection="yearList" open="(" close=")" separator=",">
-           #{item}
-       </foreach>
-     </if>
-     ORDER BY year, month asc
+    SELECT year, month, SUM(cnt) AS cnt
+      FROM (
+            SELECT IF (year <![CDATA[ < ]]> '1970', '1970', year) AS year
+                 , month
+                 , cnt
+              FROM usage_year
+             WHERE case_id = #{case_id}
+               AND evd_id = #{evd_id}
+               AND year != ''
+               AND year > 0
+             <if test="yearList != null">
+               AND year in
+               <foreach item="item" index="index" collection="yearList" open="(" close=")" separator=",">
+                   #{item}
+               </foreach>
+             </if>
+     ) A
+     GROUP BY year, month
+     ORDER BY year, month ASC
   </select>
 
   <select id="selectUsageMonthList" parameterType="Map" resultType="Map">
     SELECT regtime
-         , day1
-         , day2
-         , day3
-         , day4
-         , day5
-         , day6
-         , day7
-         , day8
-         , day9
-         , day10
-         , day11
-         , day12
-         , day13
-         , day14
-         , day15
-         , day16
-         , day17
-         , day18
-         , day19
-         , day20
-         , day21
-         , day22
-         , day23
-         , day24
-         , day25
-         , day26
-         , day27
-         , day28
-         , day29
-         , day30
-         , day31
-      FROM timeline_month 
-     WHERE regmonth = #{regdate}
+         , MAX(day1) AS day1
+         , MAX(day2) AS day2
+         , MAX(day3) AS day3
+         , MAX(day4) AS day4
+         , MAX(day5) AS day5
+         , MAX(day6) AS day6
+         , MAX(day7) AS day7
+         , MAX(day8) AS day8
+         , MAX(day9) AS day9
+         , MAX(day10) AS day10
+         , MAX(day11) AS day11
+         , MAX(day12) AS day12
+         , MAX(day13) AS day13
+         , MAX(day14) AS day14
+         , MAX(day15) AS day15
+         , MAX(day16) AS day16
+         , MAX(day17) AS day17
+         , MAX(day18) AS day18
+         , MAX(day19) AS day19
+         , MAX(day20) AS day20
+         , MAX(day21) AS day21
+         , MAX(day22) AS day22
+         , MAX(day23) AS day23
+         , MAX(day24) AS day24
+         , MAX(day25) AS day25
+         , MAX(day26) AS day26
+         , MAX(day27) AS day27
+         , MAX(day28) AS day28
+         , MAX(day29) AS day29
+         , MAX(day30) AS day30
+         , MAX(day31) AS day31
+      FROM timeline_month_2 
+     WHERE 1=1
+     <if test='regdate gt 197012'>
+       AND regmonth = #{regdate}
+     </if>    
+     <if test='regdate lte 197012'>
+       <![CDATA[
+       AND regmonth <= '197012'
+       ]]>
+       AND LENGTH(regmonth) = 6
+       AND SUBSTR(regmonth, 5, 2) = SUBSTR(#{regdate}, 5, 2)
+     </if>    
+       AND evd_id = #{evd_id}
+     GROUP BY regtime
      ORDER BY regtime ASC
   </select>
   
@@ -61,11 +80,20 @@
     SELECT min
          , act
       FROM usage_day_stat
-     WHERE year = #{year}
+     WHERE 1=1
+     <if test='year gt 1970'>
+       AND year = #{year}
+     </if>
+     <if test='year lte 1970'>
+       <![CDATA[
+       AND year <= #{year}
+       ]]>
+     </if>
        AND month = #{month}
        AND day = #{day}
        AND hour = #{hour}
        AND case_id = #{case_id}
+       AND evd_id = #{evd_id}
      ORDER BY min asc
   </select>
 
@@ -73,11 +101,27 @@
     SELECT DATE_FORMAT(regdate, '%Y-%m-%d %H:%i:%s') AS regdate, evdnc_type, artifact_type, information
       FROM usage_day_detail
      WHERE 1=1
+       AND regdate != ''
+     <if test="dateType == 1">
        AND regdate >= #{sdate}
        <![CDATA[
        AND regdate <= #{edate}
        ]]>
+     </if>
+     <if test="dateType == 2">
+       <![CDATA[
+       AND regdate < '1971-01-01 00:00:00'
+       ]]>
+       AND MONTH(regdate) = MONTH(#{sdate})
+       AND DAY(regdate) = DAY(#{sdate})
+       AND HOUR(regdate) = HOUR(#{sdate})
+       AND MINUTE(regdate) >= MINUTE(#{sdate})
+       <![CDATA[
+       AND MINUTE(regdate) <= MINUTE(#{edate})
+       ]]>
+     </if>
        AND case_id = #{case_id}
+       AND evd_id = #{evd_id}
      ORDER BY regdate asc
   </select>
 

@@ -21,7 +21,10 @@
   <script type="text/javascript" src="/carpe/resources/js/common.js"></script>
   <script type="text/javascript" src="/carpe/resources/js/MYAPP.js"></script>  
   <style type="text/css">
-  th.holiday, td.holiday {
+  th.holiday {
+    color: rgb(255, 0, 0)
+  }
+  td.holiday {
     background-color: rgba(255, 0, 0, 0.08)
   }
   .gridLink {cursor: pointer;}
@@ -176,7 +179,7 @@
   var currData;
 
   function dayMove(day) {
-    location.href = '/carpe/usage_day.do?year=' + ${year} + '&month=' + ${month} + '&day=' + day;
+    location.href = '/carpe/usage_day.do?year=' + ${year} + '&month=' + $("#selMonth").val() + '&day=' + day;
   }
   
   function getData() {
@@ -211,9 +214,14 @@
     }
 
     //데이터 정렬
+    console.log(data.list.length);
     for (var h = 0; h < data.list.length; h++) {
       for (var d = 0; d < 31; d++) {
-        dataArr[h][d] = data.list[h]["day" + (d + 1)];
+        if (data.list[h] != null) {
+          dataArr[h][d] = data.list[h]["day" + (d + 1)];
+        } else {
+          dataArr[h][d] = 0;
+        }
 
         if (dataArr[h][d] > 0) {
           if (sIdx[d] == undefined) {
@@ -266,7 +274,7 @@
               regTime > parseInt($("#end_time").val())) {
             list += "\n                    <td class=\"over\"></td> ";            
           } else {
-            list += "\n                    <td class=\"ing\"></td> ";
+            list += "\n                    <td id=\"td_ing_" + dayStr + "\" class=\"ing\"></td> ";
           }
         } else {
           list += "\n                    <td id=\"td_" + dayStr + "\"></td> ";
@@ -297,6 +305,7 @@
 		  console.log(d + ", " + list[i].dateName);
 		  $("#tr_" + d).addClass("holiday");
 		  $("[id='td_" + d + "']").addClass("holiday");
+		  $("[id='td_ing_" + d + "']").attr("class", "over");
 		}
 
 		for (var i = 1; i <= 31; i++) {
@@ -312,6 +321,7 @@
 			if (dow == 0 || dow == 6) {
 		    $("#tr_" + dayStr).addClass("holiday");
 		    $("[id='td_" + dayStr + "']").addClass("holiday");
+		    $("[id='td_ing_" + dayStr + "']").attr("class", "over");
 			}
 		}
 	}

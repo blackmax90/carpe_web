@@ -61,7 +61,7 @@
                   <div id="dateInput" class="input-calendar-jqx" style="margin-left: -9rem; width: 0rem;"></div>
               <div class="select">
                 <select name="selHour" id="selHour">
-                  <c:forEach var="i" begin="1" end="24">
+                  <c:forEach var="i" begin="0" end="23">
                     <fmt:formatNumber var="hourStr" minIntegerDigits="2" value="${i}" type="number"/>
                     <option value="${hourStr}" <c:if test="${i == hour}">selected</c:if> >${i}시</option>
                   </c:forEach>
@@ -248,16 +248,40 @@
 
     $("#selHour").change(function() {
       getUsageDayList();
+      setDate();
+      $("#jqxGrid_Systemlog").jqxGrid("updateBoundData");
     });
 
     $("#dateInput").change(function() {
       getUsageDayList();
+      setDate();
+      $("#jqxGrid_Systemlog").jqxGrid("updateBoundData");
     });
 
+    setDate();
     initChart();
     initGrid();
     getUsageDayList();
   });
+
+  var setDate = function() {
+    var date = $("#dateInput").jqxDateTimeInput("getDate");
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hour = $("#selHour").val();
+
+    if (month < 10) {
+      month = "0" + month;
+    }
+
+    if (day < 10) {
+      day = "0" + day;
+    }
+
+    sdate = year + "-" + month + "-" + day + " " + hour + ":00:00";
+    edate = year + "-" + month + "-" + day + " " + hour + ":59:59";
+  };
 
   var getUsageDayList = function() {
     var date = $("#dateInput").jqxDateTimeInput("getDate");
@@ -280,7 +304,6 @@
       async:false,
       contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
       success:function(data) {
-        //console.log(data);
         if (data.list.length == 0) {
           data.list = new Array();
 
@@ -357,7 +380,6 @@
       sdate = year + "-" + month + "-" + day + " " + hour + ":" + data.min + ":00";
       edate = year + "-" + month + "-" + day + " " + hour + ":" + data.min + ":59";
 
-      console.log(sdate + ", " + edate);
       $("#jqxGrid_Systemlog").jqxGrid("updateBoundData");
       //console.log(event.target.dataItem.dataContext);
     });
@@ -391,6 +413,8 @@
       formatData : function(data) {
         data["sdate"] = sdate;
         data["edate"] = edate;
+
+    console.log(data);
         return data;
       },
       beforeSend : function(xhr) {

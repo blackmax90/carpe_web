@@ -41,6 +41,7 @@
 		<main class="main">
 			<section class="tit-area">
 				<h3>Current Case : <%=(String)session.getAttribute(Consts.SESSION_CASE_NAME)%></h3>
+		    <h3 id="evdname">Evidence : <%=(String)session.getAttribute(Consts.SESSION_EVDNC_NAME)%> </h3>
 				<a href="/carpe/case.do"><button type="button" class="btn-transparent icon ico-case-out"><span>case out</span></button></a>
         <c:import url="../common/location_area.jsp">
 		      <c:param name="d1" value="visualization"></c:param>
@@ -54,8 +55,26 @@
 				<!--// Side 메뉴가 우측에 있는 형태의 jqx-widget //-->
 				<div class="content-box">
 					<div class="content-area">
-						<div class="btn-area">
-							<button type="button" class="btn-case-01" id="setYear">연도 선택</button>
+						<div class="btn-area division-line" style="margin-bottom: 0rem; margin-top: 0rem;">
+							<dl>
+								<dt>Evidence :</dt>
+								<dd>
+						      <div class="select" style="float: left; margin-right: 1rem;">
+                    <form name="frm" id="frm" action="/carpe/usage.do" method="post">
+                      <input type="hidden" name="evd_id" id="evd_id">
+                      <input type="hidden" name="evd_name" id="evd_name">
+                    </form>
+                    <select name="selEvdnc" id="selEvdnc">
+                      <c:forEach var="list" items="${evdList}">
+                        <option value="${list.evd_id}" <c:if test="${list.evd_id eq sessionScope.evdnc_id}">selected</c:if> >${list.evd_name}</option>
+                      </c:forEach>
+                    </select>
+                  </div>
+					        <div class="btn-area">
+					        	<button type="button" class="btn-case-01" id="setYear">연도 선택</button>
+					        </div>
+								</dd>
+							</dl>	
 						</div>
 						<div id="chartdiv" class="chart-area chart-type-3">
 							<!-- Chart 영역 //-->
@@ -234,18 +253,24 @@
 		
 		$( document ).ready( function() {
 			$('#yearList').append(tmp)
-			$('#setYear').click(function(){
+			$('#setYear').click(function() {
 				$('#yearList').show();
 			});
 			
-			$('#closeYear').click(function(){
+			$('#closeYear').click(function() {
 				$('#yearList').hide();
 			});
+
+      $("#selEvdnc").change(function() {
+        $("#evd_id").val($(this).val());
+        $("#evd_name").val($("#selEvdnc option:checked").text());
+        $("#frm").submit();
+      });
 			
 			$('input[name="checkYear"]').change(function() {
 				var yearList = "";
 				 $('input[name="checkYear"]').each(function() {
-				      if(this.checked){//checked 처리된 항목의 값
+				      if (this.checked) {//checked 처리된 항목의 값
 				      	yearList += "," + this.value;
 				      }
 				 });
