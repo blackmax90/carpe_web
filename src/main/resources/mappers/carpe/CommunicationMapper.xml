@@ -79,97 +79,83 @@
   <select id="selectCommunicationRoomList" parameterType="Map" resultType="Map">      
     SELECT type
          , phone_number
+         , name
          , message
          , created_at
+         , members
+         , chatroom_id
       FROM (
-            SELECT type
-                 , phone_number
-                 , message
-                 , DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS created_at
-              FROM lv2_communication
-             WHERE 1=1 
-               AND case_id = #{case_id}
-               <if test="number!=null and !number.equals('')">
-               AND phone_number = #{number}
-               </if>
-               <if test="sdate!=null and !sdate.equals('')">
-               AND DATE_FORMAT(created_at, '%Y-%m-%d') >= #{sdate}
-               </if>
-               <if test="edate!=null and !edate.equals('')">
-               <![CDATA[
-               AND DATE_FORMAT(created_at, '%Y-%m-%d') <= #{edate}
-               ]]>
-               </if>
-             ORDER BY type, created_at DESC
+            SELECT *
+              FROM (
+                    SELECT type
+                         , phone_number
+                         , name
+                         , message
+                         , members
+                         , chatroom_id
+                         , DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS created_at
+                      FROM lv2_communication
+                     WHERE 1=1 
+                       AND case_id = #{case_id}
+                       <if test="number!=null">
+                       AND phone_number = #{number}
+                       </if>
+                       <if test="sdate!=null and !sdate.equals('')">
+                       AND DATE_FORMAT(created_at, '%Y-%m-%d') >= #{sdate}
+                       </if>
+                       <if test="edate!=null and !edate.equals('')">
+                       <![CDATA[
+                       AND DATE_FORMAT(created_at, '%Y-%m-%d') <= #{edate}
+                       ]]>
+                       </if>
+                       AND type != 'KAKAOTALK'
+                     UNION
+                    SELECT type
+                         , phone_number
+                         , name
+                         , message
+                         , members
+                         , chatroom_id
+                         , DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS created_at
+                      FROM lv2_communication
+                     WHERE 1=1 
+                       AND case_id = 'c222222222222222222222222222222222'
+                       <if test="number!=null">
+                       AND phone_number = #{number}
+                       </if>
+                       <if test="sdate!=null and !sdate.equals('')">
+                       AND DATE_FORMAT(created_at, '%Y-%m-%d') >= #{sdate}
+                       </if>
+                       <if test="edate!=null and !edate.equals('')">
+                       <![CDATA[
+                       AND DATE_FORMAT(created_at, '%Y-%m-%d') <= #{edate}
+                       ]]>
+                       </if>
+                       AND type = 'KAKAOTALK'
+                   ) A
+             ORDER BY created_at DESC
              LIMIT 18446744073709551615
-           ) A
-     GROUP BY type, phone_number
-  <!-- 
-    SELECT roomno, GROUP_CONCAT(DISTINCT name) AS name, content, DATE_FORMAT(regdate,'%Y-%m-%d %H:%i:%s') AS regdate
-     FROM (
-           SELECT roomno, name, content, regdate
-             FROM (
-                   SELECT a.roomno, b.sender_name AS name, b.content, b.regdate
-                     FROM (
-                          SELECT DISTINCT roomno
-                            FROM communication_data
-                           WHERE 1=1
-                             AND case_id = #{case_id}
-                             AND ((msg_type = '발신' AND receiver = #{number})
-                               OR (msg_type = '수신' AND sender = #{number}))
-                          ) a
-                        , communication_data b
-                    WHERE 1=1
-                      AND a.roomno = b.roomno
-                      <if test="sdate!=null and !sdate.equals('')">
-                      AND b.regdate >= #{sdate}
-                      </if>
-                      <if test="edate!=null and !edate.equals('')">
-                      <![CDATA[
-                      AND b.regdate <= #{edate}
-                      ]]>
-                      </if>
-                    UNION
-                   SELECT a.roomno, b.receiver_name AS name, b.content, b.regdate
-                     FROM (
-                          SELECT DISTINCT roomno
-                            FROM communication_data
-                           WHERE 1=1
-                             AND case_id = #{case_id}
-                             AND ((msg_type = '발신' AND receiver = #{number})
-                               OR (msg_type = '수신' AND sender = #{number}))
-                          ) a
-                        , communication_data b
-                    WHERE 1=1
-                      AND a.roomno = b.roomno
-                      <if test="sdate!=null and !sdate.equals('')">
-                      AND b.regdate >= #{sdate}
-                      </if>
-                      <if test="edate!=null and !edate.equals('')">
-                      <![CDATA[
-                      AND b.regdate <= #{edate}
-                      ]]>
-                      </if>
-                  ) AA
-            ORDER BY regdate DESC
-            LIMIT 18446744073709551615
-          ) A
-    WHERE 1=1
-      AND name != ''
-    GROUP BY roomno
-   -->
+             ) B
+     GROUP BY type, phone_number, chatroom_id
+     ORDER BY created_at DESC
   </select>
 
   <select id="selectCommunicationDataList" parameterType="Map" resultType="Map">      
     SELECT phone_number
          , message
+         , name 
          , in_out 
          , DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') AS created_at
          , type
       FROM lv2_communication
      WHERE 1=1 
        AND case_id = #{case_id}
+     <if test="!type.equals('KAKAOTALK')">
        AND phone_number = #{number}
+     </if>
+     <if test="type.equals('KAKAOTALK')">
+       AND chatroom_id = #{chatroom_id}
+     </if>
        AND type = #{type}
      ORDER BY created_at DESC
      <if test="sdata!=null and !sdata.equals('') and pageCnt!=null and !pageCnt.equals('')">

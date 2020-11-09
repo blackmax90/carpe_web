@@ -154,6 +154,7 @@ public class GpsController {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
     paramMap.put("number", map.get("phoneNumber"));
+    paramMap.put("chatroom_id", map.get("chatroomId"));
     paramMap.put("type", map.get("type"));
     paramMap.put("sdata", map.get("sdata"));
     paramMap.put("pageCnt", map.get("pageCnt"));

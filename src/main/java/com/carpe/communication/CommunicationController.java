@@ -47,6 +47,8 @@ public class CommunicationController {
 		  HashMap<String, String> tmpHm = new HashMap<>();
 		  tmpHm.put("year", year);
 		  yearList.add(tmpHm);
+		} else {
+		  year = yearList.get(0).get("year") + "";
 		}
 
     mav.addObject("year", year);
@@ -136,6 +138,7 @@ public class CommunicationController {
     Map<String, Object> paramMap = new HashMap<String, Object>();
     paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
     paramMap.put("number", map.get("phoneNumber"));
+    paramMap.put("chatroom_id", map.get("chatroomId"));
     paramMap.put("type", map.get("type"));
     paramMap.put("sdata", map.get("sdata"));
     paramMap.put("pageCnt", map.get("pageCnt"));
@@ -151,6 +154,7 @@ public class CommunicationController {
     Map<String, Object> paramMap = new HashMap<String, Object>();
     paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
     paramMap.put("number", map.get("phoneNumber"));
+    paramMap.put("chatroom_id", map.get("chatroomId"));
     paramMap.put("type", map.get("type"));
     List<Map> dataList = service.selectCommunicationDataList(paramMap);
     SimpleDateFormat df = new SimpleDateFormat("yyyyMMddhhmmss");
@@ -160,8 +164,8 @@ public class CommunicationController {
     response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"");
     CSVWriter csvWriter = new CSVWriter(response.getWriter());
     
-    String[] keys = {"type", "created_at", "message", "in_out", "phone_number"};
-    String[] header = {"종류", "날짜", "내용", "발신번호", "수신번호"};
+    String[] keys = {"type", "created_at", "name", "message", "in_out", "phone_number"};
+    String[] header = {"종류", "날짜", "이름", "내용", "발신번호", "수신번호"};
     csvWriter.writeNext(header);
     
     for (Map data : dataList) {

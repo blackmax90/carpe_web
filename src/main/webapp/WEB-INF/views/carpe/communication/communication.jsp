@@ -136,6 +136,7 @@
 		<div id="dataLayerContent" class="pop-content">		
 		  <form id="frm" method="post" action="/carpe/communication_export.do">
 		    <input type="hidden" id="phoneNumber" name="phoneNumber" value="" >
+		    <input type="hidden" id="chatroomId" name="chatroomId" value="" >
 		    <input type="hidden" id="type" name="type" value="" >
 		  </form>
 			<h4 class="blind">조회된 컨텐츠</h4>
@@ -204,7 +205,7 @@
     });
 
     $("#dataLayerContent").scroll(function() {
-      if ($("#dataLayerContent").scrollTop() == ($("#dataList").height() - $("#dataLayerContent").height())) {
+      if (Math.ceil($("#dataLayerContent").scrollTop()) + 5 > ($("#dataList").height() - $("#dataLayerContent").height())) {
         if (commDataLoading == true) {
           return;
         }
@@ -220,7 +221,7 @@
 	});
 
 	var exportCommData = function() {
-		if (!$("#phoneNumber").val()) {
+		if (!$("#phoneNumber").val() && !$("#chatroomId").val()) {
 			return;
 		}
 
@@ -269,12 +270,33 @@
 			html += "</li> ";
 		} else {
 			$.each(list, function(idx, row) {
-			  html += "<li onclick=\"openCommDataLayer('" + row.type + "', '" + row.phone_number + "')\" style=\"cursor:pointer;\"> ";
+        var type = row.type;
+        var phone_number = row.phone_number;
+        var name = row.name;
+        var message = row.message;
+        var created_at = row.created_at;
+        var members = row.members;
+        var chatroom_id = row.chatroom_id;
+
+        var roomName = phone_number;
+
+        if (type == "KAKAOTALK" && name != "") {
+          roomName = name;
+
+          var tmpArr = members.split(",");
+          var cnt = tmpArr.length;
+
+          if (cnt > 1) {
+            roomName += " 외 " + (cnt - 1) + "명";
+          }
+        }
+
+			  html += "<li onclick=\"openCommDataLayer('" + type + "', '" + phone_number + "', '" + chatroom_id + "');\" style=\"cursor:pointer;\"> ";
 			  html += "	<div class=\"cr-info\"> ";
-			  html += "		<h6 class=\"cr-name text-ellipsis\">[" + row.type + "] " + row.phone_number + "</h6> ";
-			  html += "		<time class=\"cr-date\" datetime=\"" + row.created_at + "\">" + row.created_at.substr(0, 10) + "</time> ";
+			  html += "		<h6 class=\"cr-name text-ellipsis\">[" + type + "] " + roomName + "</h6> ";
+			  html += "		<time class=\"cr-date\" datetime=\"" + created_at + "\">" + created_at.substr(0, 10) + "</time> ";
 			  html += "	</div> ";
-			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + row.message + "\">" + removeTags(row.message) + "</p> ";
+			  html += "	<p class=\"chat-data text-ellipsis\" title=\"" + message + "\">" + removeTags(message) + "</p> ";
 			  html += "</li> ";
 			});
 		}
@@ -289,11 +311,12 @@
 	var sdata = 0;
 	var pageCnt = 50;
 
-	var openCommDataLayer = function(type, phoneNumber) {
+	var openCommDataLayer = function(type, phoneNumber, chatroomId) {
 		commDataLoading = true;
 		regdateStr = "";
 		sdata = 0;
 		$("#phoneNumber").val(phoneNumber);
+		$("#chatroomId").val(chatroomId);
 		$("#type").val(type);
 		$("#dataList").html("");
 		getCommData();
@@ -304,6 +327,7 @@
 	var getCommData = function() {
 		var data = {
 			phoneNumber: $("#phoneNumber").val(),
+			chatroomId: $("#chatroomId").val(),
 			type: $("#type").val(),
 			sdata: sdata,
 			pageCnt: pageCnt 
@@ -335,7 +359,9 @@
 		$.each(list, function(idx, row) {
 			var otherClass = "";
 			var timeStr = "";
-			var name = row.phone_number;
+			var type = row.type;
+			var name = row.name;
+			var phoneNumber = row.phone_number;
 			var in_out = row.in_out;
 			var regdate = row.created_at;
       var message = row.message;
@@ -362,6 +388,10 @@
 			if (regdate != "") {
 				timeStr = regdate.substr(11, 2) + ":" + regdate.substr(14, 2);
 			}
+
+      if (type != "KAKAOTALK") {
+        name = phoneNumber;
+      }
 
 			if (name == "") {
 				name = "(이름없음)";
