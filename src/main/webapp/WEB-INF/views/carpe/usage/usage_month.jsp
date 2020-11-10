@@ -142,7 +142,7 @@
           </div>
           <div class="aside">
             <div class="tit-area">
-              <h3 class="unit"><span>7월</span> 통계결과</h3>
+              <h3 class="unit"><span id="monthStr">${month}월</span> 통계결과</h3>
             </div>
             <div id="ContentPanel" class="aside-result">
               <!--// Content 영역 //-->
@@ -165,6 +165,40 @@
                   <li>272(270) = 31(30) X 9 (업무시간)</li>
                   <li>465(450) = 31(30) X 15 (비업무시간)</li>
                 </ul>
+              </div>
+              <div class="division-line mt20"></div>
+              <div class="usage-legend work mt20">
+                <dl class="wh">
+                  <dt>하양</dt>
+                  <dd>평일</dd>
+                </dl>
+                <dl class="pk">
+                  <dt>분홍</dt>
+                  <dd>주말, 공휴일</dd>
+                </dl>
+                <dl class="r">
+                  <dt>빨강</dt>
+                  <dd>컴퓨터 사용 (비 업무시간)</dd>
+                </dl>
+                <dl class="y">
+                  <dt>노랑</dt>
+                  <dd>컴퓨터 사용 (업무시간)</dd>
+                </dl>
+              </div>
+              <div class="division-line mt20"></div>
+              <div class="usage-legend com mt20">
+                <dl class="on">
+                  <dt><span class="ir">ON</span></dt>
+                  <dd>컴퓨터 전원 ON</dd>
+                </dl>
+                <dl class="off">
+                  <dt><span class="ir">OFF</span></dt>
+                  <dd>컴퓨터 전원 OFF</dd>
+                </dl>
+                <dl class="onoff">
+                  <dt><span class="ir">ON/OFF</span></dt>
+                  <dd>컴퓨터 전원 ON/OFF</dd>
+                </dl>
               </div>
             </div>
           </div>
@@ -370,7 +404,8 @@
       });
 
       $("#selMonth").change(function() {
-          getData();
+        $("#monthStr").text($("#selMonth option:checked").text());
+        getData();
       });
     });
   })(jQuery);
