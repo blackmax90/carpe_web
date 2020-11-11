@@ -9,6 +9,7 @@
 		     , a.case_name
 		     , a.administrator
          , DATE_FORMAT(a.create_date, '%Y-%m-%d') AS create_date
+			   , a.timezone		 
 			   , a.description		 
 			   , IFNULL((SELECT  CASE WHEN process_state =  '0' THEN 'Ready'
                                WHEN process_state =  '1' THEN 'Processing'

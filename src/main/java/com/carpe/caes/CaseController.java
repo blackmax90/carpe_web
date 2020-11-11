@@ -169,6 +169,7 @@ public class CaseController {
     paramMap.put("id", caseId);
     paramMap.put("name", map.get("name"));
     paramMap.put("admin", map.get("admin"));
+    paramMap.put("timezone", map.get("timezone"));
     paramMap.put("desc", map.get("desc"));
 
     int affected = 0;

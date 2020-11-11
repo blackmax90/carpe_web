@@ -42,7 +42,7 @@
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'mfthistory'}">on</c:if>"><a href="/carpe/mft/mfthistory.do"><span class="text">MFT History</span></a></li>
 						<li class="level02 ${hideClass} <c:if test="${d2 eq 'ntfsloghistory'}">on</c:if>"><a href="/carpe/ntfs/ntfsloghistory.do"><span class="text">NTFS Log History</span></a></li>
 						<!--// 2Depth Menu -->
-<%-- 					<li class="<c:if test="${d1 eq 'report'}">on</c:if>"><a href="#" class="icon report"><span class="text">Report</span></a></li> --%>
+					<li class="<c:if test="${d1 eq 'report'}">on</c:if>"><a href="/carpe/report.do" class="icon report"><span class="text">Report</span></a></li>
 				</ul>
 			</div>
 		</nav>

@@ -392,7 +392,7 @@
       
       // Case Insert Proc
       $('#ok').click(function(e) {
-        var caseName, caseAdministrator, caseDescription;
+        var caseName, caseAdministrator, caseTimeZone, caseDescription;
         if (!(caseName = checkInput('Name', '#newCaseName'))) {
           return;
         }
@@ -401,11 +401,13 @@
           return;
         }
 
+        caseTimeZone = $.trim($('#newCaseTimeZone').val());
         caseDescription = $.trim($('#newCaseDescription').val());
 
         var newCase = {};
         newCase.name = caseName;
         newCase.admin = caseAdministrator;
+        newCase.timezone = caseTimeZone;
         newCase.desc = caseDescription;
 
         var querystr = encodeQueryData(newCase);

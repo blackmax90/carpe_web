@@ -14,7 +14,7 @@
       <c:if test="${d1 eq 'analysis'}"><li><a href="/carpe/filesystem.do">Analysis</a></li></c:if>
       <c:if test="${d1 eq 'recovery'}"><li><a href="/carpe/carving.do">Recovery</a></li></c:if>
       <c:if test="${d1 eq 'visualization'}"><li><a href="/carpe/communication.do">Visualization</a></li></c:if>
-      <c:if test="${d1 eq 'report'}"><li><a href="#">Report</a></li></c:if>
+      <c:if test="${d1 eq 'report'}"><li><a href="/carpe/report.do">Report</a></li></c:if>
       <c:if test="${d2 eq 'filesystem'}"><li><a href="/carpe/filesystem.do">Filesystem</a></li></c:if>
       <c:if test="${d2 eq 'artifact'}"><li><a href="/carpe/artifact.do">Artifact</a></li></c:if>
       <c:if test="${d2 eq 'stringsearch'}"><li><a href="/carpe/search.do">String Search</a></li></c:if>

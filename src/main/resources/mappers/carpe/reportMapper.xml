@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.carpe.mapper.report">
+  <select id="selectCaseInfo" parameterType="Map" resultType="Map">
+    SELECT *
+      FROM case_info
+     WHERE 1=1
+       AND case_id = #{case_id}
+  </select>
+
+  <select id="selectEvdncList" parameterType="Map" resultType="Map">
+    SELECT *
+      FROM evidence_info 
+     WHERE 1=1
+       AND case_id = #{case_id}
+  </select>
+  
+  <select id="selectPartitionList" parameterType="Map" resultType="Map">
+    SELECT par_id
+         , par_name
+         , evd_id
+         , par_type
+         , sector_size
+         , cluster_size
+         , par_size
+         , md5
+         , sha1
+         , sha3
+         , start_sector
+         , filesystem
+         , par_label
+         , (SELECT COUNT(*) 
+              FROM file_info 
+             WHERE 1=1 
+               AND evd_id = a.evd_id
+               AND par_id = a.par_id
+           ) AS file_cnt
+      FROM partition_info a
+     WHERE 1=1
+       AND evd_id = #{evd_id}
+     ORDER BY par_name ASC
+  </select>
+
+  <select id="selectOsList" parameterType="Map" resultType="Map">
+    SELECT *
+      FROM lv1_os_win_reg_os_information
+     WHERE 1=1
+       AND case_id = #{case_id}
+       AND evd_id = #{evd_id}
+  </select>
+
+  <select id="selectUserAccountList" parameterType="Map" resultType="Map">
+    SELECT *
+      FROM lv1_os_win_reg_user_account 
+     WHERE 1=1
+       AND case_id = #{case_id}
+       AND evd_id = #{evd_id}
+       AND par_id = #{par_id}
+  </select>
+
+  <select id="selectArtifactCount" parameterType="Map" resultType="Map">
+    SELECT ((SELECT COUNT(*) FROM lv1_fs_ntfs_logfile_log_record WHERE case_id = #{case_id} AND evd_id = #{evd_id}) 
+           + (SELECT COUNT(*) FROM lv1_fs_ntfs_logfile_restart_area WHERE case_id = #{case_id} AND evd_id = #{evd_id})) AS ntfs_log_file
+         , (SELECT COUNT(*) FROM lv1_fs_ntfs_mft WHERE case_id = #{case_id} AND evd_id = #{evd_id}) AS ntfs_mft
+         , (SELECT COUNT(*) FROM lv1_fs_ntfs_usnjrnl WHERE case_id = #{case_id} AND evd_id = #{evd_id}) AS ntfs_usnjrnl
+      FROM dual 
+  </select>
+</mapper>

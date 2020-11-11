@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>check_readonly</title>
+    <g id="check_readonly" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M5,0.5 C2.51471863,0.5 0.5,2.51471863 0.5,5 L0.5,15 C0.5,17.4852814 2.51471863,19.5 5,19.5 L15,19.5 C17.4852814,19.5 19.5,17.4852814 19.5,15 L19.5,5 C19.5,2.51471863 17.4852814,0.5 15,0.5 L5,0.5 Z" id="Rectangle" stroke="#B8C2CC" fill="#D9DDE0" fill-rule="nonzero"></path>
+        <polygon id="Path" fill="#646E78" fill-rule="nonzero" points="4.39477207 10.0881583 7.47431833 13.1901364 15.6052279 5 17 6.4049318 7.47431833 16 3 11.4940836"></polygon>
+    </g>
+</svg>

@@ -49,8 +49,8 @@
   </select>
 
   <insert id="insertCase" parameterType="Map">
-    INSERT INTO case_info(case_id, case_name, administrator, create_date, description) 
-      VALUES(#{id}, #{name}, #{admin}, now(), #{desc})
+    INSERT INTO case_info(case_id, case_name, administrator, create_date, timezone, description) 
+      VALUES(#{id}, #{name}, #{admin}, now(), #{timezone}, #{desc})
   </insert>
 
   <delete id="updateCaseDeleteFlag" parameterType="Map">
