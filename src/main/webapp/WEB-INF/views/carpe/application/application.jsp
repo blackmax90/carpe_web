@@ -57,15 +57,15 @@
         <!--// Side 메뉴가 우측에 있는 형태의 jqx-widget //-->
         <div class="content-box">
           <div class="content-area">
-            <div style="width:500px;">
-							<div class="combo" style="width:400px;">
-								<span class="input-text-type-1 calendar" id="sdateSpan" style="cursor:pointer;"><input type="text" id="sdate" placeholder="시작일" /></span>
-								<span class="hyp">-</span>
-								<span class="input-text-type-1 calendar" id="edateSpan" style="cursor:pointer;"><input type="text" id="edate" placeholder="종료일" /></span>
-							</div>
-				      <div class="btn-area">
-					      <button type="button" class="btn-case-01 btn-search txt" id="btnSearch"><span class="icon ico-search">조회</span></button>
-				      </div>
+            <div class="fr" style="width:500px;">
+				<div class="combo" style="width:400px;">
+					<span class="input-text-type-1 calendar" id="sdateSpan" style="cursor:pointer;"><input type="text" id="sdate" placeholder="시작일" /></span>
+					<span class="hyp">-</span>
+					<span class="input-text-type-1 calendar" id="edateSpan" style="cursor:pointer;"><input type="text" id="edate" placeholder="종료일" /></span>
+				</div>
+				<div class="btn-area">
+					<button type="button" class="btn-case-01 btn-search txt" id="btnSearch"><span class="icon ico-search">조회</span></button>
+				</div>
             </div>
             <div id="chartdiv" class="chart-area chart-type-4">
               <!-- Chart 영역 //-->

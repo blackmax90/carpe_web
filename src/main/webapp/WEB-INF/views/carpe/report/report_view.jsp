@@ -14,19 +14,19 @@
             html { font-size: 8pt; }
             html, body { width:210mm; height:297mm; margin: 0; page-break-after: avoid; page-break-before: avoid; }
             tr { page-break-inside: avoid; }
-      .report_page { position:relative; margin: -1px 0 0 0; background: #FFF; overflow:hidden; page-break-inside: avoid; page-break-before: always; }
-      .report_page:first-child { page-break-before: auto; page-break-inside: avoid; }
+	      .report_page { position:relative; margin: -1px 0 0 0 !important; background: #FFF; overflow:hidden; page-break-inside: avoid; page-break-before: always; box-shadow: none !important;}
+	      .report_page:first-child { page-break-before: auto; page-break-inside: avoid; }
       }
       
     /* Common */
     * { margin:0; padding:0; box-sizing:border-box; }
-      html{ font-size:10px; word-break:break-all;  background: #FFF; }
+      html{ font-size:10px; word-break:break-all;  background: #F5F5F5; }
       body{ width: 100%; height: 100%; margin: 0; padding: 0; color:#000; font-family:'Malgun Gothic','맑은 고딕', '돋움'; font-size:inherit; font-weight:normal; line-height:1.2; overflow:auto; -webkit-font-smoothing:antialiased; -webkit-print-color-adjust: exact; }
       table { position: relative; float: left; width: 100%; margin-top:0.5rem; border-spacing:0; border-collapse:collapse; word-break:break-all; table-layout: fixed; }
       article, section, .desc { position: relative; display: block; float: left; width: 100%; }
       header { position: absolute; top: 10mm; left: 10mm; width: 190mm; height: 6rem; }
       section { padding-top: 6rem; }
-    .report_page { position: relative; display: block; float: left; width: 210mm; min-height: 297mm; padding: 10mm; margin: -1px auto 0; font-size:1.4rem; }
+    .report_page { position: relative; display: block; float: left; width: 210mm; min-height: 297mm; padding: 10mm; margin: 0 auto 1rem; font-size:1.4rem; background: #FFF; box-shadow: 0.1rem 0.1rem 0.3rem rgba(0,0,0,0.3); }
       
     h1 { position: relative; display:block; width:100%; margin: 40mm auto; line-height:1; text-align: center; }
       h1 img { display:block; width:48rem; height:auto; margin: 0 auto; padding: 1rem; }

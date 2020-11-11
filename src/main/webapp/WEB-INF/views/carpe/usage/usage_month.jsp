@@ -366,16 +366,16 @@
 
       // splitter
       $('#jqxSplitter').jqxSplitter({
-        width: '100%', 
+        width: 'calc(100%)', 
         height: '100%', 
         panels: [{ 
           min: 300, 
-          size: '75%' 
+          size: '75%'
         }, 
         {
           min: 200
         }]
-      });    
+      });
       
       $('#show_time_set').click(function(){
         $("#time_set").show();

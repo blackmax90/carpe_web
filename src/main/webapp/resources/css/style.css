@@ -1859,7 +1859,6 @@ h5 {
 .container .content-box {
   width: 100%;
   height: 100%;
-  padding:2rem;
   border-radius: 0.5rem;
   box-sizing: border-box;
 }
@@ -1923,15 +1922,18 @@ h5 {
   background-color: transparent;
 }
 
+.report .container .content-box {
+  padding: 2rem
+}
 .report .container .content-area {
   display: table;
-  width: calc(47% - 1rem);
+  width: calc(40% - 1rem);
   height: calc(50% - 1rem);
   border-radius: 0.5rem;
 }
 
 .report .container aside.content-area {
-  width: calc(53% - 1rem);
+  width: calc(60% - 1rem);
   padding:0;
   background: #FFF;
 }
@@ -1960,8 +1962,10 @@ h5 {
 }
 
 .container .content-area .btn-area.division-line {
+  display: block;
+  float:left;
+  width: calc(100% - 2rem);
   margin-top: 2rem;
-  margin-right: 2rem;
   margin-bottom:-1rem;
 }
 
@@ -2018,7 +2022,7 @@ h5 {
 }
 
 .vsa-page .content-area .chart-area.chart-type-3 {
-  height: calc(100% - 4rem);
+  height: calc(100% - 5rem);
 }
 .vsa-page .content-area .chart-area.chart-type-4 {
   height: calc(60% - 5rem);
@@ -2507,22 +2511,33 @@ h5 {
 .vsa-page .container .aside { /* 사이드 Table 영역 */
   display: inline-block;
   float: right;
-  width: 40rem;
-  height: 87.8rem;
+}
+
+.vsa-page .container .jqx-splitter-panel.aside { /* 사이드 Table 영역 */
+  width: 24rem;
 }
 
 .vsa-page .container .content-area  {  /* visualization 화면 jqwidget 메인 패널 컨텐츠 영역 */
-  width: calc(100% - 40rem);
+  width: 100%;
   float: left;
   display: inline-block;
+  overflow: hidden;
+}
+
+.vsa-page .container .jqx-splitter-panel.content-area  {  /* visualization 화면 jqwidget 메인 패널 컨텐츠 영역 */
+  width: calc(100% - 24.7rem);
+  float: right;
 }
 
 .vsa-page .container .aside .cont-result,
-.vsa-page .container .content-area .cont-result  {
+.vsa-page .container .content-area .cont-result,
+.vsa-page .container .jqx-splitter-panel.aside .cont-result,
+.vsa-page .container .jqx-splitter-panel.content-area .cont-result {
   height: calc(100% - 7rem);
 }
 
-.vsa-page .container .content-area .cont-result  {
+.vsa-page .container .content-area .cont-result,
+.vsa-page .container .jqx-splitter-panel.content-area .cont-result  {
   display: inline-block;
   float: left;
   width: calc(50% - 3rem);
@@ -2530,7 +2545,8 @@ h5 {
   border: none;
 }
 
-.vsa-page .container .content-area .cont-result:last-child {
+.vsa-page .container .content-area .cont-result:last-child,
+.vsa-page .container .jqx-splitter-panel.content-area .cont-result:last-child {
   margin-left:0 !important;
 }
 
@@ -2583,8 +2599,6 @@ h5 {
   height:100%;
   background: rgba(0,0,0,0.05);
 }
-
-
 
 .usage-m .container .content-area.jqx-splitter-panel.jqx-widget-content {
     box-sizing: border-box;
@@ -2835,7 +2849,8 @@ h5 {
 }
 
 .usage-legend.com .off dt > span {
-  background:url(../images/ico_ing_off.svg) center center no-repeat;     
+  background:url(../images/ico_ing_off.svg) center center no-repeat;    
+  background-size: 1.6rem;    
 }
 
 /*--------------------------------------------------------------

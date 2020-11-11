@@ -55,27 +55,28 @@
 				<!--// Side 메뉴가 우측에 있는 형태의 jqx-widget //-->
 				<div class="content-box">
 					<div class="content-area">
-						<div class="btn-area division-line" style="margin-bottom: 0rem; margin-top: 0rem;">
+						<div class="fr" style="margin-bottom: 0rem; margin-top: 0rem;">
 							<dl>
 								<dt>Evidence :</dt>
 								<dd>
-						      <div class="select" style="float: left; margin-right: 1rem;">
-                    <form name="frm" id="frm" action="/carpe/usage.do" method="post">
-                      <input type="hidden" name="evd_id" id="evd_id">
-                      <input type="hidden" name="evd_name" id="evd_name">
-                    </form>
-                    <select name="selEvdnc" id="selEvdnc">
-                      <c:forEach var="list" items="${evdList}">
-                        <option value="${list.evd_id}" <c:if test="${list.evd_id eq sessionScope.evdnc_id}">selected</c:if> >${list.evd_name}</option>
-                      </c:forEach>
-                    </select>
-                  </div>
-					        <div class="btn-area">
-					        	<button type="button" class="btn-case-01" id="setYear">연도 선택</button>
-					        </div>
+						     		<div class="select" style="float: left; margin-right: 1rem;">
+					                    <form name="frm" id="frm" action="/carpe/usage.do" method="post">
+					                      <input type="hidden" name="evd_id" id="evd_id">
+					                      <input type="hidden" name="evd_name" id="evd_name">
+					                    </form>
+					                    <select name="selEvdnc" id="selEvdnc">
+					                      <c:forEach var="list" items="${evdList}">
+					                        <option value="${list.evd_id}" <c:if test="${list.evd_id eq sessionScope.evdnc_id}">selected</c:if> >${list.evd_name}</option>
+					                      </c:forEach>
+					                    </select>
+					                 </div>
+							        <div class="btn-area">
+							        	<button type="button" class="btn-case-01" id="setYear">연도 선택</button>
+							        </div>
 								</dd>
 							</dl>	
 						</div>
+						<div class="division-line"></div>
 						<div id="chartdiv" class="chart-area chart-type-3">
 							<!-- Chart 영역 //-->
 						</div>

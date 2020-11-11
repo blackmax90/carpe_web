@@ -56,7 +56,7 @@
         <!--// Side 메뉴가 우측에 있는 형태의 jqx-widget //-->
         <div class="content-box">
           <div class="content-area">
-            <div style="width:500px;">
+            <div class="fr" style="width:500px;">
               <div class="combo" style="width:400px;">
                 <span class="input-text-type-1 calendar" id="sdateSpan" style="cursor: pointer;"><input type="text" id="sdate" placeholder="시작일" /></span>
                 <span class="hyp">-</span>
@@ -66,6 +66,7 @@
                 <button type="button" class="btn-case-01 btn-search txt" id="btnSearch"><span class="icon ico-search">조회</span></button>
               </div>
             </div>
+            <div class="division-line"></div>
             <div id="chartdiv" class="chart-area chart-type-1">
               <!-- Chart 영역 //-->
             </div>
