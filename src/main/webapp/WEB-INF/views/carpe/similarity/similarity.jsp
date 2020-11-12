@@ -339,19 +339,19 @@
           { name: 'content', type: 'content' },
           { name: 'download_path', type: 'string' }
         ],
-        //type : "POST",
-        //contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
-        //url: "/carpe/search_list.do"
-        localdata: [
-          {id: "AAA1", name: "BBB1", highlight_nm: "BBB1", path: "d:/test_data/testaa/test1.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test1.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
-          {id: "AAA2", name: "BBB2", highlight_nm: "BBB2", path: "d:/test_data/testaa/test2.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test2.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
-          {id: "AAA3", name: "BBB3", highlight_nm: "BBB3", path: "d:/test_data/testaa/test3.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test3.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
-          {id: "AAA4", name: "BBB4", highlight_nm: "BBB4", path: "d:/test_data/testaa/test4.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test4.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
-          {id: "AAA5", name: "BBB5", highlight_nm: "BBB5", path: "d:/test_data/testaa/test5.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test5.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
-          {id: "AAA6", name: "BBB6", highlight_nm: "BBB6", path: "d:/test_data/testaa/test6.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test6.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
-          {id: "AAA7", name: "BBB7", highlight_nm: "BBB7", path: "d:/test_data/testaa/test7.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test7.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
-          {id: "AAA8", name: "BBB8", highlight_nm: "BBB8", path: "d:/test_data/testaa/test8.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test8.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"}
-        ]
+        type : "POST",
+        contenttype: "application/x-www-form-urlencoded; charset=UTF-8",
+        url: "/carpe/search_list.do"
+//         localdata: [
+//           {id: "AAA1", name: "BBB1", highlight_nm: "BBB1", path: "d:/test_data/testaa/test1.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test1.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
+//           {id: "AAA2", name: "BBB2", highlight_nm: "BBB2", path: "d:/test_data/testaa/test2.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test2.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
+//           {id: "AAA3", name: "BBB3", highlight_nm: "BBB3", path: "d:/test_data/testaa/test3.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test3.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
+//           {id: "AAA4", name: "BBB4", highlight_nm: "BBB4", path: "d:/test_data/testaa/test4.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test4.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
+//           {id: "AAA5", name: "BBB5", highlight_nm: "BBB5", path: "d:/test_data/testaa/test5.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test5.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
+//           {id: "AAA6", name: "BBB6", highlight_nm: "BBB6", path: "d:/test_data/testaa/test6.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test6.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
+//           {id: "AAA7", name: "BBB7", highlight_nm: "BBB7", path: "d:/test_data/testaa/test7.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test7.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"},
+//           {id: "AAA8", name: "BBB8", highlight_nm: "BBB8", path: "d:/test_data/testaa/test8.txt", author: "DDD", last_written_time: "EEE", size: "10", path_with_ext: "d:/test_data/testaa/test8.txt", lastsavedby: "FFF", createdtime: "FFFGGG", lastsavedtime: "GGGFFF", content: "GGG", download_path: "HHH"}
+//         ]
 
       };
 

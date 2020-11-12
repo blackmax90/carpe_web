@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carpe.common.CarpeConfig;
+import com.carpe.common.Consts;
 
 @Controller
 public class SimilarityController {
@@ -47,9 +48,15 @@ public class SimilarityController {
     paramList.add("java");
     paramList.add("-jar");
     paramList.add(CarpeConfig.getEvdncSimilarityPath());
+
+		String caseid = (String) session.getAttribute(Consts.SESSION_CASE_ID);
+		String evdid = (String) session.getAttribute(Consts.SESSION_EVDNC_ID);
+		
+		//이부분을 실제 파일 경로로 수정해줘야함
+		String filePath = CarpeConfig.getEvdncBaseTmpPath() + "/" + caseid + "/" + evdid;
     
-    File sFile = new File(target);
-    System.out.println("target : " + target);
+    File sFile = new File(filePath + "/" + target);
+    System.out.println("target : " + filePath + "/" + target);
     paramList.add(target);
     
     if (sFile.exists() == false) {
@@ -61,8 +68,8 @@ public class SimilarityController {
     }
     
     for (String path : arrPath) {
-      File dFile = new File(path);
-      System.out.println("path : " + path);
+      File dFile = new File(filePath + "/" + path);
+      System.out.println("path : " + filePath + "/" + path);
       paramList.add(path);
 
       if (dFile.exists() == false) {
