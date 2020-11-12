@@ -93,16 +93,17 @@
 	<!-- // wrap -->
 
 	<!-- pop-up //-->
-	<div id="yearList" class="pop wrap-pop jqx-window jqx-popup ofy-auto" style="position: absolute; top: 12rem; right: 13rem; width: 14rem; height: 36rem;display:none;">
+	<div id="yearList" class="pop wrap-pop jqx-window jqx-popup" style="position: absolute; top: 12rem; right: 13rem; width: 14rem; height: 37rem;display:none;">
 		<div id="" class="pop-header jqx-window-header">
 			<h1>연도 선택</h1>
 			<div class="jqx-window-close-button-background">
 				<div class="jqx-window-close-button jqx-icon-close" id="closeYear"></div>
 			</div>
 		</div>
-<!-- 		<div id="" class="pop-content">
-			<ul>
+		<div class="pop-content" style="overflow:auto;">
+			<ul id="yearBody">
 				
+    <!-- 
 				<li class="checkbox checkbox-type-3">
 					<input id="checkbox2017" name="checkYear" type="checkbox"  value="2017" />
 					<label for="checkbox2017"><span class="text">2017</span></label>
@@ -115,8 +116,9 @@
 					<input id="checkbox2019" name="checkYear" type="checkbox"  value="2019" />
 					<label for="checkbox2019"><span class="text">2019</span></label>
 				</li>
+     -->
 			</ul>
-		</div>// pop-content end -->
+		</div>
 	</div><!-- // pop-up end -->
 
 	<!-- 공통 javascript 영역 -->
@@ -160,15 +162,12 @@
 			  return tempArray;
 			}
 		years = getUniqueObjectArray(dataList, "weekday");
-		var tmp = "<div id='' class='pop-content'><ul>";
+		var tmp = "";
 		
 		for(var i = 0; i < years.length; i++){
 			tmp += "<li class='checkbox checkbox-type-3'><input id='checkbox"+years[i]+"' name='checkYear' type='checkbox' value="+years[i]+" />"
 			tmp += "<label for='checkbox"+years[i]+"'><span class='text'>"+years[i]+"</span></label>"
 		}
-		tmp += "</ul></div>"
-		
-			
 		
 		// Themes begin
 		am4core.useTheme(am4themes_animated);
@@ -253,7 +252,7 @@
 		chart.data = dataList;
 		
 		$( document ).ready( function() {
-			$('#yearList').append(tmp)
+			$('#yearBody').html(tmp)
 			$('#setYear').click(function() {
 				$('#yearList').show();
 			});

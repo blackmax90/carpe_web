@@ -36,19 +36,21 @@ public class CommunicationController {
     Map<String, Object> paramMap = new HashMap<String, Object>();
     String year = map.get("year");
     
-    if (CommonUtil.empty(year)) {
-        year = Calendar.getInstance().get(Calendar.YEAR) + "";
-    }
-
     paramMap.put("case_id", session.getAttribute(Consts.SESSION_CASE_ID));
     List<Map> yearList = service.selectCommunicationYearList(paramMap);
 
 		if (yearList.size() == 0) {
+		  if (CommonUtil.empty(year)) {
+		    year = Calendar.getInstance().get(Calendar.YEAR) + "";
+		  }
+
 		  HashMap<String, String> tmpHm = new HashMap<>();
 		  tmpHm.put("year", year);
 		  yearList.add(tmpHm);
 		} else {
-		  year = yearList.get(0).get("year") + "";
+		  if (CommonUtil.empty(year)) {
+		    year = yearList.get(0).get("year") + "";
+		  }
 		}
 
     mav.addObject("year", year);

@@ -70,6 +70,7 @@
 								<dd>
 									<div class="select">
 										<select name="" id="setYear" onChange="setYear(this);">
+                    ${year}
                       <c:forEach var="list" items="${yearList}">
                         <option value="${list.year}" <c:if test="${list.year eq year}">selected</c:if> >${list.year}</option>
                       </c:forEach>

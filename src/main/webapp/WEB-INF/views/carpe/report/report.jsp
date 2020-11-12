@@ -102,6 +102,8 @@
       window.frames["reportFrame"].focus();
       window.frames["reportFrame"].print();
     });
+
+    $("#analysis_info").jqxCheckBox({ width: 28, height: 28, checked: true, disabled: true });
   });
   </script>
 <!-- // 현재 페이지에 필요한 js -->
