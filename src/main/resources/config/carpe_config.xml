@@ -12,6 +12,8 @@
 
 <!-- 	<entry key="elasticsearch.endpoint">http://220.73.134.142:9200</entry> -->
 	<entry key="elasticsearch.endpoint">http://211.192.109.193:9200</entry>
+	<entry key="elasticsearch.id">elastic</entry>
+	<entry key="elasticsearch.passwd">qhfltrhro</entry>
 	<entry key="elasticsearch.max_connection">10</entry>
 	<entry key="elasticsearch.conn_timeout">10000</entry>
 	<entry key="elasticsearch.read_timeout">30000</entry>

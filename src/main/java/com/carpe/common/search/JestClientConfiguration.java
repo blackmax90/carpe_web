@@ -12,7 +12,13 @@ import io.searchbox.client.config.HttpClientConfig;
 public class JestClientConfiguration {
 	@Value("#{carpe_config['elasticsearch.endpoint']}")
 	private String es_endpoint;
-
+	
+	@Value("#{carpe_config['elasticsearch.id']}")
+	private String es_id;
+	
+	@Value("#{carpe_config['elasticsearch.passwd']}")
+	private String es_passwd;
+	
 	@Value("#{carpe_config['elasticsearch.max_connection']}")
 	private int es_max_connection;
 
@@ -30,6 +36,7 @@ public class JestClientConfiguration {
 			.maxTotalConnection(es_max_connection)
 			.connTimeout(es_conn_timeout)
 			.readTimeout(es_read_timeout)
+			.defaultCredentials(es_id, es_passwd)
 		.build();
 		// @formatter:on
 
