@@ -61,7 +61,7 @@ public class SimilarityController {
     
     if (sFile.exists() == false) {
       ret = -1;
-      msg = target + " 파일을 찾을 수 없습니다.";
+      msg = filePath + "/" + target + " 파일을 찾을 수 없습니다.";
       mav.addObject("ret", ret);
       mav.addObject("msg", msg);
       return mav;
@@ -74,7 +74,7 @@ public class SimilarityController {
 
       if (dFile.exists() == false) {
         ret = -1;
-        msg = path + " 파일을 찾을 수 없습니다.";
+        msg = filePath + "/" + path + " 파일을 찾을 수 없습니다.";
         mav.addObject("ret", ret);
         mav.addObject("msg", msg);
         return mav;
