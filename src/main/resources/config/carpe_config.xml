@@ -8,8 +8,8 @@
 	<entry key="evdnc.code">e1</entry>
 	<entry key="evdnc.base.path">/home/carpe/storage</entry>
 	<entry key="evdnc.base.tmp.path">/home/carpe/tmp</entry>
-  <entry key="evdnc.image.path">/home/carpe/image</entry>
-  <entry key="evdnc.similarity.path">/home/carpe/similarity/similarity.jar</entry>
+	<entry key="evdnc.image.path">/home/carpe/image</entry>
+	<entry key="evdnc.similarity.path">/home/carpe/similarity/similarity.jar</entry>
 
 <!-- 	<entry key="elasticsearch.endpoint">http://220.73.134.142:9200</entry> -->
 	<entry key="elasticsearch.endpoint">http://211.192.109.193:9200</entry>

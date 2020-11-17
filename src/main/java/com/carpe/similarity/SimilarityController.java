@@ -49,11 +49,11 @@ public class SimilarityController {
     paramList.add("-jar");
     paramList.add(CarpeConfig.getEvdncSimilarityPath());
 
-		String caseid = (String) session.getAttribute(Consts.SESSION_CASE_ID);
-		String evdid = (String) session.getAttribute(Consts.SESSION_EVDNC_ID);
-		
-		//이부분을 실제 파일 경로로 수정해줘야함
-		String filePath = CarpeConfig.getEvdncBaseTmpPath() + "/" + caseid + "/" + evdid;
+	String caseid = (String) session.getAttribute(Consts.SESSION_CASE_ID);
+	String evdid = (String) session.getAttribute(Consts.SESSION_EVDNC_ID);
+	
+	//이부분을 실제 파일 경로로 수정해줘야함
+	String filePath = CarpeConfig.getEvdncBaseTmpPath() + "/" + caseid + "/" + evdid + "/documents";
     
     File sFile = new File(filePath + "/" + target);
     System.out.println("target : " + filePath + "/" + target);
