@@ -56,8 +56,9 @@ public class SearchController {
 	public void downloadEvdnc(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, HttpServletResponse response) throws Exception {
 		String searchPath = map.get("path");
 
-		File physicalFile = new File(String.format("%s/%s", CarpeConfig.getEvdncBasePath(), searchPath));
-
+		File physicalFile = new File(String.format("%s", searchPath));
+		
+		System.out.println(CarpeConfig.getEvdncBasePath());
 		BufferedInputStream in = null;
 		BufferedOutputStream out = null;
 
