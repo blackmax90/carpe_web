@@ -251,7 +251,7 @@
           html += "\n <tr style=\"cursor:pointer;\" onClick=\"selTarget(this);\"> ";
           html += "\n   <td> ";
           html += "\n     <div class=\"radio radio-type-1\"> ";
-          html += "\n       <input type=\"radio\" name=\"target\" id=\"tg_" + i + "\" value=\"" + rowData.path + "\" /><label for=\"tg_" + i + "\"></label> ";
+          html += "\n       <input type=\"radio\" name=\"target\" id=\"tg_" + i + "\" value=\"" + rowData.path_with_ext + "\" /><label for=\"tg_" + i + "\"></label> ";
           html += "\n     </div> ";
           html += "\n   </td> ";
           html += "\n   <td>" + rowData.name + "</td> ";

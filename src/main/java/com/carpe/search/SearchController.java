@@ -56,33 +56,36 @@ public class SearchController {
 	public void downloadEvdnc(@RequestParam HashMap<String, String> map, HttpSession session, HttpServletRequest requst, HttpServletResponse response) throws Exception {
 		String searchPath = map.get("path");
 
-		File physicalFile = new File(String.format("%s", searchPath));
-		
-		System.out.println(CarpeConfig.getEvdncBasePath());
-		BufferedInputStream in = null;
-		BufferedOutputStream out = null;
-
-		try {
-			response.setContentType("application/x-msdownload");
-			response.setHeader("Content-Disposition", "attachment; filename*=UTF-8''" + URLEncoder.encode(physicalFile.getName(), "UTF-8").replaceAll("\\+", "%20") + "; ");
-
-			in = new BufferedInputStream(new FileInputStream(physicalFile));
-			out = new BufferedOutputStream(response.getOutputStream());
-
-			FileCopyUtils.copy(in, out);
-			out.flush();
-		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				} catch (Exception ignore) {
+		if (searchPath.startsWith("/home/carpe/tmp/") && searchPath.contains("..") == false)
+		{
+			File physicalFile = new File(String.format("%s", searchPath));
+			
+			System.out.println(CarpeConfig.getEvdncBasePath());
+			BufferedInputStream in = null;
+			BufferedOutputStream out = null;
+	
+			try {
+				response.setContentType("application/x-msdownload");
+				response.setHeader("Content-Disposition", "attachment; filename*=UTF-8''" + URLEncoder.encode(physicalFile.getName(), "UTF-8").replaceAll("\\+", "%20") + "; ");
+	
+				in = new BufferedInputStream(new FileInputStream(physicalFile));
+				out = new BufferedOutputStream(response.getOutputStream());
+	
+				FileCopyUtils.copy(in, out);
+				out.flush();
+			} finally {
+				if (in != null) {
+					try {
+						in.close();
+					} catch (Exception ignore) {
+					}
 				}
-			}
-
-			if (out != null) {
-				try {
-					out.close();
-				} catch (Exception ignore) {
+	
+				if (out != null) {
+					try {
+						out.close();
+					} catch (Exception ignore) {
+					}
 				}
 			}
 		}
