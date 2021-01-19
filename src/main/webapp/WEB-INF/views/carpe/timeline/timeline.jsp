@@ -172,7 +172,7 @@
             list[i].deactivate_usb = false;
             list[i].color = "#DF5F5F";
             list[i].icon = "/carpe/resources/images/usb5.png";
-          } else if (eventType == "Web(File Download)") {
+          } else if (eventType == "Web Download") {
             list[i].deactivate_web_download = false;
             list[i].color = "#DF865F";
             list[i].icon = "/carpe/resources/images/web_download.png";
