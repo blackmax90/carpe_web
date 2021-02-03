@@ -132,7 +132,12 @@ public class EvdncController {
 		String evdncSubType = map.get("newEvdncSubType");
 		String caseId = (String) session.getAttribute(Consts.SESSION_CASE_ID);
 		String timezone = "UTC+9";
-
+		String md5 = "";
+		String sha1 = "";
+		String sha3 = "" ;
+		int process_state = 2;
+		char isdelete = 'N';
+		
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 
 		paramMap.put("id", evdncId);
@@ -143,6 +148,11 @@ public class EvdncController {
 		paramMap.put("sub_type", evdncSubType);
 		paramMap.put("case_id", caseId);
 		paramMap.put("timezone", timezone);
+		paramMap.put("md5", md5);
+		paramMap.put("sha1", sha1);
+		paramMap.put("sha3", sha3);
+		paramMap.put("process_state", process_state);
+		paramMap.put("isdelete", isdelete);
 
 		service.insertEvdnc(paramMap);
 

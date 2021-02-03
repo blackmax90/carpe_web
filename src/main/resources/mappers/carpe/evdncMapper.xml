@@ -36,8 +36,8 @@
 	</select>
 
 	<insert id="insertEvdnc" parameterType="Map">
-		INSERT INTO evidence_info(evd_id, evd_name, evd_path, tmp_path, case_id, main_type, sub_type, timezone, acquired_date) 
-			VALUES(#{id}, #{name}, #{path}, #{tmp_path}, #{case_id}, #{main_type}, #{sub_type}, #{timezone}, now())
+		INSERT INTO evidence_info(evd_id, evd_name, evd_path, tmp_path, case_id, main_type, sub_type, timezone, acquired_date, md5, sha1, sha3, process_state, isdelete) 
+			VALUES(#{id}, #{name}, #{path}, #{tmp_path}, #{case_id}, #{main_type}, #{sub_type}, #{timezone}, now(), #{md5}, #{sha1}, #{sha3}, #{process_state}, #{isdelete})
 	</insert>
 
 	<delete id="updateEvdncDeleteFlag" parameterType="Map">
